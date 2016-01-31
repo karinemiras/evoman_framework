@@ -1,7 +1,0 @@
-
-
-WARNING: Pygame initialized for simulation.
-
-WARNING: sound has been turned on.
-
-RUN: run status: enemy: 8; fitness: 91.6646987873; player life: 79.3; enemy life: 0; time: 526
