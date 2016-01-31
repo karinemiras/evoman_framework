@@ -1,0 +1,87 @@
+import math
+import random
+import cPickle as pickle
+from neat import config, population, chromosome, genome, visualize
+from neat.nn import nn_pure as nn
+from os import listdir
+import os
+from os.path import isfile, join
+from game import *
+ 
+
+# loads configs
+config.load('neat_config.py')
+
+f = open('parameters.txt','r')
+parameters = []
+for l in f.readlines():        
+    parameters.append(l.split(' '))
+f.close()
+########################## Game parameters. ##########################
+enemy =          str(parameters[0][0]) # Choose from 1 to 8. 
+experimentmode = str(parameters[7][0]) ## Choose between training/testing.
+newpop =         str(parameters[9][0]) # Choose between new for new random population or old for continuing from a saved population. 
+gens =           int(parameters[10][0]) # Number of generations in evolution.
+trials =         int(parameters[11][0]) # Number of testing trials for the best genome.
+finalsolution =  parameters[6][0] # final best solution
+#######################################################################
+
+ 
+if finalsolution == 'yes':
+
+        final = 99
+	pop = population.Population('checks/'+'checkpoint_'+str(final))
+	winner = pop.stats[0][-1]
+	pnet = nn.create_ffphenotype(winner)
+   
+	visualize.draw_net(winner) # plot da rede   
+
+	game = Game()
+	game.enemyn = enemy               
+	f,p,e,t = game.play(pnet)  
+
+	print str(final)+str(i)+' p '+str(p)+' e '+str(e)
+
+
+
+else:
+        
+  
+        ch_pointmin_p = 0
+        ch_point_p = 0
+
+	print '\nBest network output (players life):'  
+
+	mypath, filename = os.path.split(os.path.abspath(__file__)) 
+	cp = []
+	onlyfiles = [ f for f in listdir(mypath+'/checks')  ] 
+   
+
+	for f in onlyfiles:	
+	    cp.append([int(s) for s in f.split('_') if s.isdigit()][0])
+	if len(cp)>0:
+	    ch_point_p = max(cp)
+            ch_pointmin_p = min(cp)
+
+        for i in range(ch_pointmin_p,ch_point_p+1):
+            pop = population.Population('checks/'+'checkpoint_'+str(i))
+	    winner = pop.stats[0][-1]
+	    pnet = nn.create_ffphenotype(winner)
+
+           # print 'ini plot'   
+           # visualize.draw_net(winner) # plot da rede
+           # print 'fim plot'   
+
+             
+	    game = Game()
+	    game.enemyn = enemy               
+	    f,p,e,t = game.play(pnet)  
+ 
+            print ' ge '+str(i)+' p '+str(p)+' e '+str(e)
+
+
+
+
+
+
+
