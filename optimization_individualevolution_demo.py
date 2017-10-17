@@ -176,9 +176,9 @@ def cruzamento(pop):
             filhos[f] = p1*cross_prop+p2*(1-cross_prop)
 
             # mutation 
-            for i in filhos[f]:
+            for i in len(filhos[f]):
                 if np.random.uniform(0 ,1)<=mutacao:
-                    filhos[f][i] =   filhos[f][i]+np.random.normal(dom_l, dom_u)
+                    filhos[f][i] =   filhos[f][i]+np.random.normal(0, 1)
                     
             filhos[f] = np.array(map(lambda y: limites(y), filhos[f]))           
 
