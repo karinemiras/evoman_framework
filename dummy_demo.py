@@ -12,3 +12,5 @@ from environment import Environment
 env = Environment() # initializes environment in default mode, with ai player and ai enemy using random controllers
 env.play() # runs simulation 
 env.state_to_log() # prints logs about simulation state
+
+
