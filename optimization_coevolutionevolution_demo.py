@@ -271,7 +271,7 @@ def cruzamento(pop,fit_pop):
 
 
 
-print '\nNEW EVOLUTION\n'
+print('\nNEW EVOLUTION\n')
 
 pop_p = np.random.uniform(dom_l, dom_u, (npop, n_vars))
 pop_e = np.random.uniform(dom_l, dom_u, (npop, n_vars))
@@ -324,7 +324,7 @@ for i in range(1, gens):
 		pop_e, fit_pop_e = evolution(pop_e, fit_pop_e, pop_p[best])
 
 
-	print '\n GEN ',i, ' evolving ' ,env.contacthurt, ' - player mean ', np.mean(fit_pop_p) ,' - enemy mean ',  np.mean(fit_pop_e)
+	print( '\n GEN ',i, ' evolving ' ,env.contacthurt, ' - player mean ', np.mean(fit_pop_p) ,' - enemy mean ',  np.mean(fit_pop_e))
 
 
 	# switches the evolution flag between player and enemy
@@ -351,7 +351,7 @@ for i in range(1, gens):
 
 
 fim = time.time() # prints total execution time for experiment
-print '\nExecution time: '+str(round((fim-ini)/60))+' minutes \n'
+print( '\nExecution time: '+str(round((fim-ini)/60))+' minutes \n')
 
 
 file = open('neuroended', 'w')  # saves control (simulation has ended) file for bash loop file

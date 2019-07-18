@@ -219,7 +219,7 @@ def doomsday(pop,fit_pop):
 if run_mode =='test':
 
     bsol = np.loadtxt(experiment_name+'/best.txt')
-    print '\n RUNNING SAVED BEST SOLUTION \n'
+    print( '\n RUNNING SAVED BEST SOLUTION \n')
     env.update_parameter('speed','normal')
     avalia([bsol])
 
@@ -230,7 +230,7 @@ if run_mode =='test':
 
 if not os.path.exists(experiment_name+'/evoman_solstate'):
 
-    print '\nNEW EVOLUTION\n'
+    print( '\nNEW EVOLUTION\n')
 
     pop = np.random.uniform(dom_l, dom_u, (npop, n_vars))
     fit_pop = avalia(pop)
@@ -243,7 +243,7 @@ if not os.path.exists(experiment_name+'/evoman_solstate'):
 
 else:
 
-    print '\nCONTINUING EVOLUTION\n'
+    print( '\nCONTINUING EVOLUTION\n')
 
     env.load_state()
     pop = env.solutions[0]
@@ -264,7 +264,7 @@ else:
 # saves results for first pop 
 file_aux  = open(experiment_name+'/results.txt','a')
 file_aux.write('\n\ngen best mean std')
-print '\n GENERATION '+str(ini_g)+' '+str(round(fit_pop[best],6))+' '+str(round(media,6))+' '+str(round(std,6))
+print( '\n GENERATION '+str(ini_g)+' '+str(round(fit_pop[best],6))+' '+str(round(media,6))+' '+str(round(std,6)))
 file_aux.write('\n'+str(ini_g)+' '+str(round(fit_pop[best],6))+' '+str(round(media,6))+' '+str(round(std,6))   )
 file_aux.close()
 
@@ -319,7 +319,7 @@ for i in range(ini_g+1, gens):
 
     # saves results 
     file_aux  = open(experiment_name+'/results.txt','a')
-    print '\n GENERATION '+str(i)+' '+str(round(fit_pop[best],6))+' '+str(round(mean,6))+' '+str(round(std,6))
+    print( '\n GENERATION '+str(i)+' '+str(round(fit_pop[best],6))+' '+str(round(mean,6))+' '+str(round(std,6)))
     file_aux.write('\n'+str(i)+' '+str(round(fit_pop[best],6))+' '+str(round(mean,6))+' '+str(round(std,6))   )
     file_aux.close()
 
@@ -340,7 +340,7 @@ for i in range(ini_g+1, gens):
 
 
 fim = time.time() # prints total execution time for experiment
-print '\nExecution time: '+str(round((fim-ini)/60))+' minutes \n'
+print( '\nExecution time: '+str(round((fim-ini)/60))+' minutes \n')
 
 
 file = open('neuroended', 'w')  # saves control (simulation has ended) file for bash loop file
