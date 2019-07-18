@@ -82,9 +82,13 @@ class player_controller(Controller):
         return [left, right, jump, shoot, release]
 
 
+experiment_name = 'demo_individual'
+if not os.path.exists(experiment_name):
+    os.makedirs(experiment_name)
 
 # initializes simulation in individual evolution mode, for single static enemy.
-env = Environment(enemies=[1],
+env = Environment(experiment_name=experiment_name,
+                  enemies=[1],
                   playermode="ai",
                   player_controller=player_controller(),
                   enemymode="static",
@@ -104,14 +108,12 @@ ini = time.time()  # sets time marker
 # genetic algorithm params
 
 run_mode = 'train' # train or test
-stateread = None # 'state_1' 
-statesave = 'state_1'
 #n_vars = (env.get_num_sensors()+1)*5  # perceptron
 #n_vars = (env.get_num_sensors()+1)*10 + 11*5  # multilayer with 10 neurons
 n_vars = (env.get_num_sensors()+1)*50 + 51*5 # multilayer with 50 neurons
 dom_u = 1
 dom_l = -1
-npop = 100
+npop = 2#100
 gens = 30
 mutacao = 0.2
 last_best = 0
@@ -216,7 +218,7 @@ def doomsday(pop,fit_pop):
 # loads file with the best solution for testing
 if run_mode =='test':
 
-    bsol = np.loadtxt('best.txt')
+    bsol = np.loadtxt(experiment_name+'/best.txt')
     print '\n RUNNING SAVED BEST SOLUTION \n'
     env.update_parameter('speed','normal')
     avalia([bsol])
@@ -224,9 +226,9 @@ if run_mode =='test':
     sys.exit(0)
 
 
-# initilizes population loading old solutions or generating new ones   
+# initializes population loading old solutions or generating new ones
 
-if stateread == None:
+if not os.path.exists(experiment_name+'/evoman_solstate'):
 
     print '\nNEW EVOLUTION\n'
 
@@ -243,7 +245,7 @@ else:
 
     print '\nCONTINUING EVOLUTION\n'
 
-    env.load_state(stateread)
+    env.load_state()
     pop = env.solutions[0]
     fit_pop = env.solutions[1]
 
@@ -252,7 +254,7 @@ else:
     std = np.std(fit_pop)
 
     # finds last generation number
-    file_aux  = open('gen.txt','r')
+    file_aux  = open(experiment_name+'/gen.txt','r')
     ini_g = int(file_aux.readline())
     file_aux.close()
 
@@ -260,7 +262,7 @@ else:
 
 
 # saves results for first pop 
-file_aux  = open('results.txt','a')
+file_aux  = open(experiment_name+'/results.txt','a')
 file_aux.write('\n\ngen best mean std')
 print '\n GENERATION '+str(ini_g)+' '+str(round(fit_pop[best],6))+' '+str(round(media,6))+' '+str(round(std,6))
 file_aux.write('\n'+str(ini_g)+' '+str(round(fit_pop[best],6))+' '+str(round(media,6))+' '+str(round(std,6))   )
@@ -303,7 +305,7 @@ for i in range(ini_g+1, gens):
 
     if notimproved >= 15:
 
-        file_aux  = open('results.txt','a')
+        file_aux  = open(experiment_name+'/results.txt','a')
         file_aux.write('\ndoomsday')
         file_aux.close()
 
@@ -316,23 +318,23 @@ for i in range(ini_g+1, gens):
 
 
     # saves results 
-    file_aux  = open('results.txt','a')
+    file_aux  = open(experiment_name+'/results.txt','a')
     print '\n GENERATION '+str(i)+' '+str(round(fit_pop[best],6))+' '+str(round(mean,6))+' '+str(round(std,6))
     file_aux.write('\n'+str(i)+' '+str(round(fit_pop[best],6))+' '+str(round(mean,6))+' '+str(round(std,6))   )
     file_aux.close()
 
     # saves generation number
-    file_aux  = open('gen.txt','w')
+    file_aux  = open(experiment_name+'/gen.txt','w')
     file_aux.write(str(i))
     file_aux.close()
 
     # saves file with the best solution  
-    np.savetxt('best.txt',pop[best])
+    np.savetxt(experiment_name+'/best.txt',pop[best])
 
     # saves simulation state
     solutions = [pop, fit_pop]
     env.update_solutions(solutions)
-    env.save_state(statesave)
+    env.save_state()
 
 
 

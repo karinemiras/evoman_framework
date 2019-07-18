@@ -1,8 +1,8 @@
 ############################################################################### 
-# EvoMan FrameWork - V1.0 2016  			                      #
+# EvoMan FrameWork - V1.0 2016  			                      			  #
 # DEMO : Neuroevolution - Genetic Algorithm with multilayer neural network.   #
-# Author: Karine Miras        			                              #
-# karine.smiras@gmail.com     				                      #
+# Author: Karine Miras        			                             		  #
+# karine.smiras@gmail.com     				                     			  #
 ############################################################################### 
 
 # imports framework
@@ -156,10 +156,14 @@ class environm(Environment):
 			return 0.9*(100 - self.get_playerlife()) + 0.1*self.get_enemylife() - np.log(self.get_time())
 
 
+experiment_name = 'demo_co'
 
+if not os.path.exists(experiment_name):
+	os.makedirs(experiment_name)
 
 # initializes simulation for coevolution evolution mode.
-env = environm(enemies=[2],
+env = environm(experiment_name=experiment_name,
+			   enemies=[2],
 			   playermode="ai",
 			   enemymode="ai",
 			   player_controller=player_controller(),
@@ -179,8 +183,6 @@ ini = time.time()  # sets time marker
 # genetic algorithm params
 
 run_mode = 'train' # train or test
-stateread = None # 'state_1' 
-statesave = 'state_1'
 #whan_vars = (env.get_num_sensors()+1)*5  # perceptron
 n_vars = (env.get_num_sensors()+1)*10 + 11*5  # multilayer with 10 neurons
 #n_vars = (env.get_num_sensors()+1)*50 + 51*5 # multilayer with 50 neurons

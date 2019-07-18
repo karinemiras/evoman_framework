@@ -23,6 +23,7 @@ class Environment(object):
 
     # simulation parameters
     def __init__(self,
+                 experiment_name='test',
                  multiplemode="no",           # yes or no
                  enemies=[8],                 # array with 1 to 8 items, values from 1 to 8
                  loadplayer="yes",            # yes or no
@@ -47,6 +48,7 @@ class Environment(object):
 
         # initializes parameters
 
+        self.experiment_name = experiment_name
         self.multiplemode = multiplemode
         self.enemies = enemies
         self.enemyn = enemies[0] # initial current enemy
@@ -83,18 +85,18 @@ class Environment(object):
 
         # initializes log file
         if self.logs  == "on" and self.savelogs == "yes":
-            file_aux  = open('evoman_logs.txt','w')
+            file_aux  = open(self.experiment_name+'/evoman_logs.txt','w')
             file_aux.close()
 
 
         # initializes pygame library
         pygame.init()
-        self.print_logs("WARNING: Pygame initialized for simulation.")
+        self.print_logs("MESSAGE: Pygame initialized for simulation.")
 
         # initializes sound library for playing mode
         if self.sound == "on" and self.playermode == "human":
             pygame.mixer.init()
-            self.print_logs("WARNING: sound has been turned on.")
+            self.print_logs("MESSAGE: sound has been turned on.")
 
         # initializes joystick library
         if self.playermode == "human":
@@ -168,7 +170,7 @@ class Environment(object):
             print '\n'+msg # prints log messages to screen
 
             if self.savelogs == "yes": # prints log messages to file
-                file_aux  = open('evoman_logs.txt','a')
+                file_aux  = open(self.experiment_name+'/evoman_logs.txt','a')
                 file_aux.write('\n\n'+msg)
                 file_aux.close()
 
@@ -225,10 +227,10 @@ class Environment(object):
 
 
     # exports current environment state to files
-    def save_state(self, name):
+    def save_state(self):
 
         # saves configuration file for simulation parameters
-        file_aux  = open('evoman_paramstate_'+name+'.txt','w')
+        file_aux  = open(self.experiment_name+'/evoman_paramstate.txt','w')
         en = ''
         for e in self.enemies:
             en += ' '+str(e)
@@ -253,28 +255,28 @@ class Environment(object):
         file_aux.close()
 
         # saves state of solutions in the simulation
-        file = gzip.open('evoman_solstate_'+name, 'w', compresslevel = 5)
+        file = gzip.open(self.experiment_name+'/evoman_solstate', 'w', compresslevel = 5)
         pickle.dump(self.solutions, file, protocol=2)
         file.close()
 
 
-        self.print_logs("WARNING: state '"+name+"' has been saved to files.")
+        self.print_logs("MESSAGE: state has been saved to files.")
 
 
 
     # loads a state for environment from files
-    def load_state(self, name):
+    def load_state(self):
 
 
         try:
 
             # loads parameters
-            state = open('evoman_paramstate_'+name+'.txt','r')
+            state = open(self.experiment_name+'/evoman_paramstate.txt','r')
             state = state.readlines()
             for idp,p in enumerate(state):
                 pv = p.split(' ')
 
-                if idp>0:    # ginore first line
+                if idp>0:    # ignore first line
                     if idp==1: # enemy list
                         en = []
                         for i in range(1,len(pv)):
@@ -286,12 +288,12 @@ class Environment(object):
                         self.update_parameter(pv[0], pv[1].rstrip('\n'))
 
             # loads solutions
-            file = gzip.open('evoman_solstate_'+name)
+            file = gzip.open(self.experiment_name+'/evoman_solstate')
             self.solutions =  pickle.load(file)
-            self.print_logs("WARNING: state '"+name+"' has been loaded.")
+            self.print_logs("MESSAGE: state has been loaded.")
 
         except IOError:
-            self.print_logs("ERROR: could not load state '"+name+"'.")
+            self.print_logs("ERROR: could not load state.")
 
 
 
@@ -372,10 +374,10 @@ class Environment(object):
         # checks parameters consistency
 
         if self.multiplemode == "no" and len(self.enemies) > 1:
-            self.print_logs("WARNING: there is more than one enemy in 'enemies' list although the mode is not multiple.")
+            self.print_logs("MESSAGE: there is more than one enemy in 'enemies' list although the mode is not multiple.")
 
         if self.level < 1 or self.level > 3:
-            self.print_logs("WARNING: 'level' chosen is out of recommended (tested).")
+            self.print_logs("MESSAGE: 'level' chosen is out of recommended (tested).")
 
 
 
