@@ -217,7 +217,7 @@ def avalia(x1,x2):
 	return np.array(map(lambda y: simula(env,y,x2), x1))
 
 
-# tournment
+# tournament
 def torneio(pop,fit_pop):
 	c1 =  np.random.randint(0,pop.shape[0], 1)
 	c2 =  np.random.randint(0,pop.shape[0], 1)
@@ -239,7 +239,7 @@ def limites(x):
 		return x
 
 
-	# crossover
+# crossover
 def cruzamento(pop,fit_pop):
 
 	total_filhos = np.zeros((0,n_vars))
@@ -308,7 +308,7 @@ def evolution(pop,fit_pop, best):
 
 # evolution
 
-switch = 4
+switch = 4 # defined how many generations each agent has to evolve while the evolution of the other one is 'frozen'
 
 for i in range(1, gens):
 

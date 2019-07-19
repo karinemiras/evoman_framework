@@ -30,7 +30,7 @@ class player_controller(Controller):
         n_outs = [5] # number of output neurons (sprite actions)
         n_params = [len(params)] # number of input variables
         n_hlayers = 1	  # number of hidden layers
-        n_lneurons = [50] # number of neurons in each hidden layer
+        n_lneurons = [10] # number of neurons in each hidden layer
         neurons_layers = []  # array of ann layers. Each position is a layer, and will contain another array in which each position will be a neuron.
         neurons_layers.append(params) # adds input neurons layer to the ann.
 
@@ -111,8 +111,8 @@ ini = time.time()  # sets time marker
 
 run_mode = 'train' # train or test
 #n_vars = (env.get_num_sensors()+1)*5  # perceptron
-#n_vars = (env.get_num_sensors()+1)*10 + 11*5  # multilayer with 10 neurons
-n_vars = (env.get_num_sensors()+1)*50 + 51*5 # multilayer with 50 neurons
+n_vars = (env.get_num_sensors()+1)*10 + 11*5  # multilayer with 10 neurons
+#n_vars = (env.get_num_sensors()+1)*50 + 51*5 # multilayer with 50 neurons
 dom_u = 1
 dom_l = -1
 npop = 100
