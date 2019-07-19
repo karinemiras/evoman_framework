@@ -89,7 +89,7 @@ if not os.path.exists(experiment_name):
 
 # initializes simulation in multi evolution mode, for multiple static enemies.
 env = Environment(experiment_name=experiment_name,
-                  enemies=[1,2,3],
+                  enemies=[7,8],
                   multiplemode="yes",
                   playermode="ai",
                   player_controller=player_controller(),
