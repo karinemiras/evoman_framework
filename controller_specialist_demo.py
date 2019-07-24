@@ -94,7 +94,5 @@ for en in range(1, 9):
 
 	env.update_parameter('enemies',[en])
 	sol = np.loadtxt('demo_'+str(en)+'.txt')
-	print '\n LOADING SAVED SPECIALIST SOLUTION FOR ENEMY '+str(en)+' \n'
+	print('\n LOADING SAVED SPECIALIST SOLUTION FOR ENEMY '+str(en)+' \n')
 	env.play(sol)
-
-print '\n  \n'
