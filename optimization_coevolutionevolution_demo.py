@@ -156,8 +156,7 @@ class environm(Environment):
 			return 0.9*(100 - self.get_playerlife()) + 0.1*self.get_enemylife() - np.log(self.get_time())
 
 
-experiment_name = 'demo_co'
-
+experiment_name = 'co_demo'
 if not os.path.exists(experiment_name):
 	os.makedirs(experiment_name)
 
@@ -354,7 +353,7 @@ fim = time.time() # prints total execution time for experiment
 print( '\nExecution time: '+str(round((fim-ini)/60))+' minutes \n')
 
 
-file = open('neuroended', 'w')  # saves control (simulation has ended) file for bash loop file
+file = open(experiment_name+'/neuroended', 'w')  # saves control (simulation has ended) file for bash loop file
 file.close()
 
 

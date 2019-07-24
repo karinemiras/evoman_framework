@@ -7,7 +7,7 @@
 ####################################################################################### 
 
 # imports framework
-import sys
+import sys,os
 sys.path.insert(0, 'evoman')
 from environment import Environment
 from controller import Controller
@@ -76,9 +76,13 @@ class player_controller(Controller):
 
 		return [left, right, jump, shoot, release]
 
+experiment_name = 'controller_generalist_demo'
+if not os.path.exists(experiment_name):
+    os.makedirs(experiment_name)
 
 # initializes environment for multi objetive mode (generalist)  with static enemy and ai player
-env = Environment(playermode="ai",
+env = Environment(experiment_name=experiment_name,
+				  playermode="ai",
 				  player_controller=player_controller(),
 				  enemymode="static",
 				  level=2)

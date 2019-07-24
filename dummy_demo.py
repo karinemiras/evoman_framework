@@ -5,12 +5,17 @@
 ################################
 
 # imports framework
-import sys
+import sys, os
 sys.path.insert(0, 'evoman') 
 from environment import Environment
 
-env = Environment() # initializes environment in default mode, with ai player and ai enemy using random controllers
-env.play() # runs simulation 
-env.state_to_log() # prints logs about simulation state
+experiment_name = 'dummy_demo'
+if not os.path.exists(experiment_name):
+    os.makedirs(experiment_name)
 
+# initializes environment in default mode, with human player and static enemy using random controllers
+env = Environment(experiment_name=experiment_name,
+                  enemymode='static',
+                  playermode='human')
+env.play()
 

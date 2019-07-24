@@ -82,7 +82,7 @@ class player_controller(Controller):
         return [left, right, jump, shoot, release]
 
 
-experiment_name = 'demo_individual'
+experiment_name = 'individual_demo'
 if not os.path.exists(experiment_name):
     os.makedirs(experiment_name)
 
@@ -343,7 +343,7 @@ fim = time.time() # prints total execution time for experiment
 print( '\nExecution time: '+str(round((fim-ini)/60))+' minutes \n')
 
 
-file = open('neuroended', 'w')  # saves control (simulation has ended) file for bash loop file
+file = open(experiment_name+'/neuroended', 'w')  # saves control (simulation has ended) file for bash loop file
 file.close()
 
 
