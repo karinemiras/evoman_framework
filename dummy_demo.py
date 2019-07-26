@@ -13,9 +13,9 @@ experiment_name = 'dummy_demo'
 if not os.path.exists(experiment_name):
     os.makedirs(experiment_name)
 
-# initializes environment in default mode, with human player and static enemy using random controllers
+# initializes environment with ai player and ai enemy using random controllers
 env = Environment(experiment_name=experiment_name,
-                  enemymode='static',
-                  playermode='human')
+                  enemymode='ai',
+                  playermode='ai')
 env.play()
 
