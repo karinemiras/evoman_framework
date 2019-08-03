@@ -25,13 +25,13 @@ class Environment(object):
     def __init__(self,
                  experiment_name='test',
                  multiplemode="no",           # yes or no
-                 enemies=[8],                 # array with 1 to 8 items, values from 1 to 8
+                 enemies=[1],                 # array with 1 to 8 items, values from 1 to 8
                  loadplayer="yes",            # yes or no
                  loadenemy="yes",             # yes or no
-                 level=1,                     # integer
+                 level=2,                     # integer
                  playermode="ai",             # ai or human
-                 enemymode="ai",              # ai or static
-                 speed="normal",              # normal or fastest
+                 enemymode="static",          # ai or static
+                 speed="fastest",             # normal or fastest
                  inputscoded="no",            # yes or no
                  randomini="no",              # yes or no
                  sound="on",                  # on or off
