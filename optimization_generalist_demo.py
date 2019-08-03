@@ -1,6 +1,6 @@
 ############################################################################### 
 # EvoMan FrameWork - V1.0 2016  			                                  #
-# DEMO : Neuroevolution - Genetic Algorithm with perceptron neural network.   #
+# DEMO : Neuroevolution - Genetic Algorithm with            neural network.   #
 # Author: Karine Miras        			                                      #
 # karine.smiras@gmail.com     				                                  #
 ############################################################################### 
@@ -30,7 +30,7 @@ class player_controller(Controller):
         n_outs = [5] # number of output neurons (sprite actions)
         n_params = [len(params)] # number of input variables
         n_hlayers = 1	  # number of hidden layers
-        n_lneurons = [50] # number of neurons in each hidden layer
+        n_lneurons = [10] # number of neurons in each hidden layer
         neurons_layers = []  # array of ann layers. Each position is a layer, and will contain another array in which each position will be a neuron.
         neurons_layers.append(params) # adds input neurons layer to the ann.
 
@@ -82,13 +82,14 @@ class player_controller(Controller):
         return [left, right, jump, shoot, release]
 
 
-experiment_name = 'individual_demo'
+experiment_name = 'multi_demo'
 if not os.path.exists(experiment_name):
     os.makedirs(experiment_name)
 
-# initializes simulation in individual evolution mode, for single static enemy.
+# initializes simulation in multi evolution mode, for multiple static enemies.
 env = Environment(experiment_name=experiment_name,
-                  enemies=[1],
+                  enemies=[7,8],
+                  multiplemode="yes",
                   playermode="ai",
                   player_controller=player_controller(),
                   enemymode="static",
@@ -109,23 +110,23 @@ ini = time.time()  # sets time marker
 
 run_mode = 'train' # train or test
 #n_vars = (env.get_num_sensors()+1)*5  # perceptron
-#n_vars = (env.get_num_sensors()+1)*10 + 11*5  # multilayer with 10 neurons
-n_vars = (env.get_num_sensors()+1)*50 + 51*5 # multilayer with 50 neurons
+n_vars = (env.get_num_sensors()+1)*10 + 11*5  # multilayer with 10 neurons
+#n_vars = (env.get_num_sensors()+1)*50 + 51*5 # multilayer with 50 neurons
 dom_u = 1
 dom_l = -1
 npop = 100
 gens = 30
-mutacao = 0.2
+mutation = 0.2
 last_best = 0
 
 
 # runs simulation
-def simula(env,x):
+def simulation(env,x):
     f,p,e,t = env.play(pcont=x)
     return f
 
 # normalizes
-def norm(x, pfit_pop):
+def norm(x,pfit_pop):
 
     if ( max(pfit_pop) - min(pfit_pop) ) > 0:
         x_norm = ( x - min(pfit_pop) )/( max(pfit_pop) - min(pfit_pop) )
@@ -138,12 +139,12 @@ def norm(x, pfit_pop):
 
 
 # evaluation
-def avalia(x):
-    return np.array(map(lambda y: simula(env,y), x))
+def evaluate(x):
+    return np.array(map(lambda y: simulation(env,y), x))
 
 
-# tournment
-def torneio(pop):
+# tournament
+def tournament(pop):
     c1 =  np.random.randint(0,pop.shape[0], 1)
     c2 =  np.random.randint(0,pop.shape[0], 1)
 
@@ -154,7 +155,7 @@ def torneio(pop):
 
 
 # limits
-def limites(x):
+def limits(x):
 
     if x>dom_u:
         return dom_u
@@ -164,34 +165,34 @@ def limites(x):
         return x
 
 
-    # crossover
-def cruzamento(pop):
+# crossover
+def crossover(pop):
 
-    total_filhos = np.zeros((0,n_vars))
+    total_offspring = np.zeros((0,n_vars))
 
 
     for p in range(0,pop.shape[0], 2):
-        p1 = torneio(pop)
-        p2 = torneio(pop)
+        p1 = tournament(pop)
+        p2 = tournament(pop)
 
-        n_filhos =   np.random.randint(1,3+1, 1)[0]
-        filhos =  np.zeros( (n_filhos, n_vars) )
+        n_offspring =   np.random.randint(1,3+1, 1)[0]
+        offspring =  np.zeros( (n_offspring, n_vars) )
 
-        for f in range(0,n_filhos):
+        for f in range(0,n_offspring):
 
             cross_prop = np.random.uniform(0,1)
-            filhos[f] = p1*cross_prop+p2*(1-cross_prop)
+            offspring[f] = p1*cross_prop+p2*(1-cross_prop)
 
             # mutation 
-            for i in range(0,len(filhos[f])):
-                if np.random.uniform(0 ,1)<=mutacao:
-                    filhos[f][i] =   filhos[f][i]+np.random.normal(0, 1)
+            for i in range(0,len(offspring[f])):
+                if np.random.uniform(0 ,1)<=mutation:
+                    offspring[f][i] =   offspring[f][i]+np.random.normal(0, 1)
 
-            filhos[f] = np.array(map(lambda y: limites(y), filhos[f]))
+            offspring[f] = np.array(map(lambda y: limits(y), offspring[f]))
 
-            total_filhos = np.vstack((total_filhos, filhos[f]))
+            total_offspring = np.vstack((total_offspring, offspring[f]))
 
-    return total_filhos
+    return total_offspring
 
 
 # kills the worst genomes, and replace with new best/random solutions
@@ -209,7 +210,7 @@ def doomsday(pop,fit_pop):
             else:
                 pop[o][j] = pop[order[-1:]][0][j] # dna from best 
 
-        fit_pop[o]=avalia([pop[o]])
+        fit_pop[o]=evaluate([pop[o]])
 
     return pop,fit_pop
 
@@ -221,7 +222,7 @@ if run_mode =='test':
     bsol = np.loadtxt(experiment_name+'/best.txt')
     print( '\n RUNNING SAVED BEST SOLUTION \n')
     env.update_parameter('speed','normal')
-    avalia([bsol])
+    evaluate([bsol])
 
     sys.exit(0)
 
@@ -233,9 +234,9 @@ if not os.path.exists(experiment_name+'/evoman_solstate'):
     print( '\nNEW EVOLUTION\n')
 
     pop = np.random.uniform(dom_l, dom_u, (npop, n_vars))
-    fit_pop = avalia(pop)
+    fit_pop = evaluate(pop)
     best = np.argmax(fit_pop)
-    media = np.mean(fit_pop)
+    mean = np.mean(fit_pop)
     std = np.std(fit_pop)
     ini_g = 0
     solutions = [pop, fit_pop]
@@ -250,7 +251,7 @@ else:
     fit_pop = env.solutions[1]
 
     best = np.argmax(fit_pop)
-    media = np.mean(fit_pop)
+    mean = np.mean(fit_pop)
     std = np.std(fit_pop)
 
     # finds last generation number
@@ -264,8 +265,8 @@ else:
 # saves results for first pop 
 file_aux  = open(experiment_name+'/results.txt','a')
 file_aux.write('\n\ngen best mean std')
-print( '\n GENERATION '+str(ini_g)+' '+str(round(fit_pop[best],6))+' '+str(round(media,6))+' '+str(round(std,6)))
-file_aux.write('\n'+str(ini_g)+' '+str(round(fit_pop[best],6))+' '+str(round(media,6))+' '+str(round(std,6))   )
+print( '\n GENERATION '+str(ini_g)+' '+str(round(fit_pop[best],6))+' '+str(round(mean,6))+' '+str(round(std,6)))
+file_aux.write('\n'+str(ini_g)+' '+str(round(fit_pop[best],6))+' '+str(round(mean,6))+' '+str(round(std,6))   )
 file_aux.close()
 
 
@@ -276,23 +277,23 @@ notimproved = 0
 
 for i in range(ini_g+1, gens):
 
-    filhos = cruzamento(pop)  # crossover
-    fit_filhos = avalia(filhos)   # evaluation
-    pop = np.vstack((pop,filhos))
-    fit_pop = np.append(fit_pop,fit_filhos)
+    offspring = crossover(pop)  # crossover
+    fit_offspring = evaluate(offspring)   # evaluation
+    pop = np.vstack((pop,offspring))
+    fit_pop = np.append(fit_pop,fit_offspring)
 
     best = np.argmax(fit_pop) #best solution in generation
-    fit_pop[best] = float(avalia(np.array([pop[best] ]))[0]) # repeats best eval, for stability issues
+    fit_pop[best] = float(evaluate(np.array([pop[best] ]))[0]) # repeats best eval, for stability issues
     best_sol = fit_pop[best]
 
     # selection
     fit_pop_cp = fit_pop
     fit_pop_norm =  np.array(map(lambda y: norm(y,fit_pop_cp), fit_pop)) # avoiding negative probabilities, as fitness is ranges from negative numbers  
     probs = (fit_pop_norm)/(fit_pop_norm).sum()
-    escolhidos = np.random.choice(pop.shape[0], npop , p=probs, replace=False)
-    escolhidos = np.append(escolhidos[1:],best)
-    pop = pop[escolhidos]
-    fit_pop = fit_pop[escolhidos]
+    chosen = np.random.choice(pop.shape[0], npop , p=probs, replace=False)
+    chosen = np.append(chosen[1:],best)
+    pop = pop[chosen]
+    fit_pop = fit_pop[chosen]
 
 
     # searching new areas
