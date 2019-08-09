@@ -332,7 +332,7 @@ for i in range(1, gens):
 	# saves simulation state
 	solutions = [pop_p, fit_pop_p, pop_e, fit_pop_e]
 	env.update_solutions(solutions)
-	env.save_state(statesave)
+	env.save_state()
 
 
 
