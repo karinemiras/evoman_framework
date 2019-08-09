@@ -1,9 +1,9 @@
-############################################################################### 
+###############################################################################
 # EvoMan FrameWork - V1.0 2016  			                                  #
 # DEMO : Neuroevolution - Genetic Algorithm with            neural network.   #
 # Author: Karine Miras        			                                      #
 # karine.smiras@gmail.com     				                                  #
-############################################################################### 
+###############################################################################
 
 # imports framework
 import sys
@@ -11,46 +11,37 @@ sys.path.insert(0, 'evoman')
 from environment import Environment
 from controller import Controller
 
-# imports other libs 
+# imports other libs
 import time
 import numpy as np
 from math import fabs,sqrt
 import glob, os
+from tqdm import tqdm
 
 
-# implements controller structure 
+# implements controller structure
 class player_controller(Controller):
 
+    def sigmoid_activation(self, x):
+        return 1/(1+np.exp(-x))
 
+    def control(self, inputs,controller):
+        # Normalises the input using min-max scaling
+        inputs = (inputs-min(inputs))/float((max(inputs)-min(inputs)))
 
-    def control(self, params,cont):
+        # Preparing the weights and biases from the controller of layer 1
+        weights1 = controller[:len(inputs)*10].reshape((len(inputs),10))
+        bias1 = controller[len(inputs)*10:len(inputs)*10 + 10].reshape(1,10)
 
-        params = (params-min(params))/float((max(params)-min(params))) # standardizes
-        params = np.hstack( ([1.], params) )
-        n_outs = [5] # number of output neurons (sprite actions)
-        n_params = [len(params)] # number of input variables
-        n_hlayers = 1	  # number of hidden layers
-        n_lneurons = [10] # number of neurons in each hidden layer
-        neurons_layers = []  # array of ann layers. Each position is a layer, and will contain another array in which each position will be a neuron.
-        neurons_layers.append(params) # adds input neurons layer to the ann.
+        # Outputting activated first layer. @ symbol is a matrix multiplication
+        output1 = self.sigmoid_activation((inputs @ weights1) + bias1)
 
+        # Preparing the weights and biases from the controller of layer 2
+        weights2 = controller[len(inputs)*10+10:-5].reshape((10,5))
+        bias2 = controller[-5:].reshape(1,5)
 
-        weights = cont # reads weights of solution
-
-        if n_hlayers==1:
-            nh = n_params[0]*n_lneurons[0]
-            weights1 = weights[:nh].reshape( (n_params[0], n_lneurons[0]) )
-            output1 = 1./(1. + np.exp(-params.dot(weights1)))
-            output1 = np.hstack( ([1],output1) )
-            weights2 = weights[nh:].reshape( (n_lneurons[0]+1, n_outs[0]) )
-            output = 1./(1. + np.exp(-output1.dot(weights2)))
-        else:
-
-            weights = weights.reshape( (n_params[0], n_outs[0]) )
-            output = 1./(1. + np.exp(-params.dot(weights)))
-
-
-        # takes decisions about sprite actions
+        # Outputting activated second layer. Each entry in the output is an action
+        output = self.sigmoid_activation((output1 @ weights2)+ bias2)[0]
 
         if output[0] > 0.5:
             left = 1
@@ -88,7 +79,7 @@ if not os.path.exists(experiment_name):
 
 # initializes simulation in multi evolution mode, for multiple static enemies.
 env = Environment(experiment_name=experiment_name,
-                  enemies=[7,8],
+                  enemies=[1,2,3,4,5,6,7,8],
                   multiplemode="yes",
                   playermode="ai",
                   player_controller=player_controller(),
@@ -110,7 +101,7 @@ ini = time.time()  # sets time marker
 
 run_mode = 'train' # train or test
 #n_vars = (env.get_num_sensors()+1)*5  # perceptron
-n_vars = (env.get_num_sensors()+1)*10 + 11*5  # multilayer with 10 neurons
+n_vars = (env.get_num_sensors() + 1)*10 + 5*(10 + 1)  # multilayer with 10 neurons
 #n_vars = (env.get_num_sensors()+1)*50 + 51*5 # multilayer with 50 neurons
 dom_u = 1
 dom_l = -1
@@ -118,6 +109,9 @@ npop = 100
 gens = 30
 mutation = 0.2
 last_best = 0
+
+np.random.seed(420)
+
 
 
 # runs simulation
@@ -140,7 +134,7 @@ def norm(x,pfit_pop):
 
 # evaluation
 def evaluate(x):
-    return np.array(map(lambda y: simulation(env,y), x))
+    return np.array(list(map(lambda y: simulation(env,y), x)))
 
 
 # tournament
@@ -183,12 +177,12 @@ def crossover(pop):
             cross_prop = np.random.uniform(0,1)
             offspring[f] = p1*cross_prop+p2*(1-cross_prop)
 
-            # mutation 
+            # mutation
             for i in range(0,len(offspring[f])):
                 if np.random.uniform(0 ,1)<=mutation:
                     offspring[f][i] =   offspring[f][i]+np.random.normal(0, 1)
 
-            offspring[f] = np.array(map(lambda y: limits(y), offspring[f]))
+            offspring[f] = np.array(list(map(lambda y: limits(y), offspring[f])))
 
             total_offspring = np.vstack((total_offspring, offspring[f]))
 
@@ -206,9 +200,9 @@ def doomsday(pop,fit_pop):
         for j in range(0,n_vars):
             pro = np.random.uniform(0,1)
             if np.random.uniform(0,1)  <= pro:
-                pop[o][j] = np.random.uniform(dom_l, dom_u) # random dna, uniform dist. 
+                pop[o][j] = np.random.uniform(dom_l, dom_u) # random dna, uniform dist.
             else:
-                pop[o][j] = pop[order[-1:]][0][j] # dna from best 
+                pop[o][j] = pop[order[-1:]][0][j] # dna from best
 
         fit_pop[o]=evaluate([pop[o]])
 
@@ -262,7 +256,7 @@ else:
 
 
 
-# saves results for first pop 
+# saves results for first pop
 file_aux  = open(experiment_name+'/results.txt','a')
 file_aux.write('\n\ngen best mean std')
 print( '\n GENERATION '+str(ini_g)+' '+str(round(fit_pop[best],6))+' '+str(round(mean,6))+' '+str(round(std,6)))
@@ -288,7 +282,7 @@ for i in range(ini_g+1, gens):
 
     # selection
     fit_pop_cp = fit_pop
-    fit_pop_norm =  np.array(map(lambda y: norm(y,fit_pop_cp), fit_pop)) # avoiding negative probabilities, as fitness is ranges from negative numbers  
+    fit_pop_norm =  np.array(list(map(lambda y: norm(y,fit_pop_cp), fit_pop))) # avoiding negative probabilities, as fitness is ranges from negative numbers
     probs = (fit_pop_norm)/(fit_pop_norm).sum()
     chosen = np.random.choice(pop.shape[0], npop , p=probs, replace=False)
     chosen = np.append(chosen[1:],best)
@@ -318,7 +312,7 @@ for i in range(ini_g+1, gens):
     mean = np.mean(fit_pop)
 
 
-    # saves results 
+    # saves results
     file_aux  = open(experiment_name+'/results.txt','a')
     print( '\n GENERATION '+str(i)+' '+str(round(fit_pop[best],6))+' '+str(round(mean,6))+' '+str(round(std,6)))
     file_aux.write('\n'+str(i)+' '+str(round(fit_pop[best],6))+' '+str(round(mean,6))+' '+str(round(std,6))   )
@@ -329,7 +323,7 @@ for i in range(ini_g+1, gens):
     file_aux.write(str(i))
     file_aux.close()
 
-    # saves file with the best solution  
+    # saves file with the best solution
     np.savetxt(experiment_name+'/best.txt',pop[best])
 
     # saves simulation state

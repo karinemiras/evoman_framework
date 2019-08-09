@@ -6,7 +6,7 @@
 
 import sys
 import gzip
-import cPickle as pickle
+import pickle
 import numpy
 import pygame
 from pygame.locals import *
