@@ -161,7 +161,7 @@ class Environment(object):
         else:
             exec('self.'+name +"= "+ str(value))
 
-        # self.print_logs("PARAMETER CHANGE: "+name+" = "+str(value))
+        self.print_logs("PARAMETER CHANGE: "+name+" = "+str(value))
 
 
 
@@ -384,7 +384,7 @@ class Environment(object):
 
             # default fitness function for single solutions
     def fitness_single(self):
-        return 0.9*(100 - self.get_enemylife()) + 0.1*self.get_playerlife() # - numpy.log(self.get_time())
+        return 0.9*(100 - self.get_enemylife()) + 0.1*self.get_playerlife() - numpy.log(self.get_time())
 
     # default fitness function for consolidating solutions among multiple games
     def cons_multi(self,values):
@@ -496,7 +496,7 @@ class Environment(object):
 
             # returns results of the run
             def return_run():
-                #self.print_logs("RUN: run status: enemy: "+str(self.enemyn)+"; fitness: " + str(fitness) + "; player life: " + str(self.player.life)  + "; enemy life: " + str(self.enemy.life) + "; time: " + str(self.time))
+                self.print_logs("RUN: run status: enemy: "+str(self.enemyn)+"; fitness: " + str(fitness) + "; player life: " + str(self.player.life)  + "; enemy life: " + str(self.enemy.life) + "; time: " + str(self.time))
 
                 return  fitness, self.player.life, self.enemy.life, self.time
 
