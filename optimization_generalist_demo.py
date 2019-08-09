@@ -33,15 +33,15 @@ class player_controller(Controller):
         weights1 = controller[:len(inputs)*10].reshape((len(inputs),10))
         bias1 = controller[len(inputs)*10:len(inputs)*10 + 10].reshape(1,10)
 
-        # Outputting activated first layer. @ symbol is a matrix multiplication
-        output1 = self.sigmoid_activation((inputs @ weights1) + bias1)
+        # Outputting activated first layer.
+        output1 = self.sigmoid_activation(inputs.dot(weights1) + bias1)
 
         # Preparing the weights and biases from the controller of layer 2
         weights2 = controller[len(inputs)*10+10:-5].reshape((10,5))
         bias2 = controller[-5:].reshape(1,5)
 
         # Outputting activated second layer. Each entry in the output is an action
-        output = self.sigmoid_activation((output1 @ weights2)+ bias2)[0]
+        output = self.sigmoid_activation(output1.dot(weights2)+ bias2)[0]
 
         if output[0] > 0.5:
             left = 1

@@ -32,15 +32,15 @@ class player_controller(Controller):
 		weights1 = controller[:len(inputs)*n_hidden].reshape((len(inputs),n_hidden))
 		bias1 = controller[len(inputs)*n_hidden:len(inputs)*n_hidden + n_hidden].reshape(1,n_hidden)
 
-		# Outputting activated first layer. @ symbol is a matrix multiplication
-		output1 = self.sigmoid_activation((inputs @ weights1) + bias1)
+		# Outputting activated first layer.
+		output1 = self.sigmoid_activation(inputs.dot(weights1) + bias1)
 
 		# Preparing the weights and biases from the controller of layer 2
 		weights2 = controller[len(inputs)*n_hidden+n_hidden:-5].reshape((n_hidden,5))
 		bias2 = controller[-5:].reshape(1,5)
 
 		# Outputting activated second layer. Each entry in the output is an action
-		output = self.sigmoid_activation((output1 @ weights2)+ bias2)[0]
+		output = self.sigmoid_activation(output1.dot(weights2)+ bias2)[0]
 
 		# takes decisions about sprite actions
 		if output[0] > 0.5:
@@ -88,8 +88,8 @@ class enemy_controller(Controller):
 		weights1 = controller[:len(inputs)*n_hidden].reshape((len(inputs),n_hidden))
 		bias1 = controller[len(inputs)*n_hidden:len(inputs)*n_hidden + n_hidden].reshape(1,n_hidden)
 
-		# Outputting activated first layer. @ symbol is a matrix multiplication
-		output1 = self.sigmoid_activation((inputs @ weights1) + bias1)
+		# Outputting activated first layer.
+		output1 = self.sigmoid_activation(inputs.dot(weights1) + bias1)
 
 		# Preparing the weights and biases from the controller of layer 2
 		# Even though the enemy only has 4 attacks 5 outputs are used so that the same network structure as the playeer controller can be used
@@ -97,7 +97,7 @@ class enemy_controller(Controller):
 		bias2 = controller[-5:].reshape(1,5)
 
 		# Outputting activated second layer. Each entry in the output is an action
-		output = self.sigmoid_activation((output1 @ weights2)+ bias2)[0]
+		output = self.sigmoid_activation(output1.dot(weights2)+ bias2)[0]
 
 
 		# takes decisions about sprite actions
