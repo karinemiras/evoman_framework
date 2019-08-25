@@ -22,7 +22,7 @@ class Enemy(pygame.sprite.Sprite):
 
 
 
-    def __init__(self, location, *groups):
+    def __init__(self, location,n_hidden, *groups):
         super(Enemy, self).__init__(*groups)
         self.spriteDefinition = SpriteDefinition('evoman/images/EnemySprites.png', 0, 0, 43, 59)
         self.updateSprite(SpriteConstants.STANDING, SpriteConstants.LEFT)
@@ -44,7 +44,7 @@ class Enemy(pygame.sprite.Sprite):
         self.hurt = 0
         self.shooting = 0
         self.gun_cooldown = 0
-
+        self.n_hidden = n_hidden
 
 
 
@@ -80,7 +80,7 @@ class Enemy(pygame.sprite.Sprite):
 
 
             # calls the controller providing game sensors
-            actions = game.enemy_controller.control(self.sensors.get(game), game.econt)
+            actions = game.enemy_controller.control(self.sensors.get(game), game.econt, self.n_hidden)
             if len(actions) < 3:
                 game.print_logs("ERROR: Enemy 1 controller must return 3 decision variables.")
                 sys.exit(0)
@@ -161,7 +161,7 @@ class Enemy(pygame.sprite.Sprite):
                     c.set_volume(10)
                     c.play(sound)
 
-                aux = numpy.random.randint(1,4)     
+                aux = numpy.random.randint(1,4)
                 for i in range(0,aux):
                     self.twists.append(Bullet_e5((self.rect.x + (self.direction*(i*30)) ,self.rect.top + (self.direction*(i*20))  ), self.direction, game.player.rect , len(self.twists), game.sprite_e))
 

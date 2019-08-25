@@ -39,6 +39,8 @@ class Environment(object):
                  logs="on",                   # on or off
                  savelogs="yes",              # yes or no
                  clockprec="low",             # low or medium
+                 n_hidden_player = [10],      # Number of hidden neurons player
+                 n_hidden_enemy = [10],      # Number of hidden neurons enemy
                  timeexpire=3000,             # integer
                  overturetime=100,            # integer
                  solutions=None,              # any
@@ -68,6 +70,8 @@ class Environment(object):
         self.timeexpire = timeexpire
         self.overturetime = overturetime
         self.solutions = solutions
+        self.n_hidden_player = n_hidden_player
+        self.n_hidden_enemy = n_hidden_enemy
 
 
         # initializes default random controllers
@@ -129,13 +133,13 @@ class Environment(object):
 
         self.sprite_e = tmx.SpriteLayer()
         start_cell = self.tilemap.layers['triggers'].find('enemy')[0]
-        self.enemy = enemy.Enemy((start_cell.px, start_cell.py), self.sprite_e)
+        self.enemy = enemy.Enemy((start_cell.px, start_cell.py), self.n_hidden_enemy, self.sprite_e)
         self.tilemap.layers.append(self.sprite_e)  # enemy
 
         # loads player
         self.sprite_p = tmx.SpriteLayer()
         start_cell = self.tilemap.layers['triggers'].find('player')[0]
-        self.player = Player((start_cell.px, start_cell.py), self.enemyn, self.level, self.sprite_p)
+        self.player = Player((start_cell.px, start_cell.py), self.enemyn, self.level, self.n_hidden_player, self.sprite_p)
         self.tilemap.layers.append(self.sprite_p)
 
         self.player.sensors = Sensors()

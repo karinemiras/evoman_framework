@@ -4,12 +4,12 @@
 # karine.smiras@gmail.com      #
 ################################
 
-import numpy  
- 
+import numpy
+
 class Controller(object):
 
 
-    def control(self, params, cont = None):
+    def control(self, params, cont = None, n_hidden=None):
 
         action1 = numpy.random.choice([1,0])
         action2 = numpy.random.choice([1,0])
@@ -19,8 +19,3 @@ class Controller(object):
         action6 = numpy.random.choice([1,0])
 
         return [action1, action2, action3, action4, action5, action6]
-
- 
- 
-
-  

@@ -9,69 +9,13 @@
 import sys
 sys.path.insert(0, 'evoman')
 from environment import Environment
-from controller import Controller
+from demo_controller import player_controller
 
 # imports other libs
 import time
 import numpy as np
 from math import fabs,sqrt
 import glob, os
-
-
-# implements controller structure
-class player_controller(Controller):
-
-
-
-    def sigmoid_activation(self, x):
-        return 1/(1+np.exp(-x))
-
-    def control(self, inputs,controller):
-        # Normalises the input using min-max scaling
-        inputs = (inputs-min(inputs))/float((max(inputs)-min(inputs)))
-
-        # Preparing the weights and biases from the controller of layer 1
-        weights1 = controller[:len(inputs)*n_hidden].reshape((len(inputs),n_hidden))
-        bias1 = controller[len(inputs)*n_hidden:len(inputs)*n_hidden + n_hidden].reshape(1,n_hidden)
-
-        # Outputting activated first layer. 
-        output1 = self.sigmoid_activation(inputs.dot(weights1) + bias1)
-
-        # Preparing the weights and biases from the controller of layer 2
-        weights2 = controller[len(inputs)*n_hidden+n_hidden:-5].reshape((n_hidden,5))
-        bias2 = controller[-5:].reshape(1,5)
-
-        # Outputting activated second layer. Each entry in the output is an action
-        output = self.sigmoid_activation(output1.dot(weights2)+ bias2)[0]
-
-        # takes decisions about sprite actions
-
-        if output[0] > 0.5:
-            left = 1
-        else:
-            left = 0
-
-        if output[1] > 0.5:
-            right = 1
-        else:
-            right = 0
-
-        if output[2] > 0.5:
-            jump = 1
-        else:
-            jump = 0
-
-        if output[3] > 0.5:
-            shoot = 1
-        else:
-            shoot = 0
-
-        if output[4] > 0.5:
-            release = 1
-        else:
-            release = 0
-
-        return [left, right, jump, shoot, release]
 
 
 experiment_name = 'individual_demo'
@@ -85,6 +29,7 @@ env = Environment(experiment_name=experiment_name,
                   player_controller=player_controller(),
                   enemymode="static",
                   level=2,
+                  n_hidden_player=[10],
                   speed="fastest")
 
 # default environment fitness is assumed for experiment
@@ -100,9 +45,8 @@ ini = time.time()  # sets time marker
 # genetic algorithm params
 
 run_mode = 'train' # train or test
-#n_vars = (env.get_num_sensors()+1)*5  # perceptron
-#n_vars = (env.get_num_sensors()+1)*10 + 11*5  # multilayer with 10 neurons
-n_hidden = 50
+
+n_hidden = 10
 n_vars = (env.get_num_sensors()+1)*n_hidden + (n_hidden+1)*5 # multilayer with 50 neurons
 dom_u = 1
 dom_l = -1
