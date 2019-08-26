@@ -46,7 +46,7 @@ ini = time.time()  # sets time marker
 run_mode = 'train' # train or test
 
 n_hidden = 10
-n_vars = (env.get_num_sensors()+1)*n_hidden + (n_hidden+1)*5 # multilayer with 50 neurons
+n_vars = (env.get_num_sensors()+1)*n_hidden + (n_hidden+1)*5 # multilayer with 10 hidden neurons
 dom_u = 1
 dom_l = -1
 npop = 100
