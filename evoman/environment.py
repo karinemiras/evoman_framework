@@ -6,7 +6,7 @@
 
 import sys
 import gzip
-import cPickle as pickle
+import pickle
 import numpy
 import pygame
 from pygame.locals import *
@@ -38,7 +38,7 @@ class Environment(object):
                  contacthurt="player",        # player or enemy
                  logs="on",                   # on or off
                  savelogs="yes",              # yes or no
-                 clockprec="low",             # low or medium
+                 clockprec="low",
                  timeexpire=3000,             # integer
                  overturetime=100,            # integer
                  solutions=None,              # any
@@ -289,7 +289,7 @@ class Environment(object):
 
             # loads solutions
             file = gzip.open(self.experiment_name+'/evoman_solstate')
-            self.solutions =  pickle.load(file)
+            self.solutions =  pickle.load(file, encoding='latin1')
             self.print_logs("MESSAGE: state has been loaded.")
 
         except IOError:
