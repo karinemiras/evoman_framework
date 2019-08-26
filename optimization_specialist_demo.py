@@ -24,7 +24,7 @@ if not os.path.exists(experiment_name):
 
 # initializes simulation in individual evolution mode, for single static enemy.
 env = Environment(experiment_name=experiment_name,
-                  enemies=[1],
+                  enemies=[2],
                   playermode="ai",
                   player_controller=player_controller(),
                   enemymode="static",
