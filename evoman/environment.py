@@ -150,7 +150,6 @@ class Environment(object):
         # method for updating solutions bkp in simulation
     def update_solutions(self, solutions):
         self.solutions = solutions
-        self.print_logs("SOLUTIONS CHANGE:  "+str(solutions))
 
 
     # method for updating simulation parameters
