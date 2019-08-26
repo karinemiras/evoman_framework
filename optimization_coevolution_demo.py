@@ -46,8 +46,6 @@ env = environm(experiment_name=experiment_name,
 			   enemymode="ai",
 			   player_controller=player_controller(),
 			   enemy_controller=enemy_controller(),
-			   n_hidden_enemy = [10],
-			   n_hidden_player = [10],
 			   level=2,
 			   speed="fastest")
 

@@ -73,7 +73,7 @@ class Player(pygame.sprite.Sprite):
 
 
 
-    def __init__(self, location, enemyn, level, n_hidden_player, *groups):
+    def __init__(self, location, enemyn, level, *groups):
         super(Player, self).__init__(*groups)
 
 
@@ -97,7 +97,6 @@ class Player(pygame.sprite.Sprite):
         self.vy = 0
         self.hy = 0
         self.sensors = None
-        self.n_hidden_player = n_hidden_player
 
 
 
@@ -179,7 +178,7 @@ class Player(pygame.sprite.Sprite):
 
 
                 # calls the controller providing game sensors
-                actions = game.player_controller.control(self.sensors.get(game), game.pcont, self.n_hidden_player)
+                actions = game.player_controller.control(self.sensors.get(game), game.pcont)
                 if len(actions) < 5:
                     game.print_logs("ERROR: Player controller must return 5 decision variables.")
                     sys.exit(0)

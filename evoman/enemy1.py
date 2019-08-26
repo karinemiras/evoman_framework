@@ -21,7 +21,7 @@ timeexpire = 1000 # game run limit
 class Enemy(pygame.sprite.Sprite):
 
 
-    def __init__(self, location, n_hidden, *groups):
+    def __init__(self, location, *groups):
 
         super(Enemy, self).__init__(*groups)
 
@@ -43,7 +43,7 @@ class Enemy(pygame.sprite.Sprite):
         self.shooting = 1
         self.gun_cooldown = 0
         self.gun_cooldown2 = 0
-        self.n_hidden = n_hidden
+
 
 
 
@@ -82,7 +82,7 @@ class Enemy(pygame.sprite.Sprite):
 
 
             # calls the controller providing game sensors
-            actions = game.enemy_controller.control(self.sensors.get(game), game.econ, self.n_hidden)
+            actions = game.enemy_controller.control(self.sensors.get(game), game.econt)
             if len(actions) < 4:
                 game.print_logs("ERROR: Enemy 1 controller must return 4 decision variables.")
                 sys.exit(0)

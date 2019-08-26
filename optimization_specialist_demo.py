@@ -29,7 +29,6 @@ env = Environment(experiment_name=experiment_name,
                   player_controller=player_controller(),
                   enemymode="static",
                   level=2,
-                  n_hidden_player=[10],
                   speed="fastest")
 
 # default environment fitness is assumed for experiment
