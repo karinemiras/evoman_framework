@@ -47,9 +47,9 @@ ini = time.time()  # sets time marker
 # genetic algorithm params
 
 run_mode = 'train' # train or test
-#n_vars = (env.get_num_sensors()+1)*5  # perceptron
-n_vars = (env.get_num_sensors() + 1)*10 + 5*(10 + 1)  # multilayer with 10 neurons
-#n_vars = (env.get_num_sensors()+1)*50 + 51*5 # multilayer with 50 neurons
+
+n_hidden = 10
+n_vars = (env.get_num_sensors()+1)*n_hidden + (n_hidden+1)*5 # multilayer with 10 hidden neurons
 dom_u = 1
 dom_l = -1
 npop = 100
