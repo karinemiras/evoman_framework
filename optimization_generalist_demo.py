@@ -39,7 +39,7 @@ env = Environment(experiment_name=experiment_name,
 env.state_to_log() # checks environment state
 
 
-####   Optimization for controller solution (best genotype/weights for perceptron phenotype network): Ganetic Algorihm    ###
+####   Optimization for controller solution (best genotype-weights for phenotype-network): Ganetic Algorihm    ###
 
 ini = time.time()  # sets time marker
 
