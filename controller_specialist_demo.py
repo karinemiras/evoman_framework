@@ -38,6 +38,6 @@ for en in range(1, 9):
 	env.update_parameter('enemies',[en])
 
 	# Load specialist controller
-	sol = np.loadtxt('demo_'+str(en)+'.txt')
+	sol = np.loadtxt('solutions_demo/demo_'+str(en)+'.txt')
 	print('\n LOADING SAVED SPECIALIST SOLUTION FOR ENEMY '+str(en)+' \n')
 	env.play(sol)

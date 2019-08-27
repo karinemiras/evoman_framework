@@ -27,7 +27,7 @@ env = Environment(experiment_name=experiment_name,
 				  enemymode="static",
 				  level=2)
 
-sol = np.loadtxt('demo_all.txt')
+sol = np.loadtxt('solutions_demo/demo_all.txt')
 print('\n LOADING SAVED GENERALIST SOLUTION FOR ALL ENEMIES \n')
 
 # tests saved demo solutions for each enemy
