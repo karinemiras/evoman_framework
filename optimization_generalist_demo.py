@@ -20,7 +20,7 @@ import glob, os
 
 
 
-experiment_name = 'multi_demo1'
+experiment_name = 'multi_demo'
 if not os.path.exists(experiment_name):
     os.makedirs(experiment_name)
 
