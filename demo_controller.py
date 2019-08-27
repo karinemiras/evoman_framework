@@ -2,7 +2,7 @@ from controller import Controller
 import numpy as np
 
 def sigmoid_activation(x):
-	return 1/(1+np.exp(-x))
+	return 1./(1.+np.exp(-x))
 
 # implements controller structure for player
 class player_controller(Controller):
@@ -16,21 +16,25 @@ class player_controller(Controller):
 
 		if self.n_hidden[0]>0:
 			# Preparing the weights and biases from the controller of layer 1
-			weights1 = controller[:len(inputs)*self.n_hidden[0]].reshape((len(inputs),self.n_hidden[0]))
-			bias1 = controller[len(inputs)*self.n_hidden[0]:len(inputs)*self.n_hidden[0] + self.n_hidden[0]].reshape(1,self.n_hidden[0])
 
-			# Outputting activated first layer.
+			# Biases for the n hidden neurons
+			bias1 = controller[:self.n_hidden[0]].reshape(1,self.n_hidden[0])
+			# Weights for the connections from the inputs to the hidden nodes
+			weights1_slice = len(inputs)*self.n_hidden[0] + self.n_hidden[0]
+			weights1 = controller[self.n_hidden[0]:weights1_slice].reshape((len(inputs),self.n_hidden[0]))
+
+			# Outputs activation first layer.
 			output1 = sigmoid_activation(inputs.dot(weights1) + bias1)
 
 			# Preparing the weights and biases from the controller of layer 2
-			weights2 = controller[len(inputs)*self.n_hidden[0]+self.n_hidden[0]:-5].reshape((self.n_hidden[0],5))
-			bias2 = controller[-5:].reshape(1,5)
+			bias2 = controller[weights1_slice:weights1_slice + 5].reshape(1,5)
+			weights2 = controller[weights1_slice + 5:].reshape((self.n_hidden[0],5))
 
 			# Outputting activated second layer. Each entry in the output is an action
 			output = sigmoid_activation(output1.dot(weights2)+ bias2)[0]
 		else:
-			weights = controller[:len(inputs)*5].reshape((len(inputs), 5))
-			bias = controller[len(inputs)*5:].reshape(1, 5)
+			bias = controller[:5].reshape(1, 5)
+			weights = controller[5:].reshape((len(inputs), 5))
 
 			output = sigmoid_activation(inputs.dot(weights) + bias)[0]
 
@@ -62,7 +66,6 @@ class player_controller(Controller):
 
 		return [left, right, jump, shoot, release]
 
-
 # implements controller structure for enemy
 class enemy_controller(Controller):
 	def __init__(self):
@@ -75,22 +78,25 @@ class enemy_controller(Controller):
 
 		if self.n_hidden[0]>0:
 			# Preparing the weights and biases from the controller of layer 1
-			weights1 = controller[:len(inputs)*self.n_hidden[0]].reshape((len(inputs),self.n_hidden[0]))
-			bias1 = controller[len(inputs)*self.n_hidden[0]:len(inputs)*self.n_hidden[0] + self.n_hidden[0]].reshape(1,self.n_hidden[0])
 
-			# Outputting activated first layer.
+			# Biases for the n hidden neurons
+			bias1 = controller[:self.n_hidden[0]].reshape(1,self.n_hidden[0])
+			# Weights for the connections from the inputs to the hidden nodes
+			weights1_slice = len(inputs)*self.n_hidden[0] + self.n_hidden[0]
+			weights1 = controller[self.n_hidden[0]:weights1_slice].reshape((len(inputs),self.n_hidden[0]))
+
+			# Outputs activation first layer.
 			output1 = sigmoid_activation(inputs.dot(weights1) + bias1)
 
 			# Preparing the weights and biases from the controller of layer 2
-			# Even though the enemy only has 4 attacks 5 outputs are used so that the same network structure as the player controller can be used
-			weights2 = controller[len(inputs)*self.n_hidden[0]+self.n_hidden[0]:-5].reshape((self.n_hidden[0],5))
-			bias2 = controller[-5:].reshape(1,5)
+			bias2 = controller[weights1_slice:weights1_slice + 5].reshape(1,5)
+			weights2 = controller[weights1_slice + 5:].reshape((self.n_hidden[0],5))
 
 			# Outputting activated second layer. Each entry in the output is an action
 			output = sigmoid_activation(output1.dot(weights2)+ bias2)[0]
 		else:
-			weights = controller[:len(inputs)*5].reshape((len(inputs), 5))
-			bias = controller[len(inputs)*5:].reshape(1, 5)
+			bias = controller[:5].reshape(1, 5)
+			weights = controller[5:].reshape((len(inputs), 5))
 
 			output = sigmoid_activation(inputs.dot(weights) + bias)[0]
 
