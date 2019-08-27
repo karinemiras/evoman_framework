@@ -6,27 +6,33 @@ def sigmoid_activation(x):
 
 # implements controller structure for player
 class player_controller(Controller):
+	def __init__(self):
+		# Number of hidden neurons
+		self.n_hidden = [10]
 
 	def control(self, inputs,controller):
-		# Number of hidden neurons
-		n_hidden = [10]
-
 		# Normalises the input using min-max scaling
 		inputs = (inputs-min(inputs))/float((max(inputs)-min(inputs)))
 
-		# Preparing the weights and biases from the controller of layer 1
-		weights1 = controller[:len(inputs)*n_hidden[0]].reshape((len(inputs),n_hidden[0]))
-		bias1 = controller[len(inputs)*n_hidden[0]:len(inputs)*n_hidden[0] + n_hidden[0]].reshape(1,n_hidden[0])
+		if self.n_hidden[0]>0:
+			# Preparing the weights and biases from the controller of layer 1
+			weights1 = controller[:len(inputs)*self.n_hidden[0]].reshape((len(inputs),self.n_hidden[0]))
+			bias1 = controller[len(inputs)*self.n_hidden[0]:len(inputs)*self.n_hidden[0] + self.n_hidden[0]].reshape(1,self.n_hidden[0])
 
-		# Outputting activated first layer.
-		output1 = sigmoid_activation(inputs.dot(weights1) + bias1)
+			# Outputting activated first layer.
+			output1 = sigmoid_activation(inputs.dot(weights1) + bias1)
 
-		# Preparing the weights and biases from the controller of layer 2
-		weights2 = controller[len(inputs)*n_hidden[0]+n_hidden[0]:-5].reshape((n_hidden[0],5))
-		bias2 = controller[-5:].reshape(1,5)
+			# Preparing the weights and biases from the controller of layer 2
+			weights2 = controller[len(inputs)*self.n_hidden[0]+self.n_hidden[0]:-5].reshape((self.n_hidden[0],5))
+			bias2 = controller[-5:].reshape(1,5)
 
-		# Outputting activated second layer. Each entry in the output is an action
-		output = sigmoid_activation(output1.dot(weights2)+ bias2)[0]
+			# Outputting activated second layer. Each entry in the output is an action
+			output = sigmoid_activation(output1.dot(weights2)+ bias2)[0]
+		else:
+			weights = controller[:len(inputs)*5].reshape((len(inputs), 5))
+			bias = controller[len(inputs)*5:].reshape(1, 5)
+
+			output = sigmoid_activation(inputs.dot(weights) + bias)[0]
 
 		# takes decisions about sprite actions
 		if output[0] > 0.5:
@@ -59,28 +65,34 @@ class player_controller(Controller):
 
 # implements controller structure for enemy
 class enemy_controller(Controller):
+	def __init__(self):
+		# Number of hidden neurons
+		self.n_hidden = [10]
 
 	def control(self, inputs,controller):
-		# Number of hidden neurons
-		n_hidden = [10]
-
 		# Normalises the input using min-max scaling
 		inputs = (inputs-min(inputs))/float((max(inputs)-min(inputs)))
 
-		# Preparing the weights and biases from the controller of layer 1
-		weights1 = controller[:len(inputs)*n_hidden[0]].reshape((len(inputs),n_hidden[0]))
-		bias1 = controller[len(inputs)*n_hidden[0]:len(inputs)*n_hidden[0] + n_hidden[0]].reshape(1,n_hidden[0])
+		if self.n_hidden[0]>0:
+			# Preparing the weights and biases from the controller of layer 1
+			weights1 = controller[:len(inputs)*self.n_hidden[0]].reshape((len(inputs),self.n_hidden[0]))
+			bias1 = controller[len(inputs)*self.n_hidden[0]:len(inputs)*self.n_hidden[0] + self.n_hidden[0]].reshape(1,self.n_hidden[0])
 
-		# Outputting activated first layer.
-		output1 = sigmoid_activation(inputs.dot(weights1) + bias1)
+			# Outputting activated first layer.
+			output1 = sigmoid_activation(inputs.dot(weights1) + bias1)
 
-		# Preparing the weights and biases from the controller of layer 2
-		# Even though the enemy only has 4 attacks 5 outputs are used so that the same network structure as the player controller can be used
-		weights2 = controller[len(inputs)*n_hidden[0]+n_hidden[0]:-5].reshape((n_hidden[0],5))
-		bias2 = controller[-5:].reshape(1,5)
+			# Preparing the weights and biases from the controller of layer 2
+			# Even though the enemy only has 4 attacks 5 outputs are used so that the same network structure as the player controller can be used
+			weights2 = controller[len(inputs)*self.n_hidden[0]+self.n_hidden[0]:-5].reshape((self.n_hidden[0],5))
+			bias2 = controller[-5:].reshape(1,5)
 
-		# Outputting activated second layer. Each entry in the output is an action
-		output = sigmoid_activation(output1.dot(weights2)+ bias2)[0]
+			# Outputting activated second layer. Each entry in the output is an action
+			output = sigmoid_activation(output1.dot(weights2)+ bias2)[0]
+		else:
+			weights = controller[:len(inputs)*5].reshape((len(inputs), 5))
+			bias = controller[len(inputs)*5:].reshape(1, 5)
+
+			output = sigmoid_activation(inputs.dot(weights) + bias)[0]
 
 		# takes decisions about sprite actions
 		if output[0] > 0.5:
