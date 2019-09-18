@@ -22,11 +22,13 @@ experiment_name = 'individual_demo'
 if not os.path.exists(experiment_name):
     os.makedirs(experiment_name)
 
+n_hidden_neurons = 10
+
 # initializes simulation in individual evolution mode, for single static enemy.
 env = Environment(experiment_name=experiment_name,
                   enemies=[2],
                   playermode="ai",
-                  player_controller=player_controller(),
+                  player_controller=player_controller(n_hidden_neurons),
                   enemymode="static",
                   level=2,
                   speed="fastest")
@@ -45,8 +47,9 @@ ini = time.time()  # sets time marker
 
 run_mode = 'train' # train or test
 
-n_hidden = 10
-n_vars = (env.get_num_sensors()+1)*n_hidden + (n_hidden+1)*5 # multilayer with 10 hidden neurons
+# number of weights for multilayer with 10 hidden neurons
+n_vars = (env.get_num_sensors()+1)*n_hidden_neurons + (n_hidden_neurons+1)*5
+
 dom_u = 1
 dom_l = -1
 npop = 100

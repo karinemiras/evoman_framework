@@ -6,11 +6,11 @@ def sigmoid_activation(x):
 
 # implements controller structure for player
 class player_controller(Controller):
-	def __init__(self):
+	def __init__(self, _n_hidden):
 		# Number of hidden neurons
-		self.n_hidden = [10]
+		self.n_hidden = [_n_hidden]
 
-	def control(self, inputs,controller):
+	def control(self, inputs, controller):
 		# Normalises the input using min-max scaling
 		inputs = (inputs-min(inputs))/float((max(inputs)-min(inputs)))
 
@@ -68,9 +68,9 @@ class player_controller(Controller):
 
 # implements controller structure for enemy
 class enemy_controller(Controller):
-	def __init__(self):
+	def __init__(self, _n_hidden):
 		# Number of hidden neurons
-		self.n_hidden = [10]
+		self.n_hidden = [_n_hidden]
 
 	def control(self, inputs,controller):
 		# Normalises the input using min-max scaling

@@ -39,13 +39,15 @@ experiment_name = 'co_demo'
 if not os.path.exists(experiment_name):
 	os.makedirs(experiment_name)
 
+n_hidden_neurons = 10
+
 # initializes simulation for coevolution evolution mode.
 env = environm(experiment_name=experiment_name,
 			   enemies=[2],
 			   playermode="ai",
 			   enemymode="ai",
-			   player_controller=player_controller(),
-			   enemy_controller=enemy_controller(),
+			   player_controller=player_controller(n_hidden_neurons),
+			   enemy_controller=enemy_controller(n_hidden_neurons),
 			   level=2,
 			   speed="fastest")
 
@@ -61,12 +63,9 @@ ini = time.time()  # sets time marker
 # genetic algorithm params
 
 run_mode = 'train' # train or test
-#whan_vars = (env.get_num_sensors()+1)*5  # perceptron
-# n_vars = (env.get_num_sensors()+1)*10 + 11*5  # multilayer with 10 neurons
-#n_vars = (env.get_num_sensors()+1)*50 + 51*5 # multilayer with 50 neurons
 
-n_hidden = 10
-n_vars = (env.get_num_sensors()+1)*n_hidden + (n_hidden+1)*5 # multilayer with 50 neurons
+# number of weights for multilayer with 10 hidden neurons
+n_vars = (env.get_num_sensors()+1)*n_hidden_neurons + (n_hidden_neurons+1)*5
 
 dom_u = 1
 dom_l = -1
