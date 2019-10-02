@@ -42,6 +42,7 @@ class Environment(object):
                  timeexpire=3000,             # integer
                  overturetime=100,            # integer
                  solutions=None,              # any
+                 fullscreen=False,            # True or False
                  player_controller=None,      # controller object
                  enemy_controller=None      ):# controller object
 
@@ -63,6 +64,7 @@ class Environment(object):
         self.sound = sound
         self.contacthurt = contacthurt
         self.logs = logs
+        self.fulscreen = fullscreen
         self.savelogs = savelogs
         self.clockprec = clockprec
         self.timeexpire = timeexpire
@@ -111,7 +113,10 @@ class Environment(object):
             flags =  DOUBLEBUF  |  FULLSCREEN
         else:
             flags =  DOUBLEBUF
-
+        
+        if self.fullscreen:
+            flags =  DOUBLEBUF  |  FULLSCREEN
+            
         self.screen = pygame.display.set_mode((736, 512), flags)
 
         self.screen.set_alpha(None) # disables uneeded alpha
