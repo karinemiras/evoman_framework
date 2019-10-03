@@ -34,7 +34,7 @@ class Environment(object):
                  speed="fastest",             # normal or fastest
                  inputscoded="no",            # yes or no
                  randomini="no",              # yes or no
-                 sound="on",                  # on or off
+                 sound="off",                  # on or off
                  contacthurt="player",        # player or enemy
                  logs="on",                   # on or off
                  savelogs="yes",              # yes or no
@@ -96,14 +96,14 @@ class Environment(object):
         self.print_logs("MESSAGE: Pygame initialized for simulation.")
 
         # initializes sound library for playing mode
-        if self.sound == "on" and self.playermode == "human":
+        if self.sound == "on":
             pygame.mixer.init()
             self.print_logs("MESSAGE: sound has been turned on.")
 
         # initializes joystick library
         if self.playermode == "human":
             pygame.joystick.init()
-            self.joy =  pygame.joystick.get_count()
+            self.joy = pygame.joystick.get_count()
 
         self.clock = pygame.time.Clock() # initializes game clock resource
 
@@ -451,8 +451,7 @@ class Environment(object):
 
             # game timer
             self.time += 1
-            if self.playermode == "human":
-
+            if self.playermode == "human" or self.sound == "on":
                 # sound effects
                 if self.sound == "on" and self.time == 1:
                     sound = pygame.mixer.Sound('evoman/sounds/open.wav')
@@ -460,7 +459,7 @@ class Environment(object):
                     c.set_volume(1)
                     c.play(sound,loops=10)
 
-                if self.time >  self.overturetime: # delays game start a little bit for human mode
+                if self.time > self.overturetime: # delays game start a little bit for human mode
                     self.start = True
             else:
                 self.start = True
