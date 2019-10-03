@@ -64,7 +64,7 @@ class Environment(object):
         self.sound = sound
         self.contacthurt = contacthurt
         self.logs = logs
-        self.fulscreen = fullscreen
+        self.fullscreen = fullscreen
         self.savelogs = savelogs
         self.clockprec = clockprec
         self.timeexpire = timeexpire
