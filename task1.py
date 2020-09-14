@@ -25,7 +25,7 @@ class specialist:
 		self.pm = pm # Mutation probability
 
 		# Make a folder for results
-		experiment_name = 'task1_1'
+		experiment_name = 'task1_2'
 		if not os.path.exists(experiment_name):
 		    os.makedirs(experiment_name)
 
@@ -42,7 +42,7 @@ class specialist:
 		n_vars = (self.env.get_num_sensors()+1)*neurons + (neurons+1)*5
 
 		# Create framework for individuals/population
-		creator.create("FitnessMax", base.Fitness, weights=(-1.0, 1.0)) # What do these weights mean?
+		creator.create("FitnessMax", base.Fitness, weights=(1.0,)) # What do these weights mean?
 		creator.create("Individual", list, fitness=creator.FitnessMax)
 
 		self.toolbox = base.Toolbox()
@@ -84,11 +84,9 @@ class specialist:
 
 		for c in range(self.gen):
 			print("Gen:", c,len(self.pop))
-			for inds in self.pop:
-				print(inds.fitness.values)
 
 			# Parent selection using Tournament selection
-			offspring = self.toolbox.select(self.pop,2)
+			offspring = self.toolbox.select(self.pop,5)
 			offspring = list(map(self.toolbox.clone, offspring))
 			
 			 # 1-point crossover on offspring
@@ -129,5 +127,5 @@ class specialist:
 		pickle.dump(self.record, open("output.p","wb"))
 
 
-test = specialist(neurons=10,gen=1,popsize=2,pc=1,pm=0.2)
+test = specialist(neurons=10,gen=5,popsize=10,pc=1,pm=0.2)
 test.cycle()
