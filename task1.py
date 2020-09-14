@@ -118,8 +118,6 @@ class specialist:
 			# Or: Survival of the fittest
 			newpop = self.pop + offspring
 			self.pop = self.toolbox.select(newpop, len(self.pop))
-			print('First recodrd',self.record)
-
 
 			# Calculate the statistic of population in new generation
 			for keys in self.record.keys():
