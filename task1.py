@@ -14,6 +14,7 @@ import numpy as np
 import random
 from deap import creator
 from demo_controller import player_controller
+import pickle
 
 
 class specialist:
@@ -27,6 +28,8 @@ class specialist:
 		experiment_name = 'task1_1'
 		if not os.path.exists(experiment_name):
 		    os.makedirs(experiment_name)
+
+		fitness_results  = open(experiment_name + '/results.txt','a')
 
 		self.env = Environment(experiment_name=experiment_name,
 						       enemies=[5],
@@ -55,6 +58,22 @@ class specialist:
 
 		self.pop = self.toolbox.population(n=popsize)
 
+		# Set up some tools for calculating statistics
+		self.stats = tools.Statistics(key=lambda ind: ind.fitness.values)
+		self.stats.register("avg", np.mean, axis=0)
+		self.stats.register("std", np.std, axis=0)
+		self.stats.register("min", np.min, axis=0)
+		self.stats.register("max", np.max, axis=0)
+
+		# Calculate the fitness for every member in the new population
+		fitnesses = np.array(list(map(lambda y: self.toolbox.evaluate(self.env,y), self.pop)))
+		
+		for ind, fit in zip(self.pop, fitnesses):
+			ind.fitness.values = [fit]
+
+
+		self.record = self.stats.compile(self.pop)
+
 	def evaluate(self,env,ind):
 		""" Play the game and calculate resulting fitness. """
 		fitness,_,_,_ = env.play(pcont=np.array(ind))
@@ -65,9 +84,11 @@ class specialist:
 
 		for c in range(self.gen):
 			print("Gen:", c,len(self.pop))
+			for inds in self.pop:
+				print(inds.fitness.values)
 
 			# Parent selection using Tournament selection
-			offspring = self.toolbox.select(self.pop, len(self.pop))
+			offspring = self.toolbox.select(self.pop,2)
 			offspring = list(map(self.toolbox.clone, offspring))
 			
 			 # 1-point crossover on offspring
@@ -97,6 +118,18 @@ class specialist:
 			# Or: Survival of the fittest
 			newpop = self.pop + offspring
 			self.pop = self.toolbox.select(newpop, len(self.pop))
+			print('First recodrd',self.record)
 
-test = specialist(neurons=10,gen=20,popsize=20,pc=1,pm=0.2)
+
+			# Calculate the statistic of population in new generation
+			for keys in self.record.keys():
+				new_record = self.stats.compile(self.pop)
+
+				self.record[keys] = np.append(self.record[keys],new_record[keys])
+
+		# Save as a pickle
+		pickle.dump(self.record, open("output.p","wb"))
+
+
+test = specialist(neurons=10,gen=1,popsize=2,pc=1,pm=0.2)
 test.cycle()
