@@ -25,13 +25,13 @@ class specialist:
 		self.pm = pm # Mutation probability
 
 		# Make a folder for results
-		experiment_name = 'task1_2'
-		if not os.path.exists(experiment_name):
-		    os.makedirs(experiment_name)
+		self.experiment_name = 'task1_2'
+		if not os.path.exists(self.experiment_name):
+		    os.makedirs(self.experiment_name)
 
-		fitness_results  = open(experiment_name + '/results.txt','a')
+		fitness_results  = open(self.experiment_name + '/results.txt','a')
 
-		self.env = Environment(experiment_name=experiment_name,
+		self.env = Environment(experiment_name=self.experiment_name,
 						       enemies=[5],
 						       level=2,
 						       playermode='ai',
@@ -124,7 +124,7 @@ class specialist:
 				self.record[keys] = np.append(self.record[keys],new_record[keys])
 
 		# Save as a pickle
-		pickle.dump(self.record, open("output.p","wb"))
+		pickle.dump(self.record, open(self.experiment_name+"/output.p","wb"))
 
 
 test = specialist(neurons=10,gen=5,popsize=10,pc=1,pm=0.2)
