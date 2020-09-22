@@ -152,14 +152,9 @@ class specialist:
 		np.save(str(self.experiment_name+self.subname+'_bestsolution'), self.champion['ind'])
 
 
-experiments = [1,2,3,4,5] #ENTER WHICH EXPERIMENT NUMBERS YOU ARE RUNNING
+experiments = [1,2,3,4,5,6,7,8,9,10] #ENTER WHICH EXPERIMENT NUMBERS YOU ARE RUNNING (random seeds)
 ea = 'gaus' #ENTER WHICH EA YOU ARE RUNNING ('gaus' or 'uni')
 en = 2 #ENTER WHICH ENEMY YOU ARE RUNNING (2,5 OR 6)
-
-# for i in range(0,len(experiments)):
-# 	random.seed(experiments[i])
-#     test = specialist(neurons=20,gen=50,popsize=50,pc=0.3,pm=0.8,EA=ea,enemy=en,subname='/exp%i'%experiments[i])
-#     test.cycle()
 
 for i in range(0,len(experiments)):
 	random.seed(experiments[i])
