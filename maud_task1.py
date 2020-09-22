@@ -26,6 +26,7 @@ class specialist:
 		self.pm = pm # Mutation probability
 		self.EA = EA
 		self.enemy = enemy
+		self.subname = subname
 
 		# Make a folder for results
 		self.experiment_name = 'EA' + self.EA + '/enemy%i'%self.enemy
@@ -145,7 +146,7 @@ class specialist:
 					self.champion['ind'] = ind
 
 		# Save results as a pickle
-		pickle.dump(self.record, open(self.experiment_name+subname + ".p","wb"))
+		pickle.dump(self.record, open(self.experiment_name+self.subname + ".p","wb"))
 		
 		# Save the final best solution
 		np.save(str(self.experiment_name+self.subname+'_bestsolution'), self.champion['ind'])
