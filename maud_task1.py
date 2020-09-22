@@ -36,7 +36,7 @@ class specialist:
 		fitness_results  = open(self.experiment_name + subname + '.txt','a')
 
 		self.env = Environment(experiment_name=self.experiment_name,
-						       enemies=[5],
+						       enemies=[self.enemy],
 						       level=2,
 						       playermode='ai',
 						       enemymode='static',
@@ -102,7 +102,7 @@ class specialist:
 			print("Gen:", c,len(self.pop))
 
 			# Parent selection using Tournament selection
-			offspring = self.toolbox.select(self.pop,4)
+			offspring = self.toolbox.select(self.pop,20)
 			offspring = list(map(self.toolbox.clone, offspring))
 			
 			 # 1-point crossover on offspring
@@ -158,5 +158,5 @@ en = 2 #ENTER WHICH ENEMY YOU ARE RUNNING (2,5 OR 6)
 
 for i in range(0,len(experiments)):
 	random.seed(experiments[i])
-	test = specialist(neurons=1,gen=2,popsize=5,pc=0.3,pm=0.8,EA=ea,enemy=en,subname='/exp%i'%experiments[i])
+	test = specialist(neurons=20,gen=50,popsize=50,pc=0.3,pm=0.8,EA=ea,enemy=en,subname='/exp%i'%experiments[i])
 	test.cycle()
