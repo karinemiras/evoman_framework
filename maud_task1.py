@@ -18,21 +18,21 @@ import pickle
 import csv
 import pandas as pd
 
-random.seed(12)
-
 class specialist:
-	def __init__(self,neurons=10,gen=10,popsize=5,pc=0.5,pm=0.5):
+	def __init__(self,neurons=20,gen=50,popsize=50,pc=0.3,pm=0.8,EA='gaus',enemy=2,subname='exp1'):
 
 		self.gen = gen # Number of generations
 		self.pc = pc # Crossover probability
 		self.pm = pm # Mutation probability
+		self.EA = EA
+		self.enemy = enemy
 
 		# Make a folder for results
-		self.experiment_name = 'test'
+		self.experiment_name = 'EA' + self.EA + '/enemy%i'%self.enemy
 		if not os.path.exists(self.experiment_name):
 		    os.makedirs(self.experiment_name)
 
-		fitness_results  = open(self.experiment_name + '/results.txt','a')
+		fitness_results  = open(self.experiment_name + subname + '.txt','a')
 
 		self.env = Environment(experiment_name=self.experiment_name,
 						       enemies=[5],
@@ -56,8 +56,13 @@ class specialist:
 		self.toolbox.register("select", tools.selTournament, tournsize=3)
 		self.toolbox.register("population", tools.initRepeat, list, self.toolbox.individual)
 		self.toolbox.register("mate", tools.cxBlend,alpha=0.5)
-		self.toolbox.register("mutate", tools.mutGaussian,mu=0,sigma=1,indpb=0.2)
 		self.toolbox.register("evaluate", self.evaluate)
+
+		if self.EA == 'gaus':
+			self.toolbox.register("mutate", tools.mutGaussian,mu=0,sigma=1,indpb=0.2)
+		else:
+			self.toolbox.register("mutate", tools.mutUniformInt,low=1,up=1,indpb=0.2)
+
 
 		self.pop = self.toolbox.population(n=popsize)
 
@@ -140,10 +145,22 @@ class specialist:
 					self.champion['ind'] = ind
 
 		# Save results as a pickle
-		pickle.dump(self.record, open(self.experiment_name+"/output.p","wb"))
-
+		pickle.dump(self.record, open(self.experiment_name+subname + ".p","wb"))
+		
 		# Save the final best solution
-		np.save(str(self.experiment_name+'/bestsolution'), self.champion['ind'])
+		np.save(str(self.experiment_name+self.subname+'_bestsolution'), self.champion['ind'])
 
-test = specialist(neurons=20,gen=10,popsize=20,pc=0.3,pm=0.6)
-test.cycle()
+
+experiments = [1,2,3,4,5] #ENTER WHICH EXPERIMENT NUMBERS YOU ARE RUNNING
+ea = 'gaus' #ENTER WHICH EA YOU ARE RUNNING ('gaus' or 'uni')
+en = 2 #ENTER WHICH ENEMY YOU ARE RUNNING (2,5 OR 6)
+
+# for i in range(0,len(experiments)):
+# 	random.seed(experiments[i])
+#     test = specialist(neurons=20,gen=50,popsize=50,pc=0.3,pm=0.8,EA=ea,enemy=en,subname='/exp%i'%experiments[i])
+#     test.cycle()
+
+for i in range(0,len(experiments)):
+	random.seed(experiments[i])
+	test = specialist(neurons=1,gen=2,popsize=5,pc=0.3,pm=0.8,EA=ea,enemy=en,subname='/exp%i'%experiments[i])
+	test.cycle()
