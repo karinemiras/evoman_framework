@@ -1,0 +1,15 @@
+
+
+MESSAGE: Pygame initialized for simulation.
+
+PARAMETER CHANGE: enemies = [5]
+
+RUN: run status: enemy: 5; fitness: 89.23936107665804; player life: 47.2000000000003; enemy life: 0; time: 240
+
+RUN: run status: enemy: 5; fitness: 90.03650369121833; player life: 56.20000000000032; enemy life: 0; time: 266
+
+RUN: run status: enemy: 5; fitness: 89.68027017401381; player life: 52.600000000000314; enemy life: 0; time: 265
+
+RUN: run status: enemy: 5; fitness: 90.22027017401382; player life: 58.00000000000033; enemy life: 0; time: 265
+
+RUN: run status: enemy: 5; fitness: 90.03650369121833; player life: 56.20000000000032; enemy life: 0; time: 266
