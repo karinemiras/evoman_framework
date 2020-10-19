@@ -126,6 +126,7 @@ class Player(pygame.sprite.Sprite):
                     joystick.init()
 
                 # tests if the button/key was pressed or released.
+                # if the player is jumping, the release stops the jump before its maximum high is achieved
 
                 press = 0
                 release = 0

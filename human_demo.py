@@ -21,6 +21,7 @@ for en in range(1, 9):
                       speed="normal",
                       sound="on",
                       fullscreen=True,
+                      use_joystick=True,
                       playermode='human')
     env.update_parameter('enemies', [en])
     env.play()

@@ -44,7 +44,8 @@ class Environment(object):
                  solutions=None,              # any
                  fullscreen=False,            # True or False
                  player_controller=None,      # controller object
-                 enemy_controller=None      ):# controller object
+                 enemy_controller=None,      # controller object
+                 use_joystick=False):
 
 
         # initializes parameters
@@ -70,6 +71,8 @@ class Environment(object):
         self.timeexpire = timeexpire
         self.overturetime = overturetime
         self.solutions = solutions
+        self.joy = 0
+        self.use_joystick = use_joystick
 
 
         # initializes default random controllers
@@ -101,22 +104,17 @@ class Environment(object):
             self.print_logs("MESSAGE: sound has been turned on.")
 
         # initializes joystick library
-        if self.playermode == "human":
+        if self.use_joystick:
             pygame.joystick.init()
             self.joy = pygame.joystick.get_count()
 
         self.clock = pygame.time.Clock() # initializes game clock resource
-
-
-        # generates screen
-        if self.playermode == 'human': # playing mode in fullscreen
-            flags =  DOUBLEBUF  |  FULLSCREEN
-        else:
-            flags =  DOUBLEBUF
         
         if self.fullscreen:
             flags =  DOUBLEBUF  |  FULLSCREEN
-            
+        else:
+            flags =  DOUBLEBUF
+
         self.screen = pygame.display.set_mode((736, 512), flags)
 
         self.screen.set_alpha(None) # disables uneeded alpha

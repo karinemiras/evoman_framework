@@ -1,8 +1,16 @@
+# the demo_controller file contains standard controller structures for the agents.
+# you can overwrite the method 'control' in your own instance of the environment
+# and then use a different type of controller if you wish.
+# note that the param 'controller' received by 'control' is provided through environment.play(pcont=x)
+# 'controller' could contain either weights to be used in the standard controller (or other controller implemented),
+# or even a full network structure (ex.: from NEAT).
 from controller import Controller
 import numpy as np
 
+
 def sigmoid_activation(x):
 	return 1./(1.+np.exp(-x))
+
 
 # implements controller structure for player
 class player_controller(Controller):
@@ -65,6 +73,7 @@ class player_controller(Controller):
 			release = 0
 
 		return [left, right, jump, shoot, release]
+
 
 # implements controller structure for enemy
 class enemy_controller(Controller):
