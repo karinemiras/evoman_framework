@@ -13,6 +13,7 @@ import pandas as pd
 import pickle as pkl
 import os
 import pygame
+os.environ["SDL_VIDEODRIVER"] = "dummy"
 
 ###### CREATE A FOLDER CALLED solutions IN THE SAME DIRECTORY AS THIS SCRIPT  AND PASTE ALL SOLUTION TXTs THERE ! #####
 
@@ -48,8 +49,10 @@ for file in os.listdir("solutions"):
         group_name = file.replace(".txt", "")
         try:
             solution = np.loadtxt("solutions/" + file)
+            print("File of group " + str(group_name) + " was read")
         except:
-            print("File of group "+str(group_name)+" could not be read")
+            print("File of group "+str(group_name)+" could NOT be read")
+
         for enemy in enemies:
             env = Environment(
                 experiment_name=experiment_name,
@@ -64,9 +67,12 @@ for file in os.listdir("solutions"):
 
             n_vars = (env.get_num_sensors() + 1) * n_hidden + (n_hidden + 1) * 5  # multilayer with 50 neurons
             for n in range(repetitions):
-                f, p, e, t = env.play(pcont=solution)
-                df.loc[index,] = [f, p, e, t, group_name, n, enemy]
-                index += 1
+                try:
+                    f, p, e, t = env.play(pcont=solution)
+                    df.loc[index,] = [f, p, e, t, group_name, n, enemy]
+                    index += 1
+                except:
+                    print('bad solutioon')
 
 if mode == "test":
     # Convert time to time left for sorting
@@ -77,7 +83,7 @@ if mode == "test":
     df_final = pd.DataFrame(columns=["group", "enemies_slain", "gain", "player_life", "enemy_life", "time"])
     for i, group in enumerate(list(set(df["group"]))):
         this_group = df["group"] == group
-        dead_enemies = np.count_nonzero(df["enemy_life"].loc[this_group] == 0)
+        dead_enemies = np.count_nonzero(df["enemy_life"].loc[this_group] == 0) / repetitions
         gain = sum(df["player_life"].loc[this_group] - df["enemy_life"].loc[this_group]) / repetitions
         plife = sum(df["player_life"].loc[this_group]) / repetitions / n_enemies
         elife = sum(df["enemy_life"].loc[this_group]) / repetitions / n_enemies

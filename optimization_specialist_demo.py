@@ -18,6 +18,12 @@ from math import fabs,sqrt
 import glob, os
 
 
+# choose this for not using visuals and thus making experiments faster
+headless = True
+if headless:
+    os.environ["SDL_VIDEODRIVER"] = "dummy"
+
+
 experiment_name = 'individual_demo'
 if not os.path.exists(experiment_name):
     os.makedirs(experiment_name)
@@ -49,6 +55,7 @@ run_mode = 'train' # train or test
 
 # number of weights for multilayer with 10 hidden neurons
 n_vars = (env.get_num_sensors()+1)*n_hidden_neurons + (n_hidden_neurons+1)*5
+
 
 dom_u = 1
 dom_l = -1

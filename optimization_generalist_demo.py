@@ -17,6 +17,10 @@ import numpy as np
 from math import fabs,sqrt
 import glob, os
 
+# choose this for not using visuals and thus making experiments faster
+headless = True
+if headless:
+    os.environ["SDL_VIDEODRIVER"] = "dummy"
 
 n_hidden_neurons = 10
 
@@ -121,7 +125,7 @@ def crossover(pop):
         offspring =  np.zeros( (n_offspring, n_vars) )
 
         for f in range(0,n_offspring):
-
+            # crossover
             cross_prop = np.random.uniform(0,1)
             offspring[f] = p1*cross_prop+p2*(1-cross_prop)
 
