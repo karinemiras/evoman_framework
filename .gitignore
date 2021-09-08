@@ -1,0 +1,4 @@
+venv/
+evoman/
+__pycache__/
+*.py[cod]
