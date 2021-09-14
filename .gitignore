@@ -3,3 +3,5 @@ evoman/
 __pycache__/
 *.py[cod]
 *.txt
+dummy_demo_vector.py
+dummy_demo _main.py
