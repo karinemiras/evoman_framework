@@ -26,7 +26,8 @@ n_hidden_neurons = 0
 env = Environment(experiment_name=experiment_name,
 				  playermode="ai",
 				  player_controller=player_controller(n_hidden_neurons),
-			  	  speed="normal",
+			  	  speed="fastest",
+                  visualmode="yes",
 				  enemymode="static",
 				  level=2)
 
