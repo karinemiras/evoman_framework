@@ -19,6 +19,7 @@ def generate_next_generation(population_fitness):
 	Generates next generation from current population.
 	:param population_fitness: array containing each individual in population and their fitness score
 	"""
+	# should normalize each new vector between [-1, 1]
 	return
 
 def parent_selection(population_fitness):
@@ -28,13 +29,19 @@ def parent_selection(population_fitness):
 	"""
 	return
 
-def reproduce(x, y):
+def recombine(x, y):
 	"""
-	Generate one offspring from individuals a and b using crossover and additional random mutation.
-	:param x: first individual ; numpy vector with shape (num_genes,) corresponding to weights in NN controller
-	:param y: second individual ; numpy vector with shape (num_genes,) corresponding to weights in NN controller
+	Generate one offspring from individuals x and y using crossover.
+	:param x: first individual ; numpy vector with 265 weights
+	:param y: second individual ; numpy vector with 265 weights
 	"""
 	return
+
+def mutate(x):
+	"""
+	Applies random mutation to individual.
+	:param x: numpy vector with 265 weights
+	"""
 
 def compute_fitness(env, x):
 	"""
