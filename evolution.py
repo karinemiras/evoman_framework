@@ -42,6 +42,7 @@ def mutate(x):
 	Applies random mutation to individual.
 	:param x: numpy vector with 265 weights
 	"""
+	return
 
 def compute_fitness(env, x):
 	"""
