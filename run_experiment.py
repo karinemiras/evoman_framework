@@ -7,7 +7,6 @@
 ##################################################################################
 
 # imports framework
-from re import I
 import sys, os
 sys.path.insert(0, 'evoman') 
 from environment import Environment
