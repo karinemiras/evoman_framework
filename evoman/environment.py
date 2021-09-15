@@ -168,7 +168,7 @@ class Environment(object):
 
 
     def print_logs(self, msg):
-        if self.logs == "on":
+        if self.logs == "off": # TURN BACK ON
             print('\n'+msg) # prints log messages to screen
 
             if self.savelogs == "yes": # prints log messages to file
