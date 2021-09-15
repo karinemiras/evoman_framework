@@ -14,10 +14,17 @@ def initialize_generation(population_size, num_genes):
 	return np.random.uniform(-1, 1, (population_size, num_genes))
 
 
-def generate_next_generation(population):
+def generate_next_generation(population_fitness):
 	"""
 	Generates next generation from current population.
 	:param population_fitness: array containing each individual in population and their fitness score
+	"""
+	return
+
+def parent_selection(population_fitness):
+	"""
+	Returns a list of pairs with size |population| containing the selected parents that will reproduce.
+	:param populaton_fitness: array containing each individual in population and their fitness score
 	"""
 	return
 
