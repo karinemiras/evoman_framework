@@ -30,10 +30,11 @@ if not os.path.exists(experiment_name):
     os.makedirs(experiment_name)
 
 n_hidden_neurons = 10
+enemy = 5
 
 # initializes simulation in individual evolution mode, for single static enemy.
 env = Environment(experiment_name=experiment_name,
-                  enemies=[2],
+                  enemies=[enemy],
                   playermode="ai",
                   player_controller=player_controller(n_hidden_neurons),
                   enemymode="static",
@@ -56,12 +57,16 @@ for g in range(generations):
         f, p, e, t = env.play(pcont=player)
         fitness_array.append(f)
     
+    #save the fitness data
     total_fitness_data.append([np.max(fitness_array), 
                                np.mean(fitness_array), 
                                np.std(fitness_array)])
+    
+    
     pop = get_children(pop, np.array(fitness_array))
     
 
 with open('testing_data.csv', 'w', newline='', encoding='utf-8') as f:
     writer = csv.writer(f)
+    writer.writerow([enemy, generations, population_size])
     writer.writerows(total_fitness_data)

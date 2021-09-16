@@ -25,8 +25,8 @@ def crossover(p1, p2):
 def mutation(DNA, mutation_rate, sigma):
     length = len(DNA)
     mutation_index = np.random.uniform(0, 1, length) < 0.1+0.4*mutation_rate
-    mutations = np.random.normal(0, sigma, length)
-    c1 = DNA + mutation_index*mutations
+    mutation_size = np.random.normal(0, sigma, length)
+    c1 = DNA + mutation_index*mutation_size
     return c1
 
 def get_children(parents, fitness):

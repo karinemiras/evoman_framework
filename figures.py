@@ -11,17 +11,24 @@ import numpy as np
 
 total_fitness_data = []
 with open('testing_data.csv', newline='', encoding='utf-8') as f:
-    reader = csv.reader(f)
+    reader = csv.reader(f, delimiter=',', quoting=csv.QUOTE_NONNUMERIC)
     for row in reader:
         total_fitness_data.append(row)
 
+enemy, generations, population_size = total_fitness_data[0]
+total_fitness_data = total_fitness_data[1:]
 
 
-x = range(len(total_fitness_data))
+x = range(generations)
 total_fitness_data = np.array(total_fitness_data)
 fig, ax = plt.subplots()
-ax.plot(x, total_fitness_data[:,0])
+ax.plot(x, total_fitness_data[:,0], )
 ax.plot(x, total_fitness_data[:,1])
 ax.fill_between(x, 
                 total_fitness_data[:,1] - total_fitness_data[:,2], 
                 total_fitness_data[:,1] + total_fitness_data[:,2], alpha=0.2)
+ax.set_xlim(0, generations-1)
+ax.set_xticks(range(generations))
+plt.ylim(0,100)
+plt.text(0.7*generations, 5, f'Max = {np.max(total_fitness_data[:,0]).round(2)}')
+plt.title(f'Fitness over time against enemy:{int(enemy)}')
