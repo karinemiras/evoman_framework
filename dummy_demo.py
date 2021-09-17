@@ -30,7 +30,7 @@ if not os.path.exists(experiment_name):
     os.makedirs(experiment_name)
 
 n_hidden_neurons = 10
-enemy = 5
+enemy = 2
 
 # initializes simulation in individual evolution mode, for single static enemy.
 env = Environment(experiment_name=experiment_name,
@@ -48,14 +48,22 @@ n_vars = (env.get_num_sensors()+1)*n_hidden_neurons + (n_hidden_neurons+1)*5
 population_size = 100
 pop = np.random.uniform(0, 1, (population_size ,n_vars))
 total_fitness_data = []
+max_health = 0
 
 generations = 20
 for g in range(generations):
     print(f'#{g}#')
     fitness_array = []
+    fitness_array_smop = []
     for player in pop:
         f, p, e, t = env.play(pcont=player)
-        fitness_array.append(f)
+        fitness_new = 0.9*(100 - e) + 0.1*p - np.log(t)
+        fitness_smop = (100/(100-(0.9*(100-e) + 0.1*p - np.log10(t))))
+        fitness_array.append(fitness_new)
+        fitness_array_smop.append(fitness_smop)
+        if p > max_health and e == 0:
+            
+            max_health = p
     
     #save the fitness data
     total_fitness_data.append([np.max(fitness_array), 
@@ -63,10 +71,10 @@ for g in range(generations):
                                np.std(fitness_array)])
     
     
-    pop = get_children(pop, np.array(fitness_array))
+    pop = get_children(pop, np.array(fitness_array_smop))
     
 
 with open('testing_data.csv', 'w', newline='', encoding='utf-8') as f:
     writer = csv.writer(f)
-    writer.writerow([enemy, generations, population_size])
+    writer.writerow([enemy, generations, max_health])
     writer.writerows(total_fitness_data)

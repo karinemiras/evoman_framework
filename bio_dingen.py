@@ -24,8 +24,8 @@ def crossover(p1, p2):
 #and sigma: the average size of the mutation (taken from normal distribution)
 def mutation(DNA, mutation_rate, sigma):
     length = len(DNA)
-    mutation_index = np.random.uniform(0, 1, length) < 0.1+0.4*mutation_rate
-    mutation_size = np.random.normal(0, sigma, length)
+    mutation_index = np.random.uniform(0, 1, length) < 0.01+0.2*mutation_rate
+    mutation_size = np.random.normal(0, sigma**2, length)
     c1 = DNA + mutation_index*mutation_size
     return c1
 
@@ -47,8 +47,8 @@ def get_children(parents, fitness):
         child = random.choice(crossover(parents[p1[i]], parents[p2[i]]))
         
         #mutate based on parents fitness
-        mutation_rate = 1-0.5*(fitness[p1[i]] + fitness[p2[i]])/(101)
-        sigma = 1-0.5*(fitness[p1[i]] + fitness[p2[i]])/(101)
+        mutation_rate = 1-0.5*(fitness[p1[i]] + fitness[p2[i]])/(np.max(fitness)+1)
+        sigma = 1-0.5*(fitness[p1[i]] + fitness[p2[i]])/(np.max(fitness)+1)
         child = mutation(child, mutation_rate, sigma)
         
         #normalize between min-max

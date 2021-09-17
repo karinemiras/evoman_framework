@@ -15,14 +15,17 @@ with open('testing_data.csv', newline='', encoding='utf-8') as f:
     for row in reader:
         total_fitness_data.append(row)
 
-enemy, generations, population_size = total_fitness_data[0]
+enemy, generations, max_health = total_fitness_data[0]
 total_fitness_data = total_fitness_data[1:]
 
+enemy = int(enemy)
+generations = int(generations)
+population_size = len(total_fitness_data)
 
 x = range(generations)
 total_fitness_data = np.array(total_fitness_data)
 fig, ax = plt.subplots()
-ax.plot(x, total_fitness_data[:,0], )
+ax.plot(x, total_fitness_data[:,0])
 ax.plot(x, total_fitness_data[:,1])
 ax.fill_between(x, 
                 total_fitness_data[:,1] - total_fitness_data[:,2], 
@@ -30,5 +33,6 @@ ax.fill_between(x,
 ax.set_xlim(0, generations-1)
 ax.set_xticks(range(generations))
 plt.ylim(0,100)
-plt.text(0.7*generations, 5, f'Max = {np.max(total_fitness_data[:,0]).round(2)}')
+plt.text(0.7*generations, 10, f'Max Fit  = {np.max(total_fitness_data[:,0]).round(2)}')
+plt.text(0.7*generations, 5, f'Max Life= {np.round(max_health, 2)}')
 plt.title(f'Fitness over time against enemy:{int(enemy)}')
