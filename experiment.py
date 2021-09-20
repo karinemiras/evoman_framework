@@ -1,81 +1,58 @@
-"""
-Handles experiment data
-
-"""
-
 import numpy as np
-import csv
+import matplotlib.pyplot as plt
+import math
 
+from numpy.ma.extras import average
+
+DEBUG = True
 
 class Experiment:
 
-    """
-    Class used to represent the experiment.
+    # avg_fitness = np.array([])  # arrays of average fitnesses of every run of generation
+    best_solutions = np.array([[]])  # 2D array which stores best member/solution of every run
+    best_solutions_fitness = np.array([])  # array of best solution's fitness of every run
 
-    Attributes
-    ----------
-    None.
+    def __init__(self, _evolutionary_algorithm):
+        self.evolutionary_algorithm = _evolutionary_algorithm
 
-    Methods
-    -------
-    plot_data : takes in values of the current run (e.g. fitness, average_mean, std_dev) & plots the data
-    store_data : store data for current generation 
-    save_best_solutions : saves best solution from an experimental run
-    """
+    def run_experiment(self, experiments):
+        # store average fitness per generation in array
+        avg_fitness_gen = np.array([])
 
-    def __init__(self):
-        self.generation_fitness = np.array([])
+        for i in range(experiments):
+            best, best_fitness, avg_generation_fitness = self.evolutionary_algorithm.run()
+            avg_fitness_gen = np.append(avg_fitness_gen, np.average(avg_generation_fitness)) # assign average of average fitness to avg_fitness_gen
+            self.best_solutions = np.append(self.best_solutions, best)
+            self.best_solutions_fitness = np.append(self.best_solutions_fitness, best_fitness)
 
-    def store_data(self, experiment_name, fitness):
+            if DEBUG: print(f'EXPERIMENT NUMBER {i+1}: Average generation fitness: {avg_fitness_gen, avg_fitness_gen.shape} \n\n\n Fitness of the best solutions {self.best_solutions_fitness}')
+        # Plot the results of all experimental runs
+        self.line_plot(avg_fitness_gen, experiments)
+
+        # Save best of best_solutions to wonderful CSV file <3
+
+    def line_plot(self, average_fitness_generation, num_experiments):
         """
-        Stores the data from each generation --> call function at each iteration of generation
-        Also stores data after all generations --> if placed at end of generation loop in EA algorithm
+            Implements the plotting of the generational average fitness value & the highest fitness value
+            Is called after each experiment
 
-        Params
-        ------
-        experiment_name : name of the experiment
-        fitness : list of fitness values of the current generation
         """
+        # 1. ASSIGN ARRAY OF AVERAGE FITNESSES OVER ALL GENERATIONS OVER EACH EXPERIMENT TO DATAPOINTS
+        data_points = average_fitness_generation
 
-        # Calculates average fitness for a given generation
-        average_fitness = np.average(fitness)
-        # Add average_fitness to generation_fitness
-        self.generation_fitness = np.append(self.generation_fitness, average_fitness)
+        # 2. FILL ARRAY WITH VALUES CORRESPONDING TO NUMBER OF EXPERIMENTS
+        array_experiments = np.array([i+1 for i in range(num_experiments)]) # list comprehension
+        
+        if DEBUG: print(f'Experiments array = {array_experiments, array_experiments.shape}; Average fitnesses array = {data_points, data_points.shape}')
 
-        # Add generation_fitness value to .csv file with a. generation number, b. generation_fitness
-        with open(experiment_name + '_generation_fitness.csv', 'w') as new_file:
-            csv_writer = csv.writer(new_file, delimiter=',')
-            csv_writer.writerow(self.generation_fitness)  # add generation_fitness to .csv file
+        # 3. PLOT DATAPOINTS AGAINST EXPERIMENT_NUMBER
+        plt.plot(array_experiments, data_points, label="average generation fitness per experiment")
 
-        print(f'Population average fitness: {average_fitness}')
+        # 4. PLOT PARAMS
+        xint = range(min(array_experiments), math.ceil(max(array_experiments)) + 1)
+        plt.xticks(xint)  # set y-axis to only integer values
+        plt.xlabel('generation')
+        plt.ylabel('average fitness')
 
-    def plot_data(self):
-        """
-        Uses matplotlib to visualize data collected during the experiment: not sure about the idea of "current" vs. "total" data.
-        Use of parameters will depend on time when we decide to plot the data - after all generations have passed? NO - need to plot mean for each generation.
+        plt.show()
 
-        Params
-        ------
-        n_gen : number of generations
-            - hyperparams
-        c_gen : current generation
-            - i.e. f'gen{current iteration}' becomes label for x axis
-        c_mean : mean fitness of current generation
-            - c_mean = total_fitness/n_pop
-        c_std_dev : standard deviation from the mean of the current generation
-            - c_std_dev = np.std(population)
-        c_max : max fitness value of current generation
-            - c_max = best_fitness
-        c_algo : name of current solution
-        c_experiment : experiment name
-        c_enemy : current enemy type
-        (optional) t_mean : total mean of the whole evolutionary cycle (after all generations)
-            - t_mean = sum c_mean of all gen
-        """
-        # 1. Store the data
-        # 2. Plot the data
-
-        pass
-
-    def save_solution(self, solution, solution_fitness, experiment_name):
-        pass

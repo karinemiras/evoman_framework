@@ -2,11 +2,12 @@ import sys
 sys.path.insert(0, 'evoman')
 sys.path.insert(0, 'other')
 
-from experiment import Experiment
 from environment import Environment
 from demo_controller import player_controller
 import numpy as np
 import os
+
+DEBUG = True
 
 
 class EvolutionaryAlgorithm:
@@ -19,7 +20,6 @@ class EvolutionaryAlgorithm:
                  _mutation,
                  _mutation_selection,
                  _insertion):
-
         self.experiment_name = _experiment_name
         self.population_size = _population_size
         self.generations_number = _generations_number
@@ -31,13 +31,13 @@ class EvolutionaryAlgorithm:
         self.initialise_environment()
 
     def run(self):
-        experiment = Experiment()
         self.initialise_population()
         self.best_fitness = float('-inf')
+        avg_generation_fitness = np.array([])
+
         generation = 1
 
         while(generation <= self.generations_number):
-            generation += 1
             # fitness is an array of fitnesses of individuals.
             # fitness[i] is a fitness of population[i]
             fitness = self.get_fitness()
@@ -45,25 +45,31 @@ class EvolutionaryAlgorithm:
             # Checks if best candidate appeared in the newest generation
             self.update_best(fitness)
 
-            # Selects candidates for crossover
+            # CROSSOVER
             parents = self.selection(fitness, self.population)
             offspring = self.crossover(parents)
 
-            # Selects candidates for mutation
+            # MUTATION
             selected = self.mutation_selection(parents, offspring, self.population)
             mutants = self.mutation(selected)
 
-            # Add mutants to offspring, insert them to new generation
+            # NEXT GENERATION
             offspring = np.concatenate((offspring, mutants))
             self.population = self.insertion(fitness, self.population, offspring)
 
-            # Passes fitness are to experiment object to be stored
-            experiment.store_data(self.experiment_name, fitness)
-            print(f'Current best fitness: {self.best_fitness}')
+            if DEBUG:
+                print(f'Population shape: {self.population.shape}')
+                print(f'Current Generation {generation}; Best fitness: {self.best_fitness}')
+                # print(f'Best Solution: {self.best, self.best.shape}')
 
-        experiment.save_solution(self.best, self.best_fitness, self.experiment_name)
-        experiment.plot_data()
-        return self.best, self.best_fitness
+            # INCREMENT GENERATION
+            generation += 1
+
+            # CALCULATE AVERAGE FITNESS FOR GENERATION
+            avg_generation_fitness = np.append(avg_generation_fitness, np.average(fitness))
+            
+
+        return self.best, self.best_fitness, avg_generation_fitness
 
     def get_fitness(self):
         fitness = np.array([])
@@ -81,7 +87,7 @@ class EvolutionaryAlgorithm:
 
     def initialise_population(self):
         genome_length = 5 * (self.env.get_num_sensors() + 1)
-        self.population = np.random.uniform(-1, 1, self.population_size * genome_length,)
+        self.population = np.random.uniform(-1, 1, self.population_size * genome_length,) # What gets created here? Array of size...?
         self.population = self.population.reshape(self.population_size, genome_length)
 
     def initialise_environment(self):
