@@ -15,6 +15,7 @@ class EvolutionaryAlgorithm:
                  _experiment_name,
                  _population_size,
                  _generations_number,
+                 _fitness,
                  _selection,
                  _crossover,
                  _mutation,
@@ -23,6 +24,7 @@ class EvolutionaryAlgorithm:
         self.experiment_name = _experiment_name
         self.population_size = _population_size
         self.generations_number = _generations_number
+        self.fitness = _fitness
         self.selection = _selection
         self.crossover = _crossover
         self.mutation = _mutation
@@ -40,7 +42,7 @@ class EvolutionaryAlgorithm:
         while(generation <= self.generations_number):
             # fitness is an array of fitnesses of individuals.
             # fitness[i] is a fitness of population[i]
-            fitness = self.get_fitness()
+            fitness = self.fitness(self.population, self.env)
 
             # Checks if best candidate appeared in the newest generation
             self.update_best(fitness)
@@ -58,27 +60,15 @@ class EvolutionaryAlgorithm:
             self.population = self.insertion(fitness, self.population, offspring)
 
             if DEBUG:
-                print(f'Population shape: {self.population.shape}')
                 print(f'Current Generation {generation}; Best fitness: {self.best_fitness}')
-                # print(f'Best Solution: {self.best, self.best.shape}')
 
             # INCREMENT GENERATION
             generation += 1
 
             # CALCULATE AVERAGE FITNESS FOR GENERATION
             avg_generation_fitness = np.append(avg_generation_fitness, np.average(fitness))
-            
 
         return self.best, self.best_fitness, avg_generation_fitness
-
-    def get_fitness(self):
-        fitness = np.array([])
-
-        for i in range(self.population_size):
-            f, pl, el, t = self.env.play(pcont=self.population[i])
-            fitness = np.append(fitness, f)
-
-        return fitness
 
     def update_best(self, fitness):
         for i in range(self.population.shape[0]):
@@ -87,7 +77,8 @@ class EvolutionaryAlgorithm:
 
     def initialise_population(self):
         genome_length = 5 * (self.env.get_num_sensors() + 1)
-        self.population = np.random.uniform(-1, 1, self.population_size * genome_length,) # What gets created here? Array of size...?
+        # What gets created here? Array of size... ->  self.population_size * genome_length
+        self.population = np.random.uniform(-1, 1, self.population_size * genome_length,)
         self.population = self.population.reshape(self.population_size, genome_length)
 
     def initialise_environment(self):
