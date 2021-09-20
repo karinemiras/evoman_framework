@@ -10,7 +10,6 @@ import numpy as np
 import copy
 import random
 
-
 #uniform crossover (no position bias)
 def crossover(p1, p2):
     length = len(p1)
@@ -24,9 +23,22 @@ def crossover(p1, p2):
 #and sigma: the average size of the mutation (taken from normal distribution)
 def mutation(DNA, mutation_rate, sigma):
     length = len(DNA)
-    mutation_index = np.random.uniform(0, 1, length) < 0.01+0.2*mutation_rate
-    mutation_size = np.random.normal(0, sigma**2, length)
+    
+    #standard point mutations
+    mutation_index = np.random.uniform(0, 1, length) < 0.05+0.2*mutation_rate
+    mutation_size = np.random.normal(0, sigma**2+0.01, length)
     c1 = DNA + mutation_index*mutation_size
+    
+    #deletions (rare)
+    if np.random.uniform(0, 1) < 0.01+0.2*mutation_rate:
+        mutation_index = np.random.uniform(0, 1, length) < 0.01+0.2*mutation_rate
+        c1 = c1 * (mutation_index==False) + mutation_index * np.random.uniform(-1, 1, length)
+    
+    #insertions (rare)
+    if np.random.uniform(0, 1) < 0.01+0.2 * mutation_rate:
+        mutation_index = np.random.uniform(0, 1, length) < 0.01+0.2*mutation_rate
+        c1 = c1 * (mutation_index==False) + 2 * c1 * mutation_index
+    
     return c1
 
 def get_children(parents, fitness):
@@ -36,7 +48,7 @@ def get_children(parents, fitness):
     fitness = np.array(fitness)
     fitness = fitness*(fitness > 0)
     
-    #normalize the fitness to make total_fitness = 1
+    #pick parents based on fitness (fitness = weigth)
     parents_index = np.arange(0, len(parents))
     p1 = random.choices(parents_index, weights=fitness, k=len(parents_index))
     p2 = random.choices(parents_index, weights=fitness, k=len(parents_index))

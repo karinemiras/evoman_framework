@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 total_fitness_data = []
-with open('testing_data.csv', newline='', encoding='utf-8') as f:
+with open('fitness_data.csv', newline='', encoding='utf-8') as f:
     reader = csv.reader(f, delimiter=',', quoting=csv.QUOTE_NONNUMERIC)
     for row in reader:
         total_fitness_data.append(row)

@@ -46,11 +46,14 @@ n_vars = (env.get_num_sensors()+1)*n_hidden_neurons + (n_hidden_neurons+1)*5
 
 #initiate 100 parents
 population_size = 100
-pop = np.random.uniform(0, 1, (population_size ,n_vars))
+pop = np.random.uniform(-1, 1, (population_size ,n_vars))
 total_fitness_data = []
+children_index = []
+children_data = []
 max_health = 0
 
-generations = 20
+
+generations = 50
 for g in range(generations):
     print(f'#{g}#')
     fitness_array = []
@@ -61,8 +64,13 @@ for g in range(generations):
         fitness_smop = (100/(100-(0.9*(100-e) + 0.1*p - np.log10(t))))
         fitness_array.append(fitness_new)
         fitness_array_smop.append(fitness_smop)
+        
+        #save the children data (big file)
+        children_index.append([g, f, p, e, t])
+        children_data.append(player)
+        
+        #save the maximum achieved health
         if p > max_health and e == 0:
-            
             max_health = p
     
     #save the fitness data
@@ -70,11 +78,20 @@ for g in range(generations):
                                np.mean(fitness_array), 
                                np.std(fitness_array)])
     
-    
     pop = get_children(pop, np.array(fitness_array_smop))
-    
 
-with open('testing_data.csv', 'w', newline='', encoding='utf-8') as f:
+with open('fitness_data.csv', 'w', newline='', encoding='utf-8') as f:
     writer = csv.writer(f)
     writer.writerow([enemy, generations, max_health])
     writer.writerows(total_fitness_data)
+    
+children_data = np.array(children_data)
+with open('full_data_index.csv', 'w', newline='', encoding='utf-8') as f:
+    writer = csv.writer(f)
+    writer.writerow(['generation', 'fitness', 'p_health', 
+                     'e_health', 'time'])
+    writer.writerows(children_index)
+    
+with open('full_data.csv', 'w', newline='', encoding='utf-8') as f:
+    writer = csv.writer(f)
+    writer.writerows(children_data)
