@@ -17,23 +17,23 @@ from mutation_selection import MutationSelection
 # MutationSelection.selection_ratio - says how many % of given group should be selected, default 0.3
 
 
-Mutation.mutation_ratio = 0.3
-MutationSelection.selction_ratio = 0.5
+Mutation.mutation_ratio = 0.05
+Selection.selction_ratio = 1
+MutationSelection.selction_ratio = 0.3
 
 # HYPERPARAMS
-population_size = 100
+population_size = 50
 generations_number = 10
-experiment_nums = 3
-
 
 evolutionary_algorithm = EvolutionaryAlgorithm(_experiment_name='solution_1',
                                                _population_size=population_size,
                                                _generations_number=generations_number,
+                                               _hidden_layer_size=10,
                                                _fitness=Fitness.niche,
                                                _selection=Selection.basic,
                                                _crossover=Crossover.basic,
                                                _mutation=Mutation.basic,
-                                               _mutation_selection=MutationSelection.only_offspring,
+                                               _mutation_selection=MutationSelection.only_paretns,
                                                _insertion=Insertion.basic)
 
 evolutionary_algorithm.run()

@@ -4,8 +4,8 @@ import numpy as np
 class Fitness:
     # This class contains diffrent selection implementations
 
-    # max in around 21 (we use 2 norm, vectors are 105 long, values are between -1 and 1)
-    neighbourhood_radius = 4
+    # (0,1> the bigger it is the more genomers are considered neighbours
+    niche_ratio = 0.1
 
     @staticmethod
     def basic(population, env):
@@ -18,15 +18,19 @@ class Fitness:
         return fitness
 
     def niche(population, env):
+        genome_length = population.shape[1]
+        max_norm = np.linalg.norm(np.full((genome_length), 2))
+        niche_size = Fitness.niche_ratio * max_norm
+
+        distances = np.array([])
         fitness = Fitness.basic(population, env)
-        neighbours_count = np.array([])
+        print('Best in popularion:', np.amax(fitness))
 
         for individual in population:
-            neighbours = 0
+            distance = 0
             for neighbour in population:
-                if np.linalg.norm(individual - neighbour) < Fitness.neighbourhood_radius:
-                    neighbours += 1
-            neighbours_count = np.append(neighbours_count, np.sqrt(neighbours))
+                if np.linalg.norm(individual - neighbour) < niche_size:
+                    distance += 1 - np.linalg.norm(individual - neighbour) / max_norm
+            distances = np.append(distances, distance)
 
-        print('Best in popularion:', np.amax(fitness))
-        return fitness / neighbours_count
+        return fitness / distances

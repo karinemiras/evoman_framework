@@ -15,6 +15,7 @@ class EvolutionaryAlgorithm:
                  _experiment_name,
                  _population_size,
                  _generations_number,
+                 _hidden_layer_size,
                  _fitness,
                  _selection,
                  _crossover,
@@ -24,6 +25,7 @@ class EvolutionaryAlgorithm:
         self.experiment_name = _experiment_name
         self.population_size = _population_size
         self.generations_number = _generations_number
+        self.hidden_layer_size = _hidden_layer_size
         self.fitness = _fitness
         self.selection = _selection
         self.crossover = _crossover
@@ -76,7 +78,9 @@ class EvolutionaryAlgorithm:
                 self.best, self.best_fitness = self.population[i], fitness[i]
 
     def initialise_population(self):
-        genome_length = 5 * (self.env.get_num_sensors() + 1)
+        # genome_length = 5 * (self.env.get_num_sensors() + 1)
+        genome_length = self.hidden_layer_size * \
+            (self.env.get_num_sensors() + 1) + 5 * (self.hidden_layer_size + 1)
         # What gets created here? Array of size... ->  self.population_size * genome_length
         self.population = np.random.uniform(-1, 1, self.population_size * genome_length,)
         self.population = self.population.reshape(self.population_size, genome_length)
@@ -90,7 +94,7 @@ class EvolutionaryAlgorithm:
         self.env = Environment(experiment_name=self.experiment_name,
                                enemies=[1],
                                playermode="ai",
-                               player_controller=player_controller(0),
+                               player_controller=player_controller(self.hidden_layer_size),
                                enemymode="static",
                                level=2,
                                speed="fastest")
