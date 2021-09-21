@@ -14,19 +14,35 @@ import numpy as np
 import apply_NEAT 
 import csv
 
-
+tuning_parameter = "max_stagnation"
+run_nr = 3  # number of runs
+parameter_options = [2,3,4] # needs to be equal to the number of runs
 experiment_name = 'test_run_NEAT'
 
+if not os.path.exists(experiment_name):
+    os.makedirs(experiment_name)
 
-run_nr = 1  # number of runs
 
-def change_config_file(config):
+
+def change_config_file(config, value):
+    file = open(config, "r")
+    list_of_lines = file.readlines()
+    line = [idx for idx, s in enumerate(list_of_lines) if tuning_parameter in s][0]
+    string = list_of_lines[line]
+    name = string[:string.index("=")]
+    list_of_lines[line] = name+"= "+str(value)+"\n"
+
+    file = open(config, "w")
+    file.writelines(list_of_lines)
+    file.close()
+
     return config
 
 def runs(config):
     for run in range(run_nr):
-        config = change_config_file(config)
-        apply_NEAT.run(config, run)
+        config = change_config_file(config, parameter_options[run])
+        apply_NEAT.run(config, run, experiment_name)
+
 
 
 

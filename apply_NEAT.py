@@ -20,20 +20,19 @@ headless = True
 if headless:
     os.environ["SDL_VIDEODRIVER"] = "dummy"
 
-experiment_name = 'NEAT_specialist'
-if not os.path.exists(experiment_name):
-    os.makedirs(experiment_name)
+name_experiment = 'NEAT_specialist'
+
 
 n_hidden_neurons = 10
 enemy = 2                   #which enemy
-generations = 2            #number of generations per run
+generations = 15            #number of generations per run
 total_fitness_data = []
 children_index = []
 children_data = []
 max_health = 0
 generation = 0
 # initializes simulation in individual evolution mode, for single static enemy.
-env = Environment(experiment_name=experiment_name,
+env = Environment(experiment_name=name_experiment,
                   enemies=[enemy],
                   playermode="ai",
                   player_controller=NEAT_Controls(),
@@ -76,7 +75,7 @@ def eval_genomes(genomes, config):
 
 
 
-def run(config_file, run):
+def run(config_file, run, experiment_name):
     """
     runs the NEAT algorithm to train a neural network to play mega man.
     It uses the config file named config-feedforward.txt. After running it stores it results in CSV files.
@@ -102,9 +101,8 @@ def run(config_file, run):
     print('\nBest genome:\n{!s}'.format(winner))
 
     # stats to csv
-    print(total_fitness_data)
-    total_fitness_data_df = pd.DataFrame(total_fitness_data, columns = [enemy, generations, max_health])
-    print(total_fitness_data_df)
+
+    total_fitness_data_df = pd.DataFrame(total_fitness_data, columns = ["max", "mean", "std_dev"])
     total_fitness_data_df.to_csv(f'{experiment_name}/fitness_data_{run}.csv', index = False)
 
     children_index_df = pd.DataFrame(children_index, columns = ['generation', 'fitness', 'p_health',
