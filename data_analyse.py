@@ -13,10 +13,12 @@ import pandas as pd
 from scipy.spatial import distance_matrix
 from sklearn.manifold import MDS
 
-data = pd.read_csv('full_data_index.csv')
+folder = 'test_run'
+run = 0
+data = pd.read_csv(f'{folder}/full_data_index_{run}.csv')
 
 sequences = []
-with open('full_data.csv', newline='', encoding='utf-8') as f:
+with open(f'{folder}/full_data_{run}.csv', newline='', encoding='utf-8') as f:
     reader = csv.reader(f, delimiter=',', quoting=csv.QUOTE_NONNUMERIC)
     for row in reader:
         sequences.append(row)

@@ -9,8 +9,11 @@ import csv
 import matplotlib.pyplot as plt
 import numpy as np
 
+folder = 'test_run'
+run = 0
+
 total_fitness_data = []
-with open('fitness_data.csv', newline='', encoding='utf-8') as f:
+with open(f'{folder}/fitness_data_{run}.csv', newline='', encoding='utf-8') as f:
     reader = csv.reader(f, delimiter=',', quoting=csv.QUOTE_NONNUMERIC)
     for row in reader:
         total_fitness_data.append(row)

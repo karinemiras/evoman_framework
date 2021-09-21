@@ -25,73 +25,78 @@ if headless:
     os.environ["SDL_VIDEODRIVER"] = "dummy"
 
 
-experiment_name = 'individual_demo'
+experiment_name = 'test_run'
 if not os.path.exists(experiment_name):
     os.makedirs(experiment_name)
 
-n_hidden_neurons = 10
-enemy = 2
+n_hidden_neurons = 10       #number of hidden neurons
+enemy = 2                   #which enemy
+run_nr = 5                  #number of runs
+generations = 20            #number of generations per run
+population_size = 100       #pop size
+mutation_baseline = 0.01    #minimal chance for a mutation event
+mutation_multiplier = 0.2   #fitness dependent multiplier of mutation chance
 
-# initializes simulation in individual evolution mode, for single static enemy.
-env = Environment(experiment_name=experiment_name,
-                  enemies=[enemy],
-                  playermode="ai",
-                  player_controller=player_controller(n_hidden_neurons),
-                  enemymode="static",
-                  level=2,
-                  speed="fastest")
-
-# number of weights for multilayer with 10 hidden neurons
-n_vars = (env.get_num_sensors()+1)*n_hidden_neurons + (n_hidden_neurons+1)*5
-
-#initiate 100 parents
-population_size = 100
-pop = np.random.uniform(-1, 1, (population_size ,n_vars))
-total_fitness_data = []
-children_index = []
-children_data = []
-max_health = 0
-
-
-generations = 50
-for g in range(generations):
-    print(f'#{g}#')
-    fitness_array = []
-    fitness_array_smop = []
-    for player in pop:
-        f, p, e, t = env.play(pcont=player)
-        fitness_new = 0.9*(100 - e) + 0.1*p - np.log(t)
-        fitness_smop = (100/(100-(0.9*(100-e) + 0.1*p - np.log10(t))))
-        fitness_array.append(fitness_new)
-        fitness_array_smop.append(fitness_smop)
+for run in range(run_nr):
+    
+    # initializes simulation in individual evolution mode, for single static enemy.
+    env = Environment(experiment_name=experiment_name,
+                      enemies=[enemy],
+                      playermode="ai",
+                      player_controller=player_controller(n_hidden_neurons),
+                      enemymode="static",
+                      level=2,
+                      speed="fastest")
+    
+    # number of weights for multilayer with 10 hidden neurons
+    n_vars = (env.get_num_sensors()+1)*n_hidden_neurons + (n_hidden_neurons+1)*5
+    
+    #initiate 100 parents
+    pop = np.random.uniform(-1, 1, (population_size ,n_vars))
+    total_fitness_data = []
+    children_index = []
+    children_data = []
+    max_health = 0
+    
+    for g in range(generations):
+        print(f'#{g}#')
+        fitness_array = []
+        fitness_array_smop = []
+        for player in pop:
+            f, p, e, t = env.play(pcont=player)
+            fitness_new = 0.9*(100 - e) + 0.1*p - np.log(t)
+            fitness_smop = (100/(100-(0.9*(100-e) + 0.1*p - np.log10(t))))
+            fitness_array.append(fitness_new)
+            fitness_array_smop.append(fitness_smop)
+            
+            #save the children data (big file)
+            children_index.append([g, f, p, e, t])
+            children_data.append(player)
+            
+            #save the maximum achieved health
+            if p > max_health and e == 0:
+                max_health = p
         
-        #save the children data (big file)
-        children_index.append([g, f, p, e, t])
-        children_data.append(player)
+        #save the fitness data
+        total_fitness_data.append([np.max(fitness_array), 
+                                   np.mean(fitness_array), 
+                                   np.std(fitness_array)])
         
-        #save the maximum achieved health
-        if p > max_health and e == 0:
-            max_health = p
+        pop = get_children(pop, np.array(fitness_array_smop), 
+                           mutation_baseline, mutation_multiplier)
     
-    #save the fitness data
-    total_fitness_data.append([np.max(fitness_array), 
-                               np.mean(fitness_array), 
-                               np.std(fitness_array)])
-    
-    pop = get_children(pop, np.array(fitness_array_smop))
-
-with open('fitness_data.csv', 'w', newline='', encoding='utf-8') as f:
-    writer = csv.writer(f)
-    writer.writerow([enemy, generations, max_health])
-    writer.writerows(total_fitness_data)
-    
-children_data = np.array(children_data)
-with open('full_data_index.csv', 'w', newline='', encoding='utf-8') as f:
-    writer = csv.writer(f)
-    writer.writerow(['generation', 'fitness', 'p_health', 
-                     'e_health', 'time'])
-    writer.writerows(children_index)
-    
-with open('full_data.csv', 'w', newline='', encoding='utf-8') as f:
-    writer = csv.writer(f)
-    writer.writerows(children_data)
+    with open(f'{experiment_name}/fitness_data_{run}.csv', 'w', newline='', encoding='utf-8') as f:
+        writer = csv.writer(f)
+        writer.writerow([enemy, generations, max_health])
+        writer.writerows(total_fitness_data)
+        
+    children_data = np.array(children_data)
+    with open(f'{experiment_name}/full_data_index_{run}.csv', 'w', newline='', encoding='utf-8') as f:
+        writer = csv.writer(f)
+        writer.writerow(['generation', 'fitness', 'p_health', 
+                         'e_health', 'time'])
+        writer.writerows(children_index)
+        
+    with open(f'{experiment_name}/full_data_{run}.csv', 'w', newline='', encoding='utf-8') as f:
+        writer = csv.writer(f)
+        writer.writerows(children_data)

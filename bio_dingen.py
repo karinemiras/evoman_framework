@@ -21,27 +21,27 @@ def crossover(p1, p2):
     
 #mutate a chromosome based on the mutation rate: the chance that a gene mutates
 #and sigma: the average size of the mutation (taken from normal distribution)
-def mutation(DNA, mutation_rate, sigma):
+def mutation(DNA, mutation_rate, sigma, m_b, m_m):
     length = len(DNA)
     
     #standard point mutations
-    mutation_index = np.random.uniform(0, 1, length) < 0.05+0.2*mutation_rate
-    mutation_size = np.random.normal(0, sigma**2+0.01, length)
+    mutation_index = np.random.uniform(0, 1, length) < m_b+m_m*mutation_rate
+    mutation_size = np.random.normal(0, sigma**2+0.05, length)
     c1 = DNA + mutation_index*mutation_size
     
     #deletions (rare)
-    if np.random.uniform(0, 1) < 0.01+0.2*mutation_rate:
-        mutation_index = np.random.uniform(0, 1, length) < 0.01+0.2*mutation_rate
+    if np.random.uniform(0, 1) < m_b+m_m*mutation_rate:
+        mutation_index = np.random.uniform(0, 1, length) < m_b+m_m*mutation_rate
         c1 = c1 * (mutation_index==False) + mutation_index * np.random.uniform(-1, 1, length)
     
     #insertions (rare)
-    if np.random.uniform(0, 1) < 0.01+0.2 * mutation_rate:
-        mutation_index = np.random.uniform(0, 1, length) < 0.01+0.2*mutation_rate
-        c1 = c1 * (mutation_index==False) + 2 * c1 * mutation_index
+    if np.random.uniform(0, 1) < m_b+m_m * mutation_rate:
+        mutation_index = np.random.uniform(0, 1, length) < m_b+m_m*mutation_rate
+        c1 = c1 * (mutation_index==False) + random.randint(2, 5) * c1 * mutation_index
     
     return c1
 
-def get_children(parents, fitness):
+def get_children(parents, fitness, mutation_base, mutation_multiplier):
     children = copy.deepcopy(parents)
     
     #change all fitness <0 to 0
@@ -61,7 +61,7 @@ def get_children(parents, fitness):
         #mutate based on parents fitness
         mutation_rate = 1-0.5*(fitness[p1[i]] + fitness[p2[i]])/(np.max(fitness)+1)
         sigma = 1-0.5*(fitness[p1[i]] + fitness[p2[i]])/(np.max(fitness)+1)
-        child = mutation(child, mutation_rate, sigma)
+        child = mutation(child, mutation_rate, sigma, mutation_base, mutation_multiplier)
         
         #normalize between min-max
         minimum = -1
