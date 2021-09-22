@@ -24,12 +24,12 @@ MutationSelection.selection_ratio = 0.4
 population_size = 100
 generations_number = 10
 
-evolutionary_algorithm = EvolutionaryAlgorithm(_experiment_name='solution_1',
+evolutionary_algorithm = EvolutionaryAlgorithm(_experiment_name='solution_2',
                                                _population_size=population_size,
                                                _generations_number=generations_number,
                                                _hidden_layer_size=10,
                                                _fitness=Fitness.basic,
-                                               _selection=Selection.basic,
+                                               _selection=Selection.tournament_selection,
                                                _crossover=Crossover.basic,
                                                _mutation=Mutation.uniform_mutation,
                                                _mutation_selection=MutationSelection.only_parents,

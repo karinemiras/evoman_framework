@@ -24,7 +24,6 @@ class Fitness:
 
         distances = np.array([])
         fitness = Fitness.basic(population, env)
-        print('Best in popularion:', np.amax(fitness))
 
         for individual in population:
             distance = 0

@@ -45,17 +45,13 @@ class EvolutionaryAlgorithm:
             # fitness is an array of fitnesses of individuals.
             # fitness[i] is a fitness of population[i]
             fitness = self.fitness(self.population, self.env)
-            
 
             # Checks if best candidate appeared in the newest generation
             self.update_best(fitness)
 
             # CROSSOVER
-            parents = self.selection(fitness, self.population) # KEEPS ADDING SELECTION 
+            parents = self.selection(fitness, self.population)  # KEEPS ADDING SELECTION
             offspring = self.crossover(parents)
-
-            print(f"PARENTS INFO: {parents.shape}")
-            print(f"POPULATION INFO: {self.population.shape}")
 
             # MUTATION
             selected = self.mutation_selection(parents, offspring, self.population)
@@ -66,7 +62,8 @@ class EvolutionaryAlgorithm:
             self.population = self.insertion(fitness, self.population, offspring)
 
             if DEBUG:
-                print(f'Current Generation {generation}; Best fitness: {self.best_fitness}')
+                print(
+                    f'Generation {generation} - Best: {self.best_fitness} Mean: {np.mean(fitness)} Std: {np.std(fitness)}')
 
             # INCREMENT GENERATION
             generation += 1
@@ -96,7 +93,7 @@ class EvolutionaryAlgorithm:
             os.makedirs(self.experiment_name)
 
         self.env = Environment(experiment_name=self.experiment_name,
-                               enemies=[1],
+                               enemies=[2],
                                playermode="ai",
                                player_controller=player_controller(self.hidden_layer_size),
                                enemymode="static",
