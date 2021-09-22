@@ -15,7 +15,7 @@ import time
 import numpy as np
 from math import fabs,sqrt
 import glob, os
-from bio_dingen import crossover, mutation, get_children
+from bio_dingen import crossover, mutation, get_children, fitfunc
 import csv
 
 
@@ -31,11 +31,11 @@ if not os.path.exists(experiment_name):
 
 n_hidden_neurons = 10       #number of hidden neurons
 enemy = 2                   #which enemy
-run_nr = 5                  #number of runs
-generations = 20            #number of generations per run
+run_nr = 10                 #number of runs
+generations = 200           #number of generations per run
 population_size = 100       #pop size
-mutation_baseline = 0.01    #minimal chance for a mutation event
-mutation_multiplier = 0.2   #fitness dependent multiplier of mutation chance
+mutation_baseline = 0.15    #minimal chance for a mutation event
+mutation_multiplier = 0.25  #fitness dependent multiplier of mutation chance
 
 for run in range(run_nr):
     
@@ -57,6 +57,7 @@ for run in range(run_nr):
     children_index = []
     children_data = []
     max_health = 0
+    best = []
     
     for g in range(generations):
         print(f'#{g}#')
@@ -65,7 +66,7 @@ for run in range(run_nr):
         for player in pop:
             f, p, e, t = env.play(pcont=player)
             fitness_new = 0.9*(100 - e) + 0.1*p - np.log(t)
-            fitness_smop = (100/(100-(0.9*(100-e) + 0.1*p - np.log10(t))))
+            fitness_smop = fitfunc("errfoscilation", generations, g, t, e, p)
             fitness_array.append(fitness_new)
             fitness_array_smop.append(fitness_smop)
             
@@ -76,6 +77,7 @@ for run in range(run_nr):
             #save the maximum achieved health
             if p > max_health and e == 0:
                 max_health = p
+                best = player
         
         #save the fitness data
         total_fitness_data.append([np.max(fitness_array), 
@@ -100,3 +102,7 @@ for run in range(run_nr):
     with open(f'{experiment_name}/full_data_{run}.csv', 'w', newline='', encoding='utf-8') as f:
         writer = csv.writer(f)
         writer.writerows(children_data)
+    
+    with open(f'{experiment_name}/best_sol_{run}.csv', 'w', newline='', encoding='utf-8') as f:
+        writer = csv.writer(f)
+        writer.writerow(best)

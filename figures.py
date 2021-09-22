@@ -12,18 +12,21 @@ import numpy as np
 folder = 'test_run'
 run = 0
 
+#read the data
 total_fitness_data = []
 with open(f'{folder}/fitness_data_{run}.csv', newline='', encoding='utf-8') as f:
     reader = csv.reader(f, delimiter=',', quoting=csv.QUOTE_NONNUMERIC)
     for row in reader:
         total_fitness_data.append(row)
 
+#extract basic info and fitness data
 enemy, generations, max_health = total_fitness_data[0]
 total_fitness_data = total_fitness_data[1:]
 
 enemy = int(enemy)
 generations = int(generations)
 population_size = len(total_fitness_data)
+
 
 x = range(generations)
 total_fitness_data = np.array(total_fitness_data)

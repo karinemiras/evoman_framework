@@ -10,6 +10,18 @@ import numpy as np
 import copy
 import random
 
+def fitfunc(fitfunction, generations, g, t, e, p):
+    if fitfunction == "errfoscilation":
+                if g < 0.5*generations:
+                    fitness_smop =  (0.01*t)**2
+                    if t == 1000:
+                        fitness_smop += .5*( 100 - e + p)
+                else:
+                    fitness_smop = 100 - e + p
+    
+    return fitness_smop
+
+
 #uniform crossover (no position bias)
 def crossover(p1, p2):
     length = len(p1)
@@ -26,7 +38,7 @@ def mutation(DNA, mutation_rate, sigma, m_b, m_m):
     
     #standard point mutations
     mutation_index = np.random.uniform(0, 1, length) < m_b+m_m*mutation_rate
-    mutation_size = np.random.normal(0, sigma**2+0.05, length)
+    mutation_size = np.random.normal(0, 0.3*sigma**2+0.7, length)
     c1 = DNA + mutation_index*mutation_size
     
     #deletions (rare)
@@ -48,10 +60,17 @@ def get_children(parents, fitness, mutation_base, mutation_multiplier):
     fitness = np.array(fitness)
     fitness = fitness*(fitness > 0)
     
+    best = np.where(fitness==max(fitness))[0]
+    
     #pick parents based on fitness (fitness = weigth)
     parents_index = np.arange(0, len(parents))
-    p1 = random.choices(parents_index, weights=fitness, k=len(parents_index))
-    p2 = random.choices(parents_index, weights=fitness, k=len(parents_index))
+    p1 = random.choices(parents_index, weights=fitness, k=len(parents_index)-len(best))
+    p2 = random.choices(parents_index, weights=fitness, k=len(parents_index)-len(best))
+    
+    print(best)
+    
+    p1 = np.hstack((best, p1))
+    p2 = np.hstack((best, p2))
     
     #iterate to make children
     for i in range(len(parents)):
@@ -66,7 +85,12 @@ def get_children(parents, fitness, mutation_base, mutation_multiplier):
         #normalize between min-max
         minimum = -1
         maximum = 1
-        child = (maximum-minimum)*(child-child.min())/(child.max()-child.min())+minimum
+        for j in range(len(child)):
+            if child[j]<minimum:
+                child[j] = minimum
+            elif child[j] > maximum:
+                child[j] = maximum
+        #child = (maximum-minimum)*(child-child.min())/(child.max()-child.min())+minimum
         children[i] = child
         
     return children

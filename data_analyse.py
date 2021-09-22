@@ -32,7 +32,7 @@ for m in data_subset['seq']:
     matrix.append(m)
 matrix = np.array(matrix)
 
-dist_matrix = distance_matrix(matrix, matrix)/np.sqrt(4*265)
+dist_matrix = distance_matrix(matrix, matrix)/np.sqrt(4*len(matrix[0]))
 
 plt.figure(dpi=300)
 plt.imshow(dist_matrix)
@@ -50,6 +50,6 @@ scaled_data = MDS(dissimilarity='precomputed')
 scaled_data = scaled_data.fit_transform(dist_matrix)
 norm = mpl.colors.Normalize(vmin=80, vmax=100)
 plt.scatter(scaled_data[:,0], scaled_data[:,1], 
-            c=norm(data_subset['fitness']), cmap='viridis', alpha=0.3)
+            c=norm(data_subset['fitness']), cmap='viridis', alpha=0.6)
 plt.colorbar()
 plt.show()
