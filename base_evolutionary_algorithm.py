@@ -45,13 +45,17 @@ class EvolutionaryAlgorithm:
             # fitness is an array of fitnesses of individuals.
             # fitness[i] is a fitness of population[i]
             fitness = self.fitness(self.population, self.env)
+            
 
             # Checks if best candidate appeared in the newest generation
             self.update_best(fitness)
 
             # CROSSOVER
-            parents = self.selection(fitness, self.population)
+            parents = self.selection(fitness, self.population) # KEEPS ADDING SELECTION 
             offspring = self.crossover(parents)
+
+            print(f"PARENTS INFO: {parents.shape}")
+            print(f"POPULATION INFO: {self.population.shape}")
 
             # MUTATION
             selected = self.mutation_selection(parents, offspring, self.population)

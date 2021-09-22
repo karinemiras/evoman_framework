@@ -18,12 +18,12 @@ from mutation_selection import MutationSelection
 
 
 Mutation.mutation_ratio = 0.05
-Selection.selction_ratio = 1
-MutationSelection.selction_ratio = 0.3
+Selection.selection_ratio = 0.3
+MutationSelection.selection_ratio = 0.3
 
 # HYPERPARAMS
-population_size = 50
-generations_number = 10
+population_size = 20
+generations_number = 5
 
 evolutionary_algorithm = EvolutionaryAlgorithm(_experiment_name='solution_1',
                                                _population_size=population_size,
@@ -32,8 +32,9 @@ evolutionary_algorithm = EvolutionaryAlgorithm(_experiment_name='solution_1',
                                                _fitness=Fitness.niche,
                                                _selection=Selection.basic,
                                                _crossover=Crossover.basic,
-                                               _mutation=Mutation.basic,
-                                               _mutation_selection=MutationSelection.only_paretns,
+                                               _mutation=Mutation.uniform_mutation,
+                                               _mutation_selection=MutationSelection.only_parents,
                                                _insertion=Insertion.basic)
 
+print(f'Mutation Ratio: {Mutation.mutation_ratio}')
 evolutionary_algorithm.run()
