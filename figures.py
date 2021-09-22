@@ -9,7 +9,7 @@ import csv
 import matplotlib.pyplot as plt
 import numpy as np
 
-folder = 'test_run'
+folder = 'enermy_5'
 run = 0
 
 #read the data

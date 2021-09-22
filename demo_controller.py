@@ -20,7 +20,7 @@ class player_controller(Controller):
 
 	def control(self, inputs, controller):
 		# Normalises the input using min-max scaling
-		inputs = (inputs-min(inputs))/float((max(inputs)-min(inputs)))
+#		inputs = (inputs-min(inputs))/float((max(inputs)-min(inputs)))
 
 		if self.n_hidden[0]>0:
 			# Preparing the weights and biases from the controller of layer 1

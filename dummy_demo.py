@@ -25,17 +25,18 @@ if headless:
     os.environ["SDL_VIDEODRIVER"] = "dummy"
 
 
-experiment_name = 'test_run'
-if not os.path.exists(experiment_name):
-    os.makedirs(experiment_name)
-
 n_hidden_neurons = 10       #number of hidden neurons
-enemy = 2                   #which enemy
-run_nr = 10                 #number of runs
+enemy = 3                   #which enemy
+run_nr = 5                  #number of runs
 generations = 200           #number of generations per run
 population_size = 100       #pop size
 mutation_baseline = 0.15    #minimal chance for a mutation event
 mutation_multiplier = 0.25  #fitness dependent multiplier of mutation chance
+
+experiment_name = f'enemy_{enemy}'
+if not os.path.exists(experiment_name):
+    os.makedirs(experiment_name)
+    
 
 for run in range(run_nr):
     

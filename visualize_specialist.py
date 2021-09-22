@@ -21,6 +21,7 @@ if not os.path.exists(experiment_name):
 
 # Update the number of neurons for this specific example
 n_hidden_neurons = 10
+enemy = 1
 
 # initializes environment for single objective mode (specialist)  with static enemy and ai player
 env = Environment(experiment_name=experiment_name,
@@ -32,12 +33,12 @@ env = Environment(experiment_name=experiment_name,
 
 
 # tests saved demo solutions for each enemy
-for en in range(1):
+for en in range(8):
 
 	#Update the enemy
-	env.update_parameter('enemies',[2])
+	env.update_parameter('enemies',[en+1])
 
 	# Load specialist controller
-	sol = np.loadtxt('test_run/best_sol_0.csv', delimiter=',')
+	sol = np.loadtxt(f'enemy_{enemy}/best_sol_3.csv', delimiter=',')
 	print('\n LOADING SAVED SPECIALIST SOLUTION FOR ENEMY '+str(en)+' \n')
 	env.play(sol)

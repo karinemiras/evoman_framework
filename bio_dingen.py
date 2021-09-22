@@ -12,12 +12,12 @@ import random
 
 def fitfunc(fitfunction, generations, g, t, e, p):
     if fitfunction == "errfoscilation":
-                if g < 0.5*generations:
-                    fitness_smop =  (0.01*t)**2
-                    if t == 1000:
-                        fitness_smop += .5*( 100 - e + p)
-                else:
-                    fitness_smop = 100 - e + p
+        if g < 0.5*generations:
+            fitness_smop =  (0.01*t)**2
+            if t == 1000:
+                fitness_smop += .5*( 100 - e + p)
+        else:
+            fitness_smop = 100 - e + p
     
     return fitness_smop
 
@@ -38,16 +38,16 @@ def mutation(DNA, mutation_rate, sigma, m_b, m_m):
     
     #standard point mutations
     mutation_index = np.random.uniform(0, 1, length) < m_b+m_m*mutation_rate
-    mutation_size = np.random.normal(0, 0.3*sigma**2+0.7, length)
+    mutation_size = np.random.normal(0, 0.5*sigma**2+0.1, length)
     c1 = DNA + mutation_index*mutation_size
     
     #deletions (rare)
-    if np.random.uniform(0, 1) < m_b+m_m*mutation_rate:
+    if np.random.uniform(0, 1) < m_m*mutation_rate:
         mutation_index = np.random.uniform(0, 1, length) < m_b+m_m*mutation_rate
         c1 = c1 * (mutation_index==False) + mutation_index * np.random.uniform(-1, 1, length)
     
     #insertions (rare)
-    if np.random.uniform(0, 1) < m_b+m_m * mutation_rate:
+    if np.random.uniform(0, 1) < m_m * mutation_rate:
         mutation_index = np.random.uniform(0, 1, length) < m_b+m_m*mutation_rate
         c1 = c1 * (mutation_index==False) + random.randint(2, 5) * c1 * mutation_index
     
