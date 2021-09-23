@@ -11,13 +11,24 @@ import copy
 import random
 
 def fitfunc(fitfunction, generations, g, t, e, p):
+    
+    if fitfunction == "standard":
+        fitness_smop = 0.9*(100 - e) + 0.1*p - np.log(t)
+        
+    if fitfunction == "oscilation":
+        period = .5*generations
+        fitness_smop = (1 + np.cos((2*np.pi/period) * g)) * (0.1*t) + (1 + np.cos((2*np.pi/period) * g + np.pi)) * (100-e+p)
+        
+    if fitfunction == "exponential":
+        fitness_smop = 100/(0.9*(100 - e) + 0.1*p - np.log(t))
+    
     if fitfunction == "errfoscilation":
         if g < 0.5*generations:
             fitness_smop =  (0.01*t)**2
             if t == 1000:
                 fitness_smop += .5*( 100 - e + p)
         else:
-            fitness_smop = 100 - e + p
+            fitness_smop = 150 - e + p
     
     return fitness_smop
 
@@ -67,13 +78,11 @@ def get_children(parents, fitness, mutation_base, mutation_multiplier):
         p1 = random.choices(parents_index, weights=fitness, k=len(parents_index)-len(best))
         p2 = random.choices(parents_index, weights=fitness, k=len(parents_index)-len(best))
         
-        print(best)
-        
         p1 = np.hstack((best, p1))
         p2 = np.hstack((best, p2))
     else:
         p1 = best
-        p2 = best[-1:]
+        p2 = best
         
     #iterate to make children
     for i in range(len(parents)):
