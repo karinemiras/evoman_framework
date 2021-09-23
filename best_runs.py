@@ -47,7 +47,8 @@ for run in range(run_nr):
                       player_controller=player_controller(n_hidden_neurons),
                       enemymode="static",
                       level=2,
-                      speed="fastest")
+                      speed="fastest",
+                      randomini = "yes")
 
     #open data
     with open(f'{folder}/best_sol_{run}.csv', newline='', encoding='utf-8') as f:

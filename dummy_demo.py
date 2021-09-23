@@ -32,14 +32,14 @@ for enemy in [1, 2, 3, 4, 5, 6, 7, 8]:
     population_size = 100       #pop size
     mutation_baseline = 0.15    #minimal chance for a mutation event
     mutation_multiplier = 0.25  #fitness dependent multiplier of mutation chance
-    
+
     experiment_name = f'enemy_{enemy}'
     if not os.path.exists(experiment_name):
         os.makedirs(experiment_name)
-        
-    
+
+
     for run in range(run_nr):
-        
+
         # initializes simulation in individual evolution mode, for single static enemy.
         env = Environment(experiment_name=experiment_name,
                           enemies=[enemy],
@@ -49,10 +49,10 @@ for enemy in [1, 2, 3, 4, 5, 6, 7, 8]:
                           level=2,
                           speed="fastest",
 			  randomini = "yes")
-        
+
         # number of weights for multilayer with 10 hidden neurons
         n_vars = (env.get_num_sensors()+1)*n_hidden_neurons + (n_hidden_neurons+1)*5
-        
+
         #initiate 100 parents
         pop = np.random.uniform(-1, 1, (population_size ,n_vars))
         total_fitness_data = []
@@ -60,7 +60,7 @@ for enemy in [1, 2, 3, 4, 5, 6, 7, 8]:
         children_data = []
         max_health = 0
         best = []
-        
+
         for g in range(generations):
             print(f'#{g}#')
             fitness_array = []
@@ -71,40 +71,40 @@ for enemy in [1, 2, 3, 4, 5, 6, 7, 8]:
                 fitness_smop = fitfunc("errfoscilation", generations, g, t, e, p)
                 fitness_array.append(fitness_new)
                 fitness_array_smop.append(fitness_smop)
-                
+
                 #save the children data (big file)
                 children_index.append([g, f, p, e, t])
                 children_data.append(player)
-                
+
                 #save the maximum achieved health
                 if p > max_health and e == 0:
                     max_health = p
                     best = player
-            
+
             #save the fitness data
-            total_fitness_data.append([np.max(fitness_array), 
-                                       np.mean(fitness_array), 
+            total_fitness_data.append([np.max(fitness_array),
+                                       np.mean(fitness_array),
                                        np.std(fitness_array)])
-            
-            pop = get_children(pop, np.array(fitness_array_smop), 
+
+            pop = get_children(pop, np.array(fitness_array_smop),
                                mutation_baseline, mutation_multiplier)
-        
+
         with open(f'{experiment_name}/fitness_data_{run}.csv', 'w', newline='', encoding='utf-8') as f:
             writer = csv.writer(f)
             writer.writerow([enemy, generations, max_health])
             writer.writerows(total_fitness_data)
-            
+
         children_data = np.array(children_data)
         with open(f'{experiment_name}/full_data_index_{run}.csv', 'w', newline='', encoding='utf-8') as f:
             writer = csv.writer(f)
-            writer.writerow(['generation', 'fitness', 'p_health', 
+            writer.writerow(['generation', 'fitness', 'p_health',
                              'e_health', 'time'])
             writer.writerows(children_index)
-            
+
         with open(f'{experiment_name}/full_data_{run}.csv', 'w', newline='', encoding='utf-8') as f:
             writer = csv.writer(f)
             writer.writerows(children_data)
-        
+
         with open(f'{experiment_name}/best_sol_{run}.csv', 'w', newline='', encoding='utf-8') as f:
             writer = csv.writer(f)
             writer.writerow(best)

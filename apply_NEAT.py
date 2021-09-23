@@ -38,7 +38,8 @@ env = Environment(experiment_name=name_experiment,
                   player_controller=NEAT_Controls(),
                   enemymode="static",
                   level=2,
-                  speed="fastest")
+                  speed="fastest",
+                  randomini = "yes")
 
 # default environment fitness is assumed for experiment
 env.state_to_log()  # checks environment state
@@ -117,5 +118,3 @@ def run(config_file, run, experiment_name):
     children_data.clear()
     global generation
     generation = 0
-
-
