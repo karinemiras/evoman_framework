@@ -61,17 +61,20 @@ def get_children(parents, fitness, mutation_base, mutation_multiplier):
     fitness = fitness*(fitness > 0)
     
     best = np.where(fitness==max(fitness))[0]
-    
-    #pick parents based on fitness (fitness = weigth)
-    parents_index = np.arange(0, len(parents))
-    p1 = random.choices(parents_index, weights=fitness, k=len(parents_index)-len(best))
-    p2 = random.choices(parents_index, weights=fitness, k=len(parents_index)-len(best))
-    
-    print(best)
-    
-    p1 = np.hstack((best, p1))
-    p2 = np.hstack((best, p2))
-    
+    if not len(best) == len(fitness):
+        #pick parents based on fitness (fitness = weigth)
+        parents_index = np.arange(0, len(parents))
+        p1 = random.choices(parents_index, weights=fitness, k=len(parents_index)-len(best))
+        p2 = random.choices(parents_index, weights=fitness, k=len(parents_index)-len(best))
+        
+        print(best)
+        
+        p1 = np.hstack((best, p1))
+        p2 = np.hstack((best, p2))
+    else:
+        p1 = best
+        p2 = best[-1:]
+        
     #iterate to make children
     for i in range(len(parents)):
         #crossover the genes of parents and random choose a child

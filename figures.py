@@ -9,7 +9,7 @@ import csv
 import matplotlib.pyplot as plt
 import numpy as np
 
-folder = 'enermy_5'
+folder = 'enemy_1'
 run = 0
 
 #read the data
@@ -26,7 +26,6 @@ total_fitness_data = total_fitness_data[1:]
 enemy = int(enemy)
 generations = int(generations)
 population_size = len(total_fitness_data)
-#
 
 x = range(generations)
 total_fitness_data = np.array(total_fitness_data)
@@ -43,7 +42,6 @@ plt.text(0.7*generations, 10, f'Max Fit  = {np.max(total_fitness_data[:,0]).roun
 plt.text(0.7*generations, 5, f'Max Life= {np.round(max_health, 2)}')
 plt.title(f'Fitness over time against enemy:{int(enemy)}')
 plt.show()
-
 
 
 def line_plots(data_folder, runs):

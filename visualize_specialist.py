@@ -29,14 +29,15 @@ env = Environment(experiment_name=experiment_name,
 				  player_controller=player_controller(n_hidden_neurons),
 			  	  speed="normal",
 				  enemymode="static",
-				  level=2)
+				  level=2,
+				  randomini="yes")
 
 
 # tests saved demo solutions for each enemy
 for en in range(8):
 
 	#Update the enemy
-	env.update_parameter('enemies',[en+1])
+	env.update_parameter('enemies',[enemy])
 
 	# Load specialist controller
 	sol = np.loadtxt(f'enemy_{enemy}/best_sol_3.csv', delimiter=',')
