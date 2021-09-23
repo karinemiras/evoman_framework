@@ -24,16 +24,16 @@ headless = True
 if headless:
     os.environ["SDL_VIDEODRIVER"] = "dummy"
 
-for enemy in [1, 4, 5, 6, 7, 8]:
-    for fitter in ["errfoscilation", "standard", "exponential", "oscilation"]:
+for enemy in [1, 2, 3, 4, 5, 6, 7, 8]:
+    for fitter in ["standard", "exponential", "oscilation", "errfoscilation"]:
         n_hidden_neurons = 10       #number of hidden neurons
         enemy = int(enemy)          #which enemy
         run_nr = 2                  #number of runs
-        generations = 100            #number of generations per run
-        population_size = 100         #pop size
-        mutation_baseline = 0.15    #minimal chance for a mutation event
-        mutation_multiplier = 0.25  #fitness dependent multiplier of mutation chance
-        repeats = 5
+        generations = 4          #number of generations per run
+        population_size = 2         #pop size
+        mutation_baseline = 0.02    #minimal chance for a mutation event
+        mutation_multiplier = 0.2  #fitness dependent multiplier of mutation chance
+        repeats = 3
     
         experiment_name = f'enemy_{enemy}'
         if not os.path.exists(experiment_name):
@@ -100,22 +100,22 @@ for enemy in [1, 4, 5, 6, 7, 8]:
             
                 print(f'Run: {run}, Fitter: {fitter}, Generation {g}, fitness best = {round(np.max(fitness_array),2)}, fitness_smop best = {round(np.max(fitness_array_smop),2)}, best_avg_health = {max_health}')
         
-        with open(f'data_normal/{experiment_name}/fitness_data_{run}.csv', 'w', newline='', encoding='utf-8') as f:
+        with open(f'data_normal/{experiment_name}/fitness_data_{run}_{fitter}.csv', 'w', newline='', encoding='utf-8') as f:
             writer = csv.writer(f)
             writer.writerow([enemy, generations, max_health])
             writer.writerows(total_fitness_data)
             
         children_data = np.array(children_data)
- #       with open(f'data_normal/{experiment_name}/full_data_index_{run}.csv', 'w', newline='', encoding='utf-8') as f:
- #           writer = csv.writer(f)
- #           writer.writerow(['generation', 'fitness', 'p_health', 
- #                            'e_health', 'time'])
- #           writer.writerows(children_index)
+        # with open(f'data_normal/{experiment_name}/full_data_index_{run}.csv', 'w', newline='', encoding='utf-8') as f:
+        #     writer = csv.writer(f)
+        #     writer.writerow(['generation', 'fitness', 'p_health', 
+        #                      'e_health', 'time'])
+        #     writer.writerows(children_index)
             
-        with open(f'data_normal/{experiment_name}/full_data_{run}.csv', 'w', newline='', encoding='utf-8') as f:
+        with open(f'data_normal/{experiment_name}/full_data_{run}_{fitter}.csv', 'w', newline='', encoding='utf-8') as f:
             writer = csv.writer(f)
             writer.writerows(children_data)
         
-        with open(f'data_normal/{experiment_name}/best_sol_{run}.csv', 'w', newline='', encoding='utf-8') as f:
+        with open(f'data_normal/{experiment_name}/best_sol_{run}_{fitter}.csv', 'w', newline='', encoding='utf-8') as f:
             writer = csv.writer(f)
             writer.writerow(best)
