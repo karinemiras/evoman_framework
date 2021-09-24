@@ -24,16 +24,16 @@ headless = True
 if headless:
     os.environ["SDL_VIDEODRIVER"] = "dummy"
 
-for enemy in [1, 2, 3, 4, 5, 6, 7, 8]:
+for enemy in [1,4,5,6,7,8]:
     for fitter in ["standard", "exponential", "oscilation", "errfoscilation"]:
         n_hidden_neurons = 10       #number of hidden neurons
         enemy = int(enemy)          #which enemy
         run_nr = 2                  #number of runs
-        generations = 4          #number of generations per run
-        population_size = 2         #pop size
-        mutation_baseline = 0.02    #minimal chance for a mutation event
-        mutation_multiplier = 0.2  #fitness dependent multiplier of mutation chance
-        repeats = 3
+        generations = 100           #number of generations per run
+        population_size = 50       #pop size
+        mutation_baseline = 0.05    #minimal chance for a mutation event
+        mutation_multiplier = 0.2   #fitness dependent multiplier of mutation chance
+        repeats = 5
     
         experiment_name = f'enemy_{enemy}'
         if not os.path.exists(experiment_name):
@@ -64,6 +64,8 @@ for enemy in [1, 2, 3, 4, 5, 6, 7, 8]:
             best = []
     
             for g in range(generations):
+                if max_health > 99.9:
+                    break
                 fitness_array = []
                 fitness_array_smop = []
                 
@@ -98,7 +100,7 @@ for enemy in [1, 2, 3, 4, 5, 6, 7, 8]:
                 pop = get_children(pop, np.array(fitness_array_smop),
                                    mutation_baseline, mutation_multiplier)
             
-                print(f'Run: {run}, Fitter: {fitter}, Generation {g}, fitness best = {round(np.max(fitness_array),2)}, fitness_smop best = {round(np.max(fitness_array_smop),2)}, best_avg_health = {max_health}')
+                print(f'Run: {run}, Fitter: {fitter}, Generation {g}, fitness_best/mean = {round(np.max(fitness_array),2)} and {round(np.mean(fitness_array),2)},, fitness_smop best/mean = {round(np.max(fitness_array_smop),2)} and {round(np.mean(fitness_array_smop),2)},, best_avg_health = {round(max_health,2)}')
         
         with open(f'data_normal/{experiment_name}/fitness_data_{run}_{fitter}.csv', 'w', newline='', encoding='utf-8') as f:
             writer = csv.writer(f)
