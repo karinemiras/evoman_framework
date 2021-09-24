@@ -13,7 +13,8 @@ Reason about evolution mechanisms and
 implement the theoretically optimal one.
 
 Then, fine-tune the parameters. Try to get >85 for enemy 3.
-
+# For grid search: use npop=30 and gens=10, compare the mean fitness
+# For final scores: use npop=100 and gens=30
 """
 
 
@@ -93,11 +94,12 @@ def crossover(p1, p2, crossover_rate):
         c2 = np.concatenate((p2[:pt], p1[pt:]))
     return [c1, c2]
 
+# Add gaussian noise to each allele with mutation_rate probability.
+# To do: change step size to one often used in literature
 def mutation(genotype, mutation_rate):
     for i in range(len(genotype)):
-        # In-place mutation from uniform distribution
         if np.random.rand() < mutation_rate:
-            genotype[i] = np.random.uniform(lower_bound, upper_bound)
+            genotype[i] += np.random.normal(0, 1)
     return genotype
 
 def save_scores(scores, dir, filename):
@@ -155,7 +157,7 @@ n_pop = 4
 # crossover rate
 crossover_r = 0.9
 # mutation rate
-mutation_r = 0.2     
+mutation_r = 0.9  
 # lower and upper bound on initialization
 lower_bound = -1
 upper_bound = 1
