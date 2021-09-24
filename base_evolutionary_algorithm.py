@@ -8,6 +8,7 @@ import numpy as np
 import os
 
 DEBUG = True
+USE_SAME = True
 
 
 class EvolutionaryAlgorithm:
@@ -32,6 +33,7 @@ class EvolutionaryAlgorithm:
         self.mutation = _mutation
         self.mutation_selection = _mutation_selection
         self.insertion = _insertion
+        self.predefined = np.array([])
         self.initialise_environment()
 
     def run(self):
@@ -79,12 +81,18 @@ class EvolutionaryAlgorithm:
                 self.best, self.best_fitness = self.population[i], fitness[i]
 
     def initialise_population(self):
-        # genome_length = 5 * (self.env.get_num_sensors() + 1)
+        if(USE_SAME and self.predefined.shape[0]):
+            self.population = np.array(self.predefined)
+            return
+
         genome_length = self.hidden_layer_size * \
             (self.env.get_num_sensors() + 1) + 5 * (self.hidden_layer_size + 1)
         # What gets created here? Array of size... ->  self.population_size * genome_length
         self.population = np.random.uniform(-1, 1, self.population_size * genome_length,)
         self.population = self.population.reshape(self.population_size, genome_length)
+
+        if(USE_SAME):
+            self.predefined = np.array(self.population)
 
     def initialise_environment(self):
         os.environ["SDL_VIDEODRIVER"] = "dummy"

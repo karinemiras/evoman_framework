@@ -16,11 +16,18 @@ class Tuner:
 
     def run(self):
         for alpha in [40, 20, 10, 5]:
+            print(f'Range: +/-{alpha}%')
             self.tune_parameter(Mutation.mutation_ratio, alpha, self.set_mutation_ratio)
+            print('Mutation ratio - done')
             self.tune_parameter(Selection.selection_ratio, alpha, self.set_selection_ratio)
+            print('Selection ratio - done')
             self.tune_parameter(Crossover.offspring_ratio, alpha, self.set_offspring_ratio)
+            print('Offspring ratio - done')
             self.tune_parameter(MutationSelection.mutation_selection_ratio,
                                 alpha, self.set_mutation_selection_ratio)
+            print('Mutation selection ratio - done')
+
+            print('Current results')
 
             print('Mutation ratio - ', Mutation.mutation_ratio)
             print('Selection ratio -', Selection.selection_ratio)
