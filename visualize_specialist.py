@@ -10,7 +10,7 @@
 import sys, os
 sys.path.insert(0, 'evoman')
 from environment_draw import Environment
-from demo_controller import player_controller
+from controller_normal import player_controller
 
 # imports other libs
 import numpy as np
@@ -21,7 +21,7 @@ if not os.path.exists(experiment_name):
 
 # Update the number of neurons for this specific example
 n_hidden_neurons = 10
-enemy = 1
+enemy = 2
 
 # initializes environment for single objective mode (specialist)  with static enemy and ai player
 env = Environment(experiment_name=experiment_name,
@@ -40,6 +40,6 @@ for en in range(8):
 	env.update_parameter('enemies',[enemy])
 
 	# Load specialist controller
-	sol = np.loadtxt(f'enemy_{enemy}/best_sol_3.csv', delimiter=',')
+	sol = np.loadtxt(f'enemy_{enemy}/best_sol_1.csv', delimiter=',')
 	print('\n LOADING SAVED SPECIALIST SOLUTION FOR ENEMY '+str(en)+' \n')
 	env.play(sol)
