@@ -30,7 +30,7 @@ class Selection:
         return population[selected_indexes, :]
 
     @staticmethod
-    def tournament_selection(fitness, population):
+    def tournament(fitness, population):
         population_size = population.shape[0]
         genome_length = population.shape[1]
         selected_count = round(Selection.selection_ratio * population_size)

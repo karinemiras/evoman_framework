@@ -1,3 +1,4 @@
+from tuner import Tuner
 from base_evolutionary_algorithm import EvolutionaryAlgorithm
 
 from fitness import Fitness
@@ -16,13 +17,9 @@ from mutation_selection import MutationSelection
 # MutationSelection.selection_ratio - says how many % of given group should be selected, default 0.3
 
 
-Mutation.mutation_ratio = 0.05
-Selection.selection_ratio = 0.4
-MutationSelection.selection_ratio = 0.4
-
 # HYPERPARAMS
-population_size = 100
-generations_number = 10
+population_size = 50
+generations_number = 7
 
 evolutionary_algorithm = EvolutionaryAlgorithm(_experiment_name='solution_2',
                                                _population_size=population_size,
@@ -35,4 +32,10 @@ evolutionary_algorithm = EvolutionaryAlgorithm(_experiment_name='solution_2',
                                                _mutation_selection=MutationSelection.only_parents,
                                                _insertion=Insertion.basic)
 
-evolutionary_algorithm.run()
+Mutation.mutation_ratio = 0.05
+Crossover.offspring_ratio = 1
+Selection.selection_ratio = 0.3
+MutationSelection.selection_ratio = 0.5
+
+tuner = Tuner(evolutionary_algorithm)
+tuner.run()
