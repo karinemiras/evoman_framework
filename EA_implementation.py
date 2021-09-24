@@ -6,6 +6,9 @@
 
 """
 TO DO:
+! First improve selection mechanism, send to Matyas & Ard.
+https://ieeexplore.ieee.org/document/350042 = useful link comparison
+
 Reason about evolution mechanisms and 
 implement the theoretically optimal one.
 
