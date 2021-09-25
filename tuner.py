@@ -8,6 +8,7 @@ from mutation_selection import MutationSelection
 
 
 class Tuner:
+
     steps_count = 3
     evolutionary_algorithm_runs = 3
 
@@ -24,6 +25,7 @@ class Tuner:
             print('Selection ratio -', Selection.selection_ratio)
             self.tune_parameter(Crossover.offspring_ratio, alpha, self.set_offspring_ratio)
             print('Offspring ratio - ', Crossover.offspring_ratio)
+
             self.tune_parameter(MutationSelection.selection_ratio,
                                 alpha, self.set_mutation_selection_ratio)
             print('Selection mutation ratio - ', MutationSelection.selection_ratio)
@@ -33,7 +35,9 @@ class Tuner:
             print('Mutation ratio - ', Mutation.mutation_ratio)
             print('Selection ratio -', Selection.selection_ratio)
             print('Offspring ratio - ', Crossover.offspring_ratio)
+
             print('Selection mutation ratio - ', MutationSelection.selection_ratio)
+  
             print('\n\n\n')
 
     def tune_parameter(self, current_value, alpha, setter):
@@ -42,7 +46,6 @@ class Tuner:
         best_value = 0
         best_score = 0
 
-        print(np.linspace(bottom, top, Tuner.steps_count))
 
         for value in np.linspace(bottom, top, Tuner.steps_count):
             setter(value)
