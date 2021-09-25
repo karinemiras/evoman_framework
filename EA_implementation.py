@@ -22,6 +22,7 @@ Then, fine-tune the parameters. Try to get >85 for enemy 3.
 import sys
 import os
 import time
+import csv
 
 sys.path.insert(0, 'evoman') 
 os.environ["SDL_VIDEODRIVER"] = "dummy"
@@ -30,7 +31,7 @@ from environment import Environment
 from demo_controller import player_controller
 
 from argparse import ArgumentParser
-import json
+
 from pathlib import Path
 
 import numpy as np
@@ -59,25 +60,17 @@ def evaluate(individual):
     fitness, p, e, t = Experiment.env.play(pcont=individual)
     return fitness
 
-#n_vars = (env.get_num_sensors()+1)*10 + (10+1)*5
 def init_population(pop_size, n_hidden, n_input, n_output):
     genotype_len = (n_input + 1) * n_hidden + (n_hidden + 1) * n_output
     pop = np.random.uniform(lower_bound, upper_bound, size=(pop_size, genotype_len))
-
     return np.array(pop)
-    #return np.vsplit(pop, pop_size) # Split into array of genotype arrays
 
-# tournament selection (https://machinelearningmastery.com/simple-genetic-algorithm-from-scratch-in-python/)
-# Compares random individual to k other individuals 
-# and returns the best one.
+# Return the winner of a k-sized random tournament with replacement based on fitness.
+# This function is used for parent selection.
 def tournament_selection(pop, fitnesses, k=3):
-    # first random selection
-    selection_ix = np.random.randint(len(pop))
-    for ix in np.random.randint(0, len(pop), k-1):
-        # check if better (e.g. perform a tournament)
-        if fitnesses[ix] < fitnesses[selection_ix]:
-            selection_ix = ix
-    return pop[selection_ix]
+    random_indices = np.random.randint(0, len(pop), k)
+    winner_idx = np.argmax(fitnesses[random_indices])
+    return pop[random_indices[winner_idx]]
 
 # crossover two parents to create two children
 def crossover(p1, p2, crossover_rate):
@@ -94,7 +87,7 @@ def crossover(p1, p2, crossover_rate):
         c2 = np.concatenate((p2[:pt], p1[pt:]))
     return [c1, c2]
 
-# Add gaussian noise to each allele with mutation_rate probability.
+# Adds gaussian noise to each allele with mutation_rate probability.
 # To do: change step size to one often used in literature
 def mutation(genotype, mutation_rate):
     for i in range(len(genotype)):
@@ -102,19 +95,11 @@ def mutation(genotype, mutation_rate):
             genotype[i] += np.random.normal(0, 1)
     return genotype
 
-import csv
-
 def save_scores(scores, filepath):
-    # open the file in the write mode
+    # open the file in the append mode
     with open(filepath, 'a', newline='', encoding='utf-8') as f:
-
-        # create the csv writer
         writer = csv.writer(f)
-
-        # write a row to the csv file
         writer.writerow(scores)
-
-        # close the file
         f.close()
 
 
@@ -123,28 +108,29 @@ def genetic_algorithm(n_iter, n_pop, cross_rate, mutation_rate, results_path):
     # Initialize population
     pop = init_population(n_pop, n_hidden=N_HIDDEN_NEURONS, n_input=20, n_output=5)
     
-    # keep track of best solution
-    best, best_eval = 0, evaluate(pop[0])
+    # Keep best solution
+    best_solution, best_fitness = 0, evaluate(pop[0])
 
     # Enumerate generations
     for gen in range(n_iter):
 
         # Evaluate population
-        fitnesses = [evaluate(individual) for individual in pop]
+        fitnesses = np.array([evaluate(individual) for individual in pop])
 
         # Save plot results
         gen_mean = np.mean(fitnesses)
         gen_max = np.max(fitnesses) 
         save_scores((gen_mean, gen_max), results_path)
         
-        # check for new best solution
+        # Find new optimal solution
         for i in range(n_pop):
-            if fitnesses[i] > best_eval:
-                best, best_eval = pop[i], fitnesses[i]
-                print(">gen %d, new best fitness = %.3f" % (gen, fitnesses[i]))
+            if fitnesses[i] > best_fitness:
+                best_solution, best_fitness = pop[i], fitnesses[i]
+                print("Generation {}, new best fitness = {:.3f}".format(gen+1, fitnesses[i]))
+       
         # Select parents
         selected = [tournament_selection(pop, fitnesses) for _ in range(n_pop)]
-        
+
         # create the next generation
         children = []
         for i in range(0, n_pop, 2):
@@ -153,23 +139,23 @@ def genetic_algorithm(n_iter, n_pop, cross_rate, mutation_rate, results_path):
             # crossover and mutation
             for c in crossover(p1, p2, cross_rate):
                 # mutation
-                mutation(c, mutation_rate)
+                c = mutation(c, mutation_rate)
                 # store for next generation
                 children.append(c)		
         # replace population
-        pop = children
+        pop = np.array(children)
 
-    return [best, best_eval]
+    return [best_solution, best_fitness]
 
 
 # define the total iterations
-n_generations = 2
+n_generations = 10
 # define the population size
-n_pop = 4
+n_pop = 30
 # crossover rate
 crossover_r = 0.9
 # mutation rate
-mutation_r = 0.9  
+mutation_r = 0.1
 # pop initialization bounds
 upper_bound = 1
 lower_bound = -1
@@ -194,7 +180,9 @@ if __name__ == '__main__':
             if os.path.exists(results_path):
                 os.remove(results_path)
 
-            # perform the genetic algorithm search
-            best, score = genetic_algorithm(n_generations, n_pop, crossover_r, mutation_r, results_path)
-            print('Done!')
-            print('f(%s) = %f' % (best, score))
+            # Find and save best individual
+            best_solution, best_fitness = genetic_algorithm(n_generations, n_pop, crossover_r, mutation_r, results_path)
+            print('Enemy {} - Generation {} finished.'.format(enemy, i+1))
+            print('Best fitness = ', best_fitness)
+            solution_path = os.path.join(log_path, 'solution.npy')
+            np.save(solution_path, best_solution)
