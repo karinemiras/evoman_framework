@@ -18,6 +18,7 @@ class Tuner:
         for alpha in [0.4, 0.2, 0.1, 0.05]:
             print(f'Range: +/-{100*alpha}%')
             self.tune_parameter(Mutation.mutation_ratio, alpha, self.set_mutation_ratio)
+
             print('Mutation ratio - ', Mutation.mutation_ratio)
             self.tune_parameter(Selection.selection_ratio, alpha, self.set_selection_ratio)
             print('Selection ratio -', Selection.selection_ratio)
