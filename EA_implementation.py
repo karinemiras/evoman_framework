@@ -6,8 +6,8 @@
 
 """
 TO DO:
-! First improve selection mechanism, send to Matyas & Ard.
-https://ieeexplore.ieee.org/document/350042 = useful link comparison
+https://ieeexplore.ieee.org/document/350042
+useful link comparing selection mechanisms
 
 Reason about evolution mechanisms and 
 implement the theoretically optimal one.
@@ -45,7 +45,7 @@ class Experiment:
                                      enemies=[enemy],
                                      level=2,
                                      randomini='yes',
-                                     savelogs='no',  # Logging done manualy   
+                                     savelogs='yes',  # Logging done manualy   
                                      clockprec='low',
                                      playermode="ai",
                                      speed="fastest",
@@ -102,25 +102,40 @@ def mutation(genotype, mutation_rate):
             genotype[i] += np.random.normal(0, 1)
     return genotype
 
-def save_scores(scores, dir, filename):
-    if not os.path.exists(dir):
-        os.mkdir(dir)
+import csv
+
+def save_scores(scores, filepath):
+    # open the file in the write mode
+    with open(filepath, 'a', newline='', encoding='utf-8') as f:
+
+        # create the csv writer
+        writer = csv.writer(f)
+
+        # write a row to the csv file
+        writer.writerow(scores)
+
+        # close the file
+        f.close()
 
 
 
-def genetic_algorithm(n_iter, n_pop, cross_rate, mutation_rate):
-    mean_array, max_array = [], []
+def genetic_algorithm(n_iter, n_pop, cross_rate, mutation_rate, results_path):
     # Initialize population
     pop = init_population(n_pop, n_hidden=N_HIDDEN_NEURONS, n_input=20, n_output=5)
+    
     # keep track of best solution
     best, best_eval = 0, evaluate(pop[0])
+
     # Enumerate generations
     for gen in range(n_iter):
+
         # Evaluate population
         fitnesses = [evaluate(individual) for individual in pop]
-        # Calculate mean and max
-        mean_array.append(np.mean(fitnesses))
-        max_array.append(max(fitnesses))
+
+        # Save plot results
+        gen_mean = np.mean(fitnesses)
+        gen_max = np.max(fitnesses) 
+        save_scores((gen_mean, gen_max), results_path)
         
         # check for new best solution
         for i in range(n_pop):
@@ -144,9 +159,6 @@ def genetic_algorithm(n_iter, n_pop, cross_rate, mutation_rate):
         # replace population
         pop = children
 
-    # Save statistics
-    # np.save((mean_array, max_array))
-
     return [best, best_eval]
 
 
@@ -158,9 +170,9 @@ n_pop = 4
 crossover_r = 0.9
 # mutation rate
 mutation_r = 0.9  
-# lower and upper bound on initialization
-lower_bound = -1
+# pop initialization bounds
 upper_bound = 1
+lower_bound = -1
 
 if __name__ == '__main__':
     all_gains = {}
@@ -176,8 +188,13 @@ if __name__ == '__main__':
             log_path = Path('EA2', 'enemy-{}'.format(enemy), 'run-{}'.format(i))
             log_path.mkdir(parents=True, exist_ok=True)
             Experiment.initialize(str(log_path), enemy)
+            results_path = os.path.join(log_path, 'results.csv')
+
+            # Remove previous experiment results
+            if os.path.exists(results_path):
+                os.remove(results_path)
 
             # perform the genetic algorithm search
-            best, score = genetic_algorithm(n_generations, n_pop, crossover_r, mutation_r)
+            best, score = genetic_algorithm(n_generations, n_pop, crossover_r, mutation_r, results_path)
             print('Done!')
             print('f(%s) = %f' % (best, score))
