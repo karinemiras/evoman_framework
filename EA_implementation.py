@@ -73,19 +73,16 @@ def tournament_selection(pop, fitnesses, k=3):
     return pop[random_indices[winner_idx]]
 
 # crossover two parents to create two children
-def crossover(p1, p2, crossover_rate):
-    # p1 = np.array(p1)
-    # p2 = np.array(p2)
-    # children are copies of parents by default
-    c1, c2 = p1.copy(), p2.copy()
-    # check for recombination
+def crossover(parent_1, parent_2, crossover_rate):
+    # randomly select whether to perform crossover
     if np.random.rand() < crossover_rate:
-        # select crossover point that is not on the end of the string
-        pt = np.random.randint(1, len(p1)) # originally set to -2
-        # perform crossover
-        c1 = np.concatenate((p1[:pt], p2[pt:]))
-        c2 = np.concatenate((p2[:pt], p1[pt:]))
-    return [c1, c2]
+        crossover_point = np.random.randint(1, len(parent_1))
+        off_spring_1= np.append(parent_1[:crossover_point], parent_2[crossover_point:])
+        off_spring_2 = np.append(parent_2[:crossover_point], parent_1[crossover_point:])
+    else:
+        off_spring_1, off_spring_2 = parent_1.copy(), parent_2.copy()
+    
+    return [off_spring_1, off_spring_2]
 
 # Adds gaussian noise to each allele with mutation_rate probability.
 # To do: change step size to one often used in literature
