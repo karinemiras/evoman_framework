@@ -148,11 +148,11 @@ def genetic_algorithm(n_iter, n_pop, cross_rate, mutation_rate, results_path):
 # define the total iterations
 n_generations = 10
 # define the population size
-n_pop = 30
-# crossover rate
+n_pop = 100
+# crossover rate(typically in range (0.6, 0.9))
 crossover_r = 0.9
-# mutation rate
-mutation_r = 0.1
+# mutation rate(typically in range(1/chromosome_length, 1/pop_size))
+mutation_r = 1/n_pop
 # pop initialization bounds
 upper_bound = 1
 lower_bound = -1
