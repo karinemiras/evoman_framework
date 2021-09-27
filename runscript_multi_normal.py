@@ -159,9 +159,9 @@ class evo_algorithm:
 
 
 if __name__ == '__main__':
-    for enemy in [2]:
-        #for fitter in ["errfoscilation", "standard", "exponential", "oscilation"]:
-        for fitter in ["errfoscilation"]:
+    for enemy in [1,4,5,6,7,8]:
+        for fitter in ["errfoscilation", "standard", "exponential", "oscilation"]:
+        #for fitter in ["errfoscilation"]:
             n_hidden_neurons = 10       #number of hidden neurons
             enemy = int(enemy)          #which enemy
             run_nr = 1                  #number of runs
