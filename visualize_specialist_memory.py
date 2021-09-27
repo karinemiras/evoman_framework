@@ -40,6 +40,6 @@ for en in range(8):
 	env.update_parameter('enemies',[enemy])
 
 	# Load specialist controller
-	sol = np.loadtxt(f'enemy_{enemy}/best_sol_1.csv', delimiter=',')
+	sol = np.loadtxt(f'data_memory/enemy_{enemy}_errfoscilation/best_sol_1.csv', delimiter=',')
 	print('\n LOADING SAVED SPECIALIST SOLUTION FOR ENEMY '+str(en)+' \n')
 	env.play(sol)
