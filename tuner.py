@@ -1,5 +1,4 @@
 import numpy as np
-from numpy.lib.function_base import average
 
 from crossover import Crossover
 from selection import Selection
@@ -16,7 +15,8 @@ class Tuner:
         self.evolutionary_algorithm = _evolutionary_algorithm
 
     def run(self):
-        for alpha in [0.4, 0.2, 0.1, 0.05]:
+        for alpha in [0.6, 0.4, 0.3, 0.1]:
+
             print(f'Range: +/-{100*alpha}%')
             self.tune_parameter(Mutation.mutation_ratio, alpha, self.set_mutation_ratio)
 
