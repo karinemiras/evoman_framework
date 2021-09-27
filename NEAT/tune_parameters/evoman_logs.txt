@@ -47,3 +47,21 @@ logs: on
 save logs: yes
 
 ########## Simulation state - END ###########
+
+RUN: run status: enemy: 2; fitness: 21.273152252412803; player life: 0; enemy life: 70.0; time: 307
+
+RUN: run status: enemy: 2; fitness: -5.771441123130016; player life: 0; enemy life: 100; time: 321
+
+RUN: run status: enemy: 2; fitness: -5.902633333401366; player life: 0; enemy life: 100; time: 366
+
+RUN: run status: enemy: 2; fitness: -6.148468295917647; player life: 0; enemy life: 100; time: 468
+
+RUN: run status: enemy: 2; fitness: -5.645446897643238; player life: 0; enemy life: 100; time: 283
+
+RUN: run status: enemy: 2; fitness: 2.9155005869248285; player life: 0; enemy life: 90.0; time: 439
+
+RUN: run status: enemy: 2; fitness: -5.932245187448011; player life: 0; enemy life: 100; time: 377
+
+RUN: run status: enemy: 2; fitness: -5.771441123130016; player life: 0; enemy life: 100; time: 321
+
+RUN: run status: enemy: 2; fitness: 30.330119077019482; player life: 0; enemy life: 60.0; time: 290

@@ -9,6 +9,7 @@ import sys, os
 import numpy as np
 import neat
 import pandas as pd
+import pickle
 sys.path.insert(0, 'evoman')
 from environment import Environment
 from specialist_controller import NEAT_Controls
@@ -19,12 +20,6 @@ from specialist_controller import NEAT_Controls
 headless = True
 if headless:
     os.environ["SDL_VIDEODRIVER"] = "dummy"
-
-
-
-
-
-
 
 
 # runs simulation
@@ -57,8 +52,33 @@ def eval_genomes(genomes, config):
                                np.std(fitness_array)])
 
 
+def evaluate_best_sol(environment, run, experiment_name, enemy):
+    global env
 
-def run(environment, generations, config_file, run, experiment_name):
+    env = environment
+    best_sol_data = []
+
+    infile = open(f'{experiment_name}/enemy_{enemy}/best_sol_{run}.obj', 'rb')
+    best_sol = pickle.load(infile)
+    infile.close()
+
+    for j in range(5):
+        best_sol.fitness = 0
+
+        f, p, e, t = env.play(pcont=best_sol)
+
+        best_sol_data.append([f, p, e, t])
+
+    if not os.path.exists(experiment_name+"/enemy_"+str(enemy)+"/boxplot"):
+        os.makedirs(experiment_name+"/enemy_"+str(enemy)+"/boxplot")
+
+
+    best_sol_df = pd.DataFrame(best_sol_data, columns=['fitness', 'p_health',
+                                                              'e_health', 'time'])
+    best_sol_df.to_csv(f'{experiment_name}/enemy_{enemy}/boxplot/data_{run}.csv', index=False)
+
+
+def run(environment, generations, config_file, run, experiment_name, enemy):
     """
     runs the NEAT algorithm to train a neural network to play mega man.
     It uses the config file named config-feedforward.txt. After running it stores it results in CSV files.
@@ -95,13 +115,21 @@ def run(environment, generations, config_file, run, experiment_name):
     # show final stats
     print('\nBest genome:\n{!s}'.format(winner))
 
+    if not os.path.exists(experiment_name+"/enemy_"+str(enemy)):
+        os.makedirs(experiment_name+"/enemy_"+str(enemy))
+
     # stats to csv
+
     total_fitness_data_df = pd.DataFrame(total_fitness_data, columns = ["max", "mean", "std_dev"])
-    total_fitness_data_df.to_csv(f'{experiment_name}/fitness_data_{run}.csv', index = False)
+    total_fitness_data_df.to_csv(f'{experiment_name}/enemy_{enemy}/fitness_data_{run}.csv', index = False)
 
     children_index_df = pd.DataFrame(children_index, columns = ['generation', 'fitness', 'p_health',
                          'e_health', 'time'])
-    children_index_df.to_csv(f'{experiment_name}/full_data_index_{run}.csv', index = False)
+    children_index_df.to_csv(f'{experiment_name}/enemy_{enemy}/full_data_index_{run}.csv', index = False)
+
+    file = open(f'{experiment_name}/enemy_{enemy}/best_sol_{run}.obj', 'wb')
+    pickle.dump(winner, file)
+    file.close()
 
     # children_data_df = pd.DataFrame(children_data)
     # children_data_df.to_csv(f'{experiment_name}/full_data_{run}.csv', index = False)

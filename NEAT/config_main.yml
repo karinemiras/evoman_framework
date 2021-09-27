@@ -1,14 +1,15 @@
 decision_variables:
-    name_experiment: tune_parameters
-    tune_parameters: True
-    apply_optimization: False
-    show_figures: True
+    name_experiment: final_results
+    tune_parameters: False
+    apply_optimization: True
+    show_figures: False
     save_figures: False
+    final_results: True
 
 experiment_parameters:
-    number_of_runs: 5
-    enemy: 2
-    generations: 3
+    number_of_runs: 10
+    enemies: [1,5,8]
+    generations: 30
 
 
 tuning_parameters:
