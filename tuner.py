@@ -16,6 +16,7 @@ class Tuner:
 
     def run(self):
         for alpha in [0.6, 0.4, 0.3, 0.1]:
+
             print(f'Range: +/-{100*alpha}%')
             self.tune_parameter(Mutation.mutation_ratio, alpha, self.set_mutation_ratio)
 

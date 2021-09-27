@@ -18,8 +18,8 @@ from mutation_selection import MutationSelection
 
 
 # HYPERPARAMS
-population_size = 50
-generations_number = 7
+population_size = 100
+generations_number = 20
 
 
 Mutation.mutation_ratio = 0.24
@@ -38,7 +38,6 @@ evolutionary_algorithm = EvolutionaryAlgorithm(_experiment_name='solution_1',
                                                _mutation_selection=MutationSelection.only_parents,
                                                _insertion=Insertion.basic)
 
-
-# evolutionary_algorithm.run()
 tuner = Tuner(evolutionary_algorithm)
 tuner.run()
+
