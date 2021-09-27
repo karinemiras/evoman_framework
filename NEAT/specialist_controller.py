@@ -17,7 +17,7 @@ def sigmoid_activation(x):
 class NEAT_Controls(Controller):
 	def __init__(self):
 		local_dir = os.path.dirname(__file__)
-		config_file = os.path.join(local_dir, 'config-feedforward.txt')
+		config_file = os.path.join(local_dir, 'config-feedforward')
 		config = neat.config.Config(neat.DefaultGenome, neat.DefaultReproduction,
 									neat.DefaultSpeciesSet, neat.DefaultStagnation,
 									config_file)

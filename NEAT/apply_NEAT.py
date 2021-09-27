@@ -20,29 +20,11 @@ headless = True
 if headless:
     os.environ["SDL_VIDEODRIVER"] = "dummy"
 
-name_experiment = 'NEAT_specialist'
 
 
-n_hidden_neurons = 10
-enemy = 2                   #which enemy
-generations = 15            #number of generations per run
-total_fitness_data = []
-children_index = []
-children_data = []
-max_health = 0
-generation = 0
-# initializes simulation in individual evolution mode, for single static enemy.
-env = Environment(experiment_name=name_experiment,
-                  enemies=[enemy],
-                  playermode="ai",
-                  player_controller=NEAT_Controls(),
-                  enemymode="static",
-                  level=2,
-                  speed="fastest",
-                  randomini = "yes")
 
-# default environment fitness is assumed for experiment
-env.state_to_log()  # checks environment state
+
+
 
 
 # runs simulation
@@ -76,11 +58,23 @@ def eval_genomes(genomes, config):
 
 
 
-def run(config_file, run, experiment_name):
+def run(environment, generations, config_file, run, experiment_name):
     """
     runs the NEAT algorithm to train a neural network to play mega man.
     It uses the config file named config-feedforward.txt. After running it stores it results in CSV files.
     """
+    global env
+    global total_fitness_data
+    global children_index
+    global children_data
+    global generation
+
+    env = environment
+    total_fitness_data = []
+    children_index = []
+    children_data = []
+    generation = 0
+
 
     config = neat.config.Config(neat.DefaultGenome, neat.DefaultReproduction,
                                 neat.DefaultSpeciesSet, neat.DefaultStagnation,
@@ -102,7 +96,6 @@ def run(config_file, run, experiment_name):
     print('\nBest genome:\n{!s}'.format(winner))
 
     # stats to csv
-
     total_fitness_data_df = pd.DataFrame(total_fitness_data, columns = ["max", "mean", "std_dev"])
     total_fitness_data_df.to_csv(f'{experiment_name}/fitness_data_{run}.csv', index = False)
 
@@ -113,8 +106,3 @@ def run(config_file, run, experiment_name):
     # children_data_df = pd.DataFrame(children_data)
     # children_data_df.to_csv(f'{experiment_name}/full_data_{run}.csv', index = False)
 
-    total_fitness_data.clear()
-    children_index.clear()
-    children_data.clear()
-    global generation
-    generation = 0

@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="05cc4402-d462-4ba4-b74f-e75396f7b77c" name="Changes" comment="Changed structure">
+      <change afterPath="$PROJECT_DIR$/NEAT/apply_NEAT_old.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/config_main.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/Base/SpriteConstants.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/Base/SpriteDefinition.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/Base/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/controller.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/enemy1.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/enemy2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/enemy3.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/enemy4.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/enemy5.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/enemy6.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/enemy7.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/enemy8.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/environment.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/environment_draw.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/images/EnemySprites.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/images/EvoManSprites.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/images/bb.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/images/blade.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/images/bubb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/images/bullet2_l.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/images/bullet2_r.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/images/bullet_l.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/images/bullet_r.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/images/download.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/images/fireball.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/images/fireball2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/images/images.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/images/met.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/images/met2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/images/mi2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/images/plataform1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/images/plataform2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/images/roles.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/images/tex2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/images/tex3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/images/tex4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/images/torna.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/images/torna2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/images/wall1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/images/wall2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/images/water2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/map1.tmx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/map2.tmx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/map3.tmx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/map4.tmx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/player.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/roles.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/roles2.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/roles3.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/roles4.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/sensors.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/sounds/open.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/sounds/scifi003.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/sounds/scifi011.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT/evoman/tmx.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NEAT/apply_NEAT.py" beforeDir="false" afterPath="$PROJECT_DIR$/NEAT/apply_NEAT.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NEAT/config-feedforward" beforeDir="false" afterPath="$PROJECT_DIR$/NEAT/config-feedforward" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NEAT/figures_NEAT_tuning.py" beforeDir="false" afterPath="$PROJECT_DIR$/NEAT/figures_NEAT_tuning.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NEAT/main_NEAT.py" beforeDir="false" afterPath="$PROJECT_DIR$/NEAT/main_NEAT.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NEAT/specialist_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/NEAT/specialist_controller.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="ProjectId" id="1yRf3J1ACTq8foPWlraEc3KTR7T" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File" value="Python" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/NEAT" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Sicco\PycharmProjects\evoman_framework\NEAT" />
+      <recent name="C:\Users\Sicco\AppData\Roaming\JetBrains\PyCharmCE2021.2\scratches" />
+      <recent name="C:\Users\Sicco\PycharmProjects\evoman_framework" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Sicco\PycharmProjects\evoman_framework\NEAT" />
+      <recent name="C:\Users\Sicco\PycharmProjects" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.main_NEAT">
+    <configuration name="Assignment2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\Sicco\anaconda3\envs\pycharm\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../advanced_econometrics/Assignment2" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../advanced_econometrics/Assignment2/Assignment2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="figures_NEAT_tuning (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\Sicco\anaconda3\envs\pycharm\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/NEAT" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/NEAT/figures_NEAT_tuning.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="figures_NEAT_tuning" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\Sicco\anaconda3\envs\pythonProject\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <option name="SCRIPT_NAME" value="C:\Users\Sicco\PycharmProjects\evoman_framework\NEAT\figures_NEAT_tuning.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main_NEAT" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\Sicco\anaconda3\envs\pycharm\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/NEAT" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/NEAT/main_NEAT.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="scratch" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\Sicco\anaconda3\envs\pythonProject\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$APPLICATION_CONFIG_DIR$/scratches" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <option name="SCRIPT_NAME" value="$APPLICATION_CONFIG_DIR$/scratches/scratch.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.scratch" />
+      <item itemvalue="Python.figures_NEAT_tuning" />
+      <item itemvalue="Python.main_NEAT" />
+      <item itemvalue="Python.Assignment2" />
+      <item itemvalue="Python.figures_NEAT_tuning (1)" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.main_NEAT" />
+        <item itemvalue="Python.figures_NEAT_tuning (1)" />
+        <item itemvalue="Python.Assignment2" />
+        <item itemvalue="Python.scratch" />
+        <item itemvalue="Python.figures_NEAT_tuning" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="05cc4402-d462-4ba4-b74f-e75396f7b77c" name="Changes" comment="" />
+      <created>1632219122585</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1632219122585</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Create experiment file">
+      <created>1632220377626</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1632220377626</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Create neat experiment and store results in csv's">
+      <created>1632226441143</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1632226441143</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Create neat experiment and store results in csv's and made the results visible.">
+      <created>1632233199068</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1632233199068</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Changed structure">
+      <created>1632389228411</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1632389228412</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Changed structure">
+      <created>1632389274142</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1632389274142</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Changed structure">
+      <created>1632389403611</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1632389403611</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Changed structure">
+      <created>1632390047671</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1632390047671</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Changed structure">
+      <created>1632390685927</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1632390685927</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Creat experiment file" />
+    <MESSAGE value="Create experiment file" />
+    <MESSAGE value="Create neat experiment and store results in csv's" />
+    <MESSAGE value="Create neat experiment and store results in csv's and made the results visible." />
+    <MESSAGE value="Changed structure" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed structure" />
+  </component>
+</project>
