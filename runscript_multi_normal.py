@@ -130,7 +130,7 @@ class evo_algorithm:
             pop = get_children(pop, surviving_players, np.array(fitness_array_smop),
                                mutation_baseline, mutation_multiplier)
             
-            print(f'Run: {self.run}, Fitter: {self.fitter}, Generation {g}, fitness_smop best = {round(np.max(fitness_array_smop),2)}, best_avg_health = {self.max_health}, time={round(time.time()-gen_start)}')
+            print(f'Run: {self.run}, Fitter: {self.fitter}, Generation {g}, fit_mean = {round(np.mean(fitness_array_smop),2)} pm {round(np.std(fitness_array_smop),2)}, fitness_best = {round(np.max(fitness_array_smop),2)}, best_avg_health = {np.round(self.max_health,2)}, time={round(time.time()-gen_start)}')
         return
     
     def save_results(self, extended = False, full = False):
@@ -159,21 +159,20 @@ class evo_algorithm:
 
 
 if __name__ == '__main__':
-    for enemy in [1,4,5,6,7,8]:
+    for enemy in [1, 5, 8]:
         for fitter in ["errfoscilation", "standard", "exponential", "oscilation"]:
         #for fitter in ["errfoscilation"]:
             n_hidden_neurons = 10       #number of hidden neurons
             enemy = int(enemy)          #which enemy
-            run_nr = 1                  #number of runs
-            generations = 20           #number of generations per run
+            run_nr = 10                 #number of runs
+            generations = 50            #number of generations per run
             population_size = 100       #pop size
             mutation_baseline = 0.02    #minimal chance for a mutation event
             mutation_multiplier = 0.20  #fitness dependent multiplier of mutation chance
-            repeats = 5
+            repeats = 4
             start = time.time()
-            runs = 2
             
-            for run in range(runs):
+            for run in range(run_nr):
                 evo = evo_algorithm(n_hidden_neurons, enemy, run_nr, generations, population_size, mutation_baseline, mutation_multiplier, repeats, fitter, run)
                 evo.simulate()
                 evo.save_results()
