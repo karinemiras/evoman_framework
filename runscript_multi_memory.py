@@ -159,12 +159,11 @@ class evo_algorithm:
 
 if __name__ == '__main__':      
     for enemy in [2]:
-        #for fitter in ["errfoscilation", "standard", "exponential", "oscilation"]:
-        for fitter in ["errfoscilation"]:
+        for fitter in ["errfoscilation", "standard", "exponential", "oscilation"]:
             n_hidden_neurons = 10       #number of hidden neurons
             enemy = int(enemy)          #which enemy
-            run_nr = 1                  #number of runs
-            generations = 20           #number of generations per run
+            run_nr = 2                  #number of runs
+            generations = 100           #number of generations per run
             population_size = 100       #pop size
             mutation_baseline = 0.02    #minimal chance for a mutation event
             mutation_multiplier = 0.20  #fitness dependent multiplier of mutation chance
