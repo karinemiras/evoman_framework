@@ -7,8 +7,8 @@ class Insertion:
     @staticmethod
     def basic(fitness, population, offspring):
         # Replaces worse performing individuals with offspring
-        offspring_count = offspring.shape[0]
+        offspring_count = min(offspring.shape[0], population.shape[0])
         sorted_indexes = np.argsort(fitness, axis=None)
 
         population = np.delete(population, sorted_indexes[:offspring_count], 0)
-        return np.concatenate((population, offspring))
+        return np.concatenate((population, offspring[:offspring_count]))
