@@ -64,25 +64,26 @@ def mutation(DNA, mutation_rate, sigma, m_b, m_m):
     
     return c1
 
-def get_children(parents, fitness, mutation_base, mutation_multiplier):
+def get_children(parents, surviving_players, fitness, mutation_base, mutation_multiplier):
     children = copy.deepcopy(parents)
     
     #change all fitness <0 to 0
     fitness = np.array(fitness)
     fitness = fitness*(fitness > 0)
     
-    best = np.where(fitness==max(fitness))[0]
-    if not len(best) == len(fitness):
+    if not len(surviving_players) == len(fitness):
         #pick parents based on fitness (fitness = weigth)
-        parents_index = np.arange(0, len(parents))
-        p1 = random.choices(parents_index, weights=fitness, k=len(parents_index)-len(best))
-        p2 = random.choices(parents_index, weights=fitness, k=len(parents_index)-len(best))
+        parents_index = np.arange(0, len(parents), dtype=int)
+        p1 = random.choices(parents_index, weights=fitness, k=len(parents_index)-len(surviving_players))
+        p2 = random.choices(parents_index, weights=fitness, k=len(parents_index)-len(surviving_players))
         
-        p1 = np.hstack((best, p1))
-        p2 = np.hstack((best, p2))
+        if len(surviving_players) > 0:
+            p1 = np.hstack((surviving_players, p1))
+            p2 = np.hstack((surviving_players, p2))
+        
     else:
-        p1 = best
-        p2 = best
+        p1 = surviving_players
+        p2 = surviving_players
         
     #iterate to make children
     for i in range(len(parents)):
@@ -104,5 +105,4 @@ def get_children(parents, fitness, mutation_base, mutation_multiplier):
                 child[j] = maximum
         #child = (maximum-minimum)*(child-child.min())/(child.max()-child.min())+minimum
         children[i] = child
-        
     return children

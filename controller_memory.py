@@ -6,11 +6,13 @@
 # or even a full network structure (ex.: from NEAT).
 from controller import Controller
 import numpy as np
+from scipy.special import expit
 
+#def sigmoid_activation(x):
+#	return 1./(1.+np.exp(-x))
 
 def sigmoid_activation(x):
-	return 1./(1.+np.exp(-x))
-
+	return expit(x)
 
 # implements controller structure for player
 class player_controller(Controller):
