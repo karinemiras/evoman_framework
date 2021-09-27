@@ -91,10 +91,12 @@ class evo_algorithm:
         max_health = 0
         avg_fitness = 0
         
+        
         for g in range(self.generations):
             gen_start = time.time()
             fitness_array = []
             fitness_array_smop = []
+            health_array = []
             surviving_players = []
             pool = mp.Pool(mp.cpu_count())
             
@@ -108,6 +110,7 @@ class evo_algorithm:
                 fitness_array_smop.append(r[0])
                 pop.append(r[3])
                 health = r[1]
+                health_array.append(r[1])
                 survive = r[2]
                 
                 if health > self.max_health:
@@ -125,7 +128,10 @@ class evo_algorithm:
             
             self.total_fitness_data.append([np.max(fitness_array_smop),
                                             np.mean(fitness_array_smop),
-                                            np.std(fitness_array_smop)])
+                                            np.std(fitness_array_smop),
+                                            np.max(health_array),
+                                            np.mean(health_array),
+                                            np.std(health_array)])
             
             pop = get_children(pop, surviving_players, np.array(fitness_array_smop),
                                mutation_baseline, mutation_multiplier)
@@ -161,7 +167,6 @@ class evo_algorithm:
 if __name__ == '__main__':
     for enemy in [1, 5, 8]:
         for fitter in ["errfoscilation", "standard", "exponential", "oscilation"]:
-        #for fitter in ["errfoscilation"]:
             n_hidden_neurons = 10       #number of hidden neurons
             enemy = int(enemy)          #which enemy
             run_nr = 10                 #number of runs
