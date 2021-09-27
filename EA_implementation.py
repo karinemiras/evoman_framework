@@ -60,7 +60,7 @@ def init_population(pop_size, n_hidden, n_input, n_output):
 
 # Return the winner of a k-sized random tournament with replacement based on fitness.
 # This function is used for parent selection.
-def tournament_selection(pop, fitnesses, k=3):
+def tournament_selection(pop, fitnesses, k):
     random_indices = np.random.randint(0, len(pop), k)
     winner_idx = np.argmax(fitnesses[random_indices])
     return pop[random_indices[winner_idx]]
@@ -82,7 +82,7 @@ def crossover(parent_1, parent_2, crossover_rate):
 def mutation(genotype, mutation_rate):
     for i in range(len(genotype)):
         if np.random.rand() < mutation_rate:
-            genotype[i] += np.random.normal(0, 1)
+            genotype[i] += np.random.normal(0, 0.5)
     return genotype
 
 def save_scores(scores, filepath):
@@ -96,7 +96,7 @@ def elitism(fitnesses, pop, k=2):
     idx = (-fitnesses).argsort()[:k]
     return pop[idx]
 
-def genetic_algorithm(n_generations, n_pop, cross_rate, mutation_rate, results_path):
+def genetic_algorithm(n_generations, n_pop, cross_rate, mutation_rate, results_path, k):
     # Initialize population
     pop = init_population(n_pop, n_hidden=N_HIDDEN_NEURONS, n_input=20, n_output=5)
     
@@ -123,7 +123,7 @@ def genetic_algorithm(n_generations, n_pop, cross_rate, mutation_rate, results_p
         # We do not need to generate children for last generation
         if not gen == n_generations - 1:
             # Select parents
-            selected = [tournament_selection(pop, fitnesses) for _ in range(n_pop)]
+            selected = [tournament_selection(pop, fitnesses, k) for _ in range(n_pop)]
 
             # Create next generation while keeping top 2 elites
             children = []
@@ -151,9 +151,9 @@ def genetic_algorithm(n_generations, n_pop, cross_rate, mutation_rate, results_p
 
 
 # define the total iterations
-n_generations = 2
+n_generations = 100
 # define the population size
-n_pop = 4
+n_pop = 100
 # crossover rate(typically in range (0.6, 0.9))
 crossover_r = 0.9
 # mutation rate(typically in range(1/chromosome_length, 1/pop_size))
@@ -161,12 +161,14 @@ mutation_r = 1/n_pop
 # pop initialization bounds
 upper_bound = 1
 lower_bound = -1
+# tournament value
+k = 2
 
 if __name__ == '__main__':
     all_gains = {}
 
     # For each enemy
-    enemies = [6] # We do enemies 2,6,8
+    enemies = [2,6,8] # We do enemies 2,6,8
     n_experiments = 1
     for enemy in enemies:
         
@@ -183,7 +185,7 @@ if __name__ == '__main__':
                 os.remove(results_path)
 
             # Find and save best individual
-            best_solution, best_fitness = genetic_algorithm(n_generations, n_pop, crossover_r, mutation_r, results_path)
+            best_solution, best_fitness = genetic_algorithm(n_generations, n_pop, crossover_r, mutation_r, results_path, k)
             print('Enemy {} - Run {} finished.'.format(enemy, i+1))
             print('Best fitness = ', best_fitness)
             solution_path = os.path.join(log_path, 'solution-' + str(n_generations) + '.npy')

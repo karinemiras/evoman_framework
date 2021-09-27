@@ -31,15 +31,13 @@ env = Environment(experiment_name=experiment_name,
 				  enemymode="static",
 				  level=2)
 
+en = int(input("What enemy do you wish to battle?"))
+#Update the enemy
+env.update_parameter('enemies',[en])
 
-# tests saved demo solutions for each enemy
-for en in [6]:
+generation = str(input("How many generations were used?"))
 
-	#Update the enemy
-	env.update_parameter('enemies',[en])
-
-	# Load specialist controller
-	sol = np.load('EA2/enemy-{}/run-{}/solution.npy'.format(en, 0))
-	# sol = np.loadtxt('solutions_demo/demo_'+str(en)+'.txt')
-	print('\n LOADING SAVED SPECIALIST SOLUTION FOR ENEMY '+str(en)+' \n')
-	env.play(sol)
+# Load specialist controller
+sol = np.load('EA2/enemy-{}/run-{}/solution-{}.npy'.format(en, 0, generation))
+print('\n LOADING SAVED SPECIALIST SOLUTION FOR ENEMY '+str(en)+' \n')
+env.play(sol)
