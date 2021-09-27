@@ -6,15 +6,8 @@
 
 """
 TO DO:
-https://ieeexplore.ieee.org/document/350042
-useful link comparing selection mechanisms
 
-Reason about evolution mechanisms and 
-implement the theoretically optimal one.
-
-Then, fine-tune the parameters. Try to get >85 for enemy 3.
-# For grid search: use npop=30 and gens=10, compare the mean fitness
-# For final scores: use npop=100 and gens=30
+# For final scores: use npop=100 and gens=100
 """
 
 
@@ -77,7 +70,7 @@ def crossover(parent_1, parent_2, crossover_rate):
     # randomly select whether to perform crossover
     if np.random.rand() < crossover_rate:
         crossover_point = np.random.randint(1, len(parent_1))
-        off_spring_1= np.append(parent_1[crossover_point:], parent_2[:crossover_point])
+        off_spring_1 = np.append(parent_1[crossover_point:], parent_2[:crossover_point])
         off_spring_2 = np.append(parent_2[crossover_point:], parent_1[:crossover_point])   
     else:
         off_spring_1, off_spring_2 = parent_1.copy(), parent_2.copy()
@@ -99,9 +92,11 @@ def save_scores(scores, filepath):
         writer.writerow(scores)
         f.close()
 
+def elitism(fitnesses, pop, k=2):
+    idx = (-fitnesses).argsort()[:k]
+    return pop[idx]
 
-
-def genetic_algorithm(n_iter, n_pop, cross_rate, mutation_rate, results_path):
+def genetic_algorithm(n_generations, n_pop, cross_rate, mutation_rate, results_path):
     # Initialize population
     pop = init_population(n_pop, n_hidden=N_HIDDEN_NEURONS, n_input=20, n_output=5)
     
@@ -109,7 +104,7 @@ def genetic_algorithm(n_iter, n_pop, cross_rate, mutation_rate, results_path):
     best_solution, best_fitness = 0, evaluate(pop[0])
 
     # Enumerate generations
-    for gen in range(n_iter):
+    for gen in range(n_generations):
 
         # Evaluate population
         fitnesses = np.array([evaluate(individual) for individual in pop])
@@ -125,30 +120,40 @@ def genetic_algorithm(n_iter, n_pop, cross_rate, mutation_rate, results_path):
                 best_solution, best_fitness = pop[i], fitnesses[i]
                 print("Generation {}, new best fitness = {:.3f}".format(gen+1, fitnesses[i]))
        
-        # Select parents
-        selected = [tournament_selection(pop, fitnesses) for _ in range(n_pop)]
+        # We do not need to generate children for last generation
+        if not gen == n_generations - 1:
+            # Select parents
+            selected = [tournament_selection(pop, fitnesses) for _ in range(n_pop)]
 
-        # create the next generation
-        children = []
-        for i in range(0, n_pop, 2):
-            # get selected parents in pairs
-            p1, p2 = selected[i], selected[i+1]
-            # crossover and mutation
-            for c in crossover(p1, p2, cross_rate):
-                # mutation
-                c = mutation(c, mutation_rate)
-                # store for next generation
-                children.append(c)		
-        # replace population
-        pop = np.array(children)
+            # Create next generation while keeping top 2 elites
+            children = []
+            for i in range(0, n_pop, 2):
+                # get selected parents in pairs
+                p1, p2 = selected[i], selected[i+1]
+                # crossover and mutation
+                for c in crossover(p1, p2, cross_rate):
+                    # mutation
+                    c = mutation(c, mutation_rate)
+                    # store for next generation
+                    children.append(c)		
+
+            # Randomly remove 2 children and replace with elites
+            np.random.shuffle(children)
+            for i in range(2):
+                children.pop()
+            elites = elitism(fitnesses, pop, k=2)
+            children.extend(elites)
+
+            # Next generation's population
+            pop = np.array(children)
 
     return [best_solution, best_fitness]
 
 
 # define the total iterations
-n_generations = 10
+n_generations = 2
 # define the population size
-n_pop = 100
+n_pop = 4
 # crossover rate(typically in range (0.6, 0.9))
 crossover_r = 0.9
 # mutation rate(typically in range(1/chromosome_length, 1/pop_size))
@@ -161,7 +166,7 @@ if __name__ == '__main__':
     all_gains = {}
 
     # For each enemy
-    enemies = [3]
+    enemies = [6] # We do enemies 2,6,8
     n_experiments = 1
     for enemy in enemies:
         
@@ -171,7 +176,7 @@ if __name__ == '__main__':
             log_path = Path('EA2', 'enemy-{}'.format(enemy), 'run-{}'.format(i))
             log_path.mkdir(parents=True, exist_ok=True)
             Experiment.initialize(str(log_path), enemy)
-            results_path = os.path.join(log_path, 'results.csv')
+            results_path = os.path.join(log_path, 'results-' +  str(n_generations) + '.csv')
 
             # Remove previous experiment results
             if os.path.exists(results_path):
@@ -179,7 +184,7 @@ if __name__ == '__main__':
 
             # Find and save best individual
             best_solution, best_fitness = genetic_algorithm(n_generations, n_pop, crossover_r, mutation_r, results_path)
-            print('Enemy {} - Generation {} finished.'.format(enemy, i+1))
+            print('Enemy {} - Run {} finished.'.format(enemy, i+1))
             print('Best fitness = ', best_fitness)
-            solution_path = os.path.join(log_path, 'solution.npy')
+            solution_path = os.path.join(log_path, 'solution-' + str(n_generations) + '.npy')
             np.save(solution_path, best_solution)

@@ -27,12 +27,13 @@ env = Environment(experiment_name=experiment_name,
 				  playermode="ai",
 				  player_controller=player_controller(n_hidden_neurons),
 			  	  speed="normal",
+				  randomini="yes",
 				  enemymode="static",
 				  level=2)
 
 
 # tests saved demo solutions for each enemy
-for en in [3]:
+for en in [6]:
 
 	#Update the enemy
 	env.update_parameter('enemies',[en])
