@@ -20,6 +20,12 @@ import csv
 import time
 import multiprocessing as mp
 
+# choose this for not using visuals and thus making experiments faster
+os.environ["SDL_VIDEODRIVER"] = "dummy"
+
+#make sure to not print every startup of the pygame
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"    
+
 
 class evo_algorithm:
     def __init__(self, n_hidden_neurons, enemy, run_nr, generations, population_size, mutation_baseline, mutation_multiplier, repeats, fitter, run):
@@ -43,7 +49,6 @@ class evo_algorithm:
         #make save folder
         if not os.path.exists(f'data_normal/{self.experiment_name}'):
             os.makedirs(f'data_normal/{self.experiment_name}')  
-    
     
     def play_game(self, player, g, avg_fitness):
         # initializes simulation in individual evolution mode, for single static enemy.
@@ -154,18 +159,9 @@ class evo_algorithm:
 
 
 if __name__ == '__main__':
-    # choose this for not using visuals and thus making experiments faster
-    headless = True
-    if headless:
-        os.environ["SDL_VIDEODRIVER"] = "dummy"
-    
-    #make sure to not print every startup of the pygame
-    os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
-    
-    
-    for enemy in [2]:
-        #for fitter in ["errfoscilation", "standard", "exponential", "oscilation"]:
-        for fitter in ["errfoscilation"]:
+    for enemy in [1,4,5,6,7,8]:
+        for fitter in ["errfoscilation", "standard", "exponential", "oscilation"]:
+        #for fitter in ["errfoscilation"]:
             n_hidden_neurons = 10       #number of hidden neurons
             enemy = int(enemy)          #which enemy
             run_nr = 1                  #number of runs

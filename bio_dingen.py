@@ -17,10 +17,10 @@ def fitfunc(fitfunction, generations, g, t, e, p):
         
     if fitfunction == "oscilation":
         period = .5*generations
-        fitness_smop = (1 + np.cos((2*np.pi/period) * g)) * (0.1*t) + (1 + np.cos((2*np.pi/period) * g + np.pi)) * (100-e+p)
+        fitness_smop = (1 + np.cos((2*np.pi/period) * g)) * (0.1*t) + (1 + np.cos((2*np.pi/period) * g + np.pi)) * (100-e+p / np.log(t))
         
     if fitfunction == "exponential":
-        fitness_smop = 100/(0.9*(100 - e) + 0.1*p - np.log(t))
+        fitness_smop =  100/(100-(0.9*(100 - e) + 0.1*p - np.log(t)))
     
     if fitfunction == "errfoscilation":
         if g < 0.5*generations:
@@ -28,7 +28,7 @@ def fitfunc(fitfunction, generations, g, t, e, p):
             if t == 1000:
                 fitness_smop += .5*( 100 - e + p)
         else:
-            fitness_smop = 150 - e + p
+            fitness_smop = 150 - e + p - np.log(t)
     
     return fitness_smop
 
