@@ -39,7 +39,7 @@ class Environment(object):
                  logs="on",                   # on or off
                  savelogs="yes",              # yes or no
                  clockprec="low",
-                 timeexpire=3000,             # integer
+                 timeexpire=1000,             # integer
                  overturetime=100,            # integer
                  solutions=None,              # any
                  fullscreen=False,            # True or False
