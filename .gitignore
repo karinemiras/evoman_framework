@@ -1,0 +1,6 @@
+.vscode/
+.idea/
+evoman/
+__pycache__/
+*.py[cod]
+*.txt
