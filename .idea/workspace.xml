@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="05cc4402-d462-4ba4-b74f-e75396f7b77c" name="Changes" comment="Data, final results">
-      <change afterPath="$PROJECT_DIR$/NEAT/figures.py" afterDir="false" />
+    <list default="true" id="05cc4402-d462-4ba4-b74f-e75396f7b77c" name="Changes" comment="Make plots NEAT">
+      <change afterPath="$PROJECT_DIR$/figures_old.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NEAT/final_results/evoman_logs.txt" beforeDir="false" afterPath="$PROJECT_DIR$/NEAT/final_results/evoman_logs.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NEAT/figures.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/figures.py" beforeDir="false" afterPath="$PROJECT_DIR$/figures.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,6 +48,7 @@
       <recent name="C:\Users\Sicco\PycharmProjects\evoman_framework" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Sicco\PycharmProjects\evoman_framework" />
       <recent name="C:\Users\Sicco\PycharmProjects\evoman_framework\NEAT" />
       <recent name="C:\Users\Sicco\PycharmProjects" />
     </key>
@@ -85,7 +87,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/NEAT/figures.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\Sicco\PycharmProjects\evoman_framework\figures.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -274,7 +276,14 @@
       <option name="project" value="LOCAL" />
       <updated>1632816798042</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Make plots NEAT">
+      <created>1632822321860</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1632822321861</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -299,6 +308,7 @@
     <MESSAGE value="Deleted some files" />
     <MESSAGE value="Adapted code to obtain the final results" />
     <MESSAGE value="Data, final results" />
-    <option name="LAST_COMMIT_MESSAGE" value="Data, final results" />
+    <MESSAGE value="Make plots NEAT" />
+    <option name="LAST_COMMIT_MESSAGE" value="Make plots NEAT" />
   </component>
 </project>
