@@ -8,7 +8,7 @@ make data for boxplots
 import sys
 sys.path.insert(0, 'evoman')
 from environment import Environment
-from demo_controller import player_controller
+from controller_memory import player_controller
 
 # imports other libs
 import time
@@ -25,16 +25,16 @@ if headless:
     os.environ["SDL_VIDEODRIVER"] = "dummy"
 
 
-experiment_name = 'test_run_boxplots'
+experiment_name = 'data_memory/enemy_1_standard/boxplots'
 if not os.path.exists(experiment_name):
     os.makedirs(experiment_name)
 
 n_hidden_neurons = 10       #number of hidden neurons
-enemy = #TODO               #which enemy TODO
+enemy = 1               #which enemy TODO
 run_nr = 10                 #number of runs
 population_size = 100       #pop size
 test_number = 5             #times to run the best individual
-folder = 'test_run'         #folder where the best individuals are saved
+folder = 'data_memory/enemy_1_standard'         #folder where the best individuals are saved
 
 for run in range(run_nr):
     weights_data = []
@@ -67,6 +67,7 @@ for run in range(run_nr):
         t_list.append(t)
 
     #save the fitness data
+    total_fitness_data.append(["fitness", "p_health", "e_health", "time"])
     total_fitness_data.append([np.mean(f_list),
                                np.mean(p_list),
                                np.mean(e_list),
