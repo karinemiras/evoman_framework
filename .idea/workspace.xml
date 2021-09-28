@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="05cc4402-d462-4ba4-b74f-e75396f7b77c" name="Changes" comment="Deleted some files">
+    <list default="true" id="05cc4402-d462-4ba4-b74f-e75396f7b77c" name="Changes" comment="Adapted code to obtain the final results">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NEAT/NEAT_experiment.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/NEAT/apply_NEAT.py" beforeDir="false" afterPath="$PROJECT_DIR$/NEAT/apply_NEAT.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NEAT/apply_NEAT_old.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/NEAT/config_main.yml" beforeDir="false" afterPath="$PROJECT_DIR$/NEAT/config_main.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NEAT/main_NEAT.py" beforeDir="false" afterPath="$PROJECT_DIR$/NEAT/main_NEAT.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NEAT/tune_parameters/evoman_logs.txt" beforeDir="false" afterPath="$PROJECT_DIR$/NEAT/tune_parameters/evoman_logs.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -257,7 +252,14 @@
       <option name="project" value="LOCAL" />
       <updated>1632735617611</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Adapted code to obtain the final results">
+      <created>1632758050536</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1632758050536</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -280,6 +282,7 @@
     <MESSAGE value="Changed structure" />
     <MESSAGE value="Changed structure of NEAT files and added parameter tuning" />
     <MESSAGE value="Deleted some files" />
-    <option name="LAST_COMMIT_MESSAGE" value="Deleted some files" />
+    <MESSAGE value="Adapted code to obtain the final results" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adapted code to obtain the final results" />
   </component>
 </project>

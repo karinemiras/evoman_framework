@@ -86,7 +86,7 @@ def integer_options(series):
 
     final_options[(num_var-1)] = options[(len(options)-1)]
 
-    return np.array(options)
+    return final_options
 
 
 def float_options(series):
