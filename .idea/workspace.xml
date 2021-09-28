@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="05cc4402-d462-4ba4-b74f-e75396f7b77c" name="Changes" comment="Make plots NEAT">
-      <change afterPath="$PROJECT_DIR$/figures_old.py" afterDir="false" />
+    <list default="true" id="05cc4402-d462-4ba4-b74f-e75396f7b77c" name="Changes" comment="Make robust pot file">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NEAT/figures.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/best_runs.py" beforeDir="false" afterPath="$PROJECT_DIR$/best_runs.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/figures.py" beforeDir="false" afterPath="$PROJECT_DIR$/figures.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -53,20 +52,41 @@
       <recent name="C:\Users\Sicco\PycharmProjects" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.figures">
-    <configuration name="Assignment2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.figures (1)">
+    <configuration name="best_runs" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="C:\Users\Sicco\anaconda3\envs\pycharm\python.exe" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../advanced_econometrics/Assignment2" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../advanced_econometrics/Assignment2/Assignment2.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/best_runs.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="figures (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\Sicco\anaconda3\envs\pycharm\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/figures.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -138,41 +158,20 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="scratch" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="C:\Users\Sicco\anaconda3\envs\pythonProject\python.exe" />
-      <option name="WORKING_DIRECTORY" value="$APPLICATION_CONFIG_DIR$/scratches" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="" />
-      <option name="SCRIPT_NAME" value="$APPLICATION_CONFIG_DIR$/scratches/scratch.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <list>
-      <item itemvalue="Python.scratch" />
       <item itemvalue="Python.main_NEAT" />
-      <item itemvalue="Python.Assignment2" />
       <item itemvalue="Python.figures_NEAT_tuning (1)" />
       <item itemvalue="Python.figures" />
+      <item itemvalue="Python.best_runs" />
+      <item itemvalue="Python.figures (1)" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.figures (1)" />
+        <item itemvalue="Python.best_runs" />
         <item itemvalue="Python.figures" />
         <item itemvalue="Python.main_NEAT" />
         <item itemvalue="Python.figures_NEAT_tuning (1)" />
-        <item itemvalue="Python.Assignment2" />
-        <item itemvalue="Python.scratch" />
       </list>
     </recent_temporary>
   </component>
@@ -283,7 +282,14 @@
       <option name="project" value="LOCAL" />
       <updated>1632822321861</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Make robust pot file">
+      <created>1632824119525</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1632824119525</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -309,6 +315,7 @@
     <MESSAGE value="Adapted code to obtain the final results" />
     <MESSAGE value="Data, final results" />
     <MESSAGE value="Make plots NEAT" />
-    <option name="LAST_COMMIT_MESSAGE" value="Make plots NEAT" />
+    <MESSAGE value="Make robust pot file" />
+    <option name="LAST_COMMIT_MESSAGE" value="Make robust pot file" />
   </component>
 </project>
