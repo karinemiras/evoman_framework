@@ -14,7 +14,7 @@ from Base.SpriteDefinition import *
 from sensors import Sensors
 
 tilemap = 'evoman/map2.tmx'
-timeexpire = 2200 # game run limit
+timeexpire = 1000 # game run limit
 
 # enemy 6 sprite, crashman
 class Enemy(pygame.sprite.Sprite):
