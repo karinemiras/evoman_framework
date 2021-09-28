@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="05cc4402-d462-4ba4-b74f-e75396f7b77c" name="Changes" comment="Adapted code to obtain the final results">
+    <list default="true" id="05cc4402-d462-4ba4-b74f-e75396f7b77c" name="Changes" comment="Data, final results">
+      <change afterPath="$PROJECT_DIR$/NEAT/figures.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NEAT/main_NEAT.py" beforeDir="false" afterPath="$PROJECT_DIR$/NEAT/main_NEAT.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NEAT/final_results/evoman_logs.txt" beforeDir="false" afterPath="$PROJECT_DIR$/NEAT/final_results/evoman_logs.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +51,7 @@
       <recent name="C:\Users\Sicco\PycharmProjects" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main_NEAT">
+  <component name="RunManager" selected="Python.figures">
     <configuration name="Assignment2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -72,6 +73,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="figures" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\Sicco\anaconda3\envs\pycharm\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/NEAT" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/NEAT/figures.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="figures_NEAT_tuning (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -85,27 +107,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/NEAT/figures_NEAT_tuning.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="figures_NEAT_tuning" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="C:\Users\Sicco\anaconda3\envs\pythonProject\python.exe" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="" />
-      <option name="SCRIPT_NAME" value="C:\Users\Sicco\PycharmProjects\evoman_framework\NEAT\figures_NEAT_tuning.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -158,18 +159,18 @@
     </configuration>
     <list>
       <item itemvalue="Python.scratch" />
-      <item itemvalue="Python.figures_NEAT_tuning" />
       <item itemvalue="Python.main_NEAT" />
       <item itemvalue="Python.Assignment2" />
       <item itemvalue="Python.figures_NEAT_tuning (1)" />
+      <item itemvalue="Python.figures" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.figures" />
         <item itemvalue="Python.main_NEAT" />
         <item itemvalue="Python.figures_NEAT_tuning (1)" />
         <item itemvalue="Python.Assignment2" />
         <item itemvalue="Python.scratch" />
-        <item itemvalue="Python.figures_NEAT_tuning" />
       </list>
     </recent_temporary>
   </component>
@@ -259,7 +260,21 @@
       <option name="project" value="LOCAL" />
       <updated>1632758050536</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Data, final results">
+      <created>1632816782016</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1632816782016</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Data, final results">
+      <created>1632816798042</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1632816798042</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -283,6 +298,7 @@
     <MESSAGE value="Changed structure of NEAT files and added parameter tuning" />
     <MESSAGE value="Deleted some files" />
     <MESSAGE value="Adapted code to obtain the final results" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adapted code to obtain the final results" />
+    <MESSAGE value="Data, final results" />
+    <option name="LAST_COMMIT_MESSAGE" value="Data, final results" />
   </component>
 </project>
