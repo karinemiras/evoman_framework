@@ -44,6 +44,9 @@ class evo_algorithm:
         self.best = []
         self.max_health = 0
         self.run = run
+        self.min_health_enemy = 100
+        self.max_gain = -100
+        self.children_index = []
         
         #make save folder
         if not os.path.exists(f'data_memory/{self.experiment_name}'):
@@ -62,7 +65,9 @@ class evo_algorithm:
         fitness_new = 0
         fitness_smop = 0
         health = 0
+        health_enemy = 0
         repeats = self.repeats
+        time_avg = 0
         
         #repeat each player to counter the randomness
         for i in range(repeats):
@@ -70,6 +75,8 @@ class evo_algorithm:
             fitness_new += (0.9*(100 - e) + 0.1*p - np.log(t))*(1/repeats)
             fitness_smop += fitfunc(self.fitter, self.generations, g, t, e, p)*(1/repeats)
             health += (1/repeats)*p
+            health_enemy += (1/repeats)*e
+            time_avg += (1/repeats)*t
             surviving_player = False
             
             #if nog good enough 'die'
@@ -80,7 +87,7 @@ class evo_algorithm:
             if i == (repeats-1):
                 surviving_player = True
                 
-        return  [fitness_smop, health, surviving_player, player]
+        return  [fitness_smop, health, surviving_player, player, health_enemy, time_avg]
     
     
     def simulate(self, pop = []):
@@ -110,9 +117,14 @@ class evo_algorithm:
                 health = r[1]
                 health_array.append(r[1])
                 survive = r[2]
+                health_enemy = r[4]
+                gain = health - health_enemy
+                self.children_index.append([g, r[0], health, health_enemy, r[5]])
                 
-                if health > self.max_health:
+                if gain > self.max_gain:
                     self.max_health = health
+                    self.min_health_enemy = health_enemy
+                    self.max_gain = gain
                     self.best = r[3]
                     
                 if survive:
@@ -134,7 +146,7 @@ class evo_algorithm:
             pop = get_children(pop, surviving_players, np.array(fitness_array_smop),
                                mutation_baseline, mutation_multiplier)
             
-            print(f'Run: {self.run}, Fitter: {self.fitter}, Generation {g}, fit_mean = {round(np.mean(fitness_array_smop),2)} pm {round(np.std(fitness_array_smop),2)}, fitness_best = {round(np.max(fitness_array_smop),2)}, best_avg_health = {np.round(self.max_health,2)}, time={round(time.time()-gen_start)}')
+            print(f'Run: {self.run}, Fitter: {self.fitter}, Generation {g}, fit_mean = {round(np.mean(fitness_array_smop),2)} pm {round(np.std(fitness_array_smop),2)}, fitness_best = {round(np.max(fitness_array_smop),2)}, best_avg_health = {np.round(self.max_health,2)}, best_gain = {self.max_gain}, time={round(time.time()-gen_start)}')
         return
     
     def save_results(self, extended = False, full = False):
@@ -164,7 +176,7 @@ class evo_algorithm:
 
 if __name__ == '__main__':
     for enemy in [1, 5, 8]:
-        for fitter in ["errfoscilation", "standard", "exponential", "oscilation"]:
+        for fitter in ["errfoscilation", "standard", "oscilation"]:
             n_hidden_neurons = 10       #number of hidden neurons
             enemy = int(enemy)          #which enemy
             run_nr = 10                 #number of runs
@@ -178,4 +190,4 @@ if __name__ == '__main__':
             for run in range(run_nr):
                 evo = evo_algorithm(n_hidden_neurons, enemy, run_nr, generations, population_size, mutation_baseline, mutation_multiplier, repeats, fitter, run)
                 evo.simulate()
-                evo.save_results()
+                evo.save_results(extended = True)
