@@ -18,8 +18,14 @@ from mutation_selection import MutationSelection
 
 
 # HYPERPARAMS
-population_size = 50
-generations_number = 7
+population_size = 150
+generations_number = 20
+
+
+Mutation.mutation_ratio = 0.2
+Crossover.offspring_ratio = 1.44
+Selection.selection_ratio = 0.41
+MutationSelection.selection_ratio = 0.14
 
 evolutionary_algorithm = EvolutionaryAlgorithm(_experiment_name='solution_2',
                                                _population_size=population_size,
@@ -32,10 +38,5 @@ evolutionary_algorithm = EvolutionaryAlgorithm(_experiment_name='solution_2',
                                                _mutation_selection=MutationSelection.only_parents,
                                                _insertion=Insertion.basic)
 
-Mutation.mutation_ratio = 0.05
-Crossover.offspring_ratio = 1
-Selection.selection_ratio = 0.3
-MutationSelection.selection_ratio = 0.5
 
-tuner = Tuner(evolutionary_algorithm)
-tuner.run()
+evolutionary_algorithm.run()

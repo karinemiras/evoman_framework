@@ -8,7 +8,7 @@ import numpy as np
 import os
 
 DEBUG = True
-USE_SAME = True
+USE_SAME = False
 
 
 class EvolutionaryAlgorithm:
@@ -101,7 +101,7 @@ class EvolutionaryAlgorithm:
             os.makedirs(self.experiment_name)
 
         self.env = Environment(experiment_name=self.experiment_name,
-                               enemies=[2],
+                               enemies=[3],
                                playermode="ai",
                                player_controller=player_controller(self.hidden_layer_size),
                                enemymode="static",
