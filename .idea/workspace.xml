@@ -4,6 +4,15 @@
     <list default="true" id="05cc4402-d462-4ba4-b74f-e75396f7b77c" name="Changes" comment="Make robust pot file">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/best_runs.py" beforeDir="false" afterPath="$PROJECT_DIR$/best_runs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_memory/final_dataset/enemy_1_standard/boxplots/fitness_data_0.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data_memory/final_dataset/enemy_1_standard/boxplots/fitness_data_0.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_memory/final_dataset/enemy_1_standard/boxplots/fitness_data_1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data_memory/final_dataset/enemy_1_standard/boxplots/fitness_data_1.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_memory/final_dataset/enemy_1_standard/boxplots/fitness_data_2.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data_memory/final_dataset/enemy_1_standard/boxplots/fitness_data_2.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_memory/final_dataset/enemy_1_standard/boxplots/fitness_data_3.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data_memory/final_dataset/enemy_1_standard/boxplots/fitness_data_3.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_memory/final_dataset/enemy_1_standard/boxplots/fitness_data_4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data_memory/final_dataset/enemy_1_standard/boxplots/fitness_data_4.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_memory/final_dataset/enemy_1_standard/boxplots/fitness_data_6.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data_memory/final_dataset/enemy_1_standard/boxplots/fitness_data_6.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_memory/final_dataset/enemy_1_standard/boxplots/fitness_data_7.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data_memory/final_dataset/enemy_1_standard/boxplots/fitness_data_7.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_memory/final_dataset/enemy_1_standard/boxplots/fitness_data_8.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data_memory/final_dataset/enemy_1_standard/boxplots/fitness_data_8.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_memory/final_dataset/enemy_1_standard/boxplots/fitness_data_9.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data_memory/final_dataset/enemy_1_standard/boxplots/fitness_data_9.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/figures.py" beforeDir="false" afterPath="$PROJECT_DIR$/figures.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -38,7 +47,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File" value="Python" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/NEAT" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../advanced_econometrics/Assignment2/Assignment2.py" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -289,7 +298,14 @@
       <option name="project" value="LOCAL" />
       <updated>1632824119525</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Make robust pot file">
+      <created>1632833601097</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1632833601097</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
