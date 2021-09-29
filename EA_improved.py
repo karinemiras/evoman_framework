@@ -215,5 +215,7 @@ if __name__ == '__main__':
                                                             k)
             print('Enemy {} - Run {} finished.'.format(enemy, i + 1))
             print('Best fitness = ', best_fitness)
+            print('Best gain: ', Experiment.best_gain)
             solution_path = os.path.join(log_path, 'improved-solution-' + str(n_generations) + '.npy')
-            np.save(solution_path, best_solution)
+            # Save best individual based on gain
+            np.save(solution_path, Experiment.best_genome)
