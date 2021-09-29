@@ -68,6 +68,7 @@ class evo_algorithm:
         health = 0
         repeats = self.repeats
         time_avg = 0
+        health_enemy = 0
         
         #repeat each player to counter the randomness
         for i in range(repeats):
