@@ -177,10 +177,10 @@ class evo_algorithm:
 if __name__ == '__main__':
     for enemy in [1]:
         for fitter in ["standard"]:
-            n_hidden_neurons = 20       #number of hidden neurons
+            n_hidden_neurons = 10       #number of hidden neurons
             enemy = int(enemy)          #which enemy
             run_nr = 10                 #number of runs
-            generations = 300            #number of generations per run
+            generations = 100            #number of generations per run
             population_size = 100       #pop size
             mutation_baseline = 0.02    #minimal chance for a mutation event
             mutation_multiplier = 0.20  #fitness dependent multiplier of mutation chance
