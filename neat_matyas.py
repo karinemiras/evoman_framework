@@ -1,4 +1,5 @@
 from argparse import ArgumentParser
+import copy
 import json
 from pathlib import Path
 import os
@@ -14,7 +15,7 @@ from environment import Environment
 
 # neat
 import neat
-from visualize import draw_net
+# from visualize import draw_net
 
 
 class NeatController(Controller):
@@ -53,7 +54,7 @@ def evaluate(genomes, config):
         net = neat.nn.FeedForwardNetwork.create(genome, config)
         f, p, e, t = Experiment.env.play(pcont=net)
         if p - e > Experiment.best_gain:
-            Experiment.best_genome = genome
+            Experiment.best_genome = copy.deepcopy(genome)
             Experiment.best_gain = p - e
         genome.fitness = f
 
@@ -65,7 +66,7 @@ def parse_args(args):
     parser.add_argument('--checkpoint', type=Path, help='Path to checkpoint to load')
     parser.add_argument('--ch-interval', type=int, help='Checkpoint interval per generation', default=1)
     parser.add_argument('--max-gen', type=int, help='Maximum number of generations', default=30)
-    parser.add_argument('--enemies', type=int, nargs='+', help='Enemies to use', default=[2, 7, 8])
+    parser.add_argument('--enemies', type=int, nargs='+', help='Enemies to use', default=[2, 6, 8])
     return parser.parse_args(args)
 
 
@@ -100,7 +101,7 @@ def main(args):
             # Save mean and max fitness by generation
             stats.save_genome_fitness(filename=str(log_path.joinpath('stats.csv')))
             # Save a visualization of winner network
-            draw_net(config, winner, directory=log_path, filename='winner')
+            # draw_net(config, winner, directory=log_path, filename='winner')
 
             # Get gains for "best" solution
             gains = []
@@ -110,7 +111,7 @@ def main(args):
                 gains.append(p - e)
             all_gains[enemy].append(np.mean(gains))
 
-    Path(parsed_args.name, 'gains').write_text(json.dumps(gains))
+    Path(parsed_args.name, 'gains').write_text(json.dumps(all_gains))
 
 
 if __name__ == '__main__':
