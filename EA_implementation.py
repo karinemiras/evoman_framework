@@ -137,12 +137,12 @@ def genetic_algorithm(n_generations, n_pop, cross_rate, mutation_rate, results_p
                     # store for next generation
                     children.append(c)		
 
-            # Randomly remove 2 children and replace with elites
-            np.random.shuffle(children)
-            for i in range(2):
-                children.pop()
-            elites = elitism(fitnesses, pop, k=2)
-            children.extend(elites)
+            # # Randomly remove 2 children and replace with elites
+            # np.random.shuffle(children)
+            # for i in range(2):
+            #     children.pop()
+            # elites = elitism(fitnesses, pop, k=2)
+            # children.extend(elites)
 
             # Next generation's population
             pop = np.array(children)
@@ -175,7 +175,7 @@ if __name__ == '__main__':
         # Run N independent experiments
         for i in range(n_experiments):
 
-            log_path = Path('EA2', 'enemy-{}'.format(enemy), 'run-{}'.format(i))
+            log_path = Path('EA2', 'enemy-{}'.format(enemy), 'run-{}k=2'.format(i))
             log_path.mkdir(parents=True, exist_ok=True)
             Experiment.initialize(str(log_path), enemy)
             results_path = os.path.join(log_path, 'results-' +  str(n_generations) + '.csv')
