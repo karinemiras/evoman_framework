@@ -1,5 +1,5 @@
 decision_variables:
-    name_experiment: final_results
+    name_experiment: enemy1_100gens
     tune_parameters: False
     apply_optimization: True
     show_figures: False
@@ -8,8 +8,8 @@ decision_variables:
 
 experiment_parameters:
     number_of_runs: 10
-    enemies: [1,5,8]
-    generations: 30
+    enemies: [1]
+    generations: 100
 
 
 tuning_parameters:
@@ -32,4 +32,3 @@ tuning_parameters:
         l_bound: 0.7
         u_bound: 0.9
         num_variations: 3
-
