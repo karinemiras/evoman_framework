@@ -2,18 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="05cc4402-d462-4ba4-b74f-e75396f7b77c" name="Changes" comment="Make robust pot file">
+      <change afterPath="$PROJECT_DIR$/statistical_tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_24-9-2021_14_44__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_24-9-2021_14_44__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_27-9-2021_11_13__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_27-9-2021_11_13__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/best_runs.py" beforeDir="false" afterPath="$PROJECT_DIR$/best_runs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_memory/final_dataset/enemy_1_standard/boxplots/fitness_data_0.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data_memory/final_dataset/enemy_1_standard/boxplots/fitness_data_0.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_memory/final_dataset/enemy_1_standard/boxplots/fitness_data_1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data_memory/final_dataset/enemy_1_standard/boxplots/fitness_data_1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_memory/final_dataset/enemy_1_standard/boxplots/fitness_data_2.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data_memory/final_dataset/enemy_1_standard/boxplots/fitness_data_2.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_memory/final_dataset/enemy_1_standard/boxplots/fitness_data_3.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data_memory/final_dataset/enemy_1_standard/boxplots/fitness_data_3.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_memory/final_dataset/enemy_1_standard/boxplots/fitness_data_4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data_memory/final_dataset/enemy_1_standard/boxplots/fitness_data_4.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_memory/final_dataset/enemy_1_standard/boxplots/fitness_data_6.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data_memory/final_dataset/enemy_1_standard/boxplots/fitness_data_6.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_memory/final_dataset/enemy_1_standard/boxplots/fitness_data_7.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data_memory/final_dataset/enemy_1_standard/boxplots/fitness_data_7.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_memory/final_dataset/enemy_1_standard/boxplots/fitness_data_8.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data_memory/final_dataset/enemy_1_standard/boxplots/fitness_data_8.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_memory/final_dataset/enemy_1_standard/boxplots/fitness_data_9.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data_memory/final_dataset/enemy_1_standard/boxplots/fitness_data_9.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/figures.py" beforeDir="false" afterPath="$PROJECT_DIR$/figures.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +53,7 @@
       <recent name="C:\Users\Sicco\PycharmProjects" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.figures (1)">
+  <component name="RunManager" selected="Python.statistical_tests">
     <configuration name="best_runs" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -125,27 +117,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="figures_NEAT_tuning (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="C:\Users\Sicco\anaconda3\envs\pycharm\python.exe" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/NEAT" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/NEAT/figures_NEAT_tuning.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="main_NEAT" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -167,20 +138,41 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="statistical_tests" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\Sicco\anaconda3\envs\pycharm\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/statistical_tests.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Python.main_NEAT" />
-      <item itemvalue="Python.figures_NEAT_tuning (1)" />
       <item itemvalue="Python.figures" />
       <item itemvalue="Python.best_runs" />
       <item itemvalue="Python.figures (1)" />
+      <item itemvalue="Python.statistical_tests" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.statistical_tests" />
         <item itemvalue="Python.figures (1)" />
         <item itemvalue="Python.best_runs" />
         <item itemvalue="Python.figures" />
         <item itemvalue="Python.main_NEAT" />
-        <item itemvalue="Python.figures_NEAT_tuning (1)" />
       </list>
     </recent_temporary>
   </component>
