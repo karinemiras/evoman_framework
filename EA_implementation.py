@@ -115,12 +115,11 @@ def one_point_crossover(parent_1, parent_2, crossover_rate):
     # randomly select whether to perform crossover
     if np.random.rand() < crossover_rate:
         crossover_point = np.random.randint(1, len(parent_1))
-        off_spring_1 = np.append(parent_1[crossover_point:], parent_2[:crossover_point])
-        off_spring_2 = np.append(parent_2[crossover_point:], parent_1[:crossover_point])   
+        child = np.append(parent_1[crossover_point:], parent_2[:crossover_point])  
     else:
-        off_spring_1, off_spring_2 = parent_1.copy(), parent_2.copy()
+        child = parent_1 if np.random.random() < 0.5 else parent_2
     
-    return [off_spring_1, off_spring_2]
+    return child
 
 
 def uniform_crossover(parent_1, parent_2, cross_rate):
@@ -227,7 +226,7 @@ if __name__ == '__main__':
             log_path = Path('EA2', 'enemy-{}'.format(enemy), 'run-{}'.format(i))
             log_path.mkdir(parents=True, exist_ok=True)
             Experiment.initialize(str(log_path), enemy)
-            results_path = os.path.join(log_path, 'improved-results-'+ args.crossover+ str(n_generations) + '.csv')
+            results_path = os.path.join(log_path, args.crossover+ str(n_generations) + '.csv')
 
             # Remove previous experiment results
             if os.path.exists(results_path):
