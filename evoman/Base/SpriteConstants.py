@@ -1,12 +1,11 @@
-
-#Colors
+# Colors
 BLACK = (0, 0, 0)
 
-#Directions
+# Directions
 RIGHT = 1
 LEFT = 0
 
-#Movements types
+# Movements types
 STANDING = 0
 
 START_RUNNING = 1

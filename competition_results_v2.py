@@ -1,18 +1,17 @@
-
 import sys
-import matplotlib.pyplot as plt
 from math import pi
-from matplotlib.ticker import AutoLocator
+
+import matplotlib.pyplot as plt
 from matplotlib.offsetbox import AnchoredText
+from matplotlib.ticker import AutoLocator
 
 sys.path.insert(0, 'evoman')
 from environment import Environment
 from demo_controller import player_controller
 import numpy as np
 import pandas as pd
-import pickle as pkl
 import os
-import pygame
+
 os.environ["SDL_VIDEODRIVER"] = "dummy"
 
 ###### CREATE A FOLDER CALLED solutions IN THE SAME DIRECTORY AS THIS SCRIPT  AND PASTE ALL SOLUTION TXTs THERE ! #####
@@ -51,7 +50,7 @@ for file in os.listdir("solutions"):
             solution = np.loadtxt("solutions/" + file)
             print("File of group " + str(group_name) + " was read")
         except:
-            print("File of group "+str(group_name)+" could NOT be read")
+            print("File of group " + str(group_name) + " could NOT be read")
 
         for enemy in enemies:
             env = Environment(
@@ -88,7 +87,8 @@ if mode == "test":
         plife = sum(df["player_life"].loc[this_group]) / repetitions / n_enemies
         elife = sum(df["enemy_life"].loc[this_group]) / repetitions / n_enemies
         time = sum(df["time"].loc[this_group]) / repetitions / n_enemies
-        df_final.loc[i] = {"group": group, "enemies_slain": dead_enemies, "gain": gain, "player_life": plife, "enemy_life": elife, "time": time}
+        df_final.loc[i] = {"group": group, "enemies_slain": dead_enemies, "gain": gain, "player_life": plife,
+                           "enemy_life": elife, "time": time}
 
     # Determine and print winners
     winners = pd.DataFrame(columns=["slain", "gain"])
@@ -175,4 +175,3 @@ if mode == "test":
     plt.hist(pd.to_numeric(df_final["gain"]))
     plt.title("Distribution of gain\n(whole class)")
     plt.savefig("gain_hist_whole_group.png", dpi=300)
-

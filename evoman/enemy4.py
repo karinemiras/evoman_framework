@@ -5,23 +5,19 @@
 ################################
 
 import sys
-import numpy
-import random
 
-import Base
-from Base.SpriteConstants import *
+import numpy
+
 from Base.SpriteDefinition import *
-from sensors import Sensors
 
 tilemap = 'evoman/map2.tmx'
-timeexpire = 1500 # game run limit
+timeexpire = 1500  # game run limit
+
 
 # enemy 4 sprite, heatman
 class Enemy(pygame.sprite.Sprite):
 
-
-
-    def __init__(self, location,*groups):
+    def __init__(self, location, *groups):
         super(Enemy, self).__init__(*groups)
         self.spriteDefinition = SpriteDefinition('evoman/images/EnemySprites.png', 0, 0, 43, 59)
         self.updateSprite(SpriteConstants.STANDING, SpriteConstants.LEFT)
@@ -43,25 +39,22 @@ class Enemy(pygame.sprite.Sprite):
         self.gun_cooldown = 0
         self.rect.right = 580
 
-
     def update(self, dt, game):
 
-
-        if game.time==1:
+        if game.time == 1:
             # puts enemy in random initial position
             if game.randomini == 'yes':
-                self.rect.x = numpy.random.choice([640,500,400,300])
-
+                self.rect.x = numpy.random.choice([640, 500, 400, 300])
 
         # defines game mode for player action
-        if game.enemymode == 'static': # enemy controlled by static movements
+        if game.enemymode == 'static':  # enemy controlled by static movements
 
             if self.timeenemy == 2:
                 atack1 = 1
             else:
                 atack1 = 0
 
-            if self.timeenemy> 50:
+            if self.timeenemy > 50:
                 atack2 = 1
             else:
                 atack2 = 0
@@ -71,13 +64,12 @@ class Enemy(pygame.sprite.Sprite):
             else:
                 atack3 = 0
 
-            if (self.fireflash>=1 and self.fireflash <=40):
+            if (self.fireflash >= 1 and self.fireflash <= 40):
                 atack4 = 1
             else:
                 atack4 = 0
 
-        elif game.enemymode == 'ai': # player controlled by AI algorithm
-
+        elif game.enemymode == 'ai':  # player controlled by AI algorithm
 
             # calls the controller providing game sensors
             actions = game.enemy_controller.control(self.sensors.get(game), game.econt)
@@ -95,29 +87,26 @@ class Enemy(pygame.sprite.Sprite):
             else:
                 atack3 = 0
 
-
-
         # if the 'start game' marker is 1
         if game.start == 1:
 
-            self.timeenemy += 1 # increments enemy timer
+            self.timeenemy += 1  # increments enemy timer
 
             last = self.rect.copy()  # copies last position state of the enemy
-
 
             # when player atacks, enemy turns into fire and goes towards his direction
             if game.player.atacked == 1 and self.fireflash == 0:
                 self.fireflash = 100
             else:
-                self.fireflash = max(0,self.fireflash -1)
+                self.fireflash = max(0, self.fireflash - 1)
 
-            if  atack4 == 1:
+            if atack4 == 1:
                 self.rect.x += self.direction * 600 * dt
 
                 if self.fireflash == 1:
                     self.direction = self.direction * -1
 
-                if  self.rect.colliderect(game.player.rect):
+                if self.rect.colliderect(game.player.rect):
                     self.fireflash = 0
 
             # otherwise he just keeps shooting towards the player direction
@@ -145,20 +134,19 @@ class Enemy(pygame.sprite.Sprite):
                     elif game.player.rect.left > self.rect.right:
                         self.direction = 1
                 else:
-                   self.direction = self.direction *-1
-
+                    self.direction = self.direction * -1
 
             # checks collision of the player with the enemy
             if self.rect.colliderect(game.player.rect):
 
                 # choses what sprite penalise according to config
                 if game.contacthurt == "player":
-                    game.player.life = max(0, game.player.life-(game.level*0.3))
+                    game.player.life = max(0, game.player.life - (game.level * 0.3))
                 if game.contacthurt == "enemy":
-                    game.enemy.life = max(0, game.enemy.life-(game.level*0.3))
+                    game.enemy.life = max(0, game.enemy.life - (game.level * 0.3))
 
                 # pushes player when he collides with the enemy
-                game.player.rect.x +=  self.direction *  50 * dt
+                game.player.rect.x += self.direction * 50 * dt
 
                 # limits the player to stand on the screen space even being pushed
                 if game.player.rect.x < 60:
@@ -169,7 +157,7 @@ class Enemy(pygame.sprite.Sprite):
                 # sets flag to change the player image when he is hurt
                 game.player.hurt = 5
 
-             # gravity
+            # gravity
             self.dy = min(400, self.dy + 100)
             self.rect.y += self.dy * dt
 
@@ -194,7 +182,6 @@ class Enemy(pygame.sprite.Sprite):
                 if 'b' in blockers and last.top >= cell.bottom and new.top < cell.bottom:
                     new.top = cell.bottom
 
-
             # enemy shoots 3 bullets
             if atack3 == 1:
 
@@ -212,16 +199,15 @@ class Enemy(pygame.sprite.Sprite):
                         c.set_volume(10)
                         c.play(sound)
 
-
-                    for i in range (0,3):
-                        self.twists.append(Bullet_e4((self.rect.x ,self.rect.y ), self.direction, i, len(self.twists), game.sprite_e))
-                else :
+                    for i in range(0, 3):
+                        self.twists.append(
+                            Bullet_e4((self.rect.x, self.rect.y), self.direction, i, len(self.twists), game.sprite_e))
+                else:
                     self.timeenemy -= 1
-
 
             self.gun_cooldown = max(0, self.gun_cooldown - dt)  # decreases time for bullets limitation.
 
-           # changes bullets images according to the enemy direction
+            # changes bullets images according to the enemy direction
             if self.shooting > 0:
                 if self.direction == -1:
                     self.updateSprite(SpriteConstants.SHOOTING, SpriteConstants.LEFT)
@@ -229,16 +215,16 @@ class Enemy(pygame.sprite.Sprite):
                     self.updateSprite(SpriteConstants.SHOOTING, SpriteConstants.RIGHT)
 
             self.shooting -= 1
-            self.shooting = max(0,self.shooting)
+            self.shooting = max(0, self.shooting)
 
             #  changes the image when enemy is hurt and imune, as a fireball
             if self.imune == 1:
-                if game.time%2==0:
+                if game.time % 2 == 0:
                     self.image = pygame.image.load('evoman/images/fireball.png')
                 else:
                     self.image = pygame.image.load('evoman/images/fireball2.png')
 
-            self.hurt -=1
+            self.hurt -= 1
 
     def updateSprite(self, state, direction):
         self.image = self.spriteDefinition.getImage(state, direction)
@@ -246,7 +232,6 @@ class Enemy(pygame.sprite.Sprite):
 
 # enemy bullets
 class Bullet_e4(pygame.sprite.Sprite):
-
     image = pygame.image.load('evoman/images/bullet_l.png')
 
     def __init__(self, location, direction, n, n_twist, *groups):
@@ -254,45 +239,44 @@ class Bullet_e4(pygame.sprite.Sprite):
         self.rect = pygame.rect.Rect(location, self.image.get_size())
         self.direction = direction
         self.lifespan = 30
-        self.n= n
+        self.n = n
         self.n_twist = n_twist
 
     def update(self, dt, game):
 
-
         # puts the bullets in positions relative to the player. They go from the enemy to where the player is.
         if self.n == 0:
             aux_x = 50
-            aux_y = (abs(game.player.rect.x - game.enemy.rect.x)*0.55)
+            aux_y = (abs(game.player.rect.x - game.enemy.rect.x) * 0.55)
         elif self.n == 1:
             aux_x = 20
-            aux_y = (abs(game.player.rect.x - game.enemy.rect.x)*0.60)
+            aux_y = (abs(game.player.rect.x - game.enemy.rect.x) * 0.60)
         elif self.n == 2:
             aux_x = -10
-            aux_y = (abs(game.player.rect.x - game.enemy.rect.x)*0.65)
+            aux_y = (abs(game.player.rect.x - game.enemy.rect.x) * 0.65)
 
         # bullets axis x movement
         if self.direction == -1:
             if self.rect.x > game.player.rect.left + aux_x:
-                self.rect.x += self.direction *  650  * dt
+                self.rect.x += self.direction * 650 * dt
         else:
             if self.rect.x < game.player.rect.right - aux_x:
-                self.rect.x += self.direction *  650  * dt
+                self.rect.x += self.direction * 650 * dt
 
         # bullets axis y movements
         if self.direction == -1:
-             if self.rect.x > game.player.rect.left + aux_y:
-                 self.rect.y -=  500 * dt
-             else:
-                 self.rect.y +=  700 * dt
+            if self.rect.x > game.player.rect.left + aux_y:
+                self.rect.y -= 500 * dt
+            else:
+                self.rect.y += 700 * dt
         else:
-             if self.rect.x < game.player.rect.right - aux_y-10:
-                 self.rect.y -=  500 * dt
-             else:
-                 self.rect.y +=  700 * dt
+            if self.rect.x < game.player.rect.right - aux_y - 10:
+                self.rect.y -= 500 * dt
+            else:
+                self.rect.y += 700 * dt
 
         # prevents bullets from passing through the floor
-        self.rect.y = min(410,self.rect.y)
+        self.rect.y = min(410, self.rect.y)
 
         # removes old bullets
         if self.rect.y == 410:
@@ -303,7 +287,7 @@ class Bullet_e4(pygame.sprite.Sprite):
             game.enemy.twists[self.n_twist] = None
             return
 
-        if self.rect.right<1 or self.rect.left>736 or  self.rect.top <1 or self.rect.bottom>512 :
+        if self.rect.right < 1 or self.rect.left > 736 or self.rect.top < 1 or self.rect.bottom > 512:
             self.kill()
             game.enemy.twists[self.n_twist] = None
             return
@@ -312,12 +296,12 @@ class Bullet_e4(pygame.sprite.Sprite):
         if self.rect.colliderect(game.player.rect):
 
             # player loses life points, accoring to the difficulty level of the game (the more difficult, the more it loses).
-            game.player.life = max(0, game.player.life-(game.level*0.3))
+            game.player.life = max(0, game.player.life - (game.level * 0.3))
 
             # pushes player when he collides with the enemy
-            game.player.rect.x +=  self.direction *  100 * dt
+            game.player.rect.x += self.direction * 100 * dt
 
-           # limits the player to stand on the screen space even being pushed
+            # limits the player to stand on the screen space even being pushed
             if game.player.rect.x < 60:
                 game.player.rect.x = 60
             if game.player.rect.x > 620:

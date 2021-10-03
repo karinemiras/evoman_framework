@@ -5,22 +5,17 @@
 ################################
 
 import sys
-import numpy
-import random
 
-import Base
-from Base.SpriteConstants import *
+import numpy
+
 from Base.SpriteDefinition import *
-from sensors import Sensors
 
 tilemap = 'evoman/map2.tmx'
-timeexpire = 2200 # game run limit
+timeexpire = 2200  # game run limit
+
 
 # enemy 6 sprite, crashman
 class Enemy(pygame.sprite.Sprite):
-
-
-
 
     def __init__(self, location, *groups):
         super(Enemy, self).__init__(*groups)
@@ -42,36 +37,31 @@ class Enemy(pygame.sprite.Sprite):
         self.shooting = 0
         self.gun_cooldown = 0
 
-
-
     def update(self, dt, game):
 
-
-        if game.time==1:
+        if game.time == 1:
             # puts enemy in random initial position
             if game.randomini == 'yes':
-                self.rect.x = numpy.random.choice([640,500,400,300])
-
+                self.rect.x = numpy.random.choice([640, 500, 400, 300])
 
         # Defines game mode for player action.
-        if game.enemymode == 'static': # Enemy controlled by static movements.
+        if game.enemymode == 'static':  # Enemy controlled by static movements.
 
             if self.timeenemy == 105:
                 atack1 = 1
             else:
                 atack1 = 0
 
-            if ( (abs(self.rect.left-game.player.rect.left)<=1 or abs(self.rect.right-game.player.rect.right)<=1)  or self.dy>200  ):
+            if ((abs(self.rect.left - game.player.rect.left) <= 1 or abs(
+                    self.rect.right - game.player.rect.right) <= 1) or self.dy > 200):
                 atack2 = 1
             else:
                 atack2 = 0
 
-
             atack3 = 0
 
 
-        elif game.enemymode == 'ai': # Player controlled by AI algorithm.
-
+        elif game.enemymode == 'ai':  # Player controlled by AI algorithm.
 
             # calls the controller providing game sensors
             actions = game.enemy_controller.control(self.sensors.get(game), game.econt)
@@ -83,41 +73,38 @@ class Enemy(pygame.sprite.Sprite):
             atack2 = actions[1]
             atack3 = actions[2]
 
-
-
             if atack2 == 1 and not self.gun_cooldown:
                 atack2 = 1
             else:
                 atack2 = 0
 
-
         # if the 'start game' marker is 1
         if game.start == 1:
 
-            self.timeenemy += 1 # increments enemy timer
+            self.timeenemy += 1  # increments enemy timer
 
-            last = self.rect.copy() # copies last position state of the enemy
+            last = self.rect.copy()  # copies last position state of the enemy
 
             # movements of the enemy on the axis x until a limit (turning aroud)
 
-            if self.rect.left<60:
-                self.direction = self.direction  * -1
+            if self.rect.left < 60:
+                self.direction = self.direction * -1
                 self.rect.left = 60
-            if self.rect.right>680:
-                self.direction = self.direction  * -1
+            if self.rect.right > 680:
+                self.direction = self.direction * -1
                 self.rect.right = 680
 
             # calculating the relative distance between enemy and player to set the jumping strengh
-            aux_dist = (abs(game.player.rect.right - self.rect.right)/490.0)+0.1
+            aux_dist = (abs(game.player.rect.right - self.rect.right) / 490.0) + 0.1
 
             # when atacking, enemy may accelarate his movement.
-            if self.dy<0:
-                self.rect.x += self.direction * (1500 *aux_dist) * dt
+            if self.dy < 0:
+                self.rect.x += self.direction * (1500 * aux_dist) * dt
             else:
                 self.rect.x += self.direction * 180 * dt
 
             #  jumps over the player. It happens from time to time, or when the player shoots.
-            if ((self.resting == 1 and atack1 == 1) or ( self.resting == 1 and game.player.atacked == 1)):
+            if ((self.resting == 1 and atack1 == 1) or (self.resting == 1 and game.player.atacked == 1)):
 
                 if game.enemymode == 'static':
                     # enemy turns to the players direction.
@@ -133,7 +120,7 @@ class Enemy(pygame.sprite.Sprite):
                 self.resting = 0
 
             if atack3 == 1 and game.enemymode == 'ai':
-                 self.direction = self.direction * -1
+                self.direction = self.direction * -1
 
             # throws a bullet over the player when enemy is jumping and right over him
             if self.resting == 0 and self.just_shoot == 0 and atack2 == 1:
@@ -150,10 +137,10 @@ class Enemy(pygame.sprite.Sprite):
 
                 self.just_shoot = 1
 
-                self.twists.append(Bullet_e6((self.rect.x ,self.rect.y ), self.direction, len(self.twists), game.sprite_e))
+                self.twists.append(
+                    Bullet_e6((self.rect.x, self.rect.y), self.direction, len(self.twists), game.sprite_e))
 
-
-            self.gun_cooldown = max(0, self.gun_cooldown - dt) # decreases time for bullets limitation
+            self.gun_cooldown = max(0, self.gun_cooldown - dt)  # decreases time for bullets limitation
 
             # animation, running enemy images alternation
             if self.direction > 0:
@@ -174,21 +161,21 @@ class Enemy(pygame.sprite.Sprite):
 
             #  changes the image when enemy jumps
             if self.resting == 0:
-               if self.direction == -1:
-                   self.updateSprite(SpriteConstants.JUMPING, SpriteConstants.LEFT)
-               else:
-                   self.updateSprite(SpriteConstants.JUMPING, SpriteConstants.RIGHT)
+                if self.direction == -1:
+                    self.updateSprite(SpriteConstants.JUMPING, SpriteConstants.LEFT)
+                else:
+                    self.updateSprite(SpriteConstants.JUMPING, SpriteConstants.RIGHT)
 
             # checks collision of the player with the enemy
             if self.rect.colliderect(game.player.rect):
 
                 # choses what sprite penalise according to config
                 if game.contacthurt == "player":
-                    game.player.life = max(0, game.player.life-(game.level*0.3))
+                    game.player.life = max(0, game.player.life - (game.level * 0.3))
                 if game.contacthurt == "enemy":
-                    game.enemy.life = max(0, game.enemy.life-(game.level*0.3))
+                    game.enemy.life = max(0, game.enemy.life - (game.level * 0.3))
 
-                game.player.rect.x +=  self.direction *  50 * dt   # pushes player when he collides with the enemy
+                game.player.rect.x += self.direction * 50 * dt  # pushes player when he collides with the enemy
 
                 # limits the player to stand on the screen space even being pushed
                 if game.player.rect.x < 60:
@@ -227,11 +214,11 @@ class Enemy(pygame.sprite.Sprite):
             # hurt enemy animation
             if self.hurt > 0:
                 if self.direction == -1:
-                   self.updateSprite(SpriteConstants.HURTING, SpriteConstants.LEFT)
+                    self.updateSprite(SpriteConstants.HURTING, SpriteConstants.LEFT)
                 else:
-                   self.updateSprite(SpriteConstants.HURTING, SpriteConstants.RIGHT)
+                    self.updateSprite(SpriteConstants.HURTING, SpriteConstants.RIGHT)
 
-            self.hurt -=1
+            self.hurt -= 1
 
             # changes bullets images according to the enemy direction
             if self.shooting > 0:
@@ -241,17 +228,14 @@ class Enemy(pygame.sprite.Sprite):
                     self.updateSprite(SpriteConstants.SHOOTING, SpriteConstants.RIGHT)
 
             self.shooting -= 1
-            self.shooting = max(0,self.shooting)
-
+            self.shooting = max(0, self.shooting)
 
     def updateSprite(self, state, direction):
         self.image = self.spriteDefinition.getImage(state, direction)
 
+
 # enemy's bullet
 class Bullet_e6(pygame.sprite.Sprite):
-
-
-
     image = pygame.image.load('evoman/images/mi2.png')
 
     def __init__(self, location, direction, n_twist, *groups):
@@ -261,15 +245,13 @@ class Bullet_e6(pygame.sprite.Sprite):
         self.lifespan = 70
         self.n_twist = n_twist
 
-
     def update(self, dt, game):
 
+        self.rect.y += 500 * dt  # moves the bullets
 
-        self.rect.y +=  500 * dt  # moves the bullets
+        self.rect.y = min(410, self.rect.y)  # prevents bullets from passing throught the floor
 
-        self.rect.y = min(410,self.rect.y) # prevents bullets from passing throught the floor
-
-        self.lifespan -= 1 #  decreases bullet's timer
+        self.lifespan -= 1  # decreases bullet's timer
 
         # removes old bullets
         if self.lifespan < 0:
@@ -281,10 +263,9 @@ class Bullet_e6(pygame.sprite.Sprite):
         if self.rect.colliderect(game.player.rect):
 
             # player loses life points, according to the difficulty level of the game (the more difficult, the more it loses).
-            game.player.life = max(0, game.player.life-(game.level*0.3))
+            game.player.life = max(0, game.player.life - (game.level * 0.3))
 
-
-            game.player.rect.x +=  self.direction *  100 * dt # pushes player when he collides with the enemy
+            game.player.rect.x += self.direction * 100 * dt  # pushes player when he collides with the enemy
 
             # limits the player to stand on the screen space even being pushed
             if game.player.rect.x < 60:
@@ -292,5 +273,4 @@ class Bullet_e6(pygame.sprite.Sprite):
             if game.player.rect.x > 620:
                 game.player.rect.x = 620
 
-
-            game.player.hurt = 5 # sets flag to change the player image when he is hurt
+            game.player.hurt = 5  # sets flag to change the player image when he is hurt

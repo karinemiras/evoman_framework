@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="cbb56179-6c1d-4ce5-96e6-fe6435188f5f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Stable_baselines_continued_learning_test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evoman/gym_enemy1.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evoman/gym_enemy2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evoman/gym_enemy3.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evoman/gym_enemy4.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evoman/gym_enemy5.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evoman/gym_enemy6.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evoman/gym_enemy7.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evoman/gym_enemy8.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evoman/gym_environment.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evoman/gym_player.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gym_env_test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gym_env_test_random_ini.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/competition_results_v2.py" beforeDir="false" afterPath="$PROJECT_DIR$/competition_results_v2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller_generalist_demo.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller_generalist_demo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller_specialist_demo.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller_specialist_demo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/demo_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dummy_demo.py" beforeDir="false" afterPath="$PROJECT_DIR$/dummy_demo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evoman/Base/SpriteConstants.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/Base/SpriteConstants.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evoman/Base/SpriteDefinition.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/Base/SpriteDefinition.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evoman/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evoman/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evoman/enemy1.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/enemy1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evoman/enemy2.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/enemy2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evoman/enemy3.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/enemy3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evoman/enemy4.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/enemy4.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evoman/enemy5.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/enemy5.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evoman/enemy6.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/enemy6.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evoman/enemy7.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/enemy7.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evoman/enemy8.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/enemy8.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evoman/environment.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/environment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evoman/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/player.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evoman/roles.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/roles.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evoman/roles2.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/roles2.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evoman/roles3.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/roles3.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evoman/roles4.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/roles4.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evoman/sensors.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/sensors.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evoman/tmx.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/tmx.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/human_demo.py" beforeDir="false" afterPath="$PROJECT_DIR$/human_demo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/loop.sh" beforeDir="false" afterPath="$PROJECT_DIR$/loop.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimization_coevolution_demo.py" beforeDir="false" afterPath="$PROJECT_DIR$/optimization_coevolution_demo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimization_generalist_demo.py" beforeDir="false" afterPath="$PROJECT_DIR$/optimization_generalist_demo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimization_specialist_demo.py" beforeDir="false" afterPath="$PROJECT_DIR$/optimization_specialist_demo.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="ProjectId" id="1yibP5fVC7oACCui04fIH987U5T" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File" value="Python" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/evoman" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="cbb56179-6c1d-4ce5-96e6-fe6435188f5f" name="Changes" comment="" />
+      <created>1632737330128</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1632737330128</updated>
+      <workItem from="1632737333497" duration="3838000" />
+      <workItem from="1632758992536" duration="6886000" />
+      <workItem from="1632907287395" duration="35342000" />
+      <workItem from="1633070476234" duration="2325000" />
+      <workItem from="1633261279899" duration="565000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+</project>
