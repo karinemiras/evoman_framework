@@ -45,11 +45,37 @@ def crossover(p1, p2):
 #mutate a chromosome based on the mutation rate: the chance that a gene mutates
 #and sigma: the average size of the mutation (taken from normal distribution)
 def mutation(DNA, mutation_rate, sigma, m_b, m_m):
+
+    #sigma function to map sigmas to the weights
+    def sigma_func(length, sigma):
+        #simple sigma function
+        if len(sigma) == 1:
+           sizes = np.random.normal(0, 1, length) * sigma[0]
+            
+        #multi sigma function
+        #bias1 = [0:10]
+        #weights1 = [10:210]
+        #bias2 = [210:215]
+        #weights2 = [215:]
+        elif len(sigma) == 4:
+            sizes           = np.zeros(length)
+            sizes[:10]      = np.random.normal(0, 1, 10)* sigma[0]
+            sizes[10:210]   = np.random.normal(0, 1, 200)* sigma[1]
+            sizes[210:215]  = np.random.normal(0, 1, 5)* sigma[2]
+            sizes[215:]     = np.random.normal(0, 1, 50)* sigma[3]
+    
+        return sizes
+    
     length = len(DNA)
     
-    #standard point mutations
+    #first mutate sigma(s)
+    ##TODO
+    tau = 1
+    sigma = sigma * np.exp(tau*np.random.normal(0, 1))
+    
+    #standard point mutations using new sigma(s)
     mutation_index = np.random.uniform(0, 1, length) < m_b+m_m*mutation_rate
-    mutation_size = np.random.normal(0, 0.5*sigma**2+0.1, length)
+    mutation_size = sigma_func(length, sigma)
     c1 = DNA + mutation_index*mutation_size
     
     #deletions (rare)
@@ -62,7 +88,7 @@ def mutation(DNA, mutation_rate, sigma, m_b, m_m):
         mutation_index = np.random.uniform(0, 1, length) < m_b+m_m*mutation_rate
         c1 = c1 * (mutation_index==False) + random.randint(2, 5) * c1 * mutation_index
     
-    return c1
+    return np.hstack((c1, sigma))
 
 def get_children(parents, surviving_players, fitness, mutation_base, mutation_multiplier):
     children = copy.deepcopy(parents)
@@ -89,11 +115,12 @@ def get_children(parents, surviving_players, fitness, mutation_base, mutation_mu
     for i in range(len(parents)):
         #crossover the genes of parents and random choose a child
         child = random.choice(crossover(parents[p1[i]], parents[p2[i]]))
+        DNA   = child[:265]
+        sigma = child[265:]
         
         #mutate based on parents fitness
         mutation_rate = 1-0.5*(fitness[p1[i]] + fitness[p2[i]])/(np.max(fitness)+1)
-        sigma = 1-0.5*(fitness[p1[i]] + fitness[p2[i]])/(np.max(fitness)+1)
-        child = mutation(child, mutation_rate, sigma, mutation_base, mutation_multiplier)
+        child = mutation(DNA, mutation_rate, sigma, mutation_base, mutation_multiplier)
         
         #normalize between min-max
         minimum = -1

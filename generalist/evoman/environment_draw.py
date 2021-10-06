@@ -96,7 +96,7 @@ class Environment(object):
 
         # initializes pygame library
         pygame.init()
-#        self.print_logs("MESSAGE: Pygame initialized for simulation.")
+        self.print_logs("MESSAGE: Pygame initialized for simulation.")
 
         # initializes sound library for playing mode
         if self.sound == "on":
@@ -386,7 +386,7 @@ class Environment(object):
 
             # default fitness function for single solutions
     def fitness_single(self):
-        return 0.9*(100 - self.get_enemylife()) + 0.1*self.get_playerlife() - numpy.log(self.get_time())
+        return (100/(100-(0.9*(100 - self.get_enemylife()) + 0.1*self.get_playerlife() - numpy.log10(self.get_time()))))
 
     # default fitness function for consolidating solutions among multiple games
     def cons_multi(self,values):
@@ -472,23 +472,23 @@ class Environment(object):
                     return
 
             # updates objects and draws its itens on screen
-#            self.screen.fill((250,250,250))
+            self.screen.fill((250,250,250))
             self.tilemap.update( 33 / 1000., self)
-#            self.tilemap.draw(self.screen)
+            self.tilemap.draw(self.screen)
 
             # player life bar
-#            vbar = int(100 *( 1-(self.player.life/float(self.player.max_life)) ))
-#            pygame.draw.line(self.screen, (0,   0,   0), [40, 40],[140, 40], 2)
-#            pygame.draw.line(self.screen, (0,   0,   0), [40, 45],[140, 45], 5)
-#            pygame.draw.line(self.screen, (150,24,25),   [40, 45],[140 - vbar, 45], 5)
-#            pygame.draw.line(self.screen, (0,   0,   0), [40, 49],[140, 49], 2)
+            vbar = int(100 *( 1-(self.player.life/float(self.player.max_life)) ))
+            pygame.draw.line(self.screen, (0,   0,   0), [40, 40],[140, 40], 2)
+            pygame.draw.line(self.screen, (0,   0,   0), [40, 45],[140, 45], 5)
+            pygame.draw.line(self.screen, (150,24,25),   [40, 45],[140 - vbar, 45], 5)
+            pygame.draw.line(self.screen, (0,   0,   0), [40, 49],[140, 49], 2)
 
             # enemy life bar
-#            vbar = int(100 *( 1-(self.enemy.life/float(self.enemy.max_life)) ))
-#            pygame.draw.line(self.screen, (0,   0,   0), [590, 40],[695, 40], 2)
-#            pygame.draw.line(self.screen, (0,   0,   0), [590, 45],[695, 45], 5)
-#            pygame.draw.line(self.screen, (194,118,55),  [590, 45],[695 - vbar, 45], 5)
-#            pygame.draw.line(self.screen, (0,   0,   0), [590, 49],[695, 49], 2)
+            vbar = int(100 *( 1-(self.enemy.life/float(self.enemy.max_life)) ))
+            pygame.draw.line(self.screen, (0,   0,   0), [590, 40],[695, 40], 2)
+            pygame.draw.line(self.screen, (0,   0,   0), [590, 45],[695, 45], 5)
+            pygame.draw.line(self.screen, (194,118,55),  [590, 45],[695 - vbar, 45], 5)
+            pygame.draw.line(self.screen, (0,   0,   0), [590, 49],[695, 49], 2)
 
 
             #gets fitness for training agents
@@ -497,7 +497,7 @@ class Environment(object):
 
             # returns results of the run
             def return_run():
-#                self.print_logs("RUN: run status: enemy: "+str(self.enemyn)+"; fitness: " + str(fitness) + "; player life: " + str(self.player.life)  + "; enemy life: " + str(self.enemy.life) + "; time: " + str(self.time))
+                self.print_logs("RUN: run status: enemy: "+str(self.enemyn)+"; fitness: " + str(fitness) + "; player life: " + str(self.player.life)  + "; enemy life: " + str(self.enemy.life) + "; time: " + str(self.time))
 
                 return  fitness, self.player.life, self.enemy.life, self.time
 
@@ -537,8 +537,8 @@ class Environment(object):
             if self.enemy.life == 0:
                 ends -= 1
 
-#                self.screen.fill((250,250,250))
-#                self.tilemap.draw(self.screen)
+                self.screen.fill((250,250,250))
+                self.tilemap.draw(self.screen)
 
                 # tells user that player has won
                 if self.playermode == "human":
