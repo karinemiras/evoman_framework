@@ -72,7 +72,10 @@ def mutation(DNA, mutation_rate, sigma, m_b, m_m):
     #first mutate sigma(s)
     tau_ = 1/np.sqrt(2*length)
     tau = 1/np.sqrt(2*np.sqrt(length))
-    sigma = sigma * np.exp(tau_*np.random.normal(0, 1) + tau*np.random.normal(0, 1, 4))
+    if len(sigma) == 1:
+        sigma = sigma * np.exp(np.sqrt(2)*tau_*np.random.normal(0, 1))
+    elif len(sigma) == 4:
+        sigma = sigma * np.exp(tau_*np.random.normal(0, 1) + tau*np.random.normal(0, 1, 4))
 
     #standard point mutations using new sigma(s)
     mutation_index = np.random.uniform(0, 1, length) < m_b+m_m*mutation_rate
