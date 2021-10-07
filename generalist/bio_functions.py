@@ -48,6 +48,7 @@ def mutation(DNA, mutation_rate, sigma, m_b, m_m):
 
     #sigma function to map sigmas to the weights
     def sigma_func(length, sigma):
+    
         #simple sigma function
         if len(sigma) == 1:
            sizes = np.random.normal(0, 1, length) * sigma[0]
@@ -63,7 +64,7 @@ def mutation(DNA, mutation_rate, sigma, m_b, m_m):
             sizes[10:210]   = np.random.normal(0, 1, 200)* sigma[1]
             sizes[210:215]  = np.random.normal(0, 1, 5)* sigma[2]
             sizes[215:]     = np.random.normal(0, 1, 50)* sigma[3]
-    
+            
         return sizes
     
     length = len(DNA)
@@ -126,7 +127,7 @@ def get_children(parents, surviving_players, fitness, mutation_base, mutation_mu
         minimum = -1
         maximum = 1
         for j in range(len(child)):
-            if child[j]<minimum:
+            if child[j]< minimum:
                 child[j] = minimum
             elif child[j] > maximum:
                 child[j] = maximum
