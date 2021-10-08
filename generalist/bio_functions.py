@@ -42,6 +42,17 @@ def crossover(p1, p2):
 
     return c1, c2
 
+
+#weighted crossover based on fitness
+def weighted_crossover(p1, p2, f1, f2):
+    if f1+f2 == 0:
+        w = 0.5
+    else:
+        w = f1/(f1+f2)
+    c1 = w*p1 + (1-w)*p2
+
+    return c1
+
 #mutate a chromosome based on the mutation rate: the chance that a gene mutates
 #and sigma: the average size of the mutation (taken from normal distribution)
 def mutation(DNA, mutation_rate, sigma, m_b, m_m):
@@ -118,7 +129,9 @@ def get_children(parents, surviving_players, fitness, mutation_base, mutation_mu
     #iterate to make children
     for i in range(len(parents)):
         #crossover the genes of parents and random choose a child
-        child = random.choice(crossover(parents[p1[i]], parents[p2[i]]))
+        #child = random.choice(crossover(parents[p1[i]], parents[p2[i]]))
+        child = weighted_crossover(parents[p1[i]], parents[p2[i]], fitness[p1[i]], fitness[p2[i]])
+        
         DNA   = child[:265]
         sigma = child[265:]
 

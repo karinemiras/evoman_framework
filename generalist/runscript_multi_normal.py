@@ -138,10 +138,10 @@ class evo_algorithm:
             kills.append(kill)
             
         #if nog good enough 'die'
-        if np.mean(gains) > avg_gains:
+        if np.sum(gains) > avg_gains:
             surviving_player = True
         
-        return [player, surviving_player, np.mean(gains), gains, fitness_smop, times, health_player, health_enemies, kills]
+        return [player, surviving_player, np.sum(gains), gains, fitness_smop, times, health_player, health_enemies, kills]
     
     def simulate(self, pop = []):
         '''
@@ -153,7 +153,7 @@ class evo_algorithm:
             DNA = np.random.uniform(-1, 1, (self.population_size ,self.n_vars))
             sigmas = np.random.uniform(0, 1, (self.population_size ,self.n_sigmas))
             pop = np.hstack((DNA, sigmas))
-        avg_gains = 0
+        avg_gains = self.max_gain
         
         for g in range(self.generations):
             gen_start = time.time()
@@ -210,10 +210,16 @@ class evo_algorithm:
                     surviving_players.append(ind)
             pool.close()
             
-            if avg_gain > avg_gains:
-                avg_gains = avg_gain
+            if np.max(gains_array) > avg_gains:
+                if np.max(gains_array) < 0:
+                    avg_gains = 1.1*np.max(gains_array)
+                else:
+                    avg_gains = 0.9*np.max(gains_array)
             else:
-                avg_gains *= 0.9
+                if avg_gains < 0:
+                    avg_gains *= 1.1
+                else:
+                    avg_gains *= 0.9
             
             self.total_data.append([np.max(gains_array), np.mean(gains_array), np.std(gains_array), np.max(fitness_array), np.mean(fitness_array), np.std(fitness_array)])
             
@@ -224,7 +230,7 @@ class evo_algorithm:
             mean_sigmas = np.around(np.mean(np.array(pop)[:,265:], axis=0), decimals=2)
             max_sigmas = np.around(np.max(np.array(pop)[:,265:], axis=0), decimals=2)
             min_sigmas = np.around(np.min(np.array(pop)[:,265:], axis=0), decimals=2)
-            print(f'Run: {self.run}, G: {g}, F_mean = {round(np.mean(fitness_array),2)} pm {round(np.std(fitness_array),2)}, F_best = {round(np.max(fitness_array),2)}, G_mean = {np.round(np.mean(gains_array),2)}, G_best = {np.round(self.max_gain,2)}, S_mean={mean_sigmas} max:{max_sigmas} min:{min_sigmas}, kills={np.round(np.max(np.sum(kills_array, axis=1)),1)} time={round(time.time()-gen_start)}')
+            print(f'Run: {self.run}, G: {g}, F_mean = {round(np.mean(fitness_array),1)} pm {round(np.std(fitness_array),1)}, F_best = {round(np.max(fitness_array),1)}, G_mean = {np.round(np.mean(gains_array),1)}, G_best = {np.round(np.max(gains_array))}, S_mean={mean_sigmas} max:{max_sigmas} min:{min_sigmas}, kills={np.round(np.max(np.sum(kills_array, axis=1)),1)}, surviving={len(surviving_players)}, thr={np.round(avg_gains, 1)} time={round(time.time()-gen_start)}')
         return
     
     def save_results(self, extended = False, full = False):
@@ -254,11 +260,11 @@ class evo_algorithm:
 
 if __name__ == '__main__':
     n_hidden_neurons = 10       #number of hidden neurons
-    enemies = [1,2]             #which enemies
+    enemies = [1,8]             #which enemies
     run_nr = 1                  #number of runs
     generations = 100           #number of generations per run
     population_size = 100       #pop size
-    mutation_baseline = 0.02    #minimal chance for a mutation event
+    mutation_baseline = 0.1     #minimal chance for a mutation event
     mutation_multiplier = 0.20  #fitness dependent multiplier of mutation chance
     repeats = 4
     fitter = 'standard'
