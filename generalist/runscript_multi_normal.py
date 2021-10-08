@@ -209,17 +209,17 @@ class evo_algorithm:
                 if survive:
                     surviving_players.append(ind)
             pool.close()
-            
-            if np.max(gains_array) > avg_gains:
-                if np.max(gains_array) < 0:
-                    avg_gains = 1.1*np.max(gains_array)
-                else:
-                    avg_gains = 0.9*np.max(gains_array)
-            else:
-                if avg_gains < 0:
-                    avg_gains *= 1.1
-                else:
-                    avg_gains *= 0.9
+            avg_gains = 0.25*np.mean(gains_array) + 0.75*np.max(gains_array)
+#            if np.max(gains_array) > avg_gains:
+#                if np.max(gains_array) < 0:
+#                    avg_gains = 1.1*np.max(gains_array)
+#                else:
+#                    avg_gains = 0.9*np.max(gains_array)
+#            else:
+#                if avg_gains < 0:
+#                    avg_gains *= 1.1
+#                else:
+#                    avg_gains *= 0.9
             
             self.total_data.append([np.max(gains_array), np.mean(gains_array), np.std(gains_array), np.max(fitness_array), np.mean(fitness_array), np.std(fitness_array)])
             
@@ -260,7 +260,7 @@ class evo_algorithm:
 
 if __name__ == '__main__':
     n_hidden_neurons = 10       #number of hidden neurons
-    enemies = [1,8]             #which enemies
+    enemies = [1]             #which enemies
     run_nr = 1                  #number of runs
     generations = 100           #number of generations per run
     population_size = 100       #pop size
