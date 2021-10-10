@@ -6,7 +6,7 @@
 
 # imports framework
 import sys
-sys.path.insert(0, 'evoman')
+sys.path.insert(0, 'evoman_sneaky')
 from environment import Environment
 from demo_controller import player_controller
 
@@ -47,7 +47,7 @@ class evo_algorithm:
     best                = [array] the best solution
     n_sigmas            = [int] number of sigmas to use (only use 1 or 4)
     '''
-    def __init__(self, n_hidden_neurons, enemy, run_nr, generations, population_size, mutation_baseline, mutation_multiplier, repeats, fitter, run, cores='max'):
+    def __init__(self, n_hidden_neurons, enemy, run_nr, generations, population_size, mutation_baseline, mutation_multiplier, repeats, fitter, run, cores='max', current_generation = 0):
         self.enemy = enemy          #which enemy
         self.run_nr = run_nr                  #number of runs
         self.generations = generations           #number of generations per run
@@ -66,7 +66,8 @@ class evo_algorithm:
         self.max_gain = -100*len(enemy)
         self.n_sigmas = 4
         self.cores = cores
-        self.survival_number = 2
+        self.survival_number = 4
+        self.current_generation = current_generation
         
         #make save folder
         if not os.path.exists(f'data_normal/{self.experiment_name}'):
@@ -122,6 +123,7 @@ class evo_algorithm:
             
             #repeat each player to counter the randomness
             for i in range(repeats):
+                env.randomini = i
                 f, p, e, t = env.run_single(enemy, pcont=player[:self.n_vars], econt="None")
                 
                 fitness_smop += fitfunc(self.fitter, self.generations, g, t, e, p)*(1/repeats)
@@ -139,7 +141,7 @@ class evo_algorithm:
             kills.append(kill)
             
         #if nog good enough 'die'
-        if np.sum(gains) > avg_gains:
+        if fitness_smop > avg_gains:
             surviving_player = True
         
         return [player, surviving_player, np.sum(gains), gains, fitness_smop, times, health_player, health_enemies, kills]
@@ -149,11 +151,13 @@ class evo_algorithm:
         Core function of the evo_algorithm dividing the games of a generation over the cores and storing/printing 
         the most important information of a generation is saved.
         '''
-        
         #initiate 100 parents, the size of an agent is n_vars + sigmas
         if not len(pop) == self.population_size:
             DNA = np.random.uniform(-1, 1, (self.population_size ,self.n_vars))
-            sigmas = np.random.uniform(0, 1, (self.population_size ,self.n_sigmas))
+            #set bias of shoot to 1
+            for k in range(len(DNA)):
+                DNA[k,213] = 1
+            sigmas = np.random.uniform(0, 0.3, (self.population_size ,self.n_sigmas))
             pop = np.hstack((DNA, sigmas))
         
         avg_gains = self.max_gain
@@ -177,7 +181,7 @@ class evo_algorithm:
             else:
                 pool = mp.Pool(cores)
                 
-            results = [pool.apply_async(self.play_game, args=(player, g, avg_gains, enemy)) for player in pop]
+            results = [pool.apply_async(self.play_game, args=(player, self.current_generation, avg_gains, enemy)) for player in pop]
             pop = []
             
             #retrieve all the data
@@ -203,16 +207,16 @@ class evo_algorithm:
                 sigma_array.append(r[0][265:])
                 
                 #sigma data + some others
-                self.total_sigma_data.append([g]+list(np.concatenate([gains, kills, r[0][265:]]).flat))
+                self.total_sigma_data.append([self.current_generation]+list(np.concatenate([gains, kills, r[0][265:]]).flat))
                 
                 if avg_gain > self.max_gain:
-                    self.max_gain = avg_gain
+                    self.max_gain = fitness_array
                     self.best = r[0]
                     
                 if survive:
                     surviving_players.append(ind)
             pool.close()
-            avg_gains = 0.25*np.mean(gains_array) + 0.75*np.max(gains_array)
+            avg_gains = 0.25*np.mean(fitness_array) + 0.75*np.max(fitness_array)
 #            if np.max(gains_array) > avg_gains:
 #                if np.max(gains_array) < 0:
 #                    avg_gains = 1.1*np.max(gains_array)
@@ -228,24 +232,34 @@ class evo_algorithm:
             
             
             ##survival of X best players
-            best_players = np.sort(gains_array, axis=None)[len(gains_array) - self.survival_number]
-            indexes = np.where(gains_array >= best_players)[0]
+            best_players = np.sort(fitness_array, axis=None)[len(fitness_array) - self.survival_number]
+            indexes = np.where(fitness_array >= best_players)[0]
             
             for index in indexes:
                 if not index in surviving_players:
                     surviving_players.append(index)
             
+            self.current_generation += 1
+            #backup population each X gen
+            if self.current_generation%10==9:
+                self.backup_pop(pop, self.current_generation)
+            
+            
             pop = get_children(pop, surviving_players, np.array(fitness_array),
                                mutation_baseline, mutation_multiplier)
+            
             
             mean_sigmas = np.around(np.mean(np.array(pop)[:,265:], axis=0), decimals=2)
             max_sigmas = np.around(np.max(np.array(pop)[:,265:], axis=0), decimals=2)
             min_sigmas = np.around(np.min(np.array(pop)[:,265:], axis=0), decimals=2)
-            print(f'Run: {self.run}, G: {g}, F_mean = {round(np.mean(fitness_array),1)} pm {round(np.std(fitness_array),1)}, F_best = {round(np.max(fitness_array),1)}, G_mean = {np.round(np.mean(gains_array),1)}, G_best = {np.round(np.max(gains_array))}, S_mean={mean_sigmas} max:{max_sigmas} min:{min_sigmas}, kills={np.round(np.max(np.sum(kills_array, axis=1)),1)}, surviving={len(surviving_players)}, thr={np.round(avg_gains, 1)} time={round(time.time()-gen_start)}')
+            print(f'Run: {self.run}, G: {self.current_generation}, F_mean = {round(np.mean(fitness_array),1)} pm {round(np.std(fitness_array),1)}, F_best = {round(np.max(fitness_array),1)}, G_mean = {np.round(np.mean(gains_array),1)}, G_best = {np.round(np.max(gains_array))}, S_mean={mean_sigmas} max:{max_sigmas} min:{min_sigmas}, kills={np.round(np.max(np.sum(kills_array, axis=1)),1)}, surviving={len(surviving_players)}, thr={np.round(avg_gains, 1)} time={round(time.time()-gen_start)}')
         return
     
-    def save_results(self, extended = False, full = False):
-        with open(f'data_normal/{self.experiment_name}/data_{self.run}.csv', 'w', newline='', encoding='utf-8') as f:
+    def save_results(self, full = False, append = False):
+        writing_style = 'w'
+        if append:
+            writing_style = 'a'
+        with open(f'data_normal/{self.experiment_name}/data_{self.run}.csv', writing_style, newline='', encoding='utf-8') as f:
             writer = csv.writer(f)
             writer.writerow([self.enemy, self.generations])
             writer.writerows(self.total_data)
@@ -262,27 +276,50 @@ class evo_algorithm:
                 title.append(f'kill_enemy_{enemy}')
             for sig in range(self.n_sigmas):
                 title.append(f'sigma_{sig}')
-            with open(f'data_normal/{self.experiment_name}/full_data_{self.run}.csv', 'w', newline='', encoding='utf-8') as f:
+            with open(f'data_normal/{self.experiment_name}/full_data_{self.run}.csv', writing_style, newline='', encoding='utf-8') as f:
                 writer = csv.writer(f)
-                writer.writerow(title)
+                if not append:
+                    writer.writerow(title)
                 writer.writerows(self.total_sigma_data)
         return
-
+    
+    def backup_pop(self, population, generation):
+        with open(f'data_normal/{self.experiment_name}/pop_backup_{generation}.csv', 'w', newline='', encoding='utf-8') as f:
+            writer = csv.writer(f)
+            writer.writerows(population)
 
 if __name__ == '__main__':
     n_hidden_neurons = 10       #number of hidden neurons
-    enemies = [3,4,8]               #which enemies
+    enemies = [2, 6, 7, 8]               #which enemies
     run_nr = 1                  #number of runs
-    generations = 10           #number of generations per run
-    population_size = 10       #pop size
-    mutation_baseline = 0.05    #minimal chance for a mutation event
-    mutation_multiplier = 0.20  #fitness dependent multiplier of mutation chance
+    generations = 300           #number of generations per run
+    population_size = 100        #pop size
+    mutation_baseline = 0       #minimal chance for a mutation event
+    mutation_multiplier = 0.40  #fitness dependent multiplier of mutation chance
     repeats = 4
     fitter = 'standard'
     start = time.time()
     cores = 'max'
+    new = True
     
     for run in range(run_nr):
         evo = evo_algorithm(n_hidden_neurons, enemies, run_nr, generations, population_size, mutation_baseline, mutation_multiplier, repeats, fitter, run, cores)
-        evo.simulate()
-        evo.save_results(full=True)
+        
+        if new:
+            #start a new run
+            evo.simulate()
+            evo.save_results(full=True)
+        
+        else:
+            #continue an old run
+            population = []
+            load_from_generation = 0
+            backup_name = f'data_normal/enemy_[1, 4, 6]_{fitter}/pop_backup_{load_from_generation}.csv'
+            with open(backup_name, newline='', encoding='utf-8') as f:
+                reader = csv.reader(f, quoting=csv.QUOTE_NONNUMERIC)
+                for row in reader:
+                    population.append(row)
+            evo.current_generation = load_from_generation
+            evo.simulate(np.array(population))
+            
+            evo.save_results(full=True, append=False)

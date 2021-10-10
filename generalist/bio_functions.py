@@ -14,6 +14,8 @@ def fitfunc(fitfunction, generations, g, t, e, p):
 
     if fitfunction == "standard":
         fitness_smop = 0.9*(100 - e) + 0.1*p - np.log(t)
+        if e == 0:
+            fitness_smop = 200
 
     if fitfunction == "oscilation":
         period = .5*generations
