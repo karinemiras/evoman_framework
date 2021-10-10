@@ -66,6 +66,7 @@ class evo_algorithm:
         self.max_gain = -100*len(enemy)
         self.n_sigmas = 4
         self.cores = cores
+        self.survival_number = 2
         
         #make save folder
         if not os.path.exists(f'data_normal/{self.experiment_name}'):
@@ -148,11 +149,13 @@ class evo_algorithm:
         Core function of the evo_algorithm dividing the games of a generation over the cores and storing/printing 
         the most important information of a generation is saved.
         '''
+        
         #initiate 100 parents, the size of an agent is n_vars + sigmas
         if not len(pop) == self.population_size:
             DNA = np.random.uniform(-1, 1, (self.population_size ,self.n_vars))
             sigmas = np.random.uniform(0, 1, (self.population_size ,self.n_sigmas))
             pop = np.hstack((DNA, sigmas))
+        
         avg_gains = self.max_gain
         
         for g in range(self.generations):
@@ -224,6 +227,14 @@ class evo_algorithm:
             self.total_data.append([np.max(gains_array), np.mean(gains_array), np.std(gains_array), np.max(fitness_array), np.mean(fitness_array), np.std(fitness_array)])
             
             
+            ##survival of X best players
+            best_players = np.sort(gains_array, axis=None)[len(gains_array) - self.survival_number]
+            indexes = np.where(gains_array >= best_players)[0]
+            
+            for index in indexes:
+                if not index in surviving_players:
+                    surviving_players.append(index)
+            
             pop = get_children(pop, surviving_players, np.array(fitness_array),
                                mutation_baseline, mutation_multiplier)
             
@@ -260,11 +271,11 @@ class evo_algorithm:
 
 if __name__ == '__main__':
     n_hidden_neurons = 10       #number of hidden neurons
-    enemies = [1]             #which enemies
+    enemies = [3,4,8]               #which enemies
     run_nr = 1                  #number of runs
-    generations = 100           #number of generations per run
-    population_size = 100       #pop size
-    mutation_baseline = 0.1     #minimal chance for a mutation event
+    generations = 10           #number of generations per run
+    population_size = 10       #pop size
+    mutation_baseline = 0.05    #minimal chance for a mutation event
     mutation_multiplier = 0.20  #fitness dependent multiplier of mutation chance
     repeats = 4
     fitter = 'standard'

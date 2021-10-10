@@ -142,11 +142,23 @@ def get_children(parents, surviving_players, fitness, mutation_base, mutation_mu
         #normalize between min-max
         minimum = -1
         maximum = 1
+        min_sigma = -0.3
+        max_sigma = 0.3
+        thresh = 0.001
         for j in range(len(child)):
-            if child[j]< minimum:
-                child[j] = minimum
-            elif child[j] > maximum:
-                child[j] = maximum
+            if j < 265:
+                if child[j]< minimum:
+                    child[j] = minimum
+                elif child[j] > maximum:
+                    child[j] = maximum
+            else:
+                if abs(child[j]) < 0.001:
+                    child[j] = 0.001
+                if child[j]< min_sigma:
+                    child[j] = min_sigma
+                elif child[j] > max_sigma:
+                    child[j] = max_sigma
+                
         #child = (maximum-minimum)*(child-child.min())/(child.max()-child.min())+minimum
         children[i] = child
     return children
