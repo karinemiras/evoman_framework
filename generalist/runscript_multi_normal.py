@@ -210,7 +210,7 @@ class evo_algorithm:
                 self.total_sigma_data.append([self.current_generation]+list(np.concatenate([gains, kills, r[0][265:]]).flat))
                 
                 if avg_gain > self.max_gain:
-                    self.max_gain = fitness_array
+                    self.max_gain = fitness
                     self.best = r[0]
                     
                 if survive:
@@ -288,6 +288,30 @@ class evo_algorithm:
             writer = csv.writer(f)
             writer.writerows(population)
 
+def main():
+    for run in range(run_nr):
+        evo = evo_algorithm(n_hidden_neurons, enemies, run_nr, generations, population_size, mutation_baseline,
+                            mutation_multiplier, repeats, fitter, run, cores)
+
+        if new:
+            # start a new run
+            evo.simulate()
+            evo.save_results(full=True)
+
+        else:
+            # continue an old run
+            population = []
+            load_from_generation = 0
+            backup_name = f'data_normal/enemy_[1, 4, 6]_{fitter}/pop_backup_{load_from_generation}.csv'
+            with open(backup_name, newline='', encoding='utf-8') as f:
+                reader = csv.reader(f, quoting=csv.QUOTE_NONNUMERIC)
+                for row in reader:
+                    population.append(row)
+            evo.current_generation = load_from_generation
+            evo.simulate(np.array(population))
+
+            evo.save_results(full=True, append=False)
+
 if __name__ == '__main__':
     n_hidden_neurons = 10       #number of hidden neurons
     enemies = [2, 6, 7, 8]               #which enemies
@@ -301,25 +325,4 @@ if __name__ == '__main__':
     start = time.time()
     cores = 'max'
     new = True
-    
-    for run in range(run_nr):
-        evo = evo_algorithm(n_hidden_neurons, enemies, run_nr, generations, population_size, mutation_baseline, mutation_multiplier, repeats, fitter, run, cores)
-        
-        if new:
-            #start a new run
-            evo.simulate()
-            evo.save_results(full=True)
-        
-        else:
-            #continue an old run
-            population = []
-            load_from_generation = 0
-            backup_name = f'data_normal/enemy_[1, 4, 6]_{fitter}/pop_backup_{load_from_generation}.csv'
-            with open(backup_name, newline='', encoding='utf-8') as f:
-                reader = csv.reader(f, quoting=csv.QUOTE_NONNUMERIC)
-                for row in reader:
-                    population.append(row)
-            evo.current_generation = load_from_generation
-            evo.simulate(np.array(population))
-            
-            evo.save_results(full=True, append=False)
+    main()
