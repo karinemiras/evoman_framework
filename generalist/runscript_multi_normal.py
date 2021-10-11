@@ -48,6 +48,7 @@ class evo_algorithm:
     n_sigmas            = [int] number of sigmas to use (only use 1 or 4)
     '''
     def __init__(self, n_hidden_neurons, enemy, run_nr, generations, population_size, mutation_baseline, mutation_multiplier, repeats, fitter, run, cores='max', current_generation = 0):
+
         self.enemy = enemy          #which enemy
         self.run_nr = run_nr                  #number of runs
         self.generations = generations           #number of generations per run
@@ -152,6 +153,7 @@ class evo_algorithm:
         the most important information of a generation is saved.
         '''
         #initiate 100 parents, the size of an agent is n_vars + sigmas
+
         if not len(pop) == self.population_size:
             DNA = np.random.uniform(-1, 1, (self.population_size ,self.n_vars))
             #set bias of shoot to 1
@@ -245,8 +247,7 @@ class evo_algorithm:
                 self.backup_pop(pop, self.current_generation)
             
             
-            pop = get_children(pop, surviving_players, np.array(fitness_array),
-                               mutation_baseline, mutation_multiplier)
+            pop = get_children(pop, surviving_players, np.array(fitness_array), self.mutation_baseline, self.mutation_multiplier)
             
             
             mean_sigmas = np.around(np.mean(np.array(pop)[:,265:], axis=0), decimals=2)
@@ -288,18 +289,18 @@ class evo_algorithm:
             writer = csv.writer(f)
             writer.writerows(population)
 
-def main():
+def run_experiment(n_hidden_neurons, enemies, run_nr, generations, population_size, mutation_baseline, mutation_multiplier, repeats, fitter, cores, new):
+    start = time.time()
     for run in range(run_nr):
-        evo = evo_algorithm(n_hidden_neurons, enemies, run_nr, generations, population_size, mutation_baseline,
-                            mutation_multiplier, repeats, fitter, run, cores)
+        evo = evo_algorithm(n_hidden_neurons, enemies, run_nr, generations, population_size, mutation_baseline, mutation_multiplier, repeats, fitter, run, cores)
 
         if new:
-            # start a new run
+            #start a new run
             evo.simulate()
             evo.save_results(full=True)
 
         else:
-            # continue an old run
+            #continue an old run
             population = []
             load_from_generation = 0
             backup_name = f'data_normal/enemy_[1, 4, 6]_{fitter}/pop_backup_{load_from_generation}.csv'
@@ -312,6 +313,7 @@ def main():
 
             evo.save_results(full=True, append=False)
 
+
 if __name__ == '__main__':
     n_hidden_neurons = 10       #number of hidden neurons
     enemies = [2, 6, 7, 8]               #which enemies
@@ -322,7 +324,7 @@ if __name__ == '__main__':
     mutation_multiplier = 0.40  #fitness dependent multiplier of mutation chance
     repeats = 4
     fitter = 'standard'
-    start = time.time()
+
     cores = 'max'
     new = True
-    main()
+
