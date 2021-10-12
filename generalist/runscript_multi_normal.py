@@ -47,7 +47,7 @@ class evo_algorithm:
     best                = [array] the best solution
     n_sigmas            = [int] number of sigmas to use (only use 1 or 4)
     '''
-    def __init__(self, n_hidden_neurons, enemy, run_nr, generations, population_size, mutation_baseline, mutation_multiplier, repeats, fitter, run, cores='max', current_generation = 0):
+    def __init__(self, n_hidden_neurons, enemy, run_nr, generations, population_size, mutation_baseline, mutation_multiplier, repeats, fitter, run, survival_number, cores='max', current_generation = 0):
 
         self.enemy = enemy          #which enemy
         self.run_nr = run_nr                  #number of runs
@@ -289,7 +289,7 @@ class evo_algorithm:
             writer = csv.writer(f)
             writer.writerows(population)
 
-def run_experiment(n_hidden_neurons, enemies, run_nr, generations, population_size, mutation_baseline, mutation_multiplier, repeats, fitter, cores, new):
+def run_experiment(n_hidden_neurons, enemies, run_nr, generations, population_size, mutation_baseline, mutation_multiplier, repeats, fitter, survival_number, cores, new):
     start = time.time()
     for run in range(run_nr):
         evo = evo_algorithm(n_hidden_neurons, enemies, run_nr, generations, population_size, mutation_baseline, mutation_multiplier, repeats, fitter, run, cores)
@@ -323,8 +323,11 @@ if __name__ == '__main__':
     mutation_baseline = 0       #minimal chance for a mutation event
     mutation_multiplier = 0.40  #fitness dependent multiplier of mutation chance
     repeats = 4
+    survival_number = 4
     fitter = 'standard'
-
     cores = 'max'
     new = True
+
+    run_experiment(n_hidden_neurons, enemies, run_nr, generations, population_size, mutation_baseline, mutation_multiplier, repeats, fitter, survival_number, cores, new)
+
 
