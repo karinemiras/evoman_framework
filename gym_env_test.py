@@ -20,15 +20,11 @@ environments = [MaxAndSkipEnv(Evoman(enemyn=sys.argv[1]), skip=2)]
 
 model = PPO('MlpPolicy', environments[0], verbose=0)
 
-i = 0
-
 for env in environments:
-    i += 1
-
     model.set_env(env)
     model.learn(total_timesteps=(2 ** 16))
 
-    print(f'\n\n\nFinished learning env{i}!\n\n\n')
+    print(f'\n\n\nFinished learning env{sys.argv[1]}!\n\n\n')
 
     # env.env.keep_frames = True
     # obs = env.reset()
