@@ -1,5 +1,5 @@
 import math
-import traceback
+import os
 
 import gym
 import numpy as np
@@ -58,6 +58,7 @@ class Evoman(gym.Env):
                  timeexpire=3000,
                  overturetime=100,
                  cost_per_timestep=0.0,
+                 show_display=False,
                  ):
         super(Evoman, self).__init__()
         self.action_space = spaces.MultiBinary(5)
@@ -103,6 +104,8 @@ class Evoman(gym.Env):
 
         pygame.init()
         self.clock = pygame.time.Clock()
+        if not show_display:
+            os.environ["SDL_VIDEODRIVER"] = "dummy"
         self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT), DOUBLEBUF)
         self.screen.set_alpha(None)
         pygame.event.set_allowed([QUIT, KEYDOWN, KEYUP])
@@ -130,8 +133,8 @@ class Evoman(gym.Env):
 
         self.tilemap.update(33 / 1000., self)
 
-        self.reward += 0.9*(enemy_life - self.enemy.life)
-        self.reward -= 0.1*(player_life - self.player.life)
+        self.reward += 0.9 * (enemy_life - self.enemy.life)
+        self.reward -= 0.1 * (player_life - self.player.life)
         if self.player.life == 0 or self.enemy.life == 0:
             done = True
 
