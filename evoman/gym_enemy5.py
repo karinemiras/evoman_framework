@@ -165,10 +165,10 @@ class Enemy(pygame.sprite.Sprite):
             damage = (game.level * 0.3)
 
             if game.contacthurt == "player":
-                game.reward -= damage
+                #game.reward -= damage
                 game.player.life = max(0, game.player.life - damage)
             if game.contacthurt == "enemy":
-                game.reward += damage
+                #game.reward += damage
                 game.enemy.life = max(0, game.enemy.life - damage)
 
             # pushes player when he collides with the enemy
@@ -257,7 +257,7 @@ class Bullet_e5(pygame.sprite.Sprite):
 
             # player loses life points, according to the difficulty level of the game (the more difficult, the more it loses).
             damage = (game.level * 0.3)
-            game.reward -= damage
+            #game.reward -= damage
             game.player.life = max(0, game.player.life - damage)
 
             game.player.rect.x += self.direction * 100 * dt  # pushes player when he collides with the enemy

@@ -715,7 +715,10 @@ class TileMap(object):
     def draw(self, screen):
         for layer in self.layers:
             if layer.visible:
-                layer.draw(screen)
+                try:
+                    layer.draw(screen)
+                except:
+                    continue
 
     @classmethod
     def load(cls, filename, viewport):

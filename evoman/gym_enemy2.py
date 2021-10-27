@@ -150,10 +150,10 @@ class Enemy(pygame.sprite.Sprite):
             damage = (game.level * 1)
 
             if game.contacthurt == "player":
-                game.reward -= damage
+                #game.reward -= damage
                 game.player.life = max(0, game.player.life - damage)
             if game.contacthurt == "enemy":
-                game.reward += damage
+                #game.reward += damage
                 game.enemy.life = max(0, game.enemy.life - damage)
 
             game.player.hurt = 5  # sets flag to change the player image when he is hurt.
@@ -279,7 +279,7 @@ class Bullet_e2(pygame.sprite.Sprite):
         if self.rect.colliderect(game.player.rect):
             # player loses life points, according to the difficult level of the game (the more difficult, the more it loses).
             damage = (game.level * 1)
-            game.reward -= damage
+            #game.reward -= damage
             game.player.life = max(0, game.player.life - damage)
 
             # sets flag to change the player image when he is hurt

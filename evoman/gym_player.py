@@ -33,7 +33,7 @@ class Bullet_p(pygame.sprite.Sprite):
             if game.enemy.imune == 0:
                 # enemy loses life points, according to the difficult level of the game (the more difficult, the less it loses)
                 damage = 20 / game.level
-                game.reward += damage
+                #game.reward += damage
                 game.enemy.life = max(0, game.enemy.life - damage)
 
                 if game.enemyn == 4:

@@ -23,7 +23,7 @@ for env in environments:
 
     fourcc = cv2.VideoWriter_fourcc('M', 'J', 'P', 'G')
     fps = 30
-    video_filename = f'env{i}_randomini.avi'
+    video_filename = f'env{i}_(10,2)_randomini.avi'
     out = cv2.VideoWriter(video_filename, fourcc, fps, (env.WIDTH, env.HEIGHT))
     for _ in range(2500):
         action, _state = model.predict(obs, deterministic=False)

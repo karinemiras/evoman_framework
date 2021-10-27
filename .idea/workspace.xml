@@ -2,49 +2,71 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cbb56179-6c1d-4ce5-96e6-fe6435188f5f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Stable_baselines_continued_learning_test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evoman/gym_enemy1.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evoman/gym_enemy2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evoman/gym_enemy3.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evoman/gym_enemy4.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evoman/gym_enemy5.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evoman/gym_enemy6.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evoman/gym_enemy7.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evoman/gym_enemy8.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evoman/gym_environment.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evoman/gym_player.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gym_env_test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gym_env_test_random_ini.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/competition_results_v2.py" beforeDir="false" afterPath="$PROJECT_DIR$/competition_results_v2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller_generalist_demo.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller_generalist_demo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller_specialist_demo.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller_specialist_demo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/demo_controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dummy_demo.py" beforeDir="false" afterPath="$PROJECT_DIR$/dummy_demo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/evoman/Base/SpriteConstants.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/Base/SpriteConstants.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/evoman/Base/SpriteDefinition.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/Base/SpriteDefinition.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/evoman/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/evoman/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/evoman/enemy1.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/enemy1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/evoman/enemy2.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/enemy2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/evoman/enemy3.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/enemy3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/evoman/enemy4.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/enemy4.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/evoman/enemy5.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/enemy5.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/evoman/enemy6.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/enemy6.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/evoman/enemy7.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/enemy7.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/evoman/enemy8.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/enemy8.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/evoman/environment.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/environment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/evoman/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/player.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/evoman/roles.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/roles.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/evoman/roles2.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/roles2.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/evoman/roles3.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/roles3.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/evoman/roles4.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/roles4.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/evoman/sensors.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/sensors.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FSN/FSN_VFS_data_episode_lengths.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FSN/FSN_VFS_data_episode_rewards.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FSN/FSN_data_episode_lengths.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FSN/FSN_data_episode_rewards.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FSN/FSN_run2_data_episode_lengths.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FSN/FSN_run2_data_episode_rewards.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FSN_VFS_data_gather.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FSN_data_gather.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FSkipN/FSkipN_data_episode_lengths.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FSkipN/FSkipN_data_episode_rewards.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FSkipN/FSkipN_run2_data_episode_lengths.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FSkipN/FSkipN_run2_data_episode_rewards.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FSkipN/FSkipN_run2_swapped_wrapper_data_episode_lengths.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FSkipN/FSkipN_run2_swapped_wrapper_data_episode_rewards.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FSkipN_data_gather.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FSkip_data_gather.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FSkip_data_gather_lengths.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FStack_FSkip_data_gather.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FStack_FSkip_data_gather_lengths.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FStack_FSkip_data_gather_rewards.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FStack_data_gather.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FStack_data_gather_lengths.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FStack_data_gather_rewards.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Generalist/data_gather_lengths.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Generalist/data_gather_rewards.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Generalist_data_gather.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Optimized_FSkip/FSkip_data_gather_lengths.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Optimized_FSkip/FSkip_data_gather_rewards.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Optimized_FStack/FStack_data_gather_lengths.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Optimized_FStack/FStack_data_gather_rewards.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Optimized_FStack_FSkip/FStack_FSkip_A2C_data_gather_lengths.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Optimized_FStack_FSkip/FStack_FSkip_A2C_data_gather_rewards.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Optimized_FStack_FSkip/FStack_FSkip_DQN_data_gather_lengths.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Optimized_FStack_FSkip/FStack_FSkip_DQN_data_gather_rewards.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Optimized_FStack_FSkip/FStack_FSkip_PPO_data_gather_lengths.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Optimized_FStack_FSkip/FStack_FSkip_PPO_data_gather_rewards.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Optimized_FStack_FSkip/FStack_FSkip_data_gather_lengths.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Optimized_FStack_FSkip/FStack_FSkip_data_gather_rewards.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config-neat_test" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evoman/gym_sensors.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/neat_test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plotResults.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plot_FSN" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plot_FSN_VFS" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plot_FSkip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plot_FSkipN" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plot_FSkipN_swapped" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plot_FStack" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plot_FStack_FSkip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/evoman_logs.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evoman/gym_enemy1.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/gym_enemy1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evoman/gym_enemy2.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/gym_enemy2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evoman/gym_enemy3.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/gym_enemy3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evoman/gym_enemy4.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/gym_enemy4.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evoman/gym_enemy5.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/gym_enemy5.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evoman/gym_enemy6.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/gym_enemy6.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evoman/gym_enemy7.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/gym_enemy7.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evoman/gym_enemy8.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/gym_enemy8.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evoman/gym_environment.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/gym_environment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evoman/gym_player.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/gym_player.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/evoman/tmx.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/tmx.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/human_demo.py" beforeDir="false" afterPath="$PROJECT_DIR$/human_demo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/loop.sh" beforeDir="false" afterPath="$PROJECT_DIR$/loop.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/optimization_coevolution_demo.py" beforeDir="false" afterPath="$PROJECT_DIR$/optimization_coevolution_demo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/optimization_generalist_demo.py" beforeDir="false" afterPath="$PROJECT_DIR$/optimization_generalist_demo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/optimization_specialist_demo.py" beforeDir="false" afterPath="$PROJECT_DIR$/optimization_specialist_demo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gym_env_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/gym_env_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gym_env_test_random_ini.py" beforeDir="false" afterPath="$PROJECT_DIR$/gym_env_test_random_ini.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +122,17 @@
       <workItem from="1632758992536" duration="6886000" />
       <workItem from="1632907287395" duration="35342000" />
       <workItem from="1633070476234" duration="2325000" />
-      <workItem from="1633261279899" duration="565000" />
+      <workItem from="1633261279899" duration="1626000" />
+      <workItem from="1633951397046" duration="8315000" />
+      <workItem from="1634020971581" duration="4149000" />
+      <workItem from="1634025432388" duration="106000" />
+      <workItem from="1634026880205" duration="1649000" />
+      <workItem from="1634071072887" duration="5309000" />
+      <workItem from="1634120653968" duration="5359000" />
+      <workItem from="1634468620675" duration="5454000" />
+      <workItem from="1635107567739" duration="3309000" />
+      <workItem from="1635159029646" duration="6886000" />
+      <workItem from="1635356347699" duration="266000" />
     </task>
     <servers />
   </component>

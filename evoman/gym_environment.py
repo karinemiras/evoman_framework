@@ -1,4 +1,5 @@
 import math
+import traceback
 
 import gym
 import numpy as np
@@ -8,7 +9,7 @@ from pygame.locals import *
 
 import tmx as tmx
 from gym_player import Player
-from sensors import get_sensors
+from gym_sensors import get_sensors
 
 
 def action(num):
@@ -50,18 +51,33 @@ class Evoman(gym.Env):
                  logs=False,
                  savelogs=False,
                  precise_clock=False,
+                 # Keep a buffer of all the frames in the current episode.
+                 # Allows for rendering a video after the fact, but increases memory usage by a couple megabytes
+                 # Good for using with the skip-frame wrapper of StableBaselines3
+                 keep_frames=False,
                  timeexpire=3000,
                  overturetime=100,
                  cost_per_timestep=0.0,
                  ):
         super(Evoman, self).__init__()
         self.action_space = spaces.MultiBinary(5)
-        observation_space_low = np.array([-self.HEIGHT if a % 2 else -self.WIDTH for a in range(20)], dtype=np.float32)
-        observation_space_low[2] = -2
-        observation_space_low[3] = -2
-        observation_space_high = np.array([self.HEIGHT if a % 2 else self.WIDTH for a in range(20)], dtype=np.float32)
-        observation_space_high[2] = 1
-        observation_space_high[3] = 1
+
+        observation_space_low = np.array(
+            [np.array(
+                [-self.WIDTH, -self.HEIGHT],
+                dtype=np.float32
+            ) for _ in range(10)],
+            dtype=np.float32
+        )
+        observation_space_high = np.array(
+            [np.array(
+                [self.WIDTH, self.HEIGHT],
+                dtype=np.float32
+            ) for _ in range(10)],
+            dtype=np.float32
+        )
+        observation_space_low[1] = [-1, -1]
+        observation_space_high[1] = [1, 1]
 
         self.observation_space = spaces.Box(
             low=observation_space_low,
@@ -79,6 +95,8 @@ class Evoman(gym.Env):
         self.timeexpire = timeexpire
         self.overturetime = overturetime
         self.cost_per_timestep = cost_per_timestep
+        self.keep_frames = keep_frames
+        self.f_buff = None
 
         # compatibility with existing Player and Enemy classes
         self.playermode = 'ai'
@@ -91,6 +109,10 @@ class Evoman(gym.Env):
         self.reset()
 
     def reset(self):
+        if self.keep_frames:
+            if not self.f_buff is None:
+                self.prev_f_buff = np.copy(self.f_buff)
+            self.f_buff = []
         self.time = 0
         self.freeze_p = False
         self.freeze_e = False
@@ -103,8 +125,13 @@ class Evoman(gym.Env):
         done = False
 
         self.time += 1
+        enemy_life = self.enemy.life
+        player_life = self.player.life
+
         self.tilemap.update(33 / 1000., self)
 
+        self.reward += 0.9*(enemy_life - self.enemy.life)
+        self.reward -= 0.1*(player_life - self.player.life)
         if self.player.life == 0 or self.enemy.life == 0:
             done = True
 
@@ -116,9 +143,12 @@ class Evoman(gym.Env):
 
         info = {}
 
+        if self.keep_frames:
+            self.f_buff.append(self.get_frame())
+
         return get_sensors(self), self.reward, done, info
 
-    def render(self, mode="human"):
+    def draw(self):
         # updates objects and draws its itens on screen
         self.screen.fill((250, 250, 250))
         self.tilemap.draw(self.screen)
@@ -137,18 +167,12 @@ class Evoman(gym.Env):
         pygame.draw.line(self.screen, (194, 118, 55), [590, 45], [695 - vbar, 45], 5)
         pygame.draw.line(self.screen, (0, 0, 0), [590, 49], [695, 49], 2)
 
+    def render(self, mode="human"):
         if mode == "bgr":
-            pygame.display.flip()
-            pxarray = pygame.PixelArray(pygame.display.get_surface())
-            frame = np.array(pxarray)
-            rows = lambda val: np.array([val % 256, (val // 256) % 256, (val // (256 * 256)) % 256], dtype=np.uint8)
-            cols = lambda val: rows(val)
-
-            frame = np.transpose(cols(frame), (2, 1, 0))
-
-            return frame
+            return self.frame_to_bgr(self.get_frame())
 
         if mode == "human":
+            self.draw()
             if self.precise_clock:
                 self.clock.tick_busy_loop(30)
             else:
@@ -156,4 +180,28 @@ class Evoman(gym.Env):
             pygame.display.flip()
             return
 
+        if mode == "video":
+            if not self.keep_frames:
+                raise EnvironmentError("The episode video has not been stored.\nPlease turn on keep_frames next time.")
+            video = []
+            for f in self.f_buff:
+                video.append(self.frame_to_bgr(f))
+            return np.array(video)
+
+        if mode == "p_video":
+            if not self.keep_frames:
+                raise EnvironmentError("The episode video has not been stored.\nPlease turn on keep_frames next time.")
+            video = []
+            for f in self.prev_f_buff:
+                video.append(self.frame_to_bgr(f))
+            return np.array(video)
+
         raise NotImplementedError()
+
+    def get_frame(self):
+        self.draw()
+        return np.array(pygame.PixelArray(pygame.display.get_surface()))
+
+    def frame_to_bgr(self, frame):
+        bgr_frame = np.array([frame % 256, (frame // 256) % 256, (frame // (256 * 256)) % 256], dtype=np.uint8)
+        return np.transpose(bgr_frame, (2, 1, 0))
