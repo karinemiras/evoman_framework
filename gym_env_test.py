@@ -26,7 +26,7 @@ for env in environments:
     i += 1
 
     model.set_env(env)
-    model.learn(total_timesteps=(2 ** 13))
+    model.learn(total_timesteps=(2 ** 16))
 
     print(f'\n\n\nFinished learning env{i}!\n\n\n')
 

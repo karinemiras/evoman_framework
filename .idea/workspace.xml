@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cbb56179-6c1d-4ce5-96e6-fe6435188f5f" name="Changes" comment="Multithreading?">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gym_env_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/gym_env_test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -69,7 +68,7 @@
       <workItem from="1634468620675" duration="5454000" />
       <workItem from="1635107567739" duration="3309000" />
       <workItem from="1635159029646" duration="6886000" />
-      <workItem from="1635356347699" duration="10140000" />
+      <workItem from="1635356347699" duration="10323000" />
     </task>
     <task id="LOCAL-00001" summary="A bunch of stuff">
       <created>1635356758320</created>
@@ -148,7 +147,21 @@
       <option name="project" value="LOCAL" />
       <updated>1635368548168</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Multithreading?">
+      <created>1635368933754</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1635368933754</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Multithreading?">
+      <created>1635368988636</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1635368988636</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -170,5 +183,16 @@
     <MESSAGE value="A bunch of stuff" />
     <MESSAGE value="Multithreading?" />
     <option name="LAST_COMMIT_MESSAGE" value="Multithreading?" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/evoman/gym_environment.py</url>
+          <line>156</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
