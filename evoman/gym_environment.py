@@ -58,6 +58,7 @@ class Evoman(gym.Env):
                  timeexpire=3000,
                  overturetime=100,
                  cost_per_timestep=0.0,
+                 show_display=False,
                  ):
         super(Evoman, self).__init__()
         self.action_space = spaces.MultiBinary(5)
@@ -103,8 +104,9 @@ class Evoman(gym.Env):
 
         pygame.init()
         self.clock = pygame.time.Clock()
-        self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT), DOUBLEBUF)
-        self.screen.set_alpha(None)
+        if show_display:
+            self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT), DOUBLEBUF)
+            self.screen.set_alpha(None)
         pygame.event.set_allowed([QUIT, KEYDOWN, KEYUP])
         self.reset()
 

@@ -1,72 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cbb56179-6c1d-4ce5-96e6-fe6435188f5f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FSN/FSN_VFS_data_episode_lengths.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FSN/FSN_VFS_data_episode_rewards.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FSN/FSN_data_episode_lengths.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FSN/FSN_data_episode_rewards.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FSN/FSN_run2_data_episode_lengths.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FSN/FSN_run2_data_episode_rewards.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FSN_VFS_data_gather.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FSN_data_gather.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FSkipN/FSkipN_data_episode_lengths.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FSkipN/FSkipN_data_episode_rewards.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FSkipN/FSkipN_run2_data_episode_lengths.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FSkipN/FSkipN_run2_data_episode_rewards.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FSkipN/FSkipN_run2_swapped_wrapper_data_episode_lengths.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FSkipN/FSkipN_run2_swapped_wrapper_data_episode_rewards.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FSkipN_data_gather.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FSkip_data_gather.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FSkip_data_gather_lengths.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FStack_FSkip_data_gather.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FStack_FSkip_data_gather_lengths.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FStack_FSkip_data_gather_rewards.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FStack_data_gather.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FStack_data_gather_lengths.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FStack_data_gather_rewards.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Generalist/data_gather_lengths.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Generalist/data_gather_rewards.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Generalist_data_gather.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Optimized_FSkip/FSkip_data_gather_lengths.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Optimized_FSkip/FSkip_data_gather_rewards.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Optimized_FStack/FStack_data_gather_lengths.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Optimized_FStack/FStack_data_gather_rewards.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Optimized_FStack_FSkip/FStack_FSkip_A2C_data_gather_lengths.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Optimized_FStack_FSkip/FStack_FSkip_A2C_data_gather_rewards.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Optimized_FStack_FSkip/FStack_FSkip_DQN_data_gather_lengths.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Optimized_FStack_FSkip/FStack_FSkip_DQN_data_gather_rewards.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Optimized_FStack_FSkip/FStack_FSkip_PPO_data_gather_lengths.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Optimized_FStack_FSkip/FStack_FSkip_PPO_data_gather_rewards.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Optimized_FStack_FSkip/FStack_FSkip_data_gather_lengths.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Optimized_FStack_FSkip/FStack_FSkip_data_gather_rewards.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config-neat_test" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evoman/gym_sensors.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/neat_test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plotResults.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plot_FSN" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plot_FSN_VFS" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plot_FSkip" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plot_FSkipN" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plot_FSkipN_swapped" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plot_FStack" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plot_FStack_FSkip" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/evoman_logs.txt" afterDir="false" />
+    <list default="true" id="cbb56179-6c1d-4ce5-96e6-fe6435188f5f" name="Changes" comment="A bunch of stuff">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/evoman/gym_enemy1.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/gym_enemy1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/evoman/gym_enemy2.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/gym_enemy2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/evoman/gym_enemy3.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/gym_enemy3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/evoman/gym_enemy4.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/gym_enemy4.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/evoman/gym_enemy5.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/gym_enemy5.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/evoman/gym_enemy6.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/gym_enemy6.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/evoman/gym_enemy7.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/gym_enemy7.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/evoman/gym_enemy8.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/gym_enemy8.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/evoman/gym_environment.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/gym_environment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/evoman/gym_player.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/gym_player.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/evoman/tmx.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/tmx.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gym_env_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/gym_env_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym_env_test_random_ini.py" beforeDir="false" afterPath="$PROJECT_DIR$/gym_env_test_random_ini.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,8 +70,16 @@
       <workItem from="1634468620675" duration="5454000" />
       <workItem from="1635107567739" duration="3309000" />
       <workItem from="1635159029646" duration="6886000" />
-      <workItem from="1635356347699" duration="266000" />
+      <workItem from="1635356347699" duration="1522000" />
     </task>
+    <task id="LOCAL-00001" summary="A bunch of stuff">
+      <created>1635356758320</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1635356758320</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -150,5 +96,9 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="A bunch of stuff" />
+    <option name="LAST_COMMIT_MESSAGE" value="A bunch of stuff" />
   </component>
 </project>
