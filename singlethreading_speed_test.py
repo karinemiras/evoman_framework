@@ -27,8 +27,8 @@ threads = []
 for env in environments:
     threads.append(EnvTrain(PPO('MlpPolicy', env, verbose=i), 2**16))
     threads[-1].start()
-    # while True in [thread.is_alive() for thread in threads]:
-    #     time.sleep(1)
+    while True in [thread.is_alive() for thread in threads]:
+        time.sleep(1)
     i = 0
 
 while True in [thread.is_alive() for thread in threads]:
