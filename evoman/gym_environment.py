@@ -106,7 +106,11 @@ class Evoman(gym.Env):
         self.clock = pygame.time.Clock()
         if not show_display:
             os.environ["SDL_VIDEODRIVER"] = "dummy"
-        self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT), DOUBLEBUF)
+        try:
+            self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT), DOUBLEBUF)
+        except pygame.error:
+            os.environ["SDL_VIDEODRIVER"] = "dummy"
+            self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT), DOUBLEBUF)
         self.screen.set_alpha(None)
         pygame.event.set_allowed([QUIT, KEYDOWN, KEYUP])
         self.reset()
