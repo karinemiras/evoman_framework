@@ -20,15 +20,14 @@ class EnvTrain (threading.Thread):
 
 environments = [MaxAndSkipEnv(Evoman(enemyn=str(a)), skip=2) for a in range(1, 9)]
 
-model = PPO('MlpPolicy', environments[0], verbose=1)
-
-i = 0
+i = 1
 
 threads = []
 
 for env in environments:
-    threads.append(EnvTrain(PPO('MlpPolicy', env), 2**16))
+    threads.append(EnvTrain(PPO('MlpPolicy', env, verbose=i), 2**16))
     threads[-1].start()
+    i = 0
 
 while True in [thread.isAlive() for thread in threads]:
     time.sleep(1)
