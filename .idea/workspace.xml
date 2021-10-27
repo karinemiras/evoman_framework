@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cbb56179-6c1d-4ce5-96e6-fe6435188f5f" name="Changes" comment="Multithreading?">
-      <change beforePath="$PROJECT_DIR$/gym_env_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/gym_env_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multiproc.py" beforeDir="false" afterPath="$PROJECT_DIR$/multiproc.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +69,7 @@
       <workItem from="1634468620675" duration="5454000" />
       <workItem from="1635107567739" duration="3309000" />
       <workItem from="1635159029646" duration="6886000" />
-      <workItem from="1635356347699" duration="10323000" />
+      <workItem from="1635356347699" duration="10942000" />
     </task>
     <task id="LOCAL-00001" summary="A bunch of stuff">
       <created>1635356758320</created>
@@ -161,7 +162,14 @@
       <option name="project" value="LOCAL" />
       <updated>1635368988636</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Multithreading?">
+      <created>1635369007078</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1635369007078</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
