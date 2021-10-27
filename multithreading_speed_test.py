@@ -18,7 +18,7 @@ class EnvTrain (threading.Thread):
         print(f'\n\n\nFinished learning {self.name}!\n\n\n')
 
 
-environments = [MaxAndSkipEnv(Evoman(enemyn=str(a)), skip=2) for a in range(1, 4)]
+environments = [MaxAndSkipEnv(Evoman(enemyn=str(a)), skip=2) for a in range(1, 5)]
 
 i = 1
 

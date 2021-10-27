@@ -51,6 +51,7 @@ class Evoman(gym.Env):
                  logs=False,
                  savelogs=False,
                  precise_clock=False,
+                 warpspeed = True,
                  # Keep a buffer of all the frames in the current episode.
                  # Allows for rendering a video after the fact, but increases memory usage by a couple megabytes
                  # Good for using with the skip-frame wrapper of StableBaselines3
@@ -98,18 +99,21 @@ class Evoman(gym.Env):
         self.cost_per_timestep = cost_per_timestep
         self.keep_frames = keep_frames
         self.f_buff = None
+        self.show_display = show_display
+        self.warpspeed = warpspeed
 
         # compatibility with existing Player and Enemy classes
         self.playermode = 'ai'
 
         pygame.init()
         self.clock = pygame.time.Clock()
-        if not show_display:
+        if not self.show_display:
             os.environ["SDL_VIDEODRIVER"] = "dummy"
         try:
             self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT), DOUBLEBUF)
         except pygame.error:
             os.environ["SDL_VIDEODRIVER"] = "dummy"
+            self.show_display = False
             self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT), DOUBLEBUF)
         self.screen.set_alpha(None)
         pygame.event.set_allowed([QUIT, KEYDOWN, KEYUP])
@@ -153,6 +157,9 @@ class Evoman(gym.Env):
         if self.keep_frames:
             self.f_buff.append(self.get_frame())
 
+        if self.show_display:
+            self.render("human")
+
         return get_sensors(self), self.reward, done, info
 
     def draw(self):
@@ -180,10 +187,11 @@ class Evoman(gym.Env):
 
         if mode == "human":
             self.draw()
-            if self.precise_clock:
-                self.clock.tick_busy_loop(30)
-            else:
-                self.clock.tick(30)
+            if not self.warpspeed:
+                if self.precise_clock:
+                    self.clock.tick_busy_loop(30)
+                else:
+                    self.clock.tick(30)
             pygame.display.flip()
             return
 
