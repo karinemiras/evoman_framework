@@ -15,10 +15,10 @@ class EnvTrain (threading.Thread):
         threading.Thread.__init__(self)
     def run(self):
         self.model.learn(self.timesteps)
-        print(f'\n\n\nFinished learning env{self.model.env.enemyn}!\n\n\n')
+        print(f'\n\n\nFinished learning env{self.model.env.env.enemyn}!\n\n\n')
 
 
-environments = [MaxAndSkipEnv(Evoman(enemyn=str(a)), skip=2) for a in range(1, 9)]
+environments = [MaxAndSkipEnv(Evoman(enemyn=str(a)), skip=2) for a in range(1, 3)]
 
 i = 1
 
@@ -27,8 +27,8 @@ threads = []
 for env in environments:
     threads.append(EnvTrain(PPO('MlpPolicy', env, verbose=i), 2**16))
     threads[-1].start()
-    while True in [thread.is_alive() for thread in threads]:
-        time.sleep(1)
+    # while True in [thread.is_alive() for thread in threads]:
+    #     time.sleep(1)
     i = 0
 
 while True in [thread.is_alive() for thread in threads]:
