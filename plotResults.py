@@ -1,4 +1,5 @@
 import sys
+import numpy as np
 import matplotlib.pyplot as pyplot
 import csv
 
@@ -20,10 +21,11 @@ def main():
 
                 rew = rewards[i]
                 label = str(rew.pop(0))
-                label += ' (' + str(rew.pop(0)) + ')'
+                winratio = rew.pop(0)
+                label += ' (' + str(winratio) + ')'
                 # pyplot.plot(lengths_to_indexes(lens), rew, label=label)
                 lengths_to_indexes(lens)
-                pyplot.plot(lens, average(rew, 50), label=label)
+                pyplot.plot(lens, np.array(average(rew, 50))-winratio, label=label)
                 # pyplot.plot(lens, minimum(rew, 50), label=label + ' min')
                 # pyplot.plot(lens, maximum(rew, 50), label=label + ' max')
             pyplot.title(graphname)

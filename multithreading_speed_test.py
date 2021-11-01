@@ -18,14 +18,14 @@ class EnvTrain (threading.Thread):
         print(f'\n\n\nFinished learning {self.name}!\n\n\n')
 
 
-environments = [MaxAndSkipEnv(Evoman(enemyn=str(a)), skip=2) for a in range(1, 5)]
+environments = [MaxAndSkipEnv(Evoman(enemyn=str(a)), skip=2) for a in range(1, 4)]
 
 i = 1
 
 threads = []
 
 for env in environments:
-    threads.append(EnvTrain(PPO('MlpPolicy', env, verbose=i), 2**16))
+    threads.append(EnvTrain(PPO('MlpPolicy', env, verbose=0), 2**17))
     threads[-1].start()
     # while True in [thread.is_alive() for thread in threads]:
     #     time.sleep(1)

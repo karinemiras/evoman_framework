@@ -24,6 +24,9 @@ class Evoman(gym.Env):
     HEIGHT = 512
     WIDTH = 736
 
+    def win_value(self):
+        return self.weight_enemy_hitpoint * 100 - self.weight_player_hitpoint * 100
+
     def load_sprites(self):
 
         # loads enemy and map
@@ -60,6 +63,8 @@ class Evoman(gym.Env):
                  overturetime=100,
                  cost_per_timestep=0.0,
                  show_display=False,
+                 weight_enemy_hitpoint=1,
+                 weight_player_hitpoint=1,
                  ):
         super(Evoman, self).__init__()
         self.action_space = spaces.MultiBinary(5)
@@ -101,6 +106,8 @@ class Evoman(gym.Env):
         self.f_buff = None
         self.show_display = show_display
         self.warpspeed = warpspeed
+        self.weight_enemy_hitpoint = weight_enemy_hitpoint
+        self.weight_player_hitpoint = weight_player_hitpoint
 
         # compatibility with existing Player and Enemy classes
         self.playermode = 'ai'
@@ -141,8 +148,8 @@ class Evoman(gym.Env):
 
         self.tilemap.update(33 / 1000., self)
 
-        self.reward += 0.9 * (enemy_life - self.enemy.life)
-        self.reward -= 0.1 * (player_life - self.player.life)
+        self.reward += self.weight_enemy_hitpoint * (enemy_life - self.enemy.life)
+        self.reward -= self.weight_player_hitpoint * (player_life - self.player.life)
         if self.player.life == 0 or self.enemy.life == 0:
             done = True
 

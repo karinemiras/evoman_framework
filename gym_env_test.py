@@ -22,7 +22,7 @@ model = PPO('MlpPolicy', environments[0], verbose=0)
 
 for env in environments:
     model.set_env(env)
-    model.learn(total_timesteps=(2 ** 16))
+    model.learn(total_timesteps=(2 ** 17))
 
     print(f'\n\n\nFinished learning env{sys.argv[1]}!\n\n\n')
 
