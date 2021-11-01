@@ -124,6 +124,7 @@ class Evoman(gym.Env):
             self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT), DOUBLEBUF)
         self.screen.set_alpha(None)
         pygame.event.set_allowed([QUIT, KEYDOWN, KEYUP])
+        pygame.mixer.quit()
         self.reset()
 
     def reset(self):
