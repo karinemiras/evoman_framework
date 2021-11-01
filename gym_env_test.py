@@ -18,7 +18,7 @@ from gym_environment import Evoman
 
 environments = [MaxAndSkipEnv(Evoman(enemyn=sys.argv[1]), skip=2)]
 
-model = PPO('MlpPolicy', environments[0], verbose=0)
+model = PPO('MlpPolicy', environments[0], verbose=sys.argv[1]=='1')
 
 for env in environments:
     model.set_env(env)
