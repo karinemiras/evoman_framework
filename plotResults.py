@@ -4,11 +4,11 @@ import matplotlib.pyplot as pyplot
 import csv
 
 def main():
-    filename = input("File name: ")
-    graphname = input("Graph name: ")
-    data_type = input("Data type (`%` or r): ")
-    ylabel = input("Label y: ")
-    xlabel = input("Label x: ")
+    filename = sys.argv[1]
+    graphname = sys.argv[2]
+    data_type = "r"
+    ylabel = "Rewards"
+    xlabel = "Steps"
     with open(filename+'_rewards.csv', newline='\n') as reward_file:
         with open(filename+'_lengths.csv', newline='\n') as lengths_file:
             rewards = list(csv.reader(reward_file, delimiter=',', quoting=csv.QUOTE_NONNUMERIC, quotechar='\''))
@@ -25,7 +25,7 @@ def main():
                 label += ' (' + str(winratio) + ')'
                 # pyplot.plot(lengths_to_indexes(lens), rew, label=label)
                 lengths_to_indexes(lens)
-                pyplot.plot(lens, np.array(average(rew, 50))-winratio, label=label)
+                pyplot.plot(lens, np.array(average(rew, 2)), label=label)
                 # pyplot.plot(lens, minimum(rew, 50), label=label + ' min')
                 # pyplot.plot(lens, maximum(rew, 50), label=label + ' max')
             pyplot.title(graphname)
