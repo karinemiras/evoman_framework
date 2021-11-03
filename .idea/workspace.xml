@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cbb56179-6c1d-4ce5-96e6-fe6435188f5f" name="Changes" comment="Multithreading?">
-      <change afterPath="$PROJECT_DIR$/HitpointWeightIntermit_data_gather.py" afterDir="false" />
+    <list default="true" id="cbb56179-6c1d-4ce5-96e6-fe6435188f5f" name="Changes" comment="HitpointWeightIntermit_data_gather">
+      <change afterPath="$PROJECT_DIR$/FullTime_data_gather.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MSQWeightedAverage.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/normalizePlotResults.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multiproc.py" beforeDir="false" afterPath="$PROJECT_DIR$/open_as_subprocess.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/plotResults.py" beforeDir="false" afterPath="$PROJECT_DIR$/plotResults.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -33,6 +34,7 @@
   <component name="ProjectId" id="1yibP5fVC7oACCui04fIH987U5T" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
@@ -42,6 +44,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File" value="Python" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="project.scopes" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -72,7 +75,10 @@
       <workItem from="1635107567739" duration="3309000" />
       <workItem from="1635159029646" duration="6886000" />
       <workItem from="1635356347699" duration="18647000" />
-      <workItem from="1635766446355" duration="10361000" />
+      <workItem from="1635766446355" duration="10798000" />
+      <workItem from="1635808328262" duration="139000" />
+      <workItem from="1635939546847" duration="9485000" />
+      <workItem from="1635978280022" duration="4896000" />
     </task>
     <task id="LOCAL-00001" summary="A bunch of stuff">
       <created>1635356758320</created>
@@ -221,7 +227,14 @@
       <option name="project" value="LOCAL" />
       <updated>1635772092374</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="HitpointWeightIntermit_data_gather">
+      <created>1635779547620</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1635779547620</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -242,6 +255,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="A bunch of stuff" />
     <MESSAGE value="Multithreading?" />
-    <option name="LAST_COMMIT_MESSAGE" value="Multithreading?" />
+    <MESSAGE value="HitpointWeightIntermit_data_gather" />
+    <option name="LAST_COMMIT_MESSAGE" value="HitpointWeightIntermit_data_gather" />
   </component>
 </project>

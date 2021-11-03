@@ -25,15 +25,15 @@ def main():
                 label += ' (' + str(winratio) + ')'
                 # pyplot.plot(lengths_to_indexes(lens), rew, label=label)
                 lengths_to_indexes(lens)
-                pyplot.plot(lens, np.array(average(rew, 2)), label=label)
+                pyplot.plot(np.array(average(rew, 2)), label=label)
                 # pyplot.plot(lens, minimum(rew, 50), label=label + ' min')
                 # pyplot.plot(lens, maximum(rew, 50), label=label + ' max')
             pyplot.title(graphname)
             pyplot.xlabel(xlabel)
             pyplot.ylabel(ylabel)
             pyplot.grid(True)
-            if (data_type == '%'):
-                pyplot.ylim(0,1)
+            if (data_type == 'r'):
+                pyplot.ylim(-100,100)
             pyplot.legend()
             pyplot.show()
 
