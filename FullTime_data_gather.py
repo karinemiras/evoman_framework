@@ -142,7 +142,7 @@ for enemy_id, enemy_envs in enumerate(environments, start=1):
                         if not os.path.exists(videoDir):
                             os.makedirs(videoDir)
                         env.envs[0].env.env.keep_frames = False
-                        model = PPO('MlpPolicy', env, verbose=1)
+                        model = PPO('MlpPolicy', env)
                         l_prepend = [f'{id_to_name(enemy_id)}', ""]
                         r_prepend = [f'{id_to_name(enemy_id)} ({env.envs[0].env.env.weight_player_hitpoint}, {env.envs[0].env.env.weight_enemy_hitpoint})', str(env.envs[0].env.env.win_value())]
                         model.learn(total_timesteps=(2 ** 21), callback=EvalEnvCallback(

@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cbb56179-6c1d-4ce5-96e6-fe6435188f5f" name="Changes" comment="HitpointWeightIntermit_data_gather">
-      <change afterPath="$PROJECT_DIR$/FullTime_data_gather.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MSQWeightedAverage.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/normalizePlotResults.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plotResults.py" beforeDir="false" afterPath="$PROJECT_DIR$/plotResults.py" afterDir="false" />
+    <list default="true" id="cbb56179-6c1d-4ce5-96e6-fe6435188f5f" name="Changes" comment="FullTime">
+      <change beforePath="$PROJECT_DIR$/FullTime_data_gather.py" beforeDir="false" afterPath="$PROJECT_DIR$/FullTime_data_gather.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +74,7 @@
       <workItem from="1635766446355" duration="10798000" />
       <workItem from="1635808328262" duration="139000" />
       <workItem from="1635939546847" duration="9485000" />
-      <workItem from="1635978280022" duration="4896000" />
+      <workItem from="1635978280022" duration="5533000" />
     </task>
     <task id="LOCAL-00001" summary="A bunch of stuff">
       <created>1635356758320</created>
@@ -234,7 +230,14 @@
       <option name="project" value="LOCAL" />
       <updated>1635779547620</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="FullTime">
+      <created>1635983197070</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1635983197070</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -256,6 +259,7 @@
     <MESSAGE value="A bunch of stuff" />
     <MESSAGE value="Multithreading?" />
     <MESSAGE value="HitpointWeightIntermit_data_gather" />
-    <option name="LAST_COMMIT_MESSAGE" value="HitpointWeightIntermit_data_gather" />
+    <MESSAGE value="FullTime" />
+    <option name="LAST_COMMIT_MESSAGE" value="FullTime" />
   </component>
 </project>
