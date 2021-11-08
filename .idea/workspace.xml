@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cbb56179-6c1d-4ce5-96e6-fe6435188f5f" name="Changes" comment="FullTime">
-      <change beforePath="$PROJECT_DIR$/FullTime_data_gather.py" beforeDir="false" afterPath="$PROJECT_DIR$/FullTime_data_gather.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShortTime_data_gather.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evoman/tmx.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/tmx.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
