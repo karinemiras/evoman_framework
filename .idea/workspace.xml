@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="cbb56179-6c1d-4ce5-96e6-fe6435188f5f" name="Changes" comment="FullTime">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FullTime_data_gather.py" beforeDir="false" afterPath="$PROJECT_DIR$/FullTime_data_gather.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-neat_test" beforeDir="false" afterPath="$PROJECT_DIR$/config-neat_test" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/neat_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/neat_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evoman/environment.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/environment.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -247,7 +245,14 @@
       <option name="project" value="LOCAL" />
       <updated>1636388039146</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="FullTime">
+      <created>1636388584486</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1636388584486</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

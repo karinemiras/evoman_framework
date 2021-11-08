@@ -6,6 +6,7 @@
 
 import gzip
 import pickle
+import os
 
 import numpy
 from pygame.locals import *
@@ -18,6 +19,8 @@ from player import *
 
 # main class
 class Environment(object):
+    HEIGHT = 512
+    WIDTH = 736
 
     # simulation parameters
     def __init__(self,
@@ -109,7 +112,12 @@ class Environment(object):
         else:
             flags = DOUBLEBUF
 
-        self.screen = pygame.display.set_mode((736, 512), flags)
+        try:
+            self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT), DOUBLEBUF)
+        except pygame.error:
+            os.environ["SDL_VIDEODRIVER"] = "dummy"
+            self.show_display = False
+            self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT), DOUBLEBUF)
 
         self.screen.set_alpha(None)  # disables uneeded alpha
         pygame.event.set_allowed([QUIT, KEYDOWN, KEYUP])  # enables only needed events
