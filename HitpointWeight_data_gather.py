@@ -25,9 +25,9 @@ environments = [
 i = 0
 
 for enemy_id, enemy_envs in enumerate(environments, start=1):
-    with open(f'HitpointWeight/{id_to_name(enemy_id)}_lengths.csv', mode='w') as lengths_file:
+    with open(f'HitpointWeight/{id_to_name(enemy_id)}_lengths.csv', mode='a') as lengths_file:
         lengths_writer = csv.writer(lengths_file, delimiter=',', quotechar='\'', quoting=csv.QUOTE_NONNUMERIC)
-        with open(f'HitpointWeight/{id_to_name(enemy_id)}_rewards.csv', mode='w') as rewards_file:
+        with open(f'HitpointWeight/{id_to_name(enemy_id)}_rewards.csv', mode='a') as rewards_file:
             rewards_writer = csv.writer(rewards_file, delimiter=',', quotechar='\'', quoting=csv.QUOTE_NONNUMERIC)
 
             for env in enemy_envs:

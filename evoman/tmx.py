@@ -81,8 +81,6 @@ class Tileset(object):
 
         tileset = cls(name, tile_width, tile_height, firstgid)
 
-        print(tag)
-        sys.exit();
         for c in tag.getchildren():
             if c.tag == "image":
                 # create a tileset

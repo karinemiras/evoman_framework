@@ -34,7 +34,7 @@ environments = [
             )), skip=2)]
         ), n_stack=3)
     ) for weight_player_hitpoint in range(4, 7)]
-    for n in range(1, 9)
+    for n in range(1, 3)
 ]
 
 
@@ -125,13 +125,13 @@ for enemy_id, enemy_envs in enumerate(environments, start=1):
     enemyDir = f'ShortTime/{id_to_name(enemy_id)}'
     if not os.path.exists(enemyDir):
         os.makedirs(enemyDir)
-    with open(f'{enemyDir}/Evaluation_lengths.csv', mode='w') as eval_lengths_file:
+    with open(f'{enemyDir}/Evaluation_lengths.csv', mode='a') as eval_lengths_file:
         eval_lengths_writer = csv.writer(eval_lengths_file, delimiter=',', quotechar='\'', quoting=csv.QUOTE_NONNUMERIC)
-        with open(f'{enemyDir}/Evaluation_rewards.csv', mode='w') as eval_rewards_file:
+        with open(f'{enemyDir}/Evaluation_rewards.csv', mode='a') as eval_rewards_file:
             eval_rewards_writer = csv.writer(eval_rewards_file, delimiter=',', quotechar='\'', quoting=csv.QUOTE_NONNUMERIC)
-            with open(f'{enemyDir}/Training_lengths.csv', mode='w') as train_lengths_file:
+            with open(f'{enemyDir}/Training_lengths.csv', mode='a') as train_lengths_file:
                 train_lengths_writer = csv.writer(train_lengths_file, delimiter=',', quotechar='\'', quoting=csv.QUOTE_NONNUMERIC)
-                with open(f'{enemyDir}/Training_rewards.csv', mode='w') as train_rewards_file:
+                with open(f'{enemyDir}/Training_rewards.csv', mode='a') as train_rewards_file:
                     train_rewards_writer = csv.writer(train_rewards_file, delimiter=',', quotechar='\'', quoting=csv.QUOTE_NONNUMERIC)
 
                     for env, eval_env in enemy_envs:

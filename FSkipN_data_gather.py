@@ -12,9 +12,9 @@ environments = [MaxAndSkipEnv(Monitor(Evoman(enemyn='1')), skip=fskipn) for fski
 
 i = 0
 
-with open(f'FSkipN/FSkipN_run2_swapped_wrapper_data_episode_lengths.csv', mode='w') as lengths_file:
+with open(f'FSkipN/FSkipN_run2_swapped_wrapper_data_episode_lengths.csv', mode='a') as lengths_file:
     lengths_writer = csv.writer(lengths_file, delimiter=',', quotechar='\'', quoting=csv.QUOTE_NONNUMERIC)
-    with open(f'FSkipN/FSkipN_run2_swapped_wrapper_data_episode_rewards.csv', mode='w') as rewards_file:
+    with open(f'FSkipN/FSkipN_run2_swapped_wrapper_data_episode_rewards.csv', mode='a') as rewards_file:
         rewards_writer = csv.writer(rewards_file, delimiter=',', quotechar='\'', quoting=csv.QUOTE_NONNUMERIC)
 
         for env in environments:
