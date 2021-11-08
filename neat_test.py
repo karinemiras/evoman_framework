@@ -1,7 +1,6 @@
 import os
 import sys
 import neat
-import visualize
 
 sys.path.insert(0, 'evoman')
 from environment import Environment

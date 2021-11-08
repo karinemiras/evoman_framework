@@ -41,7 +41,7 @@ environments = [
                 randomini=True,
             )), skip=2)]
         ), n_stack=3)
-    ) for weight_player_hitpoint in [0.1, 0.4]]
+    ) for weight_player_hitpoint in [0.1, 0.4, 0.5]]
     for n in range(1, 9)
 ]
 

@@ -2,21 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cbb56179-6c1d-4ce5-96e6-fe6435188f5f" name="Changes" comment="FullTime">
-      <change afterPath="$PROJECT_DIR$/plotAllResults.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FSN_VFS_data_gather.py" beforeDir="false" afterPath="$PROJECT_DIR$/FSN_VFS_data_gather.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FSN_data_gather.py" beforeDir="false" afterPath="$PROJECT_DIR$/FSN_data_gather.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FSkipN_data_gather.py" beforeDir="false" afterPath="$PROJECT_DIR$/FSkipN_data_gather.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FSkip_data_gather.py" beforeDir="false" afterPath="$PROJECT_DIR$/FSkip_data_gather.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FStack_FSkip_data_gather.py" beforeDir="false" afterPath="$PROJECT_DIR$/FStack_FSkip_data_gather.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FStack_data_gather.py" beforeDir="false" afterPath="$PROJECT_DIR$/FStack_data_gather.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FullTime_data_gather.py" beforeDir="false" afterPath="$PROJECT_DIR$/FullTime_data_gather.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Generalist_data_gather.py" beforeDir="false" afterPath="$PROJECT_DIR$/Generalist_data_gather.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HitpointWeightIntermit_data_gather.py" beforeDir="false" afterPath="$PROJECT_DIR$/HitpointWeightIntermit_data_gather.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HitpointWeight_data_gather.py" beforeDir="false" afterPath="$PROJECT_DIR$/HitpointWeight_data_gather.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShortTime_data_gather.py" beforeDir="false" afterPath="$PROJECT_DIR$/ShortTime_data_gather.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/evoman/tmx.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/tmx.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plotResults.py" beforeDir="false" afterPath="$PROJECT_DIR$/plotResults.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-neat_test" beforeDir="false" afterPath="$PROJECT_DIR$/config-neat_test" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/neat_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/neat_test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -251,7 +240,14 @@
       <option name="project" value="LOCAL" />
       <updated>1635983197070</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="FullTime">
+      <created>1636388039146</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1636388039146</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

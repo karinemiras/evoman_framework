@@ -2,8 +2,8 @@
 
 [NEAT]
 fitness_criterion     = max
-fitness_threshold     = 80
-pop_size              = 150
+fitness_threshold     = 150
+pop_size              = 100
 reset_on_extinction   = False
 
 [DefaultGenome]
@@ -28,11 +28,11 @@ bias_replace_rate       = 0.1
 
 # genome compatibility options
 compatibility_disjoint_coefficient = 1.0
-compatibility_weight_coefficient   = 0.5
+compatibility_weight_coefficient   = 0.4
 
 # connection add/remove rates
-conn_add_prob           = 0.5
-conn_delete_prob        = 0.5
+conn_add_prob           = 0.05
+conn_delete_prob        = 0.05
 
 # connection enable options
 enabled_default         = True
@@ -42,8 +42,8 @@ feed_forward            = True
 initial_connection      = full
 
 # node add/remove rates
-node_add_prob           = 0.2
-node_delete_prob        = 0.2
+node_add_prob           = 0.03
+node_delete_prob        = 0.03
 
 # network parameters
 num_hidden              = 0
@@ -65,7 +65,7 @@ weight_init_stdev       = 1.0
 weight_max_value        = 1
 weight_min_value        = -1
 weight_mutate_power     = 0.5
-weight_mutate_rate      = 0.8
+weight_mutate_rate      = 0.9
 weight_replace_rate     = 0.1
 
 [DefaultSpeciesSet]
