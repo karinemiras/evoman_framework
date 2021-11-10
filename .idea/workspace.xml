@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cbb56179-6c1d-4ce5-96e6-fe6435188f5f" name="Changes" comment="So much shit.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/HitpointWeightNEAT.py" beforeDir="false" afterPath="$PROJECT_DIR$/HitpointWeightNEAT.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -78,7 +79,7 @@
       <workItem from="1635808328262" duration="139000" />
       <workItem from="1635939546847" duration="9485000" />
       <workItem from="1635978280022" duration="5533000" />
-      <workItem from="1636548564432" duration="18778000" />
+      <workItem from="1636548564432" duration="19584000" />
     </task>
     <task id="LOCAL-00001" summary="A bunch of stuff">
       <created>1635356758320</created>
@@ -276,7 +277,14 @@
       <option name="project" value="LOCAL" />
       <updated>1636581349400</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="So much shit.">
+      <created>1636581627305</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1636581627305</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
