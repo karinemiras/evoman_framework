@@ -189,4 +189,4 @@ if __name__ == '__main__':
     ]
     local_dir = os.path.dirname(__file__)
     config_path = os.path.join(local_dir, 'config-neat_test')
-    run(config_path, environments, runs=1, generations=30)
+    run(config_path, environments, runs=1, generations=25)
