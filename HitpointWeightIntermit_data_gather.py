@@ -1,12 +1,11 @@
 import csv
+import os.path
 import sys
 
 import numpy as np
 from stable_baselines3 import PPO
 from stable_baselines3.common.callbacks import BaseCallback
-from stable_baselines3.common.atari_wrappers import MaxAndSkipEnv
 from stable_baselines3.common.monitor import Monitor
-from stable_baselines3.common.vec_env import VecFrameStack, DummyVecEnv
 
 from map_enemy_id_to_name import id_to_name
 
@@ -15,22 +14,18 @@ from gym_environment import Evoman
 
 environments = [
     [(
-        VecFrameStack(DummyVecEnv(
-            [lambda: MaxAndSkipEnv(Monitor(Evoman(
-                enemyn=str(n),
-                weight_player_hitpoint=weight_player_hitpoint / 10.0,
-                weight_enemy_hitpoint=1.0 - (weight_player_hitpoint / 10.0),
-                randomini=True,
-            )), skip=2)]
-        ), n_stack=3),
-        VecFrameStack(DummyVecEnv(
-            [lambda: MaxAndSkipEnv(Monitor(Evoman(
-                enemyn=str(n),
-                weight_player_hitpoint=1,
-                weight_enemy_hitpoint=1,
-                randomini=True,
-            )), skip=2)]
-        ), n_stack=3)
+        Monitor(Evoman(
+            enemyn=str(n),
+            weight_player_hitpoint=weight_player_hitpoint / 10.0,
+            weight_enemy_hitpoint=1.0 - (weight_player_hitpoint / 10.0),
+            randomini=True,
+        )),
+        Monitor(Evoman(
+            enemyn=str(n),
+            weight_player_hitpoint=1,
+            weight_enemy_hitpoint=1,
+            randomini=True,
+        ))
     ) for weight_player_hitpoint in range(11)]
     for n in range(1, 9)
 ]
@@ -80,26 +75,29 @@ class EvalEnvCallback(BaseCallback):
         return True
 
     def _on_training_end(self) -> None:
-        self.l_writer.writerow(self.lengths_prepend+self.lengths)
-        self.r_writer.writerow(self.rewards_prepend+self.rewards)
-
+        self.l_writer.writerow(self.lengths_prepend + self.lengths)
+        self.r_writer.writerow(self.rewards_prepend + self.rewards)
 
 
 for enemy_id, enemy_envs in enumerate(environments, start=1):
+    if not os.path.exists('HitpointWeightIntermit'):
+        os.makedirs('HitpointWeightIntermit')
     with open(f'HitpointWeightIntermit/{id_to_name(enemy_id)}_lengths.csv', mode='a') as lengths_file:
         lengths_writer = csv.writer(lengths_file, delimiter=',', quotechar='\'', quoting=csv.QUOTE_NONNUMERIC)
         with open(f'HitpointWeightIntermit/{id_to_name(enemy_id)}_rewards.csv', mode='a') as rewards_file:
             rewards_writer = csv.writer(rewards_file, delimiter=',', quotechar='\'', quoting=csv.QUOTE_NONNUMERIC)
 
             for env, eval_env in enemy_envs:
-                env.envs[0].env.env.keep_frames = False
+                env.env.keep_frames = False
                 model = PPO('MlpPolicy', env)
-                model.learn(total_timesteps=(2 ** 18), callback=EvalEnvCallback(
+                model.learn(total_timesteps=int(2.5e5), callback=EvalEnvCallback(
                     eval_env=eval_env,
                     l_writer=lengths_writer,
                     r_writer=rewards_writer,
                     lengths_prepend=[f'{id_to_name(enemy_id)}', ""],
-                    rewards_prepend=[f'{id_to_name(enemy_id)} ({env.envs[0].env.env.weight_player_hitpoint}, {env.envs[0].env.env.weight_enemy_hitpoint})', str(env.envs[0].env.env.win_value())],
+                    rewards_prepend=[
+                        f'{id_to_name(enemy_id)} ({env.env.weight_player_hitpoint}, {env.env.weight_enemy_hitpoint})',
+                        str(env.env.win_value())],
                     n_eval_episodes=15,
                     eval_freq=10000,
                 ))
@@ -116,26 +114,26 @@ for enemy_id, enemy_envs in enumerate(environments, start=1):
 
                 # lengths_writer.writerow(lengths)
                 # rewards_writer.writerow(rewards)
-                print(f'\nFinished {id_to_name(enemy_id)} ({env.envs[0].env.env.weight_player_hitpoint}, {env.envs[0].env.env.weight_enemy_hitpoint})')
+                print(
+                    f'\nFinished {id_to_name(enemy_id)} ({env.env.weight_player_hitpoint}, {env.env.weight_enemy_hitpoint})')
 
     print(f'\n\nFinished {id_to_name(enemy_id)} completely\n\n')
-                # env.envs[0].env.env.keep_frames = True
-                # for j in range(10):
-                #     obs = env.reset()
-                #
-                #     fourcc = cv2.VideoWriter_fourcc('M', 'J', 'P', 'G')
-                #     fps = 30
-                #     video_filename = f'Optimized_FStack_FSkip/PPO_env{i}_run{j}.avi'
-                #     out = cv2.VideoWriter(video_filename, fourcc, fps, (env.envs[0].WIDTH, env.envs[0].HEIGHT))
-                #     for _ in range(2500):
-                #         action, _state = model.predict(obs, deterministic=False)
-                #         obs, reward, done, info = env.step(action)
-                #         if done:
-                #             break
-                #     for frame in env.render("p_video"):
-                #         out.write(frame)
-                #     out.release()
-
+    # env.env.keep_frames = True
+    # for j in range(10):
+    #     obs = env.reset()
+    #
+    #     fourcc = cv2.VideoWriter_fourcc('M', 'J', 'P', 'G')
+    #     fps = 30
+    #     video_filename = f'Optimized_FStack_FSkip/PPO_env{i}_run{j}.avi'
+    #     out = cv2.VideoWriter(video_filename, fourcc, fps, (env.envs[0].WIDTH, env.envs[0].HEIGHT))
+    #     for _ in range(2500):
+    #         action, _state = model.predict(obs, deterministic=False)
+    #         obs, reward, done, info = env.step(action)
+    #         if done:
+    #             break
+    #     for frame in env.render("p_video"):
+    #         out.write(frame)
+    #     out.release()
 
 # for env in environments:
 #     i += 1

@@ -2,8 +2,542 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cbb56179-6c1d-4ce5-96e6-fe6435188f5f" name="Changes" comment="FullTime">
+      <change afterPath="$PROJECT_DIR$/FullTime_FStack_FSkip_data_gather.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/Evaluation_lengths.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/Evaluation_rewards.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/Training_lengths.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/Training_rewards.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.4}, {0.6})/100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.4}, {0.6})/1000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.4}, {0.6})/1100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.4}, {0.6})/1200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.4}, {0.6})/1300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.4}, {0.6})/1400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.4}, {0.6})/1500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.4}, {0.6})/1600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.4}, {0.6})/1700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.4}, {0.6})/1800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.4}, {0.6})/1900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.4}, {0.6})/200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.4}, {0.6})/2000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.4}, {0.6})/300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.4}, {0.6})/400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.4}, {0.6})/500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.4}, {0.6})/600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.4}, {0.6})/700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.4}, {0.6})/800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.4}, {0.6})/900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.5}, {0.5})/100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.5}, {0.5})/1000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.5}, {0.5})/1100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.5}, {0.5})/1200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.5}, {0.5})/1300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.5}, {0.5})/1400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.5}, {0.5})/1500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.5}, {0.5})/1600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.5}, {0.5})/1700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.5}, {0.5})/1800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.5}, {0.5})/1900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.5}, {0.5})/200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.5}, {0.5})/2000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.5}, {0.5})/300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.5}, {0.5})/400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.5}, {0.5})/500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.5}, {0.5})/600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.5}, {0.5})/700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.5}, {0.5})/800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.5}, {0.5})/900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.6}, {0.4})/100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.6}, {0.4})/1000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.6}, {0.4})/1100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.6}, {0.4})/1200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.6}, {0.4})/1300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.6}, {0.4})/1400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.6}, {0.4})/1500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.6}, {0.4})/1600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.6}, {0.4})/1700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.6}, {0.4})/1800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.6}, {0.4})/1900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.6}, {0.4})/200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.6}, {0.4})/2000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.6}, {0.4})/300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.6}, {0.4})/400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.6}, {0.4})/500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.6}, {0.4})/600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.6}, {0.4})/700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.6}, {0.4})/800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/AirMan/models/({0.6}, {0.4})/900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/Evaluation_lengths.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/Evaluation_rewards.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/Training_lengths.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/Training_rewards.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.4}, {0.6})/100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.4}, {0.6})/1000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.4}, {0.6})/1100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.4}, {0.6})/1200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.4}, {0.6})/1300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.4}, {0.6})/1400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.4}, {0.6})/1500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.4}, {0.6})/1600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.4}, {0.6})/1700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.4}, {0.6})/1800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.4}, {0.6})/1900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.4}, {0.6})/200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.4}, {0.6})/2000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.4}, {0.6})/300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.4}, {0.6})/400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.4}, {0.6})/500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.4}, {0.6})/600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.4}, {0.6})/700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.4}, {0.6})/800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.4}, {0.6})/900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.5}, {0.5})/100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.5}, {0.5})/1000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.5}, {0.5})/1100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.5}, {0.5})/1200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.5}, {0.5})/1300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.5}, {0.5})/1400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.5}, {0.5})/1500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.5}, {0.5})/1600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.5}, {0.5})/1700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.5}, {0.5})/1800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.5}, {0.5})/1900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.5}, {0.5})/200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.5}, {0.5})/2000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.5}, {0.5})/300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.5}, {0.5})/400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.5}, {0.5})/500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.5}, {0.5})/600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.5}, {0.5})/700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.5}, {0.5})/800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.5}, {0.5})/900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.6}, {0.4})/100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.6}, {0.4})/1000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.6}, {0.4})/1100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.6}, {0.4})/1200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.6}, {0.4})/1300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.6}, {0.4})/1400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.6}, {0.4})/1500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.6}, {0.4})/1600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.6}, {0.4})/1700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.6}, {0.4})/1800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.6}, {0.4})/1900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.6}, {0.4})/200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.6}, {0.4})/2000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.6}, {0.4})/300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.6}, {0.4})/400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.6}, {0.4})/500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.6}, {0.4})/600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.6}, {0.4})/700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.6}, {0.4})/800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/BubbleMan/models/({0.6}, {0.4})/900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/Evaluation_lengths.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/Evaluation_rewards.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/Training_lengths.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/Training_rewards.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.4}, {0.6})/100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.4}, {0.6})/1000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.4}, {0.6})/1100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.4}, {0.6})/1200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.4}, {0.6})/1300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.4}, {0.6})/1400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.4}, {0.6})/1500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.4}, {0.6})/1600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.4}, {0.6})/1700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.4}, {0.6})/1800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.4}, {0.6})/1900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.4}, {0.6})/200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.4}, {0.6})/2000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.4}, {0.6})/300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.4}, {0.6})/400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.4}, {0.6})/500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.4}, {0.6})/600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.4}, {0.6})/700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.4}, {0.6})/800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.4}, {0.6})/900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.5}, {0.5})/100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.5}, {0.5})/1000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.5}, {0.5})/1100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.5}, {0.5})/1200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.5}, {0.5})/1300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.5}, {0.5})/1400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.5}, {0.5})/1500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.5}, {0.5})/1600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.5}, {0.5})/1700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.5}, {0.5})/1800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.5}, {0.5})/1900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.5}, {0.5})/200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.5}, {0.5})/2000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.5}, {0.5})/300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.5}, {0.5})/400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.5}, {0.5})/500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.5}, {0.5})/600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.5}, {0.5})/700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.5}, {0.5})/800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.5}, {0.5})/900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.6}, {0.4})/100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.6}, {0.4})/1000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.6}, {0.4})/1100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.6}, {0.4})/1200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.6}, {0.4})/1300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.6}, {0.4})/1400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.6}, {0.4})/1500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.6}, {0.4})/1600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.6}, {0.4})/1700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.6}, {0.4})/1800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.6}, {0.4})/1900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.6}, {0.4})/200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.6}, {0.4})/2000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.6}, {0.4})/300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.6}, {0.4})/400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.6}, {0.4})/500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.6}, {0.4})/600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.6}, {0.4})/700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.6}, {0.4})/800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/CrashMan/models/({0.6}, {0.4})/900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/Evaluation_lengths.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/Evaluation_rewards.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/Training_lengths.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/Training_rewards.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.4}, {0.6})/100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.4}, {0.6})/1000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.4}, {0.6})/1100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.4}, {0.6})/1200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.4}, {0.6})/1300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.4}, {0.6})/1400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.4}, {0.6})/1500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.4}, {0.6})/1600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.4}, {0.6})/1700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.4}, {0.6})/1800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.4}, {0.6})/1900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.4}, {0.6})/200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.4}, {0.6})/2000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.4}, {0.6})/300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.4}, {0.6})/400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.4}, {0.6})/500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.4}, {0.6})/600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.4}, {0.6})/700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.4}, {0.6})/800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.4}, {0.6})/900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.5}, {0.5})/100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.5}, {0.5})/1000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.5}, {0.5})/1100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.5}, {0.5})/1200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.5}, {0.5})/1300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.5}, {0.5})/1400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.5}, {0.5})/1500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.5}, {0.5})/1600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.5}, {0.5})/1700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.5}, {0.5})/1800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.5}, {0.5})/1900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.5}, {0.5})/200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.5}, {0.5})/2000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.5}, {0.5})/300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.5}, {0.5})/400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.5}, {0.5})/500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.5}, {0.5})/600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.5}, {0.5})/700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.5}, {0.5})/800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.5}, {0.5})/900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.6}, {0.4})/100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.6}, {0.4})/1000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.6}, {0.4})/1100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.6}, {0.4})/1200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.6}, {0.4})/1300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.6}, {0.4})/1400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.6}, {0.4})/1500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.6}, {0.4})/1600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.6}, {0.4})/1700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.6}, {0.4})/1800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.6}, {0.4})/1900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.6}, {0.4})/200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.6}, {0.4})/2000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.6}, {0.4})/300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.6}, {0.4})/400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.6}, {0.4})/500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.6}, {0.4})/600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.6}, {0.4})/700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.6}, {0.4})/800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/FlashMan/models/({0.6}, {0.4})/900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/Evaluation_lengths.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/Evaluation_rewards.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/Training_lengths.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/Training_rewards.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.4}, {0.6})/100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.4}, {0.6})/1000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.4}, {0.6})/1100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.4}, {0.6})/1200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.4}, {0.6})/1300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.4}, {0.6})/1400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.4}, {0.6})/1500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.4}, {0.6})/1600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.4}, {0.6})/1700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.4}, {0.6})/1800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.4}, {0.6})/1900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.4}, {0.6})/200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.4}, {0.6})/2000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.4}, {0.6})/300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.4}, {0.6})/400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.4}, {0.6})/500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.4}, {0.6})/600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.4}, {0.6})/700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.4}, {0.6})/800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.4}, {0.6})/900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.5}, {0.5})/100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.5}, {0.5})/1000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.5}, {0.5})/1100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.5}, {0.5})/1200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.5}, {0.5})/1300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.5}, {0.5})/1400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.5}, {0.5})/1500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.5}, {0.5})/1600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.5}, {0.5})/1700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.5}, {0.5})/1800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.5}, {0.5})/1900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.5}, {0.5})/200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.5}, {0.5})/2000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.5}, {0.5})/300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.5}, {0.5})/400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.5}, {0.5})/500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.5}, {0.5})/600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.5}, {0.5})/700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.5}, {0.5})/800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.5}, {0.5})/900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.6}, {0.4})/100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.6}, {0.4})/1000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.6}, {0.4})/1100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.6}, {0.4})/1200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.6}, {0.4})/1300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.6}, {0.4})/1400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.6}, {0.4})/1500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.6}, {0.4})/1600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.6}, {0.4})/1700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.6}, {0.4})/1800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.6}, {0.4})/1900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.6}, {0.4})/200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.6}, {0.4})/2000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.6}, {0.4})/300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.6}, {0.4})/400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.6}, {0.4})/500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.6}, {0.4})/600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.6}, {0.4})/700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.6}, {0.4})/800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/HeatMan/models/({0.6}, {0.4})/900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/Evaluation_lengths.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/Evaluation_rewards.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/Training_lengths.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/Training_rewards.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.4}, {0.6})/100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.4}, {0.6})/1000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.4}, {0.6})/1100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.4}, {0.6})/1200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.4}, {0.6})/1300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.4}, {0.6})/1400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.4}, {0.6})/1500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.4}, {0.6})/1600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.4}, {0.6})/1700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.4}, {0.6})/1800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.4}, {0.6})/1900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.4}, {0.6})/200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.4}, {0.6})/2000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.4}, {0.6})/300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.4}, {0.6})/400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.4}, {0.6})/500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.4}, {0.6})/600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.4}, {0.6})/700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.4}, {0.6})/800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.4}, {0.6})/900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.5}, {0.5})/100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.5}, {0.5})/1000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.5}, {0.5})/1100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.5}, {0.5})/1200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.5}, {0.5})/1300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.5}, {0.5})/1400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.5}, {0.5})/1500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.5}, {0.5})/1600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.5}, {0.5})/1700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.5}, {0.5})/1800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.5}, {0.5})/1900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.5}, {0.5})/200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.5}, {0.5})/2000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.5}, {0.5})/300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.5}, {0.5})/400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.5}, {0.5})/500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.5}, {0.5})/600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.5}, {0.5})/700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.5}, {0.5})/800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.5}, {0.5})/900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.6}, {0.4})/100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.6}, {0.4})/1000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.6}, {0.4})/1100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.6}, {0.4})/1200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.6}, {0.4})/1300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.6}, {0.4})/1400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.6}, {0.4})/1500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.6}, {0.4})/1600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.6}, {0.4})/1700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.6}, {0.4})/1800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.6}, {0.4})/1900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.6}, {0.4})/200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.6}, {0.4})/2000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.6}, {0.4})/300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.6}, {0.4})/400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.6}, {0.4})/500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.6}, {0.4})/600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.6}, {0.4})/700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.6}, {0.4})/800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/MetalMan/models/({0.6}, {0.4})/900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/Evaluation_lengths.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/Evaluation_rewards.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/Training_lengths.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/Training_rewards.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.4}, {0.6})/100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.4}, {0.6})/1000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.4}, {0.6})/1100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.4}, {0.6})/1200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.4}, {0.6})/1300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.4}, {0.6})/1400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.4}, {0.6})/1500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.4}, {0.6})/1600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.4}, {0.6})/1700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.4}, {0.6})/1800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.4}, {0.6})/1900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.4}, {0.6})/200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.4}, {0.6})/2000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.4}, {0.6})/300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.4}, {0.6})/400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.4}, {0.6})/500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.4}, {0.6})/600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.4}, {0.6})/700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.4}, {0.6})/800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.4}, {0.6})/900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.5}, {0.5})/100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.5}, {0.5})/1000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.5}, {0.5})/1100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.5}, {0.5})/1200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.5}, {0.5})/1300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.5}, {0.5})/1400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.5}, {0.5})/1500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.5}, {0.5})/1600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.5}, {0.5})/1700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.5}, {0.5})/1800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.5}, {0.5})/1900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.5}, {0.5})/200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.5}, {0.5})/2000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.5}, {0.5})/300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.5}, {0.5})/400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.5}, {0.5})/500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.5}, {0.5})/600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.5}, {0.5})/700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.5}, {0.5})/800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.5}, {0.5})/900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.6}, {0.4})/100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.6}, {0.4})/1000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.6}, {0.4})/1100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.6}, {0.4})/1200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.6}, {0.4})/1300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.6}, {0.4})/1400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.6}, {0.4})/1500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.6}, {0.4})/1600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.6}, {0.4})/1700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.6}, {0.4})/1800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.6}, {0.4})/1900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.6}, {0.4})/200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.6}, {0.4})/2000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.6}, {0.4})/300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.6}, {0.4})/400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.6}, {0.4})/500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.6}, {0.4})/600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.6}, {0.4})/700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.6}, {0.4})/800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/QuickMan/models/({0.6}, {0.4})/900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/Evaluation_lengths.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/Evaluation_rewards.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/Training_lengths.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/Training_rewards.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.4}, {0.6})/100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.4}, {0.6})/1000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.4}, {0.6})/1100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.4}, {0.6})/1200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.4}, {0.6})/1300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.4}, {0.6})/1400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.4}, {0.6})/1500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.4}, {0.6})/1600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.4}, {0.6})/1700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.4}, {0.6})/1800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.4}, {0.6})/1900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.4}, {0.6})/200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.4}, {0.6})/2000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.4}, {0.6})/300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.4}, {0.6})/400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.4}, {0.6})/500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.4}, {0.6})/600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.4}, {0.6})/700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.4}, {0.6})/800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.4}, {0.6})/900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.5}, {0.5})/100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.5}, {0.5})/1000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.5}, {0.5})/1100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.5}, {0.5})/1200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.5}, {0.5})/1300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.5}, {0.5})/1400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.5}, {0.5})/1500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.5}, {0.5})/1600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.5}, {0.5})/1700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.5}, {0.5})/1800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.5}, {0.5})/1900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.5}, {0.5})/200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.5}, {0.5})/2000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.5}, {0.5})/300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.5}, {0.5})/400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.5}, {0.5})/500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.5}, {0.5})/600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.5}, {0.5})/700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.5}, {0.5})/800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.5}, {0.5})/900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.6}, {0.4})/100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.6}, {0.4})/1000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.6}, {0.4})/1100000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.6}, {0.4})/1200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.6}, {0.4})/1300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.6}, {0.4})/1400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.6}, {0.4})/1500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.6}, {0.4})/1600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.6}, {0.4})/1700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.6}, {0.4})/1800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.6}, {0.4})/1900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.6}, {0.4})/200000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.6}, {0.4})/2000000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.6}, {0.4})/300000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.6}, {0.4})/400000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.6}, {0.4})/500000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.6}, {0.4})/600000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.6}, {0.4})/700000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.6}, {0.4})/800000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime/WoodMan/models/({0.6}, {0.4})/900000.model" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime_data_gather.py" beforeDir="false" afterPath="$PROJECT_DIR$/FullTime_data_gather.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HitpointWeightIntermit/AirMan_lengths.csv" beforeDir="false" afterPath="$PROJECT_DIR$/OldData/HitpointWeightIntermit/AirMan_lengths.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HitpointWeightIntermit/AirMan_rewards.csv" beforeDir="false" afterPath="$PROJECT_DIR$/OldData/HitpointWeightIntermit/AirMan_rewards.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HitpointWeightIntermit/BubbleMan_lengths.csv" beforeDir="false" afterPath="$PROJECT_DIR$/OldData/HitpointWeightIntermit/BubbleMan_lengths.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HitpointWeightIntermit/BubbleMan_rewards.csv" beforeDir="false" afterPath="$PROJECT_DIR$/OldData/HitpointWeightIntermit/BubbleMan_rewards.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HitpointWeightIntermit/CrashMan_lengths.csv" beforeDir="false" afterPath="$PROJECT_DIR$/OldData/HitpointWeightIntermit/CrashMan_lengths.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HitpointWeightIntermit/CrashMan_rewards.csv" beforeDir="false" afterPath="$PROJECT_DIR$/OldData/HitpointWeightIntermit/CrashMan_rewards.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HitpointWeightIntermit/FlashMan_lengths.csv" beforeDir="false" afterPath="$PROJECT_DIR$/OldData/HitpointWeightIntermit/FlashMan_lengths.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HitpointWeightIntermit/FlashMan_rewards.csv" beforeDir="false" afterPath="$PROJECT_DIR$/OldData/HitpointWeightIntermit/FlashMan_rewards.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HitpointWeightIntermit/HeatMan_lengths.csv" beforeDir="false" afterPath="$PROJECT_DIR$/OldData/HitpointWeightIntermit/HeatMan_lengths.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HitpointWeightIntermit/HeatMan_rewards.csv" beforeDir="false" afterPath="$PROJECT_DIR$/OldData/HitpointWeightIntermit/HeatMan_rewards.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HitpointWeightIntermit/MetalMan_lengths.csv" beforeDir="false" afterPath="$PROJECT_DIR$/OldData/HitpointWeightIntermit/MetalMan_lengths.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HitpointWeightIntermit/MetalMan_rewards.csv" beforeDir="false" afterPath="$PROJECT_DIR$/OldData/HitpointWeightIntermit/MetalMan_rewards.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HitpointWeightIntermit/QuickMan_lengths.csv" beforeDir="false" afterPath="$PROJECT_DIR$/OldData/HitpointWeightIntermit/QuickMan_lengths.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HitpointWeightIntermit/QuickMan_rewards.csv" beforeDir="false" afterPath="$PROJECT_DIR$/OldData/HitpointWeightIntermit/QuickMan_rewards.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HitpointWeightIntermit/WoodMan_lengths.csv" beforeDir="false" afterPath="$PROJECT_DIR$/OldData/HitpointWeightIntermit/WoodMan_lengths.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HitpointWeightIntermit/WoodMan_rewards.csv" beforeDir="false" afterPath="$PROJECT_DIR$/OldData/HitpointWeightIntermit/WoodMan_rewards.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HitpointWeightIntermit_data_gather.py" beforeDir="false" afterPath="$PROJECT_DIR$/HitpointWeightIntermit_data_gather.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-neat_test" beforeDir="false" afterPath="$PROJECT_DIR$/config-neat_test" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/evoman/environment.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/environment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/neat_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/neat_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/evoman_logs.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test/evoman_logs.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +582,9 @@
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/evoman" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/OldData" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -76,6 +613,7 @@
       <workItem from="1635808328262" duration="139000" />
       <workItem from="1635939546847" duration="9485000" />
       <workItem from="1635978280022" duration="5533000" />
+      <workItem from="1636548564432" duration="17939000" />
     </task>
     <task id="LOCAL-00001" summary="A bunch of stuff">
       <created>1635356758320</created>
@@ -252,7 +790,14 @@
       <option name="project" value="LOCAL" />
       <updated>1636388584486</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="FullTime">
+      <created>1636388689039</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1636388689039</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -276,5 +821,16 @@
     <MESSAGE value="HitpointWeightIntermit_data_gather" />
     <MESSAGE value="FullTime" />
     <option name="LAST_COMMIT_MESSAGE" value="FullTime" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/plotAllResults.py</url>
+          <line>9</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

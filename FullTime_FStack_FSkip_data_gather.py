@@ -1,12 +1,14 @@
 import csv
 import os
 import sys
-
 import cv2
+
 import numpy as np
 from stable_baselines3 import PPO, A2C
 from stable_baselines3.common.callbacks import BaseCallback
+from stable_baselines3.common.atari_wrappers import MaxAndSkipEnv
 from stable_baselines3.common.monitor import Monitor
+from stable_baselines3.common.vec_env import VecFrameStack, DummyVecEnv
 
 from map_enemy_id_to_name import id_to_name
 
@@ -23,18 +25,22 @@ from gym_environment import Evoman
 
 environments = [
     [(
-        Monitor(Evoman(
-            enemyn=str(n),
-            weight_player_hitpoint=weight_player_hitpoint,
-            weight_enemy_hitpoint=1.0 - weight_player_hitpoint,
-            randomini=True,
-        )),
-        Monitor(Evoman(
-            enemyn=str(n),
-            weight_player_hitpoint=1,
-            weight_enemy_hitpoint=1,
-            randomini=True,
-        ))
+        VecFrameStack(DummyVecEnv(
+            [lambda: MaxAndSkipEnv(Monitor(Evoman(
+                enemyn=str(n),
+                weight_player_hitpoint=weight_player_hitpoint,
+                weight_enemy_hitpoint=1.0 - weight_player_hitpoint,
+                randomini=True,
+            )), skip=2)]
+        ), n_stack=3),
+        VecFrameStack(DummyVecEnv(
+            [lambda: MaxAndSkipEnv(Monitor(Evoman(
+                enemyn=str(n),
+                weight_player_hitpoint=1,
+                weight_enemy_hitpoint=1,
+                randomini=True,
+            )), skip=2)]
+        ), n_stack=3)
     ) for weight_player_hitpoint in [0.1, 0.4, 0.5]]
     for n in range(2, 9)
 ]
@@ -86,7 +92,7 @@ class EvalEnvCallback(BaseCallback):
 
         if self.n_calls % self.video_freq == 0:
             if self.video_dir is not None:
-                self.eval_env.env.keep_frames = True
+                self.eval_env.envs[0].env.env.keep_frames = True
                 obs = self.eval_env.reset()
 
                 fourcc = cv2.VideoWriter_fourcc('M', 'J', 'P', 'G')
@@ -101,7 +107,7 @@ class EvalEnvCallback(BaseCallback):
                 for frame in self.eval_env.render("p_video"):
                     out.write(frame)
                 out.release()
-                self.eval_env.env.keep_frames = False
+                self.eval_env.envs[0].env.env.keep_frames = False
 
         if self.n_calls % self.eval_freq == 0:
             with open(f'{self.raw_data_dir}/wins.csv', mode='a') as wins_file:
@@ -117,11 +123,11 @@ class EvalEnvCallback(BaseCallback):
 
                         for s in range(3500):
                             action, _state = self.model.predict(obs, deterministic=False)
-                            obs, reward, done, info = self.eval_env.step(action)
+                            obs, [reward], done, info = self.eval_env.step(action)
                             rew = rew + reward
                             if done:
-                                print(rew, self.eval_env.env.enemy.life, self.eval_env.env.player.life)
-                                if self.eval_env.env.enemy.life <= 0:
+                                print(rew, self.eval_env.envs[0].env.env.enemy.life, self.eval_env.envs[0].env.env.player.life)
+                                if self.eval_env.envs[0].env.env.enemy.life <= 0:
                                     wins.append(1)
                                 else:
                                     wins.append(0)
@@ -161,22 +167,22 @@ for run in range(runs):
                         train_rewards_writer = csv.writer(train_rewards_file, delimiter=',', quotechar='\'', quoting=csv.QUOTE_NONNUMERIC)
 
                         for env, eval_env in enemy_envs:
-                            modelDir = f'{enemyDir}/models/{({env.env.weight_player_hitpoint}, {env.env.weight_enemy_hitpoint})}'
-                            videoDir = f'{enemyDir}/videos/{({env.env.weight_player_hitpoint}, {env.env.weight_enemy_hitpoint})}'
-                            rawDataDir = f'{enemyDir}/raw-data/{({env.env.weight_player_hitpoint}, {env.env.weight_enemy_hitpoint})}'
+                            modelDir = f'{enemyDir}/models/{({env.envs[0].env.env.weight_player_hitpoint}, {env.envs[0].env.env.weight_enemy_hitpoint})}'
+                            videoDir = f'{enemyDir}/videos/{({env.envs[0].env.env.weight_player_hitpoint}, {env.envs[0].env.env.weight_enemy_hitpoint})}'
+                            rawDataDir = f'{enemyDir}/raw-data/{({env.envs[0].env.env.weight_player_hitpoint}, {env.envs[0].env.env.weight_enemy_hitpoint})}'
                             if not os.path.exists(modelDir):
                                 os.makedirs(modelDir)
                             if not os.path.exists(videoDir):
                                 os.makedirs(videoDir)
                             if not os.path.exists(rawDataDir):
                                 os.makedirs(rawDataDir)
-                            env.env.keep_frames = False
+                            env.envs[0].env.env.keep_frames = False
                             if algorithm == 'A2C':
                                 model = A2C('MlpPolicy', env)
                             else:
                                 model = PPO('MlpPolicy', env)
                             l_prepend = [f'{id_to_name(enemy_id)}', ""]
-                            r_prepend = [f'{id_to_name(enemy_id)} ({env.env.weight_player_hitpoint}, {env.env.weight_enemy_hitpoint})', str(env.env.win_value())]
+                            r_prepend = [f'{id_to_name(enemy_id)} ({env.envs[0].env.env.weight_player_hitpoint}, {env.envs[0].env.env.weight_enemy_hitpoint})', str(env.envs[0].env.env.win_value())]
                             model.learn(total_timesteps=int(2.5e5), callback=EvalEnvCallback(
                                 eval_env=eval_env,
                                 l_writer=eval_lengths_writer,
@@ -193,10 +199,10 @@ for run in range(runs):
                             train_lengths_writer.writerow(l_prepend+env.envs[0].get_episode_lengths())
                             train_rewards_writer.writerow(r_prepend+env.envs[0].get_episode_rewards())
 
-                            print(f'\nFinished {id_to_name(enemy_id)} ({env.env.weight_player_hitpoint}, {env.env.weight_enemy_hitpoint})')
+                            print(f'\nFinished {id_to_name(enemy_id)} ({env.envs[0].env.env.weight_player_hitpoint}, {env.envs[0].env.env.weight_enemy_hitpoint})')
 
         print(f'\n\nFinished {id_to_name(enemy_id)} completely\n\n')
-                # env.env.keep_frames = True
+                # env.envs[0].env.env.keep_frames = True
                 # for j in range(10):
                 #     obs = env.reset()
                 #

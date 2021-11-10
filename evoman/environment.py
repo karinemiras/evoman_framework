@@ -46,6 +46,10 @@ class Environment(object):
                  fullscreen=False,  # True or False
                  player_controller=None,  # controller object
                  enemy_controller=None,  # controller object
+                 cost_per_timestep=0.0,
+                 weight_enemy_hitpoint=1,
+                 weight_player_hitpoint=1,
+                 show_display=False,
                  use_joystick=False):
 
         # initializes parameters
@@ -73,6 +77,10 @@ class Environment(object):
         self.solutions = solutions
         self.joy = 0
         self.use_joystick = use_joystick
+        self.cost_per_timestep = cost_per_timestep
+        self.weight_enemy_hitpoint = weight_enemy_hitpoint
+        self.weight_player_hitpoint = weight_player_hitpoint
+        self.show_display = show_display
 
         # initializes default random controllers
 
@@ -112,6 +120,8 @@ class Environment(object):
         else:
             flags = DOUBLEBUF
 
+        if not self.show_display:
+            os.environ["SDL_VIDEODRIVER"] = "dummy"
         try:
             self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT), DOUBLEBUF)
         except pygame.error:
@@ -368,7 +378,14 @@ class Environment(object):
             # default fitness function for single solutions
 
     def fitness_single(self):
-        return 0.9 * (100 - self.get_enemylife()) + 0.1 * self.get_playerlife() - numpy.log(self.get_time())
+        base =  self.weight_enemy_hitpoint * (100 - self.get_enemylife())\
+               - self.weight_player_hitpoint * (100 - self.get_playerlife())
+
+        if self.cost_per_timestep*self.get_time() > 0:
+            base = base - numpy.log(self.cost_per_timestep*self.get_time())
+
+        return base
+
 
     # default fitness function for consolidating solutions among multiple games
     def cons_multi(self, values):
@@ -446,25 +463,26 @@ class Environment(object):
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                     return
 
-            # updates objects and draws its itens on screen
-            self.screen.fill((250, 250, 250))
+            if self.show_display:
+                # updates objects and draws its itens on screen
+                self.screen.fill((250, 250, 250))
+                self.tilemap.draw(self.screen)
+
+                # player life bar
+                vbar = int(100 * (1 - (self.player.life / float(self.player.max_life))))
+                pygame.draw.line(self.screen, (0, 0, 0), [40, 40], [140, 40], 2)
+                pygame.draw.line(self.screen, (0, 0, 0), [40, 45], [140, 45], 5)
+                pygame.draw.line(self.screen, (150, 24, 25), [40, 45], [140 - vbar, 45], 5)
+                pygame.draw.line(self.screen, (0, 0, 0), [40, 49], [140, 49], 2)
+
+                # enemy life bar
+                vbar = int(100 * (1 - (self.enemy.life / float(self.enemy.max_life))))
+                pygame.draw.line(self.screen, (0, 0, 0), [590, 40], [695, 40], 2)
+                pygame.draw.line(self.screen, (0, 0, 0), [590, 45], [695, 45], 5)
+                pygame.draw.line(self.screen, (194, 118, 55), [590, 45], [695 - vbar, 45], 5)
+                pygame.draw.line(self.screen, (0, 0, 0), [590, 49], [695, 49], 2)
+
             self.tilemap.update(33 / 1000., self)
-            self.tilemap.draw(self.screen)
-
-            # player life bar
-            vbar = int(100 * (1 - (self.player.life / float(self.player.max_life))))
-            pygame.draw.line(self.screen, (0, 0, 0), [40, 40], [140, 40], 2)
-            pygame.draw.line(self.screen, (0, 0, 0), [40, 45], [140, 45], 5)
-            pygame.draw.line(self.screen, (150, 24, 25), [40, 45], [140 - vbar, 45], 5)
-            pygame.draw.line(self.screen, (0, 0, 0), [40, 49], [140, 49], 2)
-
-            # enemy life bar
-            vbar = int(100 * (1 - (self.enemy.life / float(self.enemy.max_life))))
-            pygame.draw.line(self.screen, (0, 0, 0), [590, 40], [695, 40], 2)
-            pygame.draw.line(self.screen, (0, 0, 0), [590, 45], [695, 45], 5)
-            pygame.draw.line(self.screen, (194, 118, 55), [590, 45], [695 - vbar, 45], 5)
-            pygame.draw.line(self.screen, (0, 0, 0), [590, 49], [695, 49], 2)
-
             # gets fitness for training agents
             fitness = self.fitness_single()
 
@@ -532,7 +550,8 @@ class Environment(object):
                 self.enemy.kill()
 
                 # updates screen
-            pygame.display.flip()
+            if self.show_display:
+                pygame.display.flip()
 
             # game runtime limit
             if self.playermode == 'ai':

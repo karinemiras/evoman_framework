@@ -1,10 +1,11 @@
 #--- parameters for the neat_test experiment ---#
 
 [NEAT]
-fitness_criterion     = max
-fitness_threshold     = 150
-pop_size              = 100
-reset_on_extinction   = False
+fitness_criterion      = max
+fitness_threshold      = 150
+pop_size               = 100
+reset_on_extinction    = False
+no_fitness_termination = True
 
 [DefaultGenome]
 # node activation options
