@@ -62,7 +62,7 @@ def main():
                 # pyplot.show()
     weightedRewards = []
     for _ in range(len(rewards[0])):
-        weightedRewards.append(np.array([0 for _ in range(26)]))
+        weightedRewards.append(np.array([0 for _ in range(len(rewards[0][0]))]))
     for enemyn in range(8):
         rews = rewards[enemyn]
         for i in range(len(rews)):

@@ -18,25 +18,38 @@ if algorithm != 'PPO' and algorithm != 'A2C':
     print("Please use PPO or A2C for the algorithm")
     sys.exit()
 
+if len(sys.argv) >= 4:
+    start = np.min([np.max([int(sys.argv[3]), 1]), 8])
+else:
+    start = 1
+
+if len(sys.argv) >= 5:
+    stop = np.min([np.max([int(sys.argv[4]), 1]), 8]) + 1
+else:
+    stop = 9
+
 sys.path.insert(0, 'evoman')
 from gym_environment import Evoman
 
 environments = [
-    [(
-        Monitor(Evoman(
-            enemyn=str(n),
-            weight_player_hitpoint=weight_player_hitpoint,
-            weight_enemy_hitpoint=1.0 - weight_player_hitpoint,
-            randomini=True,
-        )),
-        Monitor(Evoman(
-            enemyn=str(n),
-            weight_player_hitpoint=1,
-            weight_enemy_hitpoint=1,
-            randomini=True,
-        ))
-    ) for weight_player_hitpoint in [0.1, 0.4, 0.5]]
-    for n in range(2, 9)
+    (
+        n,
+        [(
+            Monitor(Evoman(
+                enemyn=str(n),
+                weight_player_hitpoint=weight_player_hitpoint,
+                weight_enemy_hitpoint=1.0 - weight_player_hitpoint,
+                randomini=True,
+            )),
+            Monitor(Evoman(
+                enemyn=str(n),
+                weight_player_hitpoint=1,
+                weight_enemy_hitpoint=1,
+                randomini=True,
+            ))
+        ) for weight_player_hitpoint in [0.1, 0.4, 0.5, 0.6]]
+    )
+    for n in range(start, stop)
 ]
 
 
@@ -44,8 +57,8 @@ class EvalEnvCallback(BaseCallback):
     def __init__(
             self,
             eval_env,
-            l_writer,
-            r_writer,
+            lengths_path,
+            rewards_path,
             models_dir = None,
             video_dir = None,
             raw_data_dir = None,
@@ -65,8 +78,8 @@ class EvalEnvCallback(BaseCallback):
         if not os.path.exists(raw_data_dir) and raw_data_dir is not None:
             os.makedirs(raw_data_dir)
         self.eval_env = eval_env
-        self.l_writer = l_writer
-        self.r_writer = r_writer
+        self.lengths_path = lengths_path
+        self.rewards_path = rewards_path
         self.lengths_prepend = lengths_prepend
         self.rewards_prepend = rewards_prepend
         self.video_dir = video_dir
@@ -92,7 +105,7 @@ class EvalEnvCallback(BaseCallback):
                 fourcc = cv2.VideoWriter_fourcc('M', 'J', 'P', 'G')
                 fps = 30
                 video_filename = f'{self.video_dir}/{self.n_calls}.avi'
-                out = cv2.VideoWriter(video_filename, fourcc, fps, (self.eval_env.envs[0].WIDTH, self.eval_env.envs[0].HEIGHT))
+                out = cv2.VideoWriter(video_filename, fourcc, fps, (self.eval_env.WIDTH, self.eval_env.HEIGHT))
                 for _ in range(3500):
                     action, _state = model.predict(obs, deterministic=False)
                     obs, reward, done, info = self.eval_env.step(action)
@@ -104,40 +117,49 @@ class EvalEnvCallback(BaseCallback):
                 self.eval_env.env.keep_frames = False
 
         if self.n_calls % self.eval_freq == 0:
-            with open(f'{self.raw_data_dir}/wins.csv', mode='a') as wins_file:
-                wins_writer = csv.writer(wins_file, delimiter=',', quotechar='\'', quoting=csv.QUOTE_NONNUMERIC)
-                with open(f'{self.raw_data_dir}/rewards.csv', mode='a') as rewards_file:
-                    rewards_writer = csv.writer(rewards_file, delimiter=',', quotechar='\'', quoting=csv.QUOTE_NONNUMERIC)
-                    wins = []
-                    rs = []
-                    ls = []
-                    for j in range(self.n_eval_episodes):
-                        obs = self.eval_env.reset()
-                        rew = 0
-
-                        for s in range(3500):
-                            action, _state = self.model.predict(obs, deterministic=False)
-                            obs, reward, done, info = self.eval_env.step(action)
-                            rew = rew + reward
-                            if done:
-                                print(rew, self.eval_env.env.enemy.life, self.eval_env.env.player.life)
-                                if self.eval_env.env.enemy.life <= 0:
-                                    wins.append(1)
-                                else:
-                                    wins.append(0)
-                                ls.append(s)
-                                break
-                        rs.append(rew)
-                    self.lengths.append(np.mean(ls))
-                    self.rewards.append(np.mean(rs))
-                    wins_writer.writerow([self.n_calls, self.n_eval_episodes, ''] + wins)
-                    rewards_writer.writerow([self.n_calls, self.n_eval_episodes, ''] + rs)
+            self.evaluate()
 
         return True
 
+    def evaluate(self):
+        wins = []
+        rs = []
+        ls = []
+        for j in range(self.n_eval_episodes):
+            obs = self.eval_env.reset()
+            rew = 0
+
+            for s in range(3500):
+                action, _state = self.model.predict(obs, deterministic=False)
+                obs, reward, done, info = self.eval_env.step(action)
+                rew = rew + reward
+                if done:
+                    print(rew, self.eval_env.env.enemy.life, self.eval_env.env.player.life)
+                    if self.eval_env.env.enemy.life <= 0:
+                        wins.append(1)
+                    else:
+                        wins.append(0)
+                    ls.append(s)
+                    break
+            rs.append(rew)
+        self.lengths.append(np.mean(ls))
+        self.rewards.append(np.mean(rs))
+        with open(f'{self.raw_data_dir}/wins.csv', mode='a') as wins_file:
+            wins_writer = csv.writer(wins_file, delimiter=',', quotechar='\'', quoting=csv.QUOTE_NONNUMERIC)
+            with open(f'{self.raw_data_dir}/rewards.csv', mode='a') as rewards_file:
+                rewards_writer = csv.writer(rewards_file, delimiter=',', quotechar='\'', quoting=csv.QUOTE_NONNUMERIC)
+                wins_writer.writerow([self.n_calls, self.n_eval_episodes, ''] + wins)
+                rewards_writer.writerow([self.n_calls, self.n_eval_episodes, ''] + rs)
+
+
     def _on_training_end(self) -> None:
-        self.l_writer.writerow(self.lengths_prepend+self.lengths)
-        self.r_writer.writerow(self.rewards_prepend+self.rewards)
+        self.evaluate()
+        with open(f'{self.lengths_path}/Evaluation_lengths.csv', mode='a') as eval_lengths_file:
+            l_writer = csv.writer(eval_lengths_file, delimiter=',', quotechar='\'', quoting=csv.QUOTE_NONNUMERIC)
+            with open(f'{self.rewards_path}/Evaluation_rewards.csv', mode='a') as eval_rewards_file:
+                r_writer = csv.writer(eval_rewards_file, delimiter=',', quotechar='\'', quoting=csv.QUOTE_NONNUMERIC)
+                l_writer.writerow(self.lengths_prepend+self.lengths)
+                r_writer.writerow(self.rewards_prepend+self.rewards)
 
 
 for run in range(runs):
@@ -147,53 +169,51 @@ for run in range(runs):
     if not os.path.exists(baseDir):
         os.makedirs(baseDir)
 
-    for enemy_id, enemy_envs in enumerate(environments, start=1):
+    for enemy_id, enemy_envs in environments:
         enemyDir = f'{baseDir}/{id_to_name(enemy_id)}'
         if not os.path.exists(enemyDir):
             os.makedirs(enemyDir)
-        with open(f'{enemyDir}/Evaluation_lengths.csv', mode='a') as eval_lengths_file:
-            eval_lengths_writer = csv.writer(eval_lengths_file, delimiter=',', quotechar='\'', quoting=csv.QUOTE_NONNUMERIC)
-            with open(f'{enemyDir}/Evaluation_rewards.csv', mode='a') as eval_rewards_file:
-                eval_rewards_writer = csv.writer(eval_rewards_file, delimiter=',', quotechar='\'', quoting=csv.QUOTE_NONNUMERIC)
-                with open(f'{enemyDir}/Training_lengths.csv', mode='a') as train_lengths_file:
-                    train_lengths_writer = csv.writer(train_lengths_file, delimiter=',', quotechar='\'', quoting=csv.QUOTE_NONNUMERIC)
-                    with open(f'{enemyDir}/Training_rewards.csv', mode='a') as train_rewards_file:
-                        train_rewards_writer = csv.writer(train_rewards_file, delimiter=',', quotechar='\'', quoting=csv.QUOTE_NONNUMERIC)
 
-                        for env, eval_env in enemy_envs:
-                            modelDir = f'{enemyDir}/models/{({env.env.weight_player_hitpoint}, {env.env.weight_enemy_hitpoint})}'
-                            videoDir = f'{enemyDir}/videos/{({env.env.weight_player_hitpoint}, {env.env.weight_enemy_hitpoint})}'
-                            rawDataDir = f'{enemyDir}/raw-data/{({env.env.weight_player_hitpoint}, {env.env.weight_enemy_hitpoint})}'
-                            if not os.path.exists(modelDir):
-                                os.makedirs(modelDir)
-                            if not os.path.exists(videoDir):
-                                os.makedirs(videoDir)
-                            if not os.path.exists(rawDataDir):
-                                os.makedirs(rawDataDir)
-                            env.env.keep_frames = False
-                            if algorithm == 'A2C':
-                                model = A2C('MlpPolicy', env)
-                            else:
-                                model = PPO('MlpPolicy', env)
-                            l_prepend = [f'{id_to_name(enemy_id)}', ""]
-                            r_prepend = [f'{id_to_name(enemy_id)} ({env.env.weight_player_hitpoint}, {env.env.weight_enemy_hitpoint})', str(env.env.win_value())]
-                            model.learn(total_timesteps=int(2.5e5), callback=EvalEnvCallback(
-                                eval_env=eval_env,
-                                l_writer=eval_lengths_writer,
-                                r_writer=eval_rewards_writer,
-                                models_dir=modelDir,
-                                video_dir=videoDir,
-                                raw_data_dir=rawDataDir,
-                                lengths_prepend=l_prepend,
-                                rewards_prepend=r_prepend,
-                                eval_freq=12500,
-                                n_eval_episodes=25,
-                            ))
+        for env, eval_env in enemy_envs:
+            modelDir = f'{enemyDir}/models/{({env.env.weight_player_hitpoint}, {env.env.weight_enemy_hitpoint})}'
+            videoDir = f'{enemyDir}/videos/{({env.env.weight_player_hitpoint}, {env.env.weight_enemy_hitpoint})}'
+            rawDataDir = f'{enemyDir}/raw-data/{({env.env.weight_player_hitpoint}, {env.env.weight_enemy_hitpoint})}'
+            if not os.path.exists(modelDir):
+                os.makedirs(modelDir)
+            if not os.path.exists(videoDir):
+                os.makedirs(videoDir)
+            if not os.path.exists(rawDataDir):
+                os.makedirs(rawDataDir)
+            env.env.keep_frames = False
+            if algorithm == 'A2C':
+                model = A2C('MlpPolicy', env)
+            else:
+                model = PPO('MlpPolicy', env)
+            l_prepend = [f'{id_to_name(enemy_id)}', ""]
+            r_prepend = [f'{id_to_name(enemy_id)} ({env.env.weight_player_hitpoint}, {env.env.weight_enemy_hitpoint})', str(env.env.win_value())]
+            model.learn(total_timesteps=int(2.5e4), callback=EvalEnvCallback(
+                eval_env=eval_env,
+                lengths_path=enemyDir,
+                rewards_path=enemyDir,
+                models_dir=modelDir,
+                video_dir=videoDir,
+                raw_data_dir=rawDataDir,
+                lengths_prepend=l_prepend,
+                rewards_prepend=r_prepend,
+                eval_freq=12500,
+                n_eval_episodes=25,
+            ))
 
-                            train_lengths_writer.writerow(l_prepend+env.envs[0].get_episode_lengths())
-                            train_rewards_writer.writerow(r_prepend+env.envs[0].get_episode_rewards())
+            with open(f'{enemyDir}/Training_lengths.csv', mode='a') as train_lengths_file:
+                train_lengths_writer = csv.writer(train_lengths_file, delimiter=',', quotechar='\'',
+                                                  quoting=csv.QUOTE_NONNUMERIC)
+                with open(f'{enemyDir}/Training_rewards.csv', mode='a') as train_rewards_file:
+                    train_rewards_writer = csv.writer(train_rewards_file, delimiter=',', quotechar='\'',
+                                                      quoting=csv.QUOTE_NONNUMERIC)
+                    train_lengths_writer.writerow(l_prepend+env.get_episode_lengths())
+                    train_rewards_writer.writerow(r_prepend+env.get_episode_rewards())
 
-                            print(f'\nFinished {id_to_name(enemy_id)} ({env.env.weight_player_hitpoint}, {env.env.weight_enemy_hitpoint})')
+                    print(f'\nFinished {id_to_name(enemy_id)} ({env.env.weight_player_hitpoint}, {env.env.weight_enemy_hitpoint})')
 
         print(f'\n\nFinished {id_to_name(enemy_id)} completely\n\n')
                 # env.env.keep_frames = True
