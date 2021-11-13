@@ -191,7 +191,7 @@ for run in range(runs):
                 model = PPO('MlpPolicy', env)
             l_prepend = [f'{id_to_name(enemy_id)}', ""]
             r_prepend = [f'{id_to_name(enemy_id)} ({env.env.weight_player_hitpoint}, {env.env.weight_enemy_hitpoint})', str(env.env.win_value())]
-            model.learn(total_timesteps=int(2.5e4), callback=EvalEnvCallback(
+            model.learn(total_timesteps=int(2.5e6), callback=EvalEnvCallback(
                 eval_env=eval_env,
                 lengths_path=enemyDir,
                 rewards_path=enemyDir,
@@ -216,42 +216,3 @@ for run in range(runs):
                     print(f'\nFinished {id_to_name(enemy_id)} ({env.env.weight_player_hitpoint}, {env.env.weight_enemy_hitpoint})')
 
         print(f'\n\nFinished {id_to_name(enemy_id)} completely\n\n')
-                # env.env.keep_frames = True
-                # for j in range(10):
-                #     obs = env.reset()
-                #
-                #     fourcc = cv2.VideoWriter_fourcc('M', 'J', 'P', 'G')
-                #     fps = 30
-                #     video_filename = f'Optimized_FStack_FSkip/PPO_env{i}_run{j}.avi'
-                #     out = cv2.VideoWriter(video_filename, fourcc, fps, (env.envs[0].WIDTH, env.envs[0].HEIGHT))
-                #     for _ in range(2500):
-                #         action, _state = model.predict(obs, deterministic=False)
-                #         obs, reward, done, info = env.step(action)
-                #         if done:
-                #             break
-                #     for frame in env.render("p_video"):
-                #         out.write(frame)
-                #     out.release()
-
-
-# for env in environments:
-#     i += 1
-#
-#     model.set_env(env)
-#     model.learn(total_timesteps=(2 ** 17))
-#
-#     print(f'\n\n\nFinished learning env{i}!\n\n\n')
-#
-#     obs = env.reset()
-#
-#     fourcc = cv2.VideoWriter_fourcc('M', 'J', 'P', 'G')
-#     fps = 30
-#     video_filename = f'env{i}_({fsn}, 10,2).avi'
-#     out = cv2.VideoWriter(video_filename, fourcc, fps, (env.WIDTH, env.HEIGHT))
-#     for _ in range(2500):
-#         action, _state = model.predict(obs, deterministic=False)
-#         obs, reward, done, info = env.step(action)
-#         out.write(env.render("bgr"))
-#         if done:
-#             break
-#     out.release()
