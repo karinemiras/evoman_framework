@@ -194,7 +194,7 @@ for run in range(runs):
                 model = PPO('MlpPolicy', env)
             l_prepend = [f'{id_to_name(enemy_id)}', ""]
             r_prepend = [f'{id_to_name(enemy_id)} ({env.env.weight_player_hitpoint}, {env.env.weight_enemy_hitpoint})', str(env.env.win_value())]
-            model.learn(total_timesteps=int(3e4), callback=EvalEnvCallback(
+            model.learn(total_timesteps=int(2.5e6), callback=EvalEnvCallback(
                 eval_env=eval_env,
                 lengths_path=enemyDir,
                 rewards_path=enemyDir,
