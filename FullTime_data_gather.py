@@ -1,5 +1,6 @@
 import csv
 import os
+import subprocess
 import sys
 
 import cv2
@@ -68,7 +69,7 @@ class EvalEnvCallback(BaseCallback):
             n_eval_episodes: int = 5,
             eval_freq: int =  10000,
             model_freq: int = 100000,
-            video_freq: int = 250000,
+            video_freq: int = 25000,
     ):
         super(EvalEnvCallback, self).__init__(verbose=verbose)
         if not os.path.exists(models_dir) and models_dir is not None:
@@ -104,7 +105,8 @@ class EvalEnvCallback(BaseCallback):
 
                 fourcc = cv2.VideoWriter_fourcc('M', 'J', 'P', 'G')
                 fps = 30
-                video_filename = f'{self.video_dir}/{self.n_calls}.avi'
+                video_filename = f'{self.video_dir}/{self.n_calls}-temp.avi'
+                video_filename_compresed = f'{self.video_dir}/{self.n_calls}.avi'
                 out = cv2.VideoWriter(video_filename, fourcc, fps, (self.eval_env.WIDTH, self.eval_env.HEIGHT))
                 for _ in range(3500):
                     action, _state = model.predict(obs, deterministic=False)
@@ -114,6 +116,8 @@ class EvalEnvCallback(BaseCallback):
                 for frame in self.eval_env.render("video"):
                     out.write(frame)
                 out.release()
+                subprocess.run(['ffmpeg', '-i', video_filename, '-vcodec', 'h264', video_filename_compresed, '-y'])
+                subprocess.run(['rm', video_filename])
                 self.eval_env.env.keep_frames = False
 
         if self.n_calls % self.eval_freq == 0:
@@ -190,7 +194,7 @@ for run in range(runs):
                 model = PPO('MlpPolicy', env)
             l_prepend = [f'{id_to_name(enemy_id)}', ""]
             r_prepend = [f'{id_to_name(enemy_id)} ({env.env.weight_player_hitpoint}, {env.env.weight_enemy_hitpoint})', str(env.env.win_value())]
-            model.learn(total_timesteps=int(2.5e6), callback=EvalEnvCallback(
+            model.learn(total_timesteps=int(3e4), callback=EvalEnvCallback(
                 eval_env=eval_env,
                 lengths_path=enemyDir,
                 rewards_path=enemyDir,
