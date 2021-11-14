@@ -116,7 +116,9 @@ class EvalEnvCallback(BaseCallback):
                 for frame in self.eval_env.render("video"):
                     out.write(frame)
                 out.release()
-                os.system(f'ffmpeg -i {video_filename} -vcodec h264 {video_filename_compresed} -y ; rm {video_filename}')
+                compac = f'ffmpeg -i "{video_filename}" -vcodec h264 "{video_filename_compresed}" -y ; rm "{video_filename}"'
+                print(compac)
+                os.system(compac)
                 self.eval_env.env.keep_frames = False
 
         if self.n_calls % self.eval_freq == 0:
