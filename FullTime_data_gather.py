@@ -100,7 +100,6 @@ class EvalEnvCallback(BaseCallback):
 
         if self.n_calls % self.video_freq == 0:
             if self.video_dir is not None:
-                self.eval_env.env.keep_frames = True
                 obs = self.eval_env.reset()
 
                 fourcc = cv2.VideoWriter_fourcc('M', 'J', 'P', 'G')
@@ -111,15 +110,13 @@ class EvalEnvCallback(BaseCallback):
                 for _ in range(3500):
                     action, _state = model.predict(obs, deterministic=False)
                     obs, reward, done, info = self.eval_env.step(action)
+                    out.write(self.eval_env.render("bgr"))
                     if done:
                         break
-                for frame in self.eval_env.render("video"):
-                    out.write(frame)
                 out.release()
                 compac = f'ffmpeg -i "{video_filename}" -vcodec h264 "{video_filename_compresed}" -y ; rm "{video_filename}"'
                 print(compac)
                 os.system(compac)
-                self.eval_env.env.keep_frames = False
 
         if self.n_calls % self.eval_freq == 0:
             self.evaluate()
