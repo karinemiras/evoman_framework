@@ -116,7 +116,8 @@ class EvalEnvCallback(BaseCallback):
                 for frame in self.eval_env.render("video"):
                     out.write(frame)
                 out.release()
-                subprocess.run(['ffmpeg', '-i', video_filename, '-vcodec', 'h264', video_filename_compresed, '-y'])
+                p1 = subprocess.Popen(['ffmpeg', '-i', video_filename, '-vcodec', 'h264', video_filename_compresed, '-y'])
+                p1.wait()
                 subprocess.run(['rm', video_filename])
                 self.eval_env.env.keep_frames = False
 
