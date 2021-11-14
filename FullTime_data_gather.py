@@ -111,7 +111,7 @@ class EvalEnvCallback(BaseCallback):
                     obs, reward, done, info = self.eval_env.step(action)
                     if done:
                         break
-                for frame in self.eval_env.render("p_video"):
+                for frame in self.eval_env.render("video"):
                     out.write(frame)
                 out.release()
                 self.eval_env.env.keep_frames = False
@@ -134,7 +134,6 @@ class EvalEnvCallback(BaseCallback):
                 obs, reward, done, info = self.eval_env.step(action)
                 rew = rew + reward
                 if done:
-                    print(rew, self.eval_env.env.enemy.life, self.eval_env.env.player.life)
                     if self.eval_env.env.enemy.life <= 0:
                         wins.append(1)
                     else:
