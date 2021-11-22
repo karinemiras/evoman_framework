@@ -153,7 +153,7 @@ def run(environments, runs=5, generations=100, population_size=100):
                     eval_env=eval_env,
                     raw_data_dir=rawDataDir,
                     model_dir=modelDir,
-                    n_eval_episodes=15,
+                    n_eval_episodes=25,
                 )
 
                 stats.register('len_rew', evaluator.collect_data)
@@ -166,13 +166,13 @@ def run(environments, runs=5, generations=100, population_size=100):
                     population=population,
                     toolbox=toolbox,
                     cxpb=1,
-                    mutpb=0.2,
+                    mutpb=1,
                     ngen=generations,
                     stats=stats,
                     verbose=False,
                 )
 
-                averaged_data = np.array(logbook.select('len_rew'))
+                averaged_data = np.rot90(np.array(logbook.select('len_rew')))
 
                 with open(lengths_path, mode='a') as eval_lengths_file:
                     eval_lengths_writer = csv.writer(eval_lengths_file, delimiter=',', quotechar='\'', quoting=csv.QUOTE_NONNUMERIC)

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cbb56179-6c1d-4ce5-96e6-fe6435188f5f" name="Changes" comment="NEAT">
-      <change afterPath="$PROJECT_DIR$/GA_50_data_gatherer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GA_data_gatherer.py" afterDir="false" />
+    <list default="true" id="cbb56179-6c1d-4ce5-96e6-fe6435188f5f" name="Changes" comment="GA">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/deap_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/GA_10_data_gatherer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GA_10_data_gatherer.py" beforeDir="false" afterPath="$PROJECT_DIR$/GA_10_data_gatherer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GA_50_data_gatherer.py" beforeDir="false" afterPath="$PROJECT_DIR$/GA_50_data_gatherer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GA_data_gatherer.py" beforeDir="false" afterPath="$PROJECT_DIR$/GA_data_gatherer.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +93,7 @@
       <workItem from="1637251796172" duration="955000" />
       <workItem from="1637406022724" duration="4522000" />
       <workItem from="1637486507791" duration="24056000" />
-      <workItem from="1637574706927" duration="8885000" />
+      <workItem from="1637574706927" duration="9739000" />
     </task>
     <task id="LOCAL-00001" summary="A bunch of stuff">
       <created>1635356758320</created>
@@ -368,7 +368,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637574958082</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="GA">
+      <created>1637617134905</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1637617134905</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -405,7 +412,8 @@
     <MESSAGE value="So much shit." />
     <MESSAGE value="Compression" />
     <MESSAGE value="NEAT" />
-    <option name="LAST_COMMIT_MESSAGE" value="NEAT" />
+    <MESSAGE value="GA" />
+    <option name="LAST_COMMIT_MESSAGE" value="GA" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
