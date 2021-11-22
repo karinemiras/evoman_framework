@@ -5,17 +5,20 @@ import sys
 
 import cv2
 import numpy as np
-from stable_baselines3 import PPO, A2C
+from stable_baselines3 import PPO, A2C, DDPG
 from stable_baselines3.common.callbacks import BaseCallback
 from stable_baselines3.common.monitor import Monitor
 
 from map_enemy_id_to_name import id_to_name
 
+sys.path.insert(0, 'evoman')
+from gym_environment_box import Evoman
+
 algorithm = sys.argv[1]
 runs = int(sys.argv[2])
 if runs < 0:
     runs = sys.maxsize
-if algorithm != 'PPO' and algorithm != 'A2C':
+if algorithm != 'PPO' and algorithm != 'A2C' and algorithm != 'DDPG':
     print("Please use PPO or A2C for the algorithm")
     sys.exit()
 
@@ -28,9 +31,6 @@ if len(sys.argv) >= 5:
     stop = np.min([np.max([int(sys.argv[4]), 1]), 8]) + 1
 else:
     stop = 9
-
-sys.path.insert(0, 'evoman')
-from gym_environment import Evoman
 
 environments = [
     (
@@ -167,7 +167,7 @@ class EvalEnvCallback(BaseCallback):
 
 for run in range(runs):
     print(f'Starting run {run}!')
-    baseDir = f'ShortTimeMultiDiscrete/{algorithm}/run{run}'
+    baseDir = f'ShortTimeBox/{algorithm}/run{run}'
 
     if not os.path.exists(baseDir):
         os.makedirs(baseDir)
@@ -190,8 +190,10 @@ for run in range(runs):
             env.env.keep_frames = False
             if algorithm == 'A2C':
                 model = A2C('MlpPolicy', env)
-            else:
+            elif algorithm == 'PPO':
                 model = PPO('MlpPolicy', env)
+            elif algorithm == 'DDPG':
+                model = DDPG('MlpPolicy', env)
             l_prepend = [f'{id_to_name(enemy_id)}', ""]
             r_prepend = [f'{id_to_name(enemy_id)} ({env.env.weight_player_hitpoint}, {env.env.weight_enemy_hitpoint})', str(env.env.win_value())]
             model.learn(total_timesteps=int(5e5), callback=EvalEnvCallback(

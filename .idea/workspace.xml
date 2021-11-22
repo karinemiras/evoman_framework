@@ -2,8 +2,37 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cbb56179-6c1d-4ce5-96e6-fe6435188f5f" name="Changes" comment="Compression">
+      <change afterPath="$PROJECT_DIR$/ShortTime_data_gather_box.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config-neat_test_old" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deap_test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evoman/gym_environment_box.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/neat_test_old_config.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plotAllRawData.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plotRawData.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/evoman_framework.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/evoman_framework.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FullTime_data_gather.py" beforeDir="false" afterPath="$PROJECT_DIR$/FullTime_data_gather.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HitpointWeightNEAT.py" beforeDir="false" afterPath="$PROJECT_DIR$/HitpointWeightNEAT.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldData/HitpointWeightIntermit/AirMan_lengths.csv" beforeDir="false" afterPath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/AirMan_lengths.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldData/HitpointWeightIntermit/AirMan_rewards.csv" beforeDir="false" afterPath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/AirMan_rewards.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldData/HitpointWeightIntermit/BubbleMan_lengths.csv" beforeDir="false" afterPath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/BubbleMan_lengths.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldData/HitpointWeightIntermit/BubbleMan_rewards.csv" beforeDir="false" afterPath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/BubbleMan_rewards.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldData/HitpointWeightIntermit/CrashMan_lengths.csv" beforeDir="false" afterPath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/CrashMan_lengths.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldData/HitpointWeightIntermit/CrashMan_rewards.csv" beforeDir="false" afterPath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/CrashMan_rewards.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldData/HitpointWeightIntermit/FlashMan_lengths.csv" beforeDir="false" afterPath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/FlashMan_lengths.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldData/HitpointWeightIntermit/FlashMan_rewards.csv" beforeDir="false" afterPath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/FlashMan_rewards.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldData/HitpointWeightIntermit/HeatMan_lengths.csv" beforeDir="false" afterPath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/HeatMan_lengths.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldData/HitpointWeightIntermit/HeatMan_rewards.csv" beforeDir="false" afterPath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/HeatMan_rewards.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldData/HitpointWeightIntermit/MetalMan_lengths.csv" beforeDir="false" afterPath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/MetalMan_lengths.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldData/HitpointWeightIntermit/MetalMan_rewards.csv" beforeDir="false" afterPath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/MetalMan_rewards.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldData/HitpointWeightIntermit/QuickMan_lengths.csv" beforeDir="false" afterPath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/QuickMan_lengths.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldData/HitpointWeightIntermit/QuickMan_rewards.csv" beforeDir="false" afterPath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/QuickMan_rewards.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldData/HitpointWeightIntermit/WoodMan_lengths.csv" beforeDir="false" afterPath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/WoodMan_lengths.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldData/HitpointWeightIntermit/WoodMan_rewards.csv" beforeDir="false" afterPath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/WoodMan_rewards.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShortTime_data_gather.py" beforeDir="false" afterPath="$PROJECT_DIR$/ShortTime_data_gather.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller_specialist_demo/evoman_logs.txt" beforeDir="false" afterPath="$PROJECT_DIR$/controller_specialist_demo/evoman_logs.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/demo_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/individual_demo/evoman_logs.txt" beforeDir="false" afterPath="$PROJECT_DIR$/individual_demo/evoman_logs.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/neat_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/neat_test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,14 +70,16 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File" value="Python" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="project.scopes" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/evoman" />
+      <recent name="$PROJECT_DIR$/FullTime" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/OldData/Mixed" />
       <recent name="$PROJECT_DIR$/OldData" />
     </key>
   </component>
@@ -83,7 +114,13 @@
       <workItem from="1636807865291" duration="3960000" />
       <workItem from="1636826638223" duration="14000" />
       <workItem from="1636892239276" duration="2602000" />
-      <workItem from="1636895298437" duration="3965000" />
+      <workItem from="1636895298437" duration="3988000" />
+      <workItem from="1636970989648" duration="7858000" />
+      <workItem from="1637151941216" duration="615000" />
+      <workItem from="1637251796172" duration="955000" />
+      <workItem from="1637406022724" duration="4522000" />
+      <workItem from="1637486507791" duration="24056000" />
+      <workItem from="1637574706927" duration="224000" />
     </task>
     <task id="LOCAL-00001" summary="A bunch of stuff">
       <created>1635356758320</created>
@@ -344,11 +381,29 @@
       <option name="project" value="LOCAL" />
       <updated>1636899226209</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="Compression">
+      <created>1636901418510</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1636901418510</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="Space.CommitStatus" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">

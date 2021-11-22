@@ -11,10 +11,13 @@ sys.path.insert(0, 'evoman')
 from environment import Environment
 from controller import Controller
 
+class PlayerController(Controller):
+    def control(self, sensors, controller):
+        return controller.activate(sensors)
 
 def eval_genome_in_env(env: Environment):
     def eval_genome(genome, config):
-        net = neat.nn.RecurrentNetwork.create(genome, config)
+        net = neat.nn.FeedForwardNetwork.create(genome, config)
         return env.run_single(env.enemies[0], net, None)
 
     return eval_genome
@@ -58,7 +61,7 @@ class EvalEnvCallback(neat.reporting.BaseReporter):
         self.generations = 0
 
     def post_evaluate(self, config, population, species, best_genome):
-        eval_env = Environment(**self.eval_env_params)
+        eval_env = Environment(**self.eval_env_params, player_controller=PlayerController())
         self.generations = self.generations + 1
         if self.generations % self.eval_freq == 0:
             with open(f'{self.raw_data_dir}/wins.csv', mode='a') as wins_file:
@@ -112,7 +115,7 @@ def run(config_file, environments, runs=5, generations=100):
                 os.makedirs(enemyDir)
 
             for env_params, eval_env_params in enemy_envs:
-                env = Environment(**env_params)
+                env = Environment(**env_params, player_controller=PlayerController())
                 lengths_path = f'{enemyDir}/Evaluation_lengths.csv'
                 rewards_path = f'{enemyDir}/Evaluation_rewards.csv'
                 modelDir = f'{enemyDir}/models/{({env.weight_player_hitpoint}, {env.weight_enemy_hitpoint})}'
@@ -184,9 +187,9 @@ if __name__ == '__main__':
                 randomini='yes',
                 logs='off',
             )
-        ) for weight_player_hitpoint in [0.1, 0.4, 0.5]]
+        ) for weight_player_hitpoint in [0.1, 0.4, 0.5, 0.6]]
         for n in range(1, 9)
     ]
     local_dir = os.path.dirname(__file__)
     config_path = os.path.join(local_dir, 'config-neat_test')
-    run(config_path, environments, runs=1, generations=10)
+    run(config_path, environments, runs=5, generations=100)
