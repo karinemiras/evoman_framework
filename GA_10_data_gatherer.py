@@ -210,4 +210,4 @@ if __name__ == '__main__':
         for n in range(1, 9)
     ]
 
-    run(environments, runs=1, generations=100, population_size=100)
+    run(environments, runs=5, generations=100, population_size=100)
