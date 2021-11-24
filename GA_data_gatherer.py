@@ -195,6 +195,7 @@ if __name__ == '__main__':
                     weight_enemy_hitpoint=1.0 - weight_player_hitpoint,
                     randomini='yes',
                     logs='off',
+                    player_controller=PlayerController(),
                     # show_display=True,
                 ),
                 Environment(
@@ -203,6 +204,7 @@ if __name__ == '__main__':
                     weight_enemy_hitpoint=1,
                     randomini='yes',
                     logs='off',
+                    player_controller=PlayerController(),
                     # show_display=True,
                 )
             ) for weight_player_hitpoint in [0.1, 0.4, 0.5, 0.6]]
