@@ -171,7 +171,7 @@ def schedule(x):
 
 for run in range(runs):
     print(f'Starting run {run}!')
-    baseDir = f'ShortTimeBox/{algorithm}/run{run}'
+    baseDir = f'FullTime/{algorithm}/run{run}'
 
     if not os.path.exists(baseDir):
         os.makedirs(baseDir)
