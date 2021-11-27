@@ -164,10 +164,16 @@ class EvalEnvCallback(BaseCallback):
                 l_writer.writerow(self.lengths_prepend+self.lengths)
                 r_writer.writerow(self.rewards_prepend+self.rewards)
 
+def schedule(x):
+    if x == 1:
+        x = x - 0.0000000000001
+    if x == 0:
+        return 1e-4
+    return np.max([-(1/(40000*np.log(x))), 1e-4])
 
 for run in range(runs):
     print(f'Starting run {run}!')
-    baseDir = f'ShortTimeBox/{algorithm}/run{run}'
+    baseDir = f'ShortTimeDiscrete/{algorithm}/run{run}'
 
     if not os.path.exists(baseDir):
         os.makedirs(baseDir)
@@ -195,7 +201,7 @@ for run in range(runs):
             elif algorithm == 'DDPG':
                 model = DDPG('MlpPolicy', env)
             elif algorithm == 'DQN':
-                model = DQN('MlpPolicy', env)
+                model = DQN('MlpPolicy', env, learning_rate=schedule, exploration_fraction=0.25, exploration_initial_eps=0.85, exploration_final_eps=0.01, gamma=0.95)
             l_prepend = [f'{id_to_name(enemy_id)}', ""]
             r_prepend = [f'{id_to_name(enemy_id)} ({env.env.weight_player_hitpoint}, {env.env.weight_enemy_hitpoint})', str(env.env.win_value())]
             model.learn(total_timesteps=int(5e5), callback=EvalEnvCallback(

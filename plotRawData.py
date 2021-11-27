@@ -47,7 +47,10 @@ def main():
     pyplot.xlabel(xlabel)
     pyplot.ylabel(ylabel)
     pyplot.grid(True)
-    # pyplot.ylim(0, 1.5)
+    if dataType == 'rewards' or dataType == 'fitness':
+        pyplot.ylim(-100, 100)
+    else :
+        pyplot.ylim(0, 1.5)
     pyplot.legend()
     pyplot.show()
 
