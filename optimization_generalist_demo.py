@@ -55,6 +55,7 @@ n_vars = (env.get_num_sensors() + 1) * n_hidden_neurons + (n_hidden_neurons + 1)
 
 dom_u = 1
 dom_l = -1
+
 npop = 100
 gens = 30
 mutation = 0.2
@@ -120,8 +121,6 @@ def crossover(pop):
 
         for f in range(0, n_offspring):
             # crossover
-            cross_prop = np.random.uniform(0, 1)
-            offspring[f] = p1 * cross_prop + p2 * (1 - cross_prop)
 
             # mutation
             for i in range(0, len(offspring[f])):

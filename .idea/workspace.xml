@@ -1,12 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cbb56179-6c1d-4ce5-96e6-fe6435188f5f" name="Changes" comment="DQN?">
-      <change afterPath="$PROJECT_DIR$/GA_50_50_30_20_data_gatherer.py" afterDir="false" />
+    <list default="true" id="cbb56179-6c1d-4ce5-96e6-fe6435188f5f" name="Changes" comment="GA-BIG">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShortTime_data_gather_discrete.py" beforeDir="false" afterPath="$PROJECT_DIR$/ShortTime_data_gather_discrete.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plotAllRawData.py" beforeDir="false" afterPath="$PROJECT_DIR$/plotAllRawData.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plotRawData.py" beforeDir="false" afterPath="$PROJECT_DIR$/plotRawData.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GA_10_data_gatherer.py" beforeDir="false" afterPath="$PROJECT_DIR$/GA_10_data_gatherer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GA_50_data_gatherer.py" beforeDir="false" afterPath="$PROJECT_DIR$/GA_50_data_gatherer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GA_data_gatherer.py" beforeDir="false" afterPath="$PROJECT_DIR$/GA_data_gatherer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/AirMan_lengths.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/AirMan_rewards.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/BubbleMan_lengths.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/BubbleMan_rewards.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/CrashMan_lengths.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/CrashMan_rewards.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/FlashMan_lengths.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/FlashMan_rewards.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/HeatMan_lengths.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/HeatMan_rewards.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/MetalMan_lengths.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/MetalMan_rewards.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/QuickMan_lengths.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/QuickMan_rewards.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/WoodMan_lengths.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/WoodMan_rewards.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Optimized_FSkip/FSkip_data_gather_lengths.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Optimized_FSkip/FSkip_data_gather_rewards.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Optimized_FStack/FStack_data_gather_lengths.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Optimized_FStack/FStack_data_gather_rewards.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Optimized_FStack_FSkip/FStack_FSkip_A2C_data_gather_lengths.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Optimized_FStack_FSkip/FStack_FSkip_A2C_data_gather_rewards.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Optimized_FStack_FSkip/FStack_FSkip_DQN_data_gather_lengths.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Optimized_FStack_FSkip/FStack_FSkip_DQN_data_gather_rewards.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Optimized_FStack_FSkip/FStack_FSkip_PPO_data_gather_lengths.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Optimized_FStack_FSkip/FStack_FSkip_PPO_data_gather_rewards.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Optimized_FStack_FSkip/FStack_FSkip_data_gather_lengths.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Optimized_FStack_FSkip/FStack_FSkip_data_gather_rewards.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/demo_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimization_generalist_demo.py" beforeDir="false" afterPath="$PROJECT_DIR$/optimization_generalist_demo.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,14 +125,8 @@
       <workItem from="1637486507791" duration="24056000" />
       <workItem from="1637574706927" duration="12303000" />
       <workItem from="1637765898402" duration="8155000" />
-      <workItem from="1638024351182" duration="1774000" />
-    </task>
-    <task id="LOCAL-00001" summary="A bunch of stuff">
-      <created>1635356758320</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1635356758320</updated>
+      <workItem from="1638024351182" duration="2711000" />
+      <workItem from="1638377962639" duration="12699000" />
     </task>
     <task id="LOCAL-00002" summary="A bunch of stuff">
       <created>1635360071190</created>
@@ -441,7 +464,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637784472375</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="GA-BIG">
+      <created>1638046324415</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1638046324415</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -480,7 +510,8 @@
     <MESSAGE value="NEAT" />
     <MESSAGE value="GA" />
     <MESSAGE value="DQN?" />
-    <option name="LAST_COMMIT_MESSAGE" value="DQN?" />
+    <MESSAGE value="GA-BIG" />
+    <option name="LAST_COMMIT_MESSAGE" value="GA-BIG" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

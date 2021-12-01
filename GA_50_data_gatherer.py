@@ -1,12 +1,11 @@
 import csv
 import os
+import pickle
 import random
 import sys
-import pickle
 
-# import neat
-from deap import base, creator, tools, algorithms
 import numpy as np
+from deap import base, creator, tools, algorithms
 
 from map_enemy_id_to_name import id_to_name
 
@@ -28,9 +27,9 @@ class PlayerController(Controller):
     def control(self, sensors, controller):
         # Normalise input
         result = (sensors - min(sensors)) / float((max(sensors) - min(sensors)))
-        for layer in controller:
+        for (biases, layer) in zip(controller[0], controller[1]):
             l = np.array(layer)
-            result = sigmoid_activation(l.dot(result))
+            result = sigmoid_activation(l.dot(result)+biases)
 
         return np.round(result).astype(int)
 
@@ -38,29 +37,50 @@ class PlayerController(Controller):
 def gen_multi_layer_network(prototype, input, output, layers=[]):
     ls = [input, *layers, output]
 
-    return prototype([
+    return prototype(
+        [
         np.array([
             [
-                random.random() for _ in range(ls[i])
-            ] for _ in range(ls[i+1])
-        ], dtype=np.float) for i in range(len(ls)-1)
-    ])
+                random.random() for _ in range(ls[i+1])
+            ] for i in range(len(ls) - 1)
+        ], dtype=np.float),
+        np.array([
+            [
+                [
+                    random.random() for _ in range(ls[i])
+                ] for _ in range(ls[i + 1])
+            ] for i in range(len(ls) - 1)
+        ], dtype=np.float)
+    ]
+    )
 
 
 def mut_mlp(ind, func, **kwargs):
-    for l in ind:
+    for l in ind[1]:
         for sl in l:
             func(sl, **kwargs)
+    for l in ind[0]:
+        func(l, **kwargs)
+
+    ind[0] = np.clip(ind[0], -1, 1)
+    ind[1] = np.clip(ind[1], -1, 1)
 
     return ind,
 
 
-def crossover_mlp(ind1, ind2, func, **kwargs):
-    for i in range(len(ind1)):
-        for j in range(len(ind1[i])):
-            ind1[i][j], ind2[i][j] = func(ind1[i][j], ind2[i][j], **kwargs)
+def crossover_mlp(ind1, ind2, prototype):
+    cross_prop = np.random.uniform(0, 1)
+    offspring1 = prototype([
+        ind1[0] * cross_prop + ind2[0] * (1 - cross_prop),
+        ind1[1] * cross_prop + ind2[1] * (1 - cross_prop),
+    ])
+    cross_prop = np.random.uniform(0, 1)
+    offspring2 = prototype([
+        ind1[0] * cross_prop + ind2[0] * (1 - cross_prop),
+        ind1[1] * cross_prop + ind2[1] * (1 - cross_prop),
+    ])
 
-    return ind1, ind2
+    return offspring1, offspring2
 
 
 class EvalEnvCallback:
@@ -118,7 +138,7 @@ def run(environments, runs=5, generations=100, population_size=100):
 
     toolbox = base.Toolbox()
     toolbox.register('attr_float_list', lambda n: [random.random() for _ in range(n)])
-    toolbox.register('mate', crossover_mlp, func=tools.cxUniform, indpb=0.5)
+    toolbox.register('mate', crossover_mlp, prototype=creator.Individual)
     toolbox.register('mutate', mut_mlp, func=tools.mutGaussian, mu=0.0, sigma=1.0, indpb=0.2)
     toolbox.register('select', tools.selTournament, tournsize=2)
 
@@ -126,7 +146,7 @@ def run(environments, runs=5, generations=100, population_size=100):
 
     for run in range(runs):
         print(f'Starting run {run}!')
-        baseDir = f'FullTime/GA-50/run{run}'
+        baseDir = f'FullTime/GA/run{run}'
 
         if not os.path.exists(baseDir):
             os.makedirs(baseDir)
@@ -183,7 +203,6 @@ def run(environments, runs=5, generations=100, population_size=100):
 
                 print(
                     f'\nFinished {id_to_name(enemy_id)} ({env.weight_player_hitpoint}, {env.weight_enemy_hitpoint})')
-
 
 if __name__ == '__main__':
     environments = [
