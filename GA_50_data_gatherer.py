@@ -38,20 +38,20 @@ def gen_multi_layer_network(prototype, input, output, layers=[]):
     ls = [input, *layers, output]
 
     return prototype(
-        [
-        np.array([
-            [
-                random.random() for _ in range(ls[i+1])
-            ] for i in range(len(ls) - 1)
-        ], dtype=np.float),
-        np.array([
-            [
+        [[
+            np.array(
                 [
-                    random.random() for _ in range(ls[i])
-                ] for _ in range(ls[i + 1])
-            ] for i in range(len(ls) - 1)
-        ], dtype=np.float)
-    ]
+                    random.random() for _ in range(ls[i + 1])
+                ], dtype=np.float) for i in range(len(ls) - 1)
+        ],
+            [
+                np.array([
+                    [
+                        random.random() for _ in range(ls[i])
+                    ] for _ in range(ls[i + 1])
+                ], dtype=np.float) for i in range(len(ls) - 1)
+            ]
+        ]
     )
 
 
@@ -62,8 +62,8 @@ def mut_mlp(ind, func, **kwargs):
     for l in ind[0]:
         func(l, **kwargs)
 
-    ind[0] = np.clip(ind[0], -1, 1)
-    ind[1] = np.clip(ind[1], -1, 1)
+    ind[0] = [np.clip(i, -1, 1) for i in ind[0]]
+    ind[1] = [np.clip(i, -1, 1) for i in ind[1]]
 
     return ind,
 
@@ -71,13 +71,13 @@ def mut_mlp(ind, func, **kwargs):
 def crossover_mlp(ind1, ind2, prototype):
     cross_prop = np.random.uniform(0, 1)
     offspring1 = prototype([
-        ind1[0] * cross_prop + ind2[0] * (1 - cross_prop),
-        ind1[1] * cross_prop + ind2[1] * (1 - cross_prop),
+        [i1 * cross_prop + i2 * (1 - cross_prop) for i1, i2 in zip(ind1[0], ind2[0])],
+        [i1 * cross_prop + i2 * (1 - cross_prop) for i1, i2 in zip(ind1[1], ind2[1])],
     ])
     cross_prop = np.random.uniform(0, 1)
     offspring2 = prototype([
-        ind1[0] * cross_prop + ind2[0] * (1 - cross_prop),
-        ind1[1] * cross_prop + ind2[1] * (1 - cross_prop),
+        [i1 * cross_prop + i2 * (1 - cross_prop) for i1, i2 in zip(ind1[0], ind2[0])],
+        [i1 * cross_prop + i2 * (1 - cross_prop) for i1, i2 in zip(ind1[1], ind2[1])],
     ])
 
     return offspring1, offspring2

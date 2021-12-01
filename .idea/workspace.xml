@@ -6,36 +6,6 @@
       <change beforePath="$PROJECT_DIR$/GA_10_data_gatherer.py" beforeDir="false" afterPath="$PROJECT_DIR$/GA_10_data_gatherer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GA_50_data_gatherer.py" beforeDir="false" afterPath="$PROJECT_DIR$/GA_50_data_gatherer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GA_data_gatherer.py" beforeDir="false" afterPath="$PROJECT_DIR$/GA_data_gatherer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/AirMan_lengths.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/AirMan_rewards.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/BubbleMan_lengths.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/BubbleMan_rewards.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/CrashMan_lengths.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/CrashMan_rewards.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/FlashMan_lengths.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/FlashMan_rewards.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/HeatMan_lengths.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/HeatMan_rewards.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/MetalMan_lengths.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/MetalMan_rewards.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/QuickMan_lengths.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/QuickMan_rewards.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/WoodMan_lengths.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/OldData/Mixed/HitpointWeightIntermit/WoodMan_rewards.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Optimized_FSkip/FSkip_data_gather_lengths.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Optimized_FSkip/FSkip_data_gather_rewards.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Optimized_FStack/FStack_data_gather_lengths.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Optimized_FStack/FStack_data_gather_rewards.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Optimized_FStack_FSkip/FStack_FSkip_A2C_data_gather_lengths.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Optimized_FStack_FSkip/FStack_FSkip_A2C_data_gather_rewards.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Optimized_FStack_FSkip/FStack_FSkip_DQN_data_gather_lengths.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Optimized_FStack_FSkip/FStack_FSkip_DQN_data_gather_rewards.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Optimized_FStack_FSkip/FStack_FSkip_PPO_data_gather_lengths.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Optimized_FStack_FSkip/FStack_FSkip_PPO_data_gather_rewards.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Optimized_FStack_FSkip/FStack_FSkip_data_gather_lengths.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Optimized_FStack_FSkip/FStack_FSkip_data_gather_rewards.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/demo_controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/optimization_generalist_demo.py" beforeDir="false" afterPath="$PROJECT_DIR$/optimization_generalist_demo.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,14 +96,7 @@
       <workItem from="1637574706927" duration="12303000" />
       <workItem from="1637765898402" duration="8155000" />
       <workItem from="1638024351182" duration="2711000" />
-      <workItem from="1638377962639" duration="12699000" />
-    </task>
-    <task id="LOCAL-00002" summary="A bunch of stuff">
-      <created>1635360071190</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1635360071190</updated>
+      <workItem from="1638377962639" duration="13931000" />
     </task>
     <task id="LOCAL-00003" summary="A bunch of stuff">
       <created>1635360100413</created>
@@ -471,7 +434,14 @@
       <option name="project" value="LOCAL" />
       <updated>1638046324415</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="GA-BIG">
+      <created>1638399741807</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1638399741807</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
