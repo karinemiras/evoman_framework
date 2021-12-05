@@ -270,7 +270,7 @@ def doomsday(pop, fit_pop):
 
 for run in range(runs):
     print(f'Starting run {run}!')
-    baseDir = f'FullTime/Base-GA-10/run{run}'
+    baseDir = f'FullTime/Base-GA-50/run{run}'
 
     if not os.path.exists(baseDir):
         os.makedirs(baseDir)
