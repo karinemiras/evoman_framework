@@ -281,7 +281,10 @@ for run in range(runs):
             os.makedirs(enemyDir)
 
         for env, eval_env in enemy_envs:
-            n_vars = (env.get_num_sensors() + 1) * n_hidden_neurons + (n_hidden_neurons + 1) * 5
+            if n_hidden_neurons == 0:
+                n_vars = (env.get_num_sensors() + 1) * 5
+            else:
+                n_vars = (env.get_num_sensors() + 1) * n_hidden_neurons + (n_hidden_neurons + 1) * 5
             pop = np.random.uniform(dom_l, dom_u, (npop, n_vars))
             print(np.array(pop).shape)
             fit_pop = evaluate(pop)

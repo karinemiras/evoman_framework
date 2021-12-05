@@ -270,7 +270,7 @@ def doomsday(pop, fit_pop):
 
 for run in range(runs):
     print(f'Starting run {run}!')
-    baseDir = f'FullTime/Base-GA-10/run{run}'
+    baseDir = f'FullTime/Base-GA/run{run}'
 
     if not os.path.exists(baseDir):
         os.makedirs(baseDir)
@@ -281,7 +281,10 @@ for run in range(runs):
             os.makedirs(enemyDir)
 
         for env, eval_env in enemy_envs:
-            n_vars = (env.get_num_sensors() + 1) * n_hidden_neurons + (n_hidden_neurons + 1) * 5
+            if n_hidden_neurons == 0:
+                n_vars = (env.get_num_sensors() + 1) * 5
+            else:
+                n_vars = (env.get_num_sensors() + 1) * n_hidden_neurons + (n_hidden_neurons + 1) * 5
             pop = np.random.uniform(dom_l, dom_u, (npop, n_vars))
             print(np.array(pop).shape)
             fit_pop = evaluate(pop)
