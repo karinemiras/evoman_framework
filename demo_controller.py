@@ -33,9 +33,6 @@ class player_controller(Controller):
             weights1 = controller[self.n_hidden[0]:weights1_slice].reshape((len(inputs), self.n_hidden[0]))
 
             # Outputs activation first layer.
-            print("inputs: ", inputs)
-            print("weights1: ", weights1)
-            print("bias1: ", bias1)
             output1 = sigmoid_activation(inputs.dot(weights1) + bias1)
 
             # Preparing the weights and biases from the controller of layer 2

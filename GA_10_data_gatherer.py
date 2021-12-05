@@ -19,8 +19,11 @@ def sigmoid_activation(x):
 
 
 def evaluate(individual, env: Environment):
-    f, p, e, t = env.play(pcont=individual)
-    return f,
+    f, p, e, t = 0, 0, 0, 0
+    for _ in range(3):
+        tf, tp, te, tt = env.play(pcont=individual)
+        f += tf
+    return (f/3),
 
 
 class PlayerController(Controller):

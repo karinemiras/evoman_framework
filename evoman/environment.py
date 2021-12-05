@@ -47,8 +47,8 @@ class Environment(object):
                  player_controller=None,  # controller object
                  enemy_controller=None,  # controller object
                  cost_per_timestep=0.0,
-                 weight_enemy_hitpoint=1,
-                 weight_player_hitpoint=1,
+                 weight_enemy_hitpoint=0.9,
+                 weight_player_hitpoint=0.11,
                  show_display=False,
                  use_joystick=False):
 
@@ -582,7 +582,6 @@ class Environment(object):
 
     # checks objective mode
     def play(self, pcont="None", econt="None"):
-
         if self.multiplemode == "yes":
             return self.multiple(pcont, econt)
         else:

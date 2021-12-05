@@ -2,10 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cbb56179-6c1d-4ce5-96e6-fe6435188f5f" name="Changes" comment="GA-BIG">
+      <change afterPath="$PROJECT_DIR$/Base_GA_10_data_gatherer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Base_GA_50_data_gatherer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Base_GA_data_gatherer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/evoman_framework.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/evoman_framework.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GA_10_data_gatherer.py" beforeDir="false" afterPath="$PROJECT_DIR$/GA_10_data_gatherer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GA_50_data_gatherer.py" beforeDir="false" afterPath="$PROJECT_DIR$/GA_50_data_gatherer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GA_data_gatherer.py" beforeDir="false" afterPath="$PROJECT_DIR$/GA_data_gatherer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller_generalist_demo/evoman_logs.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller_specialist_demo/evoman_logs.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/demo_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evoman/environment.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/environment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimization_specialist_demo.py" beforeDir="false" afterPath="$PROJECT_DIR$/optimization_specialist_demo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plotAllRawData.py" beforeDir="false" afterPath="$PROJECT_DIR$/plotAllRawData.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plotRawData.py" beforeDir="false" afterPath="$PROJECT_DIR$/plotRawData.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,14 +107,8 @@
       <workItem from="1637574706927" duration="12303000" />
       <workItem from="1637765898402" duration="8155000" />
       <workItem from="1638024351182" duration="2711000" />
-      <workItem from="1638377962639" duration="13931000" />
-    </task>
-    <task id="LOCAL-00003" summary="A bunch of stuff">
-      <created>1635360100413</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1635360100413</updated>
+      <workItem from="1638377962639" duration="14536000" />
+      <workItem from="1638712091515" duration="5825000" />
     </task>
     <task id="LOCAL-00004" summary="A bunch of stuff">
       <created>1635360310510</created>
@@ -441,7 +446,14 @@
       <option name="project" value="LOCAL" />
       <updated>1638399741807</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="GA-BIG">
+      <created>1638401600776</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1638401600776</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

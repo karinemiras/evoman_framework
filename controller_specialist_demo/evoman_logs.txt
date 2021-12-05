@@ -1,5 +1,0 @@
-
-
-MESSAGE: Pygame initialized for simulation.
-
-PARAMETER CHANGE: enemies = [1]

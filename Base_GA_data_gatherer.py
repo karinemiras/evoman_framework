@@ -30,7 +30,7 @@ experiment_name = 'individual_demo'
 if not os.path.exists(experiment_name):
     os.makedirs(experiment_name)
 
-n_hidden_neurons = 10
+n_hidden_neurons = 0
 
 # initializes simulation in individual evolution mode, for single static enemy.
 
