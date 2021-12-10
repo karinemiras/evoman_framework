@@ -19,11 +19,8 @@ def sigmoid_activation(x):
 
 
 def evaluate(individual, env: Environment):
-    f, p, e, t = 0, 0, 0, 0
-    for _ in range(3):
-        tf, tp, te, tt = env.play(pcont=individual)
-        f += tf
-    return (f/3),
+    f, p, e, t = env.play(pcont=individual)
+    return f,
 
 
 class PlayerController(Controller):
@@ -216,7 +213,7 @@ if __name__ == '__main__':
                     enemies=[n],
                     weight_player_hitpoint=weight_player_hitpoint,
                     weight_enemy_hitpoint=1.0 - weight_player_hitpoint,
-                    randomini='yes',
+                    # randomini='yes',
                     logs='off',
                     player_controller=PlayerController(),
                     # show_display=True,
@@ -225,7 +222,7 @@ if __name__ == '__main__':
                     enemies=[n],
                     weight_player_hitpoint=1,
                     weight_enemy_hitpoint=1,
-                    randomini='yes',
+                    # randomini='yes',
                     logs='off',
                     player_controller=PlayerController(),
                     # show_display=True,
@@ -235,4 +232,4 @@ if __name__ == '__main__':
         for n in range(1, 9)
     ]
 
-    run(environments, runs=5, generations=100, population_size=100)
+    run(environments, runs=4, generations=100, population_size=100)

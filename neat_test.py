@@ -177,14 +177,14 @@ if __name__ == '__main__':
                 enemies=[n],
                 weight_player_hitpoint=weight_player_hitpoint,
                 weight_enemy_hitpoint=1.0 - weight_player_hitpoint,
-                randomini='yes',
+                # randomini='yes',
                 logs='off',
             ),
             dict(
                 enemies=[n],
                 weight_player_hitpoint=1,
                 weight_enemy_hitpoint=1,
-                randomini='yes',
+                # randomini='yes',
                 logs='off',
             )
         ) for weight_player_hitpoint in [0.1, 0.4, 0.5, 0.6]]

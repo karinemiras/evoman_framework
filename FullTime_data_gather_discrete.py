@@ -40,13 +40,13 @@ environments = [
                 enemyn=str(n),
                 weight_player_hitpoint=weight_player_hitpoint,
                 weight_enemy_hitpoint=1.0 - weight_player_hitpoint,
-                randomini=True,
+                # randomini=True,
             )),
             Monitor(Evoman(
                 enemyn=str(n),
                 weight_player_hitpoint=1,
                 weight_enemy_hitpoint=1,
-                randomini=True,
+                # randomini=True,
             ))
         ) for weight_player_hitpoint in [0.1, 0.4, 0.5, 0.6]]
     )
@@ -203,7 +203,7 @@ for run in range(runs):
             elif algorithm == 'DDPG':
                 model = DDPG('MlpPolicy', env)
             elif algorithm == 'DQN':
-                model = DQN('MlpPolicy', env, learning_rate=schedule)
+                model = DQN('MlpPolicy', env)
             l_prepend = [f'{id_to_name(enemy_id)}', ""]
             r_prepend = [f'{id_to_name(enemy_id)} ({env.env.weight_player_hitpoint}, {env.env.weight_enemy_hitpoint})', str(env.env.win_value())]
             model.learn(total_timesteps=int(2.5e6), callback=EvalEnvCallback(

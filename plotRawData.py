@@ -56,7 +56,7 @@ def main():
     if not os.path.exists(f'{root_folder}/{algorithm}/{run}/plots/{data_type}'):
         os.makedirs(f'{root_folder}/{algorithm}/{run}/plots/{data_type}')
     pyplot.savefig(f'{root_folder}/{algorithm}/{run}/plots/{data_type}/{graph_name}.jpg')
-    # pyplot.show()
+    pyplot.show()
 
 def lengths_to_indexes(array):
     for i in range(1, len(array)):

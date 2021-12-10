@@ -40,13 +40,13 @@ environments = [
                 enemyn=str(n),
                 weight_player_hitpoint=weight_player_hitpoint,
                 weight_enemy_hitpoint=1.0 - weight_player_hitpoint,
-                randomini=True,
+                # randomini=True,
             )),
             Monitor(Evoman(
                 enemyn=str(n),
                 weight_player_hitpoint=1,
                 weight_enemy_hitpoint=1,
-                randomini=True,
+                # randomini=True,
             ))
         ) for weight_player_hitpoint in [0.1, 0.4, 0.5, 0.6]]
     )
