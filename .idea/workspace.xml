@@ -3,17 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="cbb56179-6c1d-4ce5-96e6-fe6435188f5f" name="Changes" comment="GA-BIG">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Base_GA_10_data_gatherer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Base_GA_10_data_gatherer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Base_GA_50_data_gatherer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Base_GA_50_data_gatherer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Base_GA_data_gatherer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Base_GA_data_gatherer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FullTime_data_gather.py" beforeDir="false" afterPath="$PROJECT_DIR$/FullTime_data_gather.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FullTime_data_gather_discrete.py" beforeDir="false" afterPath="$PROJECT_DIR$/FullTime_data_gather_discrete.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GA_10_data_gatherer.py" beforeDir="false" afterPath="$PROJECT_DIR$/GA_10_data_gatherer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GA_50_data_gatherer.py" beforeDir="false" afterPath="$PROJECT_DIR$/GA_50_data_gatherer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GA_data_gatherer.py" beforeDir="false" afterPath="$PROJECT_DIR$/GA_data_gatherer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/neat_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/neat_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/neat_test_old_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/neat_test_old_config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plotRawData.py" beforeDir="false" afterPath="$PROJECT_DIR$/plotRawData.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,14 +99,8 @@
       <workItem from="1638712091515" duration="9031000" />
       <workItem from="1638804066599" duration="3138000" />
       <workItem from="1638974383749" duration="128000" />
-      <workItem from="1639170308527" duration="533000" />
-    </task>
-    <task id="LOCAL-00007" summary="Multithreading?">
-      <created>1635362772244</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1635362772244</updated>
+      <workItem from="1639170308527" duration="2006000" />
+      <workItem from="1639316187375" duration="8917000" />
     </task>
     <task id="LOCAL-00008" summary="Multithreading?">
       <created>1635362924225</created>
@@ -454,7 +438,14 @@
       <option name="project" value="LOCAL" />
       <updated>1638735818525</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="GA-BIG">
+      <created>1639170896572</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1639170896572</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

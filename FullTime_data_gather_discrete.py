@@ -170,7 +170,7 @@ def schedule(x):
         x = x - 0.0000000000001
     if x == 0:
         return 1e-4
-    return np.max([-(1/(40000*np.log(x))), 1e-4])
+    return np.max([-(1/(200*np.log(x))), 1e-2])
 
 
 for run in range(runs):
