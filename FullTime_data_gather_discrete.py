@@ -16,21 +16,29 @@ from gym_environment_discrete import Evoman
 
 algorithm = sys.argv[1]
 runs = int(sys.argv[2])
+runs_start = int(sys.argv[3])
+randomini = sys.argv[4]
+if randomini != 'yes' and randomini != 'no':
+    raise EnvironmentError()
+if randomini != 'yes':
+    randomini = True
+if randomini != 'no':
+    randomini = False
 if runs < 0:
     runs = sys.maxsize
 if algorithm != 'PPO' and algorithm != 'A2C' and algorithm != 'DDPG' and algorithm != 'DQN':
     print("Please use PPO or A2C for the algorithm")
     sys.exit()
 
-if len(sys.argv) >= 4:
-    start = np.min([np.max([int(sys.argv[3]), 1]), 8])
-else:
-    start = 1
-
-if len(sys.argv) >= 5:
-    stop = np.min([np.max([int(sys.argv[4]), 1]), 8]) + 1
-else:
-    stop = 9
+# if len(sys.argv) >= 4:
+#     start = np.min([np.max([int(sys.argv[3]), 1]), 8])
+# else:
+#     start = 1
+#
+# if len(sys.argv) >= 5:
+#     stop = np.min([np.max([int(sys.argv[4]), 1]), 8]) + 1
+# else:
+#     stop = 9
 
 environments = [
     (
@@ -40,17 +48,17 @@ environments = [
                 enemyn=str(n),
                 weight_player_hitpoint=weight_player_hitpoint,
                 weight_enemy_hitpoint=1.0 - weight_player_hitpoint,
-                # randomini=True,
+                randomini=randomini,
             )),
             Monitor(Evoman(
                 enemyn=str(n),
                 weight_player_hitpoint=1,
                 weight_enemy_hitpoint=1,
-                # randomini=True,
+                randomini=randomini,
             ))
-        ) for weight_player_hitpoint in [0.1, 0.4, 0.5, 0.6]]
+        ) for weight_player_hitpoint in [0.5]]
     )
-    for n in range(start, stop)
+    for n in [1, 2, 4, 7]
 ]
 
 
@@ -170,12 +178,17 @@ def schedule(x):
         x = x - 0.0000000000001
     if x == 0:
         return 1e-4
-    return np.max([-(1/(200*np.log(x))), 1e-2])
+    return np.max([-(1/(40*np.log(x))), 5e-2])
 
 
-for run in range(runs):
+for run in range(runs_start, runs_start+runs):
     print(f'Starting run {run}!')
-    baseDir = f'FullTime/{algorithm}/run{run}'
+    if sys.argv[4] == 'no':
+        baseDir = f'FinalData/StaticIni/{algorithm}/run{run}'
+    elif sys.argv[4] == 'yes':
+        baseDir = f'FinalData/RandomIni/{algorithm}/run{run}'
+    else:
+        raise EnvironmentError()
 
     if not os.path.exists(baseDir):
         os.makedirs(baseDir)
@@ -216,7 +229,7 @@ for run in range(runs):
                 lengths_prepend=l_prepend,
                 rewards_prepend=r_prepend,
                 eval_freq=12500,
-                n_eval_episodes=15,
+                n_eval_episodes=25,
             ))
 
             with open(f'{enemyDir}/Training_lengths.csv', mode='a') as train_lengths_file:

@@ -91,7 +91,7 @@ environments = [
                 weight_player_hitpoint=weight_player_hitpoint,
                 weight_enemy_hitpoint=1.0 - weight_player_hitpoint,
                 playermode="ai",
-                # randomini='yes',
+                randomini=sys.argv[1],
                 enemymode="static",
                 logs='off',
                 player_controller=player_controller(n_hidden_neurons),
@@ -101,16 +101,16 @@ environments = [
                 enemies=[n],
                 weight_player_hitpoint=1,
                 weight_enemy_hitpoint=1,
-                # randomini='yes',
+                randomini=sys.argv[1],
                 playermode="ai",
                 enemymode="static",
                 logs='off',
                 player_controller=player_controller(n_hidden_neurons),
                 # show_display=True,
             )
-        ) for weight_player_hitpoint in [0.1, 0.4, 0.5, 0.6]]
+        ) for weight_player_hitpoint in [0.5]]
     )
-    for n in range(1, 9)
+    for n in [1, 2, 4, 7]
 ]
 
 
@@ -134,7 +134,7 @@ npop = 100
 gens = 100
 mutation = 0.2
 last_best = 0
-runs = 5
+runs = 25
 
 
 # runs simulation
@@ -270,7 +270,12 @@ def doomsday(pop, fit_pop):
 
 for run in range(runs):
     print(f'Starting run {run}!')
-    baseDir = f'FullTime/Base-GA-50/run{run}'
+    if sys.argv[1] == 'no':
+        baseDir = f'FinalData/StaticIni/GA-50/run{run}'
+    elif sys.argv[1] == 'yes':
+        baseDir = f'FinalData/RandomIni/GA-50/run{run}'
+    else:
+        raise EnvironmentError()
 
     if not os.path.exists(baseDir):
         os.makedirs(baseDir)

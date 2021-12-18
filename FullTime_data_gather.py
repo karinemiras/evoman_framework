@@ -13,21 +13,29 @@ from map_enemy_id_to_name import id_to_name
 
 algorithm = sys.argv[1]
 runs = int(sys.argv[2])
+runs_start = int(sys.argv[3])
+randomini = sys.argv[4]
+if randomini != 'yes' and randomini != 'no':
+    raise EnvironmentError()
+if randomini != 'yes':
+    randomini = True
+if randomini != 'no':
+    randomini = False
 if runs < 0:
     runs = sys.maxsize
 if algorithm != 'PPO' and algorithm != 'A2C':
     print("Please use PPO or A2C for the algorithm")
     sys.exit()
 
-if len(sys.argv) >= 4:
-    start = np.min([np.max([int(sys.argv[3]), 1]), 8])
-else:
-    start = 1
-
-if len(sys.argv) >= 5:
-    stop = np.min([np.max([int(sys.argv[4]), 1]), 8]) + 1
-else:
-    stop = 9
+# if len(sys.argv) >= 4:
+#     start = np.min([np.max([int(sys.argv[3]), 1]), 8])
+# else:
+#     start = 1
+#
+# if len(sys.argv) >= 5:
+#     stop = np.min([np.max([int(sys.argv[4]), 1]), 8]) + 1
+# else:
+#     stop = 9
 
 sys.path.insert(0, 'evoman')
 from gym_environment import Evoman
@@ -40,17 +48,17 @@ environments = [
                 enemyn=str(n),
                 weight_player_hitpoint=weight_player_hitpoint,
                 weight_enemy_hitpoint=1.0 - weight_player_hitpoint,
-                # randomini=True,
+                randomini=randomini,
             )),
             Monitor(Evoman(
                 enemyn=str(n),
                 weight_player_hitpoint=1,
                 weight_enemy_hitpoint=1,
-                # randomini=True,
+                randomini=randomini,
             ))
-        ) for weight_player_hitpoint in [0.1, 0.4, 0.5, 0.6]]
+        ) for weight_player_hitpoint in [0.5]]
     )
-    for n in range(start, stop)
+    for n in [1, 2, 4, 7]
 ]
 
 
@@ -163,9 +171,14 @@ class EvalEnvCallback(BaseCallback):
                 r_writer.writerow(self.rewards_prepend+self.rewards)
 
 
-for run in range(runs):
+for run in range(runs_start, runs_start+runs):
     print(f'Starting run {run}!')
-    baseDir = f'FullTime/{algorithm}/run{run}'
+    if sys.argv[4] == 'no':
+        baseDir = f'FinalData/StaticIni/{algorithm}/run{run}'
+    elif sys.argv[4] == 'yes':
+        baseDir = f'FinalData/RandomIni/{algorithm}/run{run}'
+    else:
+        raise EnvironmentError()
 
     if not os.path.exists(baseDir):
         os.makedirs(baseDir)

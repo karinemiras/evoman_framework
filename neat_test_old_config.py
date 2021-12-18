@@ -106,12 +106,17 @@ class PlayerController(Controller):
 def run(config_file, environments, runs=5, generations=100):
     for run in range(runs):
         print(f'Starting run {run}!')
-        baseDir = f'FullTime/NEAT-old/run{run}'
+        if sys.argv[1] == 'no':
+            baseDir = f'FinalData/StaticIni/NEAT/run{run}'
+        elif sys.argv[1] == 'yes':
+            baseDir = f'FinalData/RandomIni/NEAT/run{run}'
+        else:
+            raise EnvironmentError()
 
         if not os.path.exists(baseDir):
             os.makedirs(baseDir)
 
-        for enemy_id, enemy_envs in enumerate(environments, start=1):
+        for enemy_id, enemy_envs in environments:
             enemyDir = f'{baseDir}/{id_to_name(enemy_id)}'
             if not os.path.exists(enemyDir):
                 os.makedirs(enemyDir)
@@ -174,24 +179,27 @@ if __name__ == '__main__':
     #     for n in range(1, 9)
     # ]
     environments = [
-        [(
-            dict(
-                enemies=[n],
-                weight_player_hitpoint=weight_player_hitpoint,
-                weight_enemy_hitpoint=1.0 - weight_player_hitpoint,
-                # randomini='yes',
-                logs='off',
-            ),
-            dict(
-                enemies=[n],
-                weight_player_hitpoint=1,
-                weight_enemy_hitpoint=1,
-                # randomini='yes',
-                logs='off',
-            )
-        ) for weight_player_hitpoint in [0.1, 0.4, 0.5, 0.6]]
-        for n in range(1, 9)
+        (
+            n,
+            [(
+                dict(
+                    enemies=[n],
+                    weight_player_hitpoint=weight_player_hitpoint,
+                    weight_enemy_hitpoint=1.0 - weight_player_hitpoint,
+                    randomini=sys.argv[1],
+                    logs='off',
+                ),
+                dict(
+                    enemies=[n],
+                    weight_player_hitpoint=1,
+                    weight_enemy_hitpoint=1,
+                    randomini=sys.argv[1],
+                    logs='off',
+                )
+            ) for weight_player_hitpoint in [0.5]]
+        )
+        for n in [1, 2, 4, 7]
     ]
     local_dir = os.path.dirname(__file__)
     config_path = os.path.join(local_dir, 'config-neat_test_old')
-    run(config_path, environments, runs=5, generations=100)
+    run(config_path, environments, runs=25, generations=100)
