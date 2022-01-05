@@ -68,7 +68,7 @@ class EvalEnvCallback(neat.reporting.BaseReporter):
         if self.generations % self.eval_freq == 0:
             with open(f'{self.raw_data_dir}/wins.csv', mode='a') as wins_file:
                 wins_writer = csv.writer(wins_file, delimiter=',', quotechar='\'', quoting=csv.QUOTE_NONNUMERIC)
-                with open(f'{self.raw_data_dir}/fitness.csv', mode='a') as rewards_file:
+                with open(f'{self.raw_data_dir}/rewards.csv', mode='a') as rewards_file:
                     rewards_writer = csv.writer(rewards_file, delimiter=',', quotechar='\'',
                                                 quoting=csv.QUOTE_NONNUMERIC)
                     eval_genome = eval_genome_in_env(eval_env)
@@ -98,13 +98,8 @@ class EvalEnvCallback(neat.reporting.BaseReporter):
                     eval_rewards_writer.writerow(self.rewards_prepend+self.rewards)
 
 
-class PlayerController(Controller):
-    def control(self, sensors, controller):
-        return controller.activate(sensors)
-
-
 def run(config_file, environments, runs=5, generations=100):
-    for run in range(runs):
+    for run in range(25, 25+runs):
         print(f'Starting run {run}!')
         if sys.argv[1] == 'no':
             baseDir = f'FinalData/StaticIni/NEAT/run{run}'

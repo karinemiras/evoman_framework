@@ -114,6 +114,7 @@ class Player(pygame.sprite.Sprite):
                 press = 0
                 release = 0
                 for event in game.event:
+                    print(event)
                     if event.type == pygame.JOYBUTTONDOWN or event.type == pygame.KEYDOWN:
                         press = 1
                     else:

@@ -2,6 +2,6 @@
 
 MESSAGE: Pygame initialized for simulation.
 
-MESSAGE: sound has been turned on.
+PARAMETER CHANGE: enemies = [4]
 
-PARAMETER CHANGE: enemies = [8]
+RUN: run status: enemy: 4; fitness: 34.0; player life: 0; enemy life: 50.0; time: 538

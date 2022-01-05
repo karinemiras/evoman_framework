@@ -75,7 +75,7 @@ class EvalEnvCallback:
             with open(f'{self.raw_data_dir}/wins.csv', mode='a') as wins_file:
                 wins_writer = csv.writer(wins_file, delimiter=',', quotechar='\'', quoting=csv.QUOTE_NONNUMERIC)
                 wins_writer.writerow([self.generations, self.n_eval_episodes, ''] + wins)
-            with open(f'{self.raw_data_dir}/fitness.csv', mode='a') as rewards_file:
+            with open(f'{self.raw_data_dir}/rewards.csv', mode='a') as rewards_file:
                 rewards_writer = csv.writer(rewards_file, delimiter=',', quotechar='\'',
                                             quoting=csv.QUOTE_NONNUMERIC)
                 rewards_writer.writerow([self.generations, self.n_eval_episodes, ''] + rs)
@@ -268,7 +268,7 @@ def doomsday(pop, fit_pop):
 # evolution
 
 
-for run in range(runs):
+for run in range(25, 25+runs):
     print(f'Starting run {run}!')
     if sys.argv[1] == 'no':
         baseDir = f'FinalData/StaticIni/GA-50/run{run}'

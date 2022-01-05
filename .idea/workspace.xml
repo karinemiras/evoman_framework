@@ -2,53 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cbb56179-6c1d-4ce5-96e6-fe6435188f5f" name="Changes" comment="GA-BIG">
+      <change afterPath="$PROJECT_DIR$/figure_out_network_shape.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plotAllGraphs.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plotBargraph.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plotBarplots.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plotGraphs.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Base_GA_50_data_gatherer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Base_GA_50_data_gatherer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FSN_VFS_data_gather.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FSN_data_gather.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FSkipN_data_gather.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FSkip_data_gather.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FSkip_data_gather_lengths.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FStack_FSkip_data_gather.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FStack_FSkip_data_gather_lengths.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FStack_FSkip_data_gather_rewards.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FStack_data_gather.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FStack_data_gather_lengths.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FStack_data_gather_rewards.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FullTime_FStack_FSkip_data_gather.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FullTime_data_gather.py" beforeDir="false" afterPath="$PROJECT_DIR$/FullTime_data_gather.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FullTime_data_gather_discrete.py" beforeDir="false" afterPath="$PROJECT_DIR$/FullTime_data_gather_discrete.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HitpointWeight/AirMan_lengths.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HitpointWeight/AirMan_rewards.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HitpointWeight/BubbleMan_lengths.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HitpointWeight/BubbleMan_rewards.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HitpointWeight/CrashMan_lengths.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HitpointWeight/CrashMan_rewards.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HitpointWeight/FlashMan_lengths.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HitpointWeight/FlashMan_rewards.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HitpointWeight/HeatMan_lengths.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HitpointWeight/HeatMan_rewards.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HitpointWeight/MetalMan_lengths.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HitpointWeight/MetalMan_rewards.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HitpointWeight/QuickMan_lengths.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HitpointWeight/QuickMan_rewards.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HitpointWeight/WoodMan_lengths.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HitpointWeight/WoodMan_rewards.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HitpointWeightIntermit_data_gather.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HitpointWeightNEAT.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HitpointWeight_data_gather.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Generalist/data_gather_lengths.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Generalist/data_gather_rewards.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/evoman/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/player.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/human_demo.py" beforeDir="false" afterPath="$PROJECT_DIR$/human_demo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multithreading_speed_test.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/neat_test_old_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/neat_test_old_config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/open_as_subprocess.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plot_FSN" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plot_FSN_VFS" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plot_FSkip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plot_FSkipN" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plot_FSkipN_swapped" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plot_FStack" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plot_FStack_FSkip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/singlethreading_speed_test.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/test/evoman_logs.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test/evoman_logs.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -86,13 +51,13 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File" value="Python" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/FullTime" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/FullTime" />
       <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/FullTime" />
       <recent name="$PROJECT_DIR$/evoman" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -148,14 +113,14 @@
       <workItem from="1639170308527" duration="2006000" />
       <workItem from="1639316187375" duration="11887000" />
       <workItem from="1639695449747" duration="2667000" />
-      <workItem from="1639749909353" duration="3948000" />
-    </task>
-    <task id="LOCAL-00009" summary="Multithreading?">
-      <created>1635363043478</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1635363043478</updated>
+      <workItem from="1639749909353" duration="4688000" />
+      <workItem from="1639942543242" duration="130000" />
+      <workItem from="1640733802162" duration="593000" />
+      <workItem from="1640880575339" duration="1199000" />
+      <workItem from="1640943563196" duration="5867000" />
+      <workItem from="1641047055715" duration="7336000" />
+      <workItem from="1641076706507" duration="5340000" />
+      <workItem from="1641230278910" duration="18093000" />
     </task>
     <task id="LOCAL-00010" summary="Multithreading?">
       <created>1635363338946</created>
@@ -493,7 +458,14 @@
       <option name="project" value="LOCAL" />
       <updated>1639599478046</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="GA-BIG">
+      <created>1639857681262</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1639857681263</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

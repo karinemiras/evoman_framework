@@ -17,11 +17,11 @@ if not os.path.exists(experiment_name):
     os.makedirs(experiment_name)
 
 # initializes environment with human player and static enemies
-for en in range(1, 9):
+for en in [4]:
     env = Environment(experiment_name=experiment_name,
                       enemymode='static',
                       speed="normal",
-                      sound="on",
+                      sound="off",
                       fullscreen=True,
                       use_joystick=True,
                       playermode='human',
