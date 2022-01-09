@@ -2,19 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cbb56179-6c1d-4ce5-96e6-fe6435188f5f" name="Changes" comment="GA-BIG">
-      <change afterPath="$PROJECT_DIR$/figure_out_network_shape.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plotAllGraphs.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plotBargraph.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plotBarplots.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plotGraphs.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Base_GA_50_data_gatherer_with_time.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plotAllBarplots.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/evoman_framework.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/evoman_framework.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Base_GA_50_data_gatherer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Base_GA_50_data_gatherer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Generalist/data_gather_lengths.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Generalist/data_gather_rewards.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/evoman/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/player.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/human_demo.py" beforeDir="false" afterPath="$PROJECT_DIR$/human_demo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/neat_test_old_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/neat_test_old_config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/evoman_logs.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test/evoman_logs.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plotBarplots.py" beforeDir="false" afterPath="$PROJECT_DIR$/plotBarplots.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plotGraphs.py" beforeDir="false" afterPath="$PROJECT_DIR$/plotGraphs.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +33,16 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/optimization_specialist_demo.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/plotAllGraphs.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/.local/lib/python3.9/site-packages/matplotlib/figure.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/evoman/environment.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/.local/lib/python3.9/site-packages/matplotlib/pyplot.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/evoman/gym_environment.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/evoman/gym_enemy1.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/evoman/gym_environment_discrete.py" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="ProjectId" id="1yibP5fVC7oACCui04fIH987U5T" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -52,7 +56,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File" value="Python" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -120,14 +124,8 @@
       <workItem from="1640943563196" duration="5867000" />
       <workItem from="1641047055715" duration="7336000" />
       <workItem from="1641076706507" duration="5340000" />
-      <workItem from="1641230278910" duration="18093000" />
-    </task>
-    <task id="LOCAL-00010" summary="Multithreading?">
-      <created>1635363338946</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1635363338946</updated>
+      <workItem from="1641230278910" duration="19757000" />
+      <workItem from="1641561671630" duration="225000" />
     </task>
     <task id="LOCAL-00011" summary="Multithreading?">
       <created>1635368548168</created>
@@ -465,7 +463,14 @@
       <option name="project" value="LOCAL" />
       <updated>1639857681263</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="GA-BIG">
+      <created>1641418085948</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1641418085949</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

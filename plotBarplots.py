@@ -37,32 +37,32 @@ def main():
     pyplot.boxplot(x=boxes, labels=box_names)
     for box in boxes:
         print(len(box))
-    # height = 100
-    # for i in range(1, 3):
-    #     for j in range(i, 3):
-    #         height += 10
-    #         pyplot.hlines(height, 1+i, 4-(j-i))
-    #         pyplot.vlines(1+i, height-4, height)
-    #         pyplot.vlines(4-(j-i), height-3, height)
-    #         pvalue = stats.ranksums(boxes[i], boxes[3-(j-i)]).pvalue
-    #         print(pvalue)
-    #         if pvalue < 0.001:
-    #             label = "***"
-    #         elif pvalue < 0.01:
-    #             label = "**"
-    #         elif pvalue < 0.05:
-    #             label = "*"
-    #         else:
-    #             label = "N.S."
-    #
-    #         pyplot.annotate(label, ((1+i + 4-(j-i))/2, height))
+    height = 100
+    for i in range(1, 3):
+        for j in range(i, 3):
+            height += 10
+            pyplot.hlines(height, 1+i, 4-(j-i))
+            pyplot.vlines(1+i, height-4, height)
+            pyplot.vlines(4-(j-i), height-3, height)
+            pvalue = stats.ranksums(boxes[i], boxes[3-(j-i)]).pvalue
+            print(pvalue)
+            if pvalue < 0.001:
+                label = "***"
+            elif pvalue < 0.01:
+                label = "**"
+            elif pvalue < 0.05:
+                label = "*"
+            else:
+                label = "N.S."
+
+            pyplot.annotate(label, ((1+i + 4-(j-i))/2, height))
 
     pyplot.title(graph_name)
     pyplot.xlabel(x_label)
     pyplot.ylabel(y_label)
-    # if not os.path.exists(f'{root}/box-plots/{ini}'):
-    #     os.makedirs(f'{root}/box-plots/{ini}')
-    # pyplot.savefig(f'{root}/box-plots/{ini}/{graph_name}.jpg')
+    if not os.path.exists(f'{root}/box-plots/{ini}'):
+        os.makedirs(f'{root}/box-plots/{ini}')
+    pyplot.savefig(f'{root}/box-plots/{ini}/{graph_name}.jpg')
     pyplot.show()
 
 def lengths_to_indexes(array):

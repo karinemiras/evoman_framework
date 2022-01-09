@@ -38,14 +38,16 @@ def main():
 
         try:
             tranformed = [[mean_arrays[x][y] for x in range(len(mean_arrays))] for y in range(len(mean_arrays[0]))]
-            full_mean = np.array([np.mean(a) for a in tranformed])
+            full_mean = np.array([np.percentile(a, 50) for a in tranformed])
+            q75, q25 = [np.array([np.percentile(a, 75) for a in tranformed]),
+                        np.array([np.percentile(a, 25) for a in tranformed])]
             smoothened_mean = np.array(average(full_mean, 2))
-            error = np.array([np.sqrt(np.sum([np.square(b - np.mean(a)) for b in a]) / len(a)) for a in tranformed])
+            # error = np.array([np.sqrt(np.sum([np.square(b - np.mean(a)) for b in a]) / len(a)) for a in tranformed])
             pyplot.plot(episode_array, smoothened_mean, label=alg)
             pyplot.fill_between(
                 episode_array,
-                smoothened_mean - average(error, 2),
-                smoothened_mean + average(error, 2),
+                average(q25, 2),
+                average(q75, 2),
                 alpha=0.5
             )
         except:
