@@ -335,7 +335,7 @@ for run in range(int(sys.argv[1]), int(sys.argv[2])):
                 os.makedirs(rawDataDir)
 
             l_prepend = [f'{id_to_name(enemy_id)}', ""]
-            r_prepend = [f'{id_to_name(enemy_id)} ({env.weight_player_hitpoint}, {env.weight_enemy_hitpoint})', str(env.win_value())]
+            r_prepend = [f'{id_to_name(enemy_id)} ({env.weight_player_hitpoint}, {env.weight_enemy_hitpoint})', "0"]
             evaluator = EvalEnvCallback(
                 eval_env=eval_env,
                 lengths_path=enemyDir,
