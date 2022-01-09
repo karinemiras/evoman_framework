@@ -296,7 +296,7 @@ for run in range(int(sys.argv[1]), int(sys.argv[2])):
     elif sys.argv[3] == 'yes':
         baseDir = f'FinalData/RandomIni/GA-50/run{run}'
     else:
-        raise EnvironmentError()
+        raise EnvironmentError("no random or static selected")
 
     if not os.path.exists(baseDir):
         os.makedirs(baseDir)
