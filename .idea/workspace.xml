@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cbb56179-6c1d-4ce5-96e6-fe6435188f5f" name="Changes" comment="GA-BIG">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Base_GA_50_data_gatherer_with_time.py" beforeDir="false" afterPath="$PROJECT_DIR$/Base_GA_50_data_gatherer_with_time.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plotAllGraphs.py" beforeDir="false" afterPath="$PROJECT_DIR$/plotAllGraphs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plotBargraph.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plotBarplots.py" beforeDir="false" afterPath="$PROJECT_DIR$/plotBarplots.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plotGraphs.py" beforeDir="false" afterPath="$PROJECT_DIR$/plotGraphs.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,13 +123,6 @@
       <workItem from="1641076706507" duration="5340000" />
       <workItem from="1641230278910" duration="19757000" />
       <workItem from="1641561671630" duration="225000" />
-    </task>
-    <task id="LOCAL-00016" summary="Multithreading?">
-      <created>1635369891333</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1635369891333</updated>
     </task>
     <task id="LOCAL-00017" summary="Multithreading?">
       <created>1635770045461</created>
@@ -472,7 +460,14 @@
       <option name="project" value="LOCAL" />
       <updated>1641763810935</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="GA-BIG">
+      <created>1641944010413</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1641944010413</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
