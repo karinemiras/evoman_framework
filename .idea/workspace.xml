@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cbb56179-6c1d-4ce5-96e6-fe6435188f5f" name="Changes" comment="GA-BIG">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Base_GA_50_data_gatherer_with_time.py" beforeDir="false" afterPath="$PROJECT_DIR$/Base_GA_50_data_gatherer_with_time.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plotAllGraphs.py" beforeDir="false" afterPath="$PROJECT_DIR$/plotAllGraphs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plotBargraph.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plotBarplots.py" beforeDir="false" afterPath="$PROJECT_DIR$/plotBarplots.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plotGraphs.py" beforeDir="false" afterPath="$PROJECT_DIR$/plotGraphs.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,14 +33,17 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/optimization_specialist_demo.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/plotAllGraphs.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$USER_HOME$/.local/lib/python3.9/site-packages/matplotlib/figure.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/evoman/environment.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$USER_HOME$/.local/lib/python3.9/site-packages/matplotlib/pyplot.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/evoman/gym_environment.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/evoman/gym_enemy1.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/plotAllGraphs.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/optimization_specialist_demo.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/.local/lib/python3.9/site-packages/matplotlib/pyplot.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/.local/lib/python3.9/site-packages/matplotlib/figure.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/evoman/gym_environment_discrete.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/evoman/gym_enemy1.py" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="1yibP5fVC7oACCui04fIH987U5T" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -120,13 +128,6 @@
       <workItem from="1641076706507" duration="5340000" />
       <workItem from="1641230278910" duration="19757000" />
       <workItem from="1641561671630" duration="225000" />
-    </task>
-    <task id="LOCAL-00015" summary="Multithreading?">
-      <created>1635369625764</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1635369625764</updated>
     </task>
     <task id="LOCAL-00016" summary="Multithreading?">
       <created>1635369891333</created>
@@ -464,7 +465,14 @@
       <option name="project" value="LOCAL" />
       <updated>1641763753147</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="GA-BIG">
+      <created>1641763810935</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1641763810935</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -491,7 +499,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="A bunch of stuff" />

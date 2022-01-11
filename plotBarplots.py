@@ -15,9 +15,10 @@ def main():
 
     root_folder = f'{root}/{ini}'
 
-    algorithms = os.listdir(root_folder)
+    algorithms = ["DQN", "PPO", "GA-50", "NEAT"]
     box_names = []
     boxes = []
+    violins = dict()
     for alg in algorithms:
         alg_path = f'{root_folder}/{alg}'
         runs = os.listdir(alg_path)
@@ -33,35 +34,44 @@ def main():
                 print("No full data for run")
         box_names.append(alg)
         boxes.append(means_array)
+        violins[alg] = means_array
 
-    pyplot.boxplot(x=boxes, labels=box_names)
+    fig, ax = pyplot.subplots()
+
+
+    for (n, box) in enumerate(boxes):
+        pyplot.violinplot(dataset=box, positions=[n+1], showmeans=True)
+    ax.set_xticks([1, 2, 3, 4])
+    ax.set_xticklabels(box_names)
     for box in boxes:
         print(len(box))
     height = 100
-    for i in range(1, 3):
+    for i in range(0, 3):
         for j in range(i, 3):
-            height += 10
-            pyplot.hlines(height, 1+i, 4-(j-i))
-            pyplot.vlines(1+i, height-4, height)
-            pyplot.vlines(4-(j-i), height-3, height)
             pvalue = stats.ranksums(boxes[i], boxes[3-(j-i)]).pvalue
-            print(pvalue)
-            if pvalue < 0.001:
-                label = "***"
-            elif pvalue < 0.01:
-                label = "**"
-            elif pvalue < 0.05:
-                label = "*"
-            else:
-                label = "N.S."
+            if (pvalue >= 1e-15):
+                height += 10
+                pyplot.hlines(height, 1+i, 4-(j-i))
+                pyplot.vlines(1+i, height-4, height)
+                pyplot.vlines(4-(j-i), height-3, height)
+                print(pvalue)
+                if pvalue < 0.001:
+                    label = "***"
+                elif pvalue < 0.01:
+                    label = "**"
+                elif pvalue < 0.05:
+                    label = "*"
+                else:
+                    label = "N.S."
 
-            pyplot.annotate(label, ((1+i + 4-(j-i))/2, height))
+                pyplot.annotate(label, ((1+i + 4-(j-i))/2, height))
 
     pyplot.title(graph_name)
     pyplot.xlabel(x_label)
     pyplot.ylabel(y_label)
     if not os.path.exists(f'{root}/box-plots/{ini}'):
         os.makedirs(f'{root}/box-plots/{ini}')
+    pyplot.grid(True, axis='y')
     pyplot.savefig(f'{root}/box-plots/{ini}/{graph_name}.jpg')
     pyplot.show()
 

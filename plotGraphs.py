@@ -10,12 +10,16 @@ def main():
     enemy = sys.argv[3]
     data_type = sys.argv[4]
     graph_name = sys.argv[5]
-    y_label = sys.argv[7]
-    x_label = sys.argv[6]
+    y_label = sys.argv[6]
+
+    fig = pyplot.figure() #figsize=(7.5, 5.5)
+    ax1 = fig.add_subplot(111)
+    ax2 = ax1.twiny()
+    pyplot.subplots_adjust(top=0.85)
 
     root_folder = f'{root}/{ini}'
 
-    algorithms = os.listdir(root_folder)
+    algorithms = ["DQN", "PPO", "GA-50", "NEAT"]
     for alg in algorithms:
         alg_path =  f'{root_folder}/{alg}'
         runs = os.listdir(alg_path)
@@ -33,7 +37,7 @@ def main():
                 mean_arrays.append(means)
             except:
                 print("No full data for run")
-        if alg == 'GA-50' or alg == 'NEAT':
+        if alg == 'GA-50' or alg == 'GA-50-untimed' or alg == 'NEAT':
             episode_array *= 25000
 
         try:
@@ -43,8 +47,8 @@ def main():
                         np.array([np.percentile(a, 25) for a in tranformed])]
             smoothened_mean = np.array(average(full_mean, 2))
             # error = np.array([np.sqrt(np.sum([np.square(b - np.mean(a)) for b in a]) / len(a)) for a in tranformed])
-            pyplot.plot(episode_array, smoothened_mean, label=alg)
-            pyplot.fill_between(
+            ax1.plot(episode_array, smoothened_mean, label=alg)
+            ax1.fill_between(
                 episode_array,
                 average(q25, 2),
                 average(q75, 2),
@@ -59,10 +63,18 @@ def main():
         pyplot.ylim(-0.05, 1.05)
 
     pyplot.title(graph_name)
-    pyplot.xlabel(x_label)
-    pyplot.ylabel(y_label)
-    pyplot.grid(True)
-    pyplot.legend()
+    ax1.set_xlabel('timesteps')
+    ax1.set_ylabel(y_label)
+    ax1.grid(True)
+    ax1.legend()
+
+    locs, labels = pyplot.xticks()
+    print(locs, labels)
+    ax2.set_xlabel('generations')
+    ax2.set_xlim(ax1.get_xlim())
+    ax2.set_xticks(locs * 2.5e6)
+    ax2.set_xticklabels([int(l*2.5e6/25000) for l in locs])
+
     if not os.path.exists(f'{root}/plots/{ini}/{data_type}'):
         os.makedirs(f'{root}/plots/{ini}/{data_type}')
     pyplot.savefig(f'{root}/plots/{ini}/{data_type}/{graph_name}.jpg')

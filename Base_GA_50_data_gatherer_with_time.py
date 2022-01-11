@@ -292,9 +292,9 @@ def doomsday(pop, fit_pop):
 for run in range(int(sys.argv[1]), int(sys.argv[2])):
     print(f'Starting run {run}!')
     if sys.argv[3] == 'no':
-        baseDir = f'FinalData/StaticIni/GA-50/run{run}'
+        baseDir = f'FinalDataT/StaticIni/GA-50/run{run}'
     elif sys.argv[3] == 'yes':
-        baseDir = f'FinalData/RandomIni/GA-50/run{run}'
+        baseDir = f'FinalDataT/RandomIni/GA-50/run{run}'
     else:
         raise EnvironmentError("no random or static selected")
 
@@ -396,6 +396,7 @@ for run in range(int(sys.argv[1]), int(sys.argv[2])):
                 env.update_solutions(solutions)
                 env.save_state()
 
+            evaluator.on_finish()
             print(
                 f'\nFinished {id_to_name(enemy_id)} ({env.weight_player_hitpoint}, {env.weight_enemy_hitpoint})')
 
