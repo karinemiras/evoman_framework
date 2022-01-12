@@ -50,7 +50,7 @@ class Evoman(gym.Env):
                  level=2,
                  enemymode="static",
                  contacthurt="player",
-                 randomini=False,
+                 randomini="no",
                  logs=False,
                  savelogs=False,
                  precise_clock=False,

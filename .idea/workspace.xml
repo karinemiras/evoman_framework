@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cbb56179-6c1d-4ce5-96e6-fe6435188f5f" name="Changes" comment="GA-BIG">
-      <change beforePath="$PROJECT_DIR$/Base_GA_50_data_gatherer_with_time.py" beforeDir="false" afterPath="$PROJECT_DIR$/Base_GA_50_data_gatherer_with_time.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime_data_gather.py" beforeDir="false" afterPath="$PROJECT_DIR$/FullTime_data_gather.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evoman/gym_environment.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/gym_environment.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,13 +125,6 @@
       <workItem from="1641076706507" duration="5340000" />
       <workItem from="1641230278910" duration="19757000" />
       <workItem from="1641561671630" duration="225000" />
-    </task>
-    <task id="LOCAL-00017" summary="Multithreading?">
-      <created>1635770045461</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1635770045461</updated>
     </task>
     <task id="LOCAL-00018" summary="Multithreading?">
       <created>1635771742001</created>
@@ -467,7 +462,14 @@
       <option name="project" value="LOCAL" />
       <updated>1641944010413</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="GA-BIG">
+      <created>1641944227688</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1641944227688</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

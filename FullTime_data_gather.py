@@ -17,10 +17,6 @@ runs_start = int(sys.argv[3])
 randomini = sys.argv[4]
 if randomini != 'yes' and randomini != 'no':
     raise EnvironmentError()
-if randomini != 'yes':
-    randomini = True
-if randomini != 'no':
-    randomini = False
 if runs < 0:
     runs = sys.maxsize
 if algorithm != 'PPO' and algorithm != 'A2C':
