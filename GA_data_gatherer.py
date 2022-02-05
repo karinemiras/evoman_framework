@@ -249,43 +249,6 @@ def doomsday(pop, fit_pop):
     return pop, fit_pop
 
 
-# loads file with the best solution for testing
-# if run_mode == 'test':
-#     bsol = np.loadtxt(experiment_name + '/best.txt')
-#     print('\n RUNNING SAVED BEST SOLUTION \n')
-#     env.update_parameter('speed', 'normal')
-#     evaluate([bsol])
-#
-#     sys.exit(0)
-
-# initializes population loading old solutions or generating new ones
-
-# else:
-#
-#     print('\nCONTINUING EVOLUTION\n')
-#
-#     env.load_state()
-#     pop = env.solutions[0]
-#     fit_pop = env.solutions[1]
-#
-#     best = np.argmax(fit_pop)
-#     mean = np.mean(fit_pop)
-#     std = np.std(fit_pop)
-#
-#     # finds last generation number
-#     file_aux = open(experiment_name + '/gen.txt', 'r')
-#     ini_g = int(file_aux.readline())
-#     file_aux.close()
-
-# saves results for first pop
-# file_aux = open(experiment_name + '/results.txt', 'a')
-# file_aux.write('\n\ngen best mean std')
-# print('\n GENERATION ' + str(ini_g) + ' ' + str(round(fit_pop[best], 6)) + ' ' + str(round(mean, 6)) + ' ' + str(
-#     round(std, 6)))
-# file_aux.write(
-#     '\n' + str(ini_g) + ' ' + str(round(fit_pop[best], 6)) + ' ' + str(round(mean, 6)) + ' ' + str(round(std, 6)))
-# file_aux.close()
-
 # evolution
 
 
@@ -323,14 +286,11 @@ for run in range(int(sys.argv[1]), int(sys.argv[2])):
             last_sol = fit_pop[best]
 
             modelDir = f'{enemyDir}/models/{({env.weight_player_hitpoint}, {env.weight_enemy_hitpoint})}'
-            # videoDir = f'{enemyDir}/videos/{({env.weight_player_hitpoint}, {env.weight_enemy_hitpoint})}'
             rawDataDir = f'{enemyDir}/raw-data/{({env.weight_player_hitpoint}, {env.weight_enemy_hitpoint})}'
             lengths_path = f'{enemyDir}/Evaluation_lengths.csv'
             rewards_path = f'{enemyDir}/Evaluation_rewards.csv'
             if not os.path.exists(modelDir):
                 os.makedirs(modelDir)
-            # if not os.path.exists(videoDir):
-            #     os.makedirs(videoDir)
             if not os.path.exists(rawDataDir):
                 os.makedirs(rawDataDir)
 
