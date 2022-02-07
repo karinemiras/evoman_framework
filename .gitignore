@@ -1,2 +1,6 @@
 .idea
 *.avi
+*.model
+*__pycache__*
+neat-checkpoint*
+generation*

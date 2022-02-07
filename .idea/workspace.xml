@@ -2,9 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cbb56179-6c1d-4ce5-96e6-fe6435188f5f" name="Changes" comment="GA-BIG">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FullTime_data_gather.py" beforeDir="false" afterPath="$PROJECT_DIR$/FullTime_data_gather.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/evoman/gym_environment.py" beforeDir="false" afterPath="$PROJECT_DIR$/evoman/gym_environment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime_data_gather.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FullTime_data_gather_discrete.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GA_data_gatherer.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evoman/gym_environment_box.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/neat_test_old_config.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +60,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File" value="Python" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="terminal" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
