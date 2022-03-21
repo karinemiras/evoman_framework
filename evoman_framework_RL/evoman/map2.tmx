@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="23" height="16" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="roles" tilewidth="32" tileheight="32">
+  <image source="evoman/images/roles.png" trans="ff00ff" width="450" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="player" value="yes"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="enemy" value="yes"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="exit" value="yes"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="reverse" value="yes"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="life" value="yes"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="hd" value="yes"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="plat" value="yes"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="gun" value="yes"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="spike" value="yes"/>
+   </properties>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="spike2" value="yes"/>
+   </properties>
+  </tile>
+  <tile id="10">
+   <properties>
+    <property name="score" value="yes"/>
+   </properties>
+  </tile>
+  <tile id="11">
+   <properties>
+    <property name="medicine" value="yes"/>
+   </properties>
+  </tile>
+  <tile id="12">
+   <properties>
+    <property name="spike3" value="yes"/>
+   </properties>
+  </tile>
+  <tile id="13">
+   <properties>
+    <property name="spike4" value="yes"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="15" name="images" tilewidth="32" tileheight="32">
+  <image source="evoman/images/images.jpg" trans="ff00ff" width="225" height="225"/>
+ </tileset>
+ <tileset firstgid="64" name="download" tilewidth="32" tileheight="32">
+  <image source="evoman/images/download.jpg" trans="ff00ff" width="284" height="177"/>
+ </tileset>
+ <tileset firstgid="104" name="tex3" tilewidth="32" tileheight="32">
+  <image source="evoman/images/tex3.jpg" trans="ff00ff" width="270" height="186"/>
+ </tileset>
+ <layer name="set" width="23" height="16">
+  <data encoding="base64" compression="zlib">
+   eJy11EcOAjEMheG5Ab13uBy99957uTL/JlJkwURAWHyajJ9lRV4k6DhOCB544YMfAQR/zCKIIqydY4gjgeQXmfpX3xHGmGCKGeZYvKm59cvZK6yxwRY77HF4U3Pr/+Teeqafbdxbz/Sz7XurzNa+X2Wf7LuIEsqooIoa6miImqlXzm6ihTY66KKHPgaiZuqVs4eGHeo1U6+cvTTsUK+ZeuXsI04444IrbrjjIWqmXjXzH2+Uymy+UTJLIY0Mssghj4KF7AlW5nVa
+  </data>
+ </layer>
+ <objectgroup name="triggers" width="23" height="16" visible="0">
+  <object gid="1" x="101" y="353"/>
+  <object gid="2" x="588" y="356"/>
+  <object name="floor" x="0" y="2" width="735" height="28">
+   <properties>
+    <property name="blockers" value="tlrb"/>
+   </properties>
+  </object>
+  <object name="floor" x="1" y="30" width="59" height="450">
+   <properties>
+    <property name="blockers" value="tlrb"/>
+   </properties>
+  </object>
+  <object name="floor" x="677" y="32" width="58" height="450">
+   <properties>
+    <property name="blockers" value="tlrb"/>
+   </properties>
+  </object>
+  <object name="floor" x="4" y="419" width="731" height="95">
+   <properties>
+    <property name="blockers" value="tlrb"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
