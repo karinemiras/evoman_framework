@@ -1,11 +1,11 @@
 ####################
 # Use this file to run a known solution for an algorithm 1-5 times (default 1)
-# The solution file must be located in the solutions folder and follow the following naming format: algorithm_e#.txt
-# Where algorithm = standard or SANE, and # is the enemy number 1-8
+# The solution file must be located in the solutions folder and follow the following naming format: algorithm_e#.txt or algorithm_e#.pkl
+# Where algorithm = NEAT or SANE, and # is the enemy number 1-8
 # Alternatively, change the name in the code to specify a different file
 
 # User arguments: 
-#   1) algorithm (standard or SANE) 
+#   1) algorithm (NEAT or SANE) 
 #   2) enemy number (1-8) 
 #   3) number of games to run (1-5) (default: 1)
 
@@ -20,22 +20,22 @@ import numpy as np
 from statistics import mean 
 sys.path.insert(0, 'evoman') 
 from environment import Environment
-from demo_controller import player_controller
-
+from NEAT_controller import NeatController
+import pickle
 
 # Read command line arguments
 if not(len(sys.argv) == 3 or len(sys.argv) == 4):
-    sys.exit("Error: please specify:\n1) the algorithm (standard or SANE)\n2) the enemy (1-8)\n3) the number of games to run (1-5) (default: 1)")
+    sys.exit("Error: please specify:\n1) the algorithm (NEAT or SANE)\n2) the enemy (1-8)\n3) the number of games to run (1-5) (default: 1)")
 
-# First argument must indicate the algorithm - 'standard' or 'SANE'
+# First argument must indicate the algorithm - 'NEAT' or 'SANE'
 algorithm = sys.argv[1]
 
-if algorithm == 'sane': 
-    algorithm = 'SANE'
+if algorithm == 'neat': 
+    algorithm = 'NEAT'
 #print("First argument: ", algorithm)
 
-if not(algorithm == 'standard' or algorithm == 'SANE'):
-    sys.exit("Error: please specify the algorithm using 'standard' or 'SANE'.")
+if not(algorithm == 'NEAT' or algorithm == 'SANE'):
+    sys.exit("Error: please specify the algorithm using 'NEAT' or 'SANE'.")
 
 # Second argument must specify the enemy to be trained on - integer from 1 - 8
 try:
@@ -72,8 +72,12 @@ experiment_name = "specialists/" + algorithm + "_e" + str(enemy) + "_i" + str(it
 #experiment_name = "optimizations/[insert name here]"
 
 # Default solutionfile. Comment to specify your own
-solutionfile = "solutions/" + algorithm + "_e" + str(enemy) + ".txt"
+if algorithm == "NEAT":
+    solutionfile = "solutions/" + algorithm + "_e" + str(enemy) + ".pkl"
+else:
+    solutionfile = "solutions/" + algorithm + "_e" + str(enemy) + ".txt"
 #solutionfile = "solutions/[insert name here]"
+
 gain_path = experiment_name + "/gain.txt"
 print("Logs will be saved at:", experiment_name)
 print("Individual gain will be saved at:", gain_path)
@@ -82,16 +86,20 @@ print("Make sure that the required file containing the solution is found at", so
 if not os.path.exists(experiment_name):
     os.makedirs(experiment_name)
 
+# Select controller according to the algorithm
+if algorithm == 'NEAT': control = NeatController()
+else: control = "insert SANE controller"
+
 enemies = [enemy]
 env = Environment(experiment_name=experiment_name,
                   playermode="ai",
                   enemies = enemies,
-				  #player_controller= insert algorithm,
-			  	  speed="fastest", # change to "normal" if you want to watch
+				  player_controller= control,
+			  	  speed="normal", # fastest or normal
 				  enemymode="static",
 				  level=2)
 
-# Load the solution
+# Search for solution
 if not os.path.exists(solutionfile):
     sys.exit("No solution found.")
 
@@ -102,7 +110,10 @@ file.truncate(0)
 list_gain = []    
 for it in range(1,iterations+1):
     print('\n ITERATION NUMBER '+str(it)+' \n')
-    sol = np.loadtxt(solutionfile)
+    if algorithm == "NEAT":
+        sol = pickle.load(open(solutionfile, "rb"))
+    else:
+        sol = np.loadtxt(solutionfile)
     env.play(sol)
     
     # calculate individual gain
