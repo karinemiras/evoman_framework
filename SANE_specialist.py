@@ -1,18 +1,18 @@
 import numpy as np
 
 class SANE_Specialist():
-    def __init__(self, env, gens, picklepath, logpath, total_neurons = 100, neurons_per_network = 10, n_networks = 100, mutation_sigma = 0.1):
+    def __init__(self, env, gens, picklepath, logpath, cfg):
         self.env = env
-        self.total_neurons = total_neurons
-        self.neurons_per_network = neurons_per_network
-        self.n_networks = n_networks
-        self.mutation_sigma = mutation_sigma
+        self.total_neurons = int(cfg['total_neurons'])
+        self.neurons_per_network = int(cfg['neurons_per_network'])
+        self.n_networks = int(cfg['n_networks'])
+        self.mutation_sigma = float(cfg['mutation_sigma'])
 
         self.n_inputs = env.get_num_sensors()
         self.n_bias = 1
         self.n_outputs = 5
         weights_per_neuron = self.n_inputs + self.n_bias + self.n_outputs
-        self.pop = np.random.uniform(-1, 1, (total_neurons, weights_per_neuron))
+        self.pop = np.random.uniform(-1, 1, (self.total_neurons, weights_per_neuron))
 
         self.sane_execute(gens)
 
