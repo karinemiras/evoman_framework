@@ -24,7 +24,9 @@ import sys, os
 sys.path.insert(0, 'evoman') 
 from environment import Environment
 from NEAT_controller import NeatController
+from demo_controller import player_controller
 from NEAT_specialist import NEAT_Spealist
+from SANE_specialist import SANE_Specialist
 
 
 # Read command line arguments
@@ -94,7 +96,7 @@ enemies = [enemy]
 
 # Select controller according to the algorithm
 if algorithm == 'NEAT': control = NeatController()
-else: control = "insert SANE controller"
+else: control = player_controller(10)
 
 env = Environment(experiment_name=experiment_name,
                   enemies=enemies,
@@ -121,7 +123,7 @@ for it in range(1,runs+1):
     if algorithm == 'NEAT':
         optimizer = NEAT_Spealist(env, gens, picklepath, logpath)
     else:
-        optimizer = "insert SANE optimizer"
+        optimizer = SANE_Specialist(env, gens, picklepath, logpath)
     
     
 
