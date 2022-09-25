@@ -102,6 +102,7 @@ env = Environment(experiment_name=experiment_name,
                   player_controller=control,            
                   enemymode="static",
                   level=2,
+                  logs = "off",
                   speed="fastest")
     
 # Run the optimizations the specified number of times
@@ -115,9 +116,10 @@ for it in range(1,runs+1):
     
     # Create a path for the pickle file, so the algorithm knows where to save it
     picklepath = run_name + "/" + algorithm + "_e" + str(enemy) + ".pkl"
+    logpath = run_name + "/data_run_1.txt"
     
     if algorithm == 'NEAT':
-        optimizer = NEAT_Spealist(env, gens, picklepath)
+        optimizer = NEAT_Spealist(env, gens, picklepath, logpath)
     else:
         optimizer = "insert SANE optimizer"
     

@@ -110,6 +110,10 @@ file.truncate(0)
 list_gain = []    
 for it in range(1,iterations+1):
     print('\n ITERATION NUMBER '+str(it)+' \n')
+    # speed up runs after the first one
+    if it == 2: env.update_parameter("speed", "fastest")
+    
+    # select solution
     if algorithm == "NEAT":
         sol = pickle.load(open(solutionfile, "rb"))
     else:

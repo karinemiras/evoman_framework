@@ -5,6 +5,7 @@ sys.path.insert(0, 'evoman')
 from environment import Environment
 import numpy as np
 from NEAT_controller import NeatController
+from generation_reporter import generation_reporter
 import pickle
 
 # np.set_printoptions(threshold=sys.maxsize) # remove console array truncation
@@ -15,13 +16,14 @@ import pickle
 # game.state_to_log()  # checks environment state
 
 class NEAT_Spealist():
-    def __init__(self, env, gens, picklepath):
+    def __init__(self, env, gens, picklepath, logpath):
         neat_dir = os.path.dirname(__file__)
         neat_path = os.path.join(neat_dir, "NEAT-config.txt")
         
         self.game = env
         self.gens = gens
         self.picklepath = picklepath
+        self.logpath = logpath
         
         self.neat_execute(neat_path)
         
@@ -46,11 +48,13 @@ class NEAT_Spealist():
 
         # sets up the population
         pop = neat.Population(config)
-
+        
         pop.add_reporter(neat.StdOutReporter(True))
         s = neat.StatisticsReporter()
         pop.add_reporter(s)
         pop.add_reporter(neat.Checkpointer(self.gens))
+        # our reporter, to report mean/max fitness for each generation
+        pop.add_reporter(generation_reporter(self.logpath))
 
         # Run the algorithm
         winner = pop.run(self.genome_evaluation, self.gens)
