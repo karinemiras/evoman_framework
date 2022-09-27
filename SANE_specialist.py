@@ -7,6 +7,8 @@ class SANE_Specialist():
         self.neurons_per_network = int(cfg['neurons_per_network'])
         self.n_networks = int(cfg['n_networks'])
         self.mutation_sigma = float(cfg['mutation_sigma'])
+        self.survivor_rate = float(cfg['survivor_rate'])
+        self.parent_rate = float(cfg['parent_rate'])
 
         self.n_inputs = env.get_num_sensors()
         self.n_bias = 1
@@ -50,7 +52,7 @@ class SANE_Specialist():
         # Return average fitness of each neuron
         return fitnesses / counts
 
-    # Tournament selection. sorted_pop should be sorted by fitness from low to high
+    # Tournament selection with k=2. sorted_pop should be sorted by fitness from low to high
     def tournament_selection(self, sorted_pop):
         c0 = np.random.randint(0, len(sorted_pop))
         c1 = np.random.randint(0, len(sorted_pop))
@@ -70,12 +72,13 @@ class SANE_Specialist():
     # Perform parent selection, crossover and mutation
     def new_gen(self, fitnesses):
         sorted_pop = self.pop[np.argsort(fitnesses)]
-        best_half = sorted_pop[self.total_neurons//2:]
+        survivors = sorted_pop[round(self.survivor_rate*self.total_neurons):]
+        parents = sorted_pop[round(self.parent_rate*self.total_neurons):]
 
-        offspring = list(best_half)
+        offspring = list(survivors)
         while len(offspring) < self.total_neurons:
-            p0 = self.tournament_selection(best_half)
-            p1 = self.tournament_selection(best_half)
+            p0 = self.tournament_selection(parents)
+            p1 = self.tournament_selection(parents)
             child = self.crossover(p0, p1)
             offspring.append(child)
 
