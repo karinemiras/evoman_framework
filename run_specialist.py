@@ -21,6 +21,7 @@ from statistics import mean
 sys.path.insert(0, 'evoman') 
 from environment import Environment
 from NEAT_controller import NeatController
+from demo_controller import player_controller
 import pickle
 
 # Read command line arguments
@@ -88,7 +89,9 @@ if not os.path.exists(experiment_name):
 
 # Select controller according to the algorithm
 if algorithm == 'NEAT': control = NeatController()
-else: control = "insert SANE controller"
+else:
+    (n_neurons, sane_weights) = pickle.load(open(solutionfile, 'rb'))
+    control = player_controller(n_neurons)
 
 enemies = [enemy]
 env = Environment(experiment_name=experiment_name,
@@ -117,7 +120,7 @@ for it in range(1,iterations+1):
     if algorithm == "NEAT":
         sol = pickle.load(open(solutionfile, "rb"))
     else:
-        sol = np.loadtxt(solutionfile)
+        sol = sane_weights
     env.play(sol)
     
     # calculate individual gain

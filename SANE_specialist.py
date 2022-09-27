@@ -1,8 +1,10 @@
 import numpy as np
+import pickle
 
 class SANE_Specialist():
     def __init__(self, env, gens, picklepath, logpath, cfg):
         self.env = env
+        self.picklepath = picklepath
         self.logpath = logpath
         self.total_neurons = int(cfg['total_neurons'])
         self.neurons_per_network = int(cfg['neurons_per_network'])
@@ -16,6 +18,7 @@ class SANE_Specialist():
         self.n_outputs = 5
         weights_per_neuron = self.n_inputs + self.n_bias + self.n_outputs
         self.pop = np.random.uniform(-1, 1, (self.total_neurons, weights_per_neuron))
+        self.best_network_fitness = 0.0
 
         with open(logpath, 'w') as logfile:
             logfile.write("")
@@ -50,6 +53,11 @@ class SANE_Specialist():
             # Evaluate network
             fitness, _, _, _, = self.env.play(pcont=net)
             network_fitnesses[i] = fitness
+            # Save network if it is better than all previous ones
+            if fitness > self.best_network_fitness:
+                with open(self.picklepath, 'wb') as f:
+                    pickle.dump((self.neurons_per_network, net), f)
+                self.best_network_fitness = fitness
             # Add fitness to each neuron's cumulative fitness value
             neuron_fitnesses[select] += fitness
         
@@ -98,7 +106,7 @@ class SANE_Specialist():
         fmax = network_fitnesses.max()
         print(f"Generation {gen + 1} done. min: {fmin:.2f}, max: {fmax:.2f}, avg: {fmean:.2f}")
         with open(self.logpath, 'a') as logfile:
-            logfile.write(f"{fmean}, {fmax}\n")
+            logfile.write(f"{fmean} {fmax}\n")
 
     # Run the GA
     def sane_execute(self, n_gens):
