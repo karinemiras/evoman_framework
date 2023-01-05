@@ -6,15 +6,17 @@
 # Ported to Python 3
 # Added selective area support SpriteLayer.draw
 
-import sys
 import struct
-import pygame
-from pygame.locals import *
-from pygame import Rect
-from xml.etree import ElementTree
+import sys
 from base64 import b64decode
+from xml.etree import ElementTree
 from zlib import decompress
 
+import pygame
+from pygame import Rect
+from pygame.locals import *
+
+image_cache = {}
 
 class Tile(object):
     def __init__(self, gid, surface, tileset):
@@ -88,7 +90,9 @@ class Tileset(object):
         return tileset
 
     def add_image(self, file):
-        image = pygame.image.load(file).convert_alpha()
+        if file not in image_cache:
+            image_cache[file] = pygame.image.load(file).convert_alpha()
+        image = image_cache[file]
         if not image:
             sys.exit("Error creating new Tileset: file %s not found" % file)
         id = self.firstgid

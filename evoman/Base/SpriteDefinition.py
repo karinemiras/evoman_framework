@@ -1,5 +1,7 @@
 import pygame
+
 from . import SpriteConstants
+
 
 class SpriteDefinition(object):
     """Contains the properties and methods to control a SpriteSheet structure"""

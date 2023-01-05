@@ -28,7 +28,8 @@ env = Environment(experiment_name=experiment_name,
 				  player_controller=player_controller(n_hidden_neurons),
 			  	  speed="normal",
 				  enemymode="static",
-				  level=2)
+				  level=2,
+				  visuals=True)
 
 
 # tests saved demo solutions for each enemy

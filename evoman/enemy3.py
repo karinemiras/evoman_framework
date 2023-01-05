@@ -5,13 +5,10 @@
 ################################
 
 import sys
-import numpy
-import random
 
-import Base
-from Base.SpriteConstants import *
+import numpy
+
 from Base.SpriteDefinition import *
-from sensors import Sensors
 
 tilemap = 'evoman/map2.tmx'
 timeexpire = 1000 # game run limit
@@ -19,13 +16,17 @@ timeexpire = 1000 # game run limit
 # enemy 3 sprite, woodman
 class Enemy(pygame.sprite.Sprite):
 
+    def __init__(self, location, *groups, visuals):
 
-    def __init__(self, location,*groups):
         super(Enemy, self).__init__(*groups)
-        self.spriteDefinition = SpriteDefinition('evoman/images/EnemySprites.png', 0, 0, 43, 59)
-        self.updateSprite(SpriteConstants.STANDING, SpriteConstants.LEFT)
-
-        self.rect = pygame.rect.Rect(location, self.image.get_size())
+        self.visuals = visuals
+        if visuals:
+            self.spriteDefinition = SpriteDefinition('evoman/images/EnemySprites.png', 0, 0, 43, 59)
+            self.updateSprite(SpriteConstants.STANDING, SpriteConstants.RIGHT)
+            self.image = self.spriteDefinition.getImage(SpriteConstants.STANDING, SpriteConstants.RIGHT)
+            self.rect = pygame.rect.Rect(location, self.image.get_size())
+        else:
+            self.rect = pygame.rect.Rect(location, pygame.Surface([43, 59]).get_size())
         self.direction = -1
         self.max_life = 100
         self.life = self.max_life
@@ -222,15 +223,15 @@ class Enemy(pygame.sprite.Sprite):
 
                     if self.direction > 0:
                         ax = [-24,50,1,1]
-                        self.twists.append(Bullet_e3((self.rect.x+ax[i],self.rect.y-ay[i]), 1, 'h', len(self.twists), game.sprite_e))
+                        self.twists.append(Bullet_e3((self.rect.x+ax[i],self.rect.y-ay[i]), 1, 'h', len(self.twists), game.sprite_e,visuals=self.visuals))
                     else:
                         ax = [25,-50,-7,-7]
-                        self.twists.append(Bullet_e3((self.rect.x-ax[i],self.rect.y-ay[i]), -1, 'h', len(self.twists), game.sprite_e))
+                        self.twists.append(Bullet_e3((self.rect.x-ax[i],self.rect.y-ay[i]), -1, 'h', len(self.twists), game.sprite_e,visuals=self.visuals))
 
                 # shoots 4 bullets placed in fixed places - bullets coming from the top of the screen
                 aux = 100
                 for i in range (0,4):
-                    self.twists.append(Bullet_e3((aux,100), 1, 'v',len(self.twists),game.sprite_e))
+                    self.twists.append(Bullet_e3((aux,100), 1, 'v',len(self.twists),game.sprite_e,visuals=self.visuals))
                     aux = aux + 150
 
             # decreases time for bullets limitation
@@ -257,7 +258,8 @@ class Enemy(pygame.sprite.Sprite):
 
 
     def updateSprite(self, state, direction):
-        self.image = self.spriteDefinition.getImage(state, direction)
+        if self.visuals:
+            self.image = self.spriteDefinition.getImage(state, direction)
 
 # enemy's bullet
 class Bullet_e3(pygame.sprite.Sprite):
@@ -266,7 +268,7 @@ class Bullet_e3(pygame.sprite.Sprite):
 
     image = pygame.image.load('evoman/images/met.png')
 
-    def __init__(self, location, direction, btype, n_twist, *groups):
+    def __init__(self, location, direction, btype, n_twist, *groups, visuals):
         super(Bullet_e3, self).__init__(*groups)
         self.rect = pygame.rect.Rect(location, self.image.get_size())
         self.direction = direction
@@ -274,16 +276,17 @@ class Bullet_e3(pygame.sprite.Sprite):
         self.btype = btype
         self.swingtime = 0
         self.n_twist = n_twist
+        self.visuals=visuals
 
 
 
     def update(self, dt, game):
 
-
-        if game.time%2==0:
-            self.image = pygame.image.load('evoman/images/met.png')
-        else:
-            self.image = pygame.image.load('evoman/images/met2.png')
+        if self.visuals:
+            if game.time%2==0:
+                self.image = pygame.image.load('evoman/images/met.png')
+            else:
+                self.image = pygame.image.load('evoman/images/met2.png')
 
 
         # decreases bullet's timer

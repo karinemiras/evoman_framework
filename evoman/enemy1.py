@@ -5,13 +5,10 @@
 ################################
 
 import sys
-import numpy
-import random
 
-import Base
-from Base.SpriteConstants import *
+import numpy
+
 from Base.SpriteDefinition import *
-from sensors import Sensors
 
 tilemap = 'evoman/map1.tmx'  # scenario
 timeexpire = 1000 # game run limit
@@ -20,15 +17,17 @@ timeexpire = 1000 # game run limit
 # enemy 1 sprite, flashman
 class Enemy(pygame.sprite.Sprite):
 
-
-    def __init__(self, location, *groups):
+    def __init__(self, location, *groups, visuals):
 
         super(Enemy, self).__init__(*groups)
-
-        self.spriteDefinition = SpriteDefinition('evoman/images/EnemySprites.png', 0, 0, 43, 59)
-        self.updateSprite(SpriteConstants.STANDING, SpriteConstants.LEFT)
-
-        self.rect = pygame.rect.Rect(location, self.image.get_size())
+        self.visuals = visuals
+        if visuals:
+            self.spriteDefinition = SpriteDefinition('evoman/images/EnemySprites.png', 0, 0, 43, 59)
+            self.updateSprite(SpriteConstants.STANDING, SpriteConstants.RIGHT)
+            self.image = self.spriteDefinition.getImage(SpriteConstants.STANDING, SpriteConstants.RIGHT)
+            self.rect = pygame.rect.Rect(location, self.image.get_size())
+        else:
+            self.rect = pygame.rect.Rect(location, pygame.Surface([43, 59]).get_size())
         self.direction = -1
         self.max_life = 100
         self.life = self.max_life
@@ -247,9 +246,9 @@ class Enemy(pygame.sprite.Sprite):
 
                 # Start position of the bullets vary according to the position of the enemy.
                 if self.direction > 0:
-                    self.twists.append(Bullet_e1((self.rect.x+(i*rand),self.rect.y+10+(i*rand2)), 1, len(self.twists), game.sprite_e))
+                    self.twists.append(Bullet_e1((self.rect.x+(i*rand),self.rect.y+10+(i*rand2)), 1, len(self.twists), game.sprite_e, visuals=self.visuals))
                 else:
-                    self.twists.append(Bullet_e1((self.rect.x-(i*rand)+46,self.rect.y+10+(i*rand2)), -1, len(self.twists), game.sprite_e))
+                    self.twists.append(Bullet_e1((self.rect.x-(i*rand)+46,self.rect.y+10+(i*rand2)), -1, len(self.twists), game.sprite_e, visuals=self.visuals))
 
         # Decreases time for bullets and freezing limitation.
         self.gun_cooldown = max(0, self.gun_cooldown - dt)
@@ -275,26 +274,27 @@ class Enemy(pygame.sprite.Sprite):
             self.timeenemy = 0
 
     def updateSprite(self, state, direction):
-        self.image = self.spriteDefinition.getImage(state, direction)
+        if self.visuals:
+            self.image = self.spriteDefinition.getImage(state, direction)
 
 # Enemy's bullets.
 class Bullet_e1(pygame.sprite.Sprite):
 
 
-
-    image = pygame.image.load('evoman/images/bullet2_l.png')
-
-    def __init__(self, location, direction, n_twist, *groups):
+    def __init__(self, location, direction, n_twist, *groups, visuals):
         super(Bullet_e1, self).__init__(*groups)
-        self.rect = pygame.rect.Rect(location, self.image.get_size())
+        self.rect = pygame.rect.Rect(location, (15, 7))
         self.direction = direction
         self.n_twist = n_twist
 
-        # Fits image according to the side the enemy is turned to.
-        if self.direction == 1:
-            self.image = pygame.image.load('evoman/images/bullet2_r.png')
-        else:
-            self.image = pygame.image.load('evoman/images/bullet2_l.png')
+        if visuals:
+
+            # Fits image according to the side the enemy is turned to.
+            if self.direction == 1:
+                self.image = pygame.image.load('evoman/images/bullet2_r.png')
+            else:
+                self.image = pygame.image.load('evoman/images/bullet2_l.png')
+            self.rect = pygame.rect.Rect(location, self.image.get_size())
 
 
 

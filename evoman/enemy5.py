@@ -5,13 +5,10 @@
 ################################
 
 import sys
-import numpy
-import random
 
-import Base
-from Base.SpriteConstants import *
+import numpy
+
 from Base.SpriteDefinition import *
-from sensors import Sensors
 
 tilemap = 'evoman/map2.tmx'
 timeexpire = 1000 # game run limit
@@ -19,15 +16,17 @@ timeexpire = 1000 # game run limit
 # enemy 5 sprite, metalman
 class Enemy(pygame.sprite.Sprite):
 
+    def __init__(self, location, *groups, visuals):
 
-
-
-    def __init__(self, location,*groups):
         super(Enemy, self).__init__(*groups)
-        self.spriteDefinition = SpriteDefinition('evoman/images/EnemySprites.png', 0, 0, 43, 59)
-        self.updateSprite(SpriteConstants.STANDING, SpriteConstants.LEFT)
-
-        self.rect = pygame.rect.Rect(location, self.image.get_size())
+        self.visuals = visuals
+        if visuals:
+            self.spriteDefinition = SpriteDefinition('evoman/images/EnemySprites.png', 0, 0, 43, 59)
+            self.updateSprite(SpriteConstants.STANDING, SpriteConstants.RIGHT)
+            self.image = self.spriteDefinition.getImage(SpriteConstants.STANDING, SpriteConstants.RIGHT)
+            self.rect = pygame.rect.Rect(location, self.image.get_size())
+        else:
+            self.rect = pygame.rect.Rect(location, pygame.Surface([43, 59]).get_size())
         self.direction = -1
         self.max_life = 100
         self.life = self.max_life
@@ -160,7 +159,8 @@ class Enemy(pygame.sprite.Sprite):
                     c.set_volume(10)
                     c.play(sound)
 
-                aux = numpy.random.randint(1,4)
+                #aux = numpy.random.randint(1,4) no more randomness if all other enemies are deterministic
+                aux = 2
                 for i in range(0,aux):
                     self.twists.append(Bullet_e5((self.rect.x + (self.direction*(i*30)) ,self.rect.top + (self.direction*(i*20))  ), self.direction, game.player.rect , len(self.twists), game.sprite_e))
 
@@ -267,7 +267,8 @@ class Enemy(pygame.sprite.Sprite):
             self.shooting = max(0,self.shooting)
 
     def updateSprite(self, state, direction):
-        self.image = self.spriteDefinition.getImage(state, direction)
+        if self.visuals:
+            self.image = self.spriteDefinition.getImage(state, direction)
 
 # enemy bullets
 class Bullet_e5(pygame.sprite.Sprite):

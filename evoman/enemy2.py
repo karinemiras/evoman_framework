@@ -5,13 +5,10 @@
 ################################
 
 import sys
-import numpy
-import random
 
-import Base
-from Base.SpriteConstants import *
+import numpy
+
 from Base.SpriteDefinition import *
-from sensors import Sensors
 
 tilemap = 'evoman/map2.tmx'
 timeexpire = 1000 # game run limit
@@ -19,15 +16,19 @@ timeexpire = 1000 # game run limit
 # enemy 2 sprite, airman
 class Enemy(pygame.sprite.Sprite):
 
+    
 
-    def __init__(self, location, *groups):
+    def __init__(self, location, *groups, visuals):
 
         super(Enemy, self).__init__(*groups)
-
-        self.spriteDefinition = SpriteDefinition('evoman/images/EnemySprites.png', 0, 0, 43, 59)
-        self.updateSprite(SpriteConstants.STANDING, SpriteConstants.LEFT)
-
-        self.rect = pygame.rect.Rect(location, self.image.get_size())
+        self.visuals = visuals
+        if visuals:
+            self.spriteDefinition = SpriteDefinition('evoman/images/EnemySprites.png', 0, 0, 43, 59)
+            self.updateSprite(SpriteConstants.STANDING, SpriteConstants.RIGHT)
+            self.image = self.spriteDefinition.getImage(SpriteConstants.STANDING, SpriteConstants.RIGHT)
+            self.rect = pygame.rect.Rect(location, self.image.get_size())
+        else:
+            self.rect = pygame.rect.Rect(location, pygame.Surface([43, 59]).get_size())
         self.direction = -1
         self.max_life = 100
         self.life = self.max_life
@@ -209,7 +210,7 @@ class Enemy(pygame.sprite.Sprite):
 
                 # shoots 6 bullets placed in a fixed range
                 for i in range (0,6):
-                    self.twists.append(Bullet_e2((self.rect.x+10,self.rect.bottom), self.direction ,i, len(self.twists), game.sprite_e))
+                    self.twists.append(Bullet_e2((self.rect.x+10,self.rect.bottom), self.direction ,i, len(self.twists), game.sprite_e, visuals=self.visuals))
 
             # decreases time for bullets limitation
             self.gun_cooldown = max(0, self.gun_cooldown - dt)
@@ -236,17 +237,24 @@ class Enemy(pygame.sprite.Sprite):
 
 
     def updateSprite(self, state, direction):
-        self.image = self.spriteDefinition.getImage(state, direction)
+        if self.visuals:
+            self.image = self.spriteDefinition.getImage(state, direction)
 
 # enemy's bullet
 class Bullet_e2(pygame.sprite.Sprite):
 
 
-    image = pygame.image.load('evoman/images/torna.png')
-
-    def __init__(self, location, direction,n, n_twist , *groups):
+    def __init__(self, location, direction,n, n_twist , *groups, visuals):
         super(Bullet_e2, self).__init__(*groups)
-        self.rect = pygame.rect.Rect(location, self.image.get_size())
+
+        self.rect = pygame.rect.Rect(location, (23, 23))
+        self.visuals = visuals
+        if visuals:
+            self.image = self.image_r = pygame.image.load('evoman/images/torna.png')
+            self.image_l = pygame.image.load('evoman/images/torna2.png')
+            self.rect = pygame.rect.Rect(location, self.image_r.get_size())
+
+
         self.direction = direction
         self.lifespan = 55
         self.n = n
@@ -256,10 +264,11 @@ class Bullet_e2(pygame.sprite.Sprite):
 
     def update(self, dt, game):
 
-        if game.time%2==0:
-            self.image = pygame.image.load('evoman/images/torna.png')
-        else:
-            self.image = pygame.image.load('evoman/images/torna2.png')
+        if self.visuals:
+            if game.time%2==0:
+                self.image = self.image_r
+            else:
+                self.image = self.image_l
 
 
         # removes bullets objetcs when they transpass the screen limits

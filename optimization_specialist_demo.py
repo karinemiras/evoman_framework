@@ -24,20 +24,23 @@ if headless:
     os.environ["SDL_VIDEODRIVER"] = "dummy"
 
 
-experiment_name = 'individual_demo'
+experiment_name = 'optimization_test82'
 if not os.path.exists(experiment_name):
     os.makedirs(experiment_name)
 
 n_hidden_neurons = 10
 
+
+
 # initializes simulation in individual evolution mode, for single static enemy.
 env = Environment(experiment_name=experiment_name,
-                  enemies=[2],
+                  enemies=[8],
                   playermode="ai",
                   player_controller=player_controller(n_hidden_neurons),
                   enemymode="static",
                   level=2,
-                  speed="fastest")
+                  speed="fastest",
+                  visuals=False)
 
 # default environment fitness is assumed for experiment
 
@@ -287,6 +290,7 @@ for i in range(ini_g+1, gens):
 
 fim = time.time() # prints total execution time for experiment
 print( '\nExecution time: '+str(round((fim-ini)/60))+' minutes \n')
+print( '\nExecution time: '+str(round((fim-ini)))+' seconds \n')
 
 
 file = open(experiment_name+'/neuroended', 'w')  # saves control (simulation has ended) file for bash loop file

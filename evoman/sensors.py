@@ -16,20 +16,19 @@ class Sensors():
         posx_e = game.enemy.rect.left +((game.enemy.rect.right - game.enemy.rect.left)/2)
         posy_e = game.enemy.rect.bottom +((game.enemy.rect.top - game.enemy.rect.bottom)/2)
 
-        param_values = [ posx_p-posx_e, posy_p-posy_e, game.player.direction, game.enemy.direction]
+        # pre-allocate values for the bullets
+        param_values = [ posx_p-posx_e, posy_p-posy_e, game.player.direction, game.enemy.direction] + [0]*16
 
         # calculates vertical and horizontal distances between player and the center of enemy's bullets
+        bullet_count = 0
         for i in range(0,len(game.enemy.twists)):
             if game.enemy.twists[i] != None:
                 posx_be = game.enemy.twists[i].rect.left +((game.enemy.twists[i].rect.right - game.enemy.twists[i].rect.left)/2)
                 posy_be = game.enemy.twists[i].rect.bottom +((game.enemy.twists[i].rect.top - game.enemy.twists[i].rect.bottom)/2)
-                param_values.append(posx_p-posx_be)
-                param_values.append(posy_p-posy_be)
+                param_values[4 + bullet_count * 2] = posx_p - posx_be
+                param_values[4 + bullet_count * 2 + 1] = posy_p - posy_be
+                bullet_count+=1
 
-        # treats cases when not all bullets are used
-        for i in range(0,8-len([t for t in game.enemy.twists if t != None])):
-            param_values.append(0)
-            param_values.append(0)
 
         # applies several transformations to input variables (sensors)
         if game.inputscoded == "yes":

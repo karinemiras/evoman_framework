@@ -15,6 +15,7 @@ import tmx
 
 from player import *
 from controller import Controller
+from sensors import Sensors
 
 
 # main class
@@ -45,7 +46,8 @@ class Environment(object):
                  fullscreen=False,            # True or False
                  player_controller=None,      # controller object
                  enemy_controller=None,      # controller object
-                 use_joystick=False):
+                 use_joystick=False,
+                 visuals=False):
 
 
         # initializes parameters
@@ -73,6 +75,10 @@ class Environment(object):
         self.solutions = solutions
         self.joy = 0
         self.use_joystick = use_joystick
+
+        self.visuals = visuals
+        self.enemyImports = {e: __import__('enemy'+str(e)) for e in self.enemies}
+
 
 
         # initializes default random controllers
@@ -120,6 +126,7 @@ class Environment(object):
         self.screen.set_alpha(None) # disables uneeded alpha
         pygame.event.set_allowed([QUIT, KEYDOWN, KEYUP]) # enables only needed events
 
+
         self.load_sprites()
 
 
@@ -127,18 +134,20 @@ class Environment(object):
     def load_sprites(self):
 
         # loads enemy and map
-        enemy = __import__('enemy'+str(self.enemyn))
+        if not self.enemyn in self.enemyImports:
+            self.enemyImports[self.enemyn] = __import__('enemy'+str(self.enemyn))
+        enemy = self.enemyImports[self.enemyn]
         self.tilemap = tmx.load(enemy.tilemap, self.screen.get_size())  # map
 
         self.sprite_e = tmx.SpriteLayer()
         start_cell = self.tilemap.layers['triggers'].find('enemy')[0]
-        self.enemy = enemy.Enemy((start_cell.px, start_cell.py), self.sprite_e)
+        self.enemy = enemy.Enemy((start_cell.px, start_cell.py), self.sprite_e, visuals=self.visuals)
         self.tilemap.layers.append(self.sprite_e)  # enemy
 
         # loads player
         self.sprite_p = tmx.SpriteLayer()
         start_cell = self.tilemap.layers['triggers'].find('player')[0]
-        self.player = Player((start_cell.px, start_cell.py), self.enemyn, self.level, self.sprite_p)
+        self.player = Player((start_cell.px, start_cell.py), self.enemyn, self.level, self.sprite_p, visuals =self.visuals)
         self.tilemap.layers.append(self.sprite_p)
 
         self.player.sensors = Sensors()
@@ -422,7 +431,9 @@ class Environment(object):
         self.freeze_e = False
         self.start = False
 
-        enemy = __import__('enemy'+str(self.enemyn))
+        if not self.enemyn in self.enemyImports:
+            self.enemyImports[self.enemyn] = __import__('enemy'+str(self.enemyn))
+        enemy = self.enemyImports[self.enemyn]
 
         self.load_sprites()
 
@@ -472,23 +483,26 @@ class Environment(object):
                     return
 
             # updates objects and draws its itens on screen
-            self.screen.fill((250,250,250))
             self.tilemap.update( 33 / 1000., self)
-            self.tilemap.draw(self.screen)
 
-            # player life bar
-            vbar = int(100 *( 1-(self.player.life/float(self.player.max_life)) ))
-            pygame.draw.line(self.screen, (0,   0,   0), [40, 40],[140, 40], 2)
-            pygame.draw.line(self.screen, (0,   0,   0), [40, 45],[140, 45], 5)
-            pygame.draw.line(self.screen, (150,24,25),   [40, 45],[140 - vbar, 45], 5)
-            pygame.draw.line(self.screen, (0,   0,   0), [40, 49],[140, 49], 2)
+            if self.visuals:
+                
+                self.screen.fill((250,250,250))
+                self.tilemap.draw(self.screen)
 
-            # enemy life bar
-            vbar = int(100 *( 1-(self.enemy.life/float(self.enemy.max_life)) ))
-            pygame.draw.line(self.screen, (0,   0,   0), [590, 40],[695, 40], 2)
-            pygame.draw.line(self.screen, (0,   0,   0), [590, 45],[695, 45], 5)
-            pygame.draw.line(self.screen, (194,118,55),  [590, 45],[695 - vbar, 45], 5)
-            pygame.draw.line(self.screen, (0,   0,   0), [590, 49],[695, 49], 2)
+                # player life bar
+                vbar = int(100 *( 1-(self.player.life/float(self.player.max_life)) ))
+                pygame.draw.line(self.screen, (0,   0,   0), [40, 40],[140, 40], 2)
+                pygame.draw.line(self.screen, (0,   0,   0), [40, 45],[140, 45], 5)
+                pygame.draw.line(self.screen, (150,24,25),   [40, 45],[140 - vbar, 45], 5)
+                pygame.draw.line(self.screen, (0,   0,   0), [40, 49],[140, 49], 2)
+
+                # enemy life bar
+                vbar = int(100 *( 1-(self.enemy.life/float(self.enemy.max_life)) ))
+                pygame.draw.line(self.screen, (0,   0,   0), [590, 40],[695, 40], 2)
+                pygame.draw.line(self.screen, (0,   0,   0), [590, 45],[695, 45], 5)
+                pygame.draw.line(self.screen, (194,118,55),  [590, 45],[695 - vbar, 45], 5)
+                pygame.draw.line(self.screen, (0,   0,   0), [590, 49],[695, 49], 2)
 
 
             #gets fitness for training agents
@@ -497,7 +511,7 @@ class Environment(object):
 
             # returns results of the run
             def return_run():
-                self.print_logs("RUN: run status: enemy: "+str(self.enemyn)+"; fitness: " + str(fitness) + "; player life: " + str(self.player.life)  + "; enemy life: " + str(self.enemy.life) + "; time: " + str(self.time))
+                #self.print_logs("RUN: run status: enemy: "+str(self.enemyn)+"; fitness: " + str(fitness) + "; player life: " + str(self.player.life)  + "; enemy life: " + str(self.enemy.life) + "; time: " + str(self.time))
 
                 return  fitness, self.player.life, self.enemy.life, self.time
 
@@ -536,14 +550,14 @@ class Environment(object):
             # checks enemy life status
             if self.enemy.life == 0:
                 ends -= 1
-
-                self.screen.fill((250,250,250))
-                self.tilemap.draw(self.screen)
+                if self.visuals:
+                    self.screen.fill((250,250,250))
+                    self.tilemap.draw(self.screen)
 
                 # tells user that player has won
                 if self.playermode == "human":
                     myfont = pygame.font.SysFont("Comic sams", 100)
-                    pygame.font.Font.set_bold
+
                     self.screen.blit(myfont.render(" Player wins ", 1, (150,24,25) ), (170, 180))
 
                 self.enemy.kill()   # removes enemy sprite
@@ -563,7 +577,8 @@ class Environment(object):
                 self.enemy.kill()
 
                 # updates screen
-            pygame.display.flip()
+            if self.visuals:
+                pygame.display.flip()
 
 
             # game runtime limit
