@@ -12,8 +12,6 @@ from Base.SpriteDefinition import *
 # player proctile
 class Bullet_p(pygame.sprite.Sprite):
 
-
-
     def __init__(self, location, direction, n_twist, *groups, visuals):
         super(Bullet_p, self).__init__(*groups)
         self.rect = pygame.rect.Rect(location, (13, 7))
@@ -31,21 +29,15 @@ class Bullet_p(pygame.sprite.Sprite):
 
             self.rect = pygame.rect.Rect(location, self.image.get_size())
 
-
-        # fits image according to the side the player is turned to
-
-
-
-
     def update(self, dt, game):
 
         # removes bullets objetcs when they transpass the screen limits
-        if self.rect.right<1 or self.rect.left>736 or  self.rect.top <1 or self.rect.bottom>512 :
+        if self.rect.right < 1 or self.rect.left > 736 or self.rect.top < 1 or self.rect.bottom > 512:
             self.kill()
             game.player.twists[self.n_twist] = None
             return
 
-        self.rect.x += self.direction * 600 * dt    # moving on the X axis (left or tight). It adds 600*dt forward at each general game loop loop iteration, where dt controls the frames limit.
+        self.rect.x += self.direction * 600 * dt  # moving on the X axis (left or tight). It adds 600*dt forward at each general game loop loop iteration, where dt controls the frames limit.
 
         # checks collision of player's bullet with the enemy
         if self.rect.colliderect(game.enemy.rect):
@@ -53,12 +45,11 @@ class Bullet_p(pygame.sprite.Sprite):
             # if enemy is not imune
             if game.enemy.imune == 0:
                 # enemy loses life points, according to the difficult level of the game (the more difficult, the less it loses)
-                game.enemy.life = max(0, game.enemy.life-(20/game.level))
+                game.enemy.life = max(0, game.enemy.life - (20 / game.level))
 
                 if game.enemyn == 4:
                     # makes enemy imune to player's shooting.
                     game.enemy.imune = 1
-
 
             # removes the bullet off the screen after collision.
             self.kill()
@@ -67,12 +58,8 @@ class Bullet_p(pygame.sprite.Sprite):
             game.enemy.hurt = 5
 
 
-
-
 # player sprite
 class Player(pygame.sprite.Sprite):
-
-    
 
     def __init__(self, location, enemyn, level, *groups, visuals):
         super(Player, self).__init__(*groups)
@@ -103,14 +90,9 @@ class Player(pygame.sprite.Sprite):
         self.hy = 0
         self.sensors = None
 
-
-
-
     def update(self, dt, game):
 
-
         if game.freeze_p != 0 or game.start != 1:
-
             game.tilemap.set_focus(self.rect.x, self.rect.y)
             return
         # if the enemies are not atacking with the freezing atack (prevents player from making any movements or atacking) and also the 'start game' marker is 1.
@@ -125,15 +107,7 @@ class Player(pygame.sprite.Sprite):
             self.vy = 1
             self.hy = -900
 
-        # defines game mode for player action
-
-        if game.playermode == 'human': # player controlled by keyboard/joystick
-
-            jump, left, release, right, shoot = self.human_input(game)
-
-        elif game.playermode == 'ai': # player controlled by AI algorithm
-
-            jump, left, release, right, shoot = self.ai_input(game)
+        jump, left, release, right, shoot = self.get_input(game)
 
         # if the button is released before the jumping maximum height, them player stops going up.
         if release == 1 and self.resting == 0:
@@ -161,21 +135,14 @@ class Player(pygame.sprite.Sprite):
                 self.updateSprite(SpriteConstants.STANDING, SpriteConstants.RIGHT)
 
         # if player is touching the floor, he is allowed to jump
-        if  self.resting == 1  and jump == 1:
-                self.dy =  self.hy
+        if self.resting == 1 and jump == 1:
+            self.dy = self.hy
 
         # gravity
         self.dy = min(400, self.dy + 100)
         self.rect.y += self.dy * dt * self.vy
 
-        #  changes the image when player jumps
-        if self.resting == 0 :
-            if self.direction == -1:
-                self.updateSprite(SpriteConstants.JUMPING, SpriteConstants.LEFT)
-            else:
-                self.updateSprite(SpriteConstants.JUMPING, SpriteConstants.RIGHT)
-
-        new = self.rect # copies new (after movement) position state of the player
+        new = self.rect  # copies new (after movement) position state of the player
 
         # controls screen walls and platforms limits agaist player
         self.check_blockers(game, last, new)
@@ -186,18 +153,41 @@ class Player(pygame.sprite.Sprite):
         # decreases time for limitating bullets
         self.gun_cooldown = max(0, self.gun_cooldown - dt)
 
+        self.hurt -= 1
+        self.hurt = max(0, self.hurt)
+        self.shooting -= 1
+        self.shooting = max(0, self.shooting)
+
+        # kills player in case he touches killers stuff, like spikes.
+        for cell in game.tilemap.layers['triggers'].collide(self.rect, 'killers'):
+            game.player.life = 0
+
+        self.update_animation(game, new)
+
+    def get_input(self, game):
+        # defines game mode for player action
+        if game.playermode == 'human':  # player controlled by keyboard/joystick
+
+            jump, left, release, right, shoot = self.human_input(game)
+
+        elif game.playermode == 'ai':  # player controlled by AI algorithm
+
+            jump, left, release, right, shoot = self.ai_input(game)
+        return jump, left, release, right, shoot
+
+    def update_animation(self, game, new):
+        #  changes the image when player jumps
+        if self.resting == 0:
+            if self.direction == -1:
+                self.updateSprite(SpriteConstants.JUMPING, SpriteConstants.LEFT)
+            else:
+                self.updateSprite(SpriteConstants.JUMPING, SpriteConstants.RIGHT)
         # hurt player animation
         if self.hurt > 0:
             if self.direction == -1:
                 self.updateSprite(SpriteConstants.HURTING, SpriteConstants.LEFT)
             else:
                 self.updateSprite(SpriteConstants.HURTING, SpriteConstants.RIGHT)
-
-        self.hurt -= 1
-        self.hurt = max(0,self.hurt)
-        self.shooting -= 1
-        self.shooting = max(0,self.shooting)
-
         # shooting animation
         if self.shooting > 0:
             if self.resting == 0:
@@ -210,11 +200,6 @@ class Player(pygame.sprite.Sprite):
                     self.updateSprite(SpriteConstants.SHOOTING, SpriteConstants.LEFT)
                 else:
                     self.updateSprite(SpriteConstants.SHOOTING, SpriteConstants.RIGHT)
-
-        # kills player in case he touches killers stuff, like spikes.
-        for cell in game.tilemap.layers['triggers'].collide(self.rect, 'killers'):
-            game.player.life = 0
-
         # focuses screen center on player
         if self.visuals:
             game.tilemap.set_focus(new.x, new.y)
@@ -227,10 +212,12 @@ class Player(pygame.sprite.Sprite):
 
             # creates bullets objects according to the direction.
             if self.direction > 0:
-                self.twists.append(Bullet_p(self.rect.midright, 1, len(self.twists), game.sprite_p,visuals=self.visuals))
+                self.twists.append(
+                    Bullet_p(self.rect.midright, 1, len(self.twists), game.sprite_p, visuals=self.visuals))
 
             else:
-                self.twists.append(Bullet_p(self.rect.midleft, -1, len(self.twists), game.sprite_p,visuals=self.visuals))
+                self.twists.append(
+                    Bullet_p(self.rect.midleft, -1, len(self.twists), game.sprite_p, visuals=self.visuals))
 
             self.gun_cooldown = 0.4  # marks time to the bullet for allowing next bullets
 
