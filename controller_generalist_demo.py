@@ -8,8 +8,8 @@
 
 # imports framework
 import sys,os
-sys.path.insert(0, 'evoman')
-from environment import Environment
+
+from evoman.environment import Environment
 from demo_controller import player_controller
 
 # imports other libs

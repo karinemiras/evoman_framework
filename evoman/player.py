@@ -6,7 +6,7 @@
 
 import sys
 
-from Base.SpriteDefinition import *
+from evoman.Base.SpriteDefinition import *
 
 
 # player proctile

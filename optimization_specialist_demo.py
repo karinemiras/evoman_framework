@@ -7,8 +7,8 @@
 
 # imports framework
 import sys
-sys.path.insert(0, 'evoman')
-from environment import Environment
+
+from evoman.environment import Environment
 from demo_controller import player_controller
 
 # imports other libs
@@ -24,7 +24,7 @@ if headless:
     os.environ["SDL_VIDEODRIVER"] = "dummy"
 
 
-experiment_name = 'optimization_test82'
+experiment_name = 'optimization_test'
 if not os.path.exists(experiment_name):
     os.makedirs(experiment_name)
 

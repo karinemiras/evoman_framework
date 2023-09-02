@@ -11,11 +11,11 @@ import numpy
 import pygame
 from pygame.locals import *
 import struct
-import tmx
+import evoman.tmx as tmx
 
-from player import *
-from controller import Controller
-from sensors import Sensors
+from evoman.player import *
+from evoman.controller import Controller
+from evoman.sensors import Sensors
 
 
 # main class
@@ -77,7 +77,7 @@ class Environment(object):
         self.use_joystick = use_joystick
 
         self.visuals = visuals
-        self.enemyImports = {e: __import__('enemy'+str(e)) for e in self.enemies}
+        self.enemyImports = {e: __import__('evoman.enemy'+str(self.enemyn), fromlist=['enemy'+str(self.enemyn)]) for e in self.enemies}
 
 
 
@@ -135,7 +135,7 @@ class Environment(object):
 
         # loads enemy and map
         if not self.enemyn in self.enemyImports:
-            self.enemyImports[self.enemyn] = __import__('enemy'+str(self.enemyn))
+            self.enemyImports[self.enemyn] = __import__('evoman.enemy'+str(self.enemyn), fromlist=['enemy'+str(self.enemyn)])
         enemy = self.enemyImports[self.enemyn]
         self.tilemap = tmx.load(enemy.tilemap, self.screen.get_size())  # map
 
@@ -432,7 +432,7 @@ class Environment(object):
         self.start = False
 
         if not self.enemyn in self.enemyImports:
-            self.enemyImports[self.enemyn] = __import__('enemy'+str(self.enemyn))
+            self.enemyImports[self.enemyn] = __import__('evoman.enemy'+str(self.enemyn), fromlist=['enemy'+str(self.enemyn)])
         enemy = self.enemyImports[self.enemyn]
 
         self.load_sprites()

@@ -8,7 +8,7 @@ import sys
 
 import numpy
 
-from Base.SpriteDefinition import *
+from evoman.Base.SpriteDefinition import *
 
 tilemap = 'evoman/map2.tmx'
 timeexpire = 2200 # game run limit
