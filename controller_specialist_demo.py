@@ -8,8 +8,8 @@
 
 # imports framework
 import sys, os
-sys.path.insert(0, 'evoman')
-from environment import Environment
+
+from evoman.environment import Environment
 from demo_controller import player_controller
 
 # imports other libs
@@ -28,7 +28,8 @@ env = Environment(experiment_name=experiment_name,
 				  player_controller=player_controller(n_hidden_neurons),
 			  	  speed="normal",
 				  enemymode="static",
-				  level=2)
+				  level=2,
+				  visuals=True)
 
 
 # tests saved demo solutions for each enemy

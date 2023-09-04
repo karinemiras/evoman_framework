@@ -5,8 +5,8 @@ from math import pi
 from matplotlib.ticker import AutoLocator
 from matplotlib.offsetbox import AnchoredText
 
-sys.path.insert(0, 'evoman')
-from environment import Environment
+
+from evoman.environment import Environment
 from demo_controller import player_controller
 import numpy as np
 import pandas as pd

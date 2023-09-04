@@ -5,13 +5,10 @@
 ################################
 
 import sys
-import numpy
-import random
 
-import Base
-from Base.SpriteConstants import *
-from Base.SpriteDefinition import *
-from sensors import Sensors
+import numpy
+
+from evoman.Base.SpriteDefinition import *
 
 tilemap = 'evoman/map2.tmx'
 timeexpire = 2200 # game run limit
@@ -19,15 +16,17 @@ timeexpire = 2200 # game run limit
 # enemy 6 sprite, crashman
 class Enemy(pygame.sprite.Sprite):
 
+    def __init__(self, location, *groups, visuals):
 
-
-
-    def __init__(self, location, *groups):
         super(Enemy, self).__init__(*groups)
-        self.spriteDefinition = SpriteDefinition('evoman/images/EnemySprites.png', 0, 0, 43, 59)
-        self.updateSprite(SpriteConstants.STANDING, SpriteConstants.LEFT)
-
-        self.rect = pygame.rect.Rect(location, self.image.get_size())
+        self.visuals = visuals
+        if visuals:
+            self.spriteDefinition = SpriteDefinition('evoman/images/EnemySprites.png', 0, 0, 43, 59)
+            self.updateSprite(SpriteConstants.STANDING, SpriteConstants.RIGHT)
+            self.image = self.spriteDefinition.getImage(SpriteConstants.STANDING, SpriteConstants.RIGHT)
+            self.rect = pygame.rect.Rect(location, self.image.get_size())
+        else:
+            self.rect = pygame.rect.Rect(location, pygame.Surface([43, 59]).get_size())
         self.direction = -1
         self.max_life = 100
         self.life = self.max_life
@@ -245,7 +244,8 @@ class Enemy(pygame.sprite.Sprite):
 
 
     def updateSprite(self, state, direction):
-        self.image = self.spriteDefinition.getImage(state, direction)
+        if self.visuals:
+            self.image = self.spriteDefinition.getImage(state, direction)
 
 # enemy's bullet
 class Bullet_e6(pygame.sprite.Sprite):

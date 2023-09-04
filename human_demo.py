@@ -6,8 +6,8 @@
 
 # imports framework
 import sys, os
-sys.path.insert(0, 'evoman') 
-from environment import Environment
+
+from evoman.environment import Environment
 
 experiment_name = 'test'
 
@@ -22,7 +22,8 @@ for en in range(1, 9):
                       sound="on",
                       fullscreen=True,
                       use_joystick=True,
-                      playermode='human')
+                      playermode='human',
+                      visuals=True)
     env.update_parameter('enemies', [en])
     env.play()
 
