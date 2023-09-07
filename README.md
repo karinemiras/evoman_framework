@@ -15,5 +15,6 @@ To run the demo:
 To play the game:
 `python human_demo.py`
 
+### hello there, this is just a test
 ### test
 this is Luna's test
