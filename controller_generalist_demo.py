@@ -7,7 +7,7 @@
 #######################################################################################
 
 # imports framework
-import sys,os
+import sys, os
 
 from evoman.environment import Environment
 from demo_controller import player_controller
@@ -24,21 +24,21 @@ n_hidden_neurons = 0
 
 # initializes environment for multi objetive mode (generalist)  with static enemy and ai player
 env = Environment(experiment_name=experiment_name,
-				  playermode="ai",
-				  player_controller=player_controller(n_hidden_neurons),
-		  		  speed="normal",
-				  enemymode="static",
-				  level=2)
+                  playermode="ai",
+                  player_controller=player_controller(n_hidden_neurons),
+                  speed="normal",
+                  enemymode="static",
+                  level=2,
+                  visuals=True)
 
 sol = np.loadtxt('solutions_demo/demo_all.txt')
 print('\n LOADING SAVED GENERALIST SOLUTION FOR ALL ENEMIES \n')
 
 # tests saved demo solutions for each enemy
 for en in range(1, 9):
-	
-	#Update the enemy
-	env.update_parameter('enemies',[en])
+    # Update the enemy
+    env.update_parameter('enemies', [en])
 
-	env.play(sol)
+    env.play(sol)
 
 print('\n  \n')
