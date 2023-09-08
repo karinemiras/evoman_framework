@@ -1,0 +1,22 @@
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: WHAT
+      description: "Briefly describe what you want to do, introduce the concept, preferably in one sentence."
+      render: bash
+  - type: textarea
+    id: why
+    attributes:
+      label: WHY
+      description: "Describe why we should do it, how is it going to progress the project, what we are going to gain by putting time and effort into this."
+      render: bash
+  - type: textarea
+    id: how
+    attributes:
+      label: HOW
+      description: "Briefly describe what you want to do, introduce the concept, preferably in one sentence. 
+        Include a little deeper description how we can achieve that. 
+        You can add some more explanations to the nature of the problem. 
+        If it's possible try to estimate how much time it could take."
+      render: bash
