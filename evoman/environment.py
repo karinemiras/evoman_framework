@@ -77,7 +77,7 @@ class Environment(object):
         self.use_joystick = use_joystick
 
         self.visuals = visuals
-        self.enemyImports = {e: __import__('evoman.enemy'+str(self.enemyn), fromlist=['enemy'+str(self.enemyn)]) for e in self.enemies}
+        self.enemyImports = {e: __import__('evoman.enemy'+str(e), fromlist=['enemy'+str(e)]) for e in self.enemies}
 
 
 
