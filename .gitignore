@@ -82,7 +82,7 @@ docs/_build/
 .pybuilder/
 target/
 
-# Jupyter Notebook
+# jupyter Notebook
 .ipynb_checkpoints
 
 # IPython
@@ -215,4 +215,3 @@ fabric.properties
 
 # Android studio 3.1+ serialized cache file
 .idea/caches/build_file_checksums.ser
-/Jupyter/
