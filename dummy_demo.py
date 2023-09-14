@@ -14,6 +14,7 @@ if not os.path.exists(experiment_name):
     os.makedirs(experiment_name)
 
 # initializes environment with ai player using random controller, playing against static enemy
-env = Environment(experiment_name=experiment_name)
+env = Environment(experiment_name=experiment_name, speed="normal", visuals=True)
+#env.update_parameter('enemies', [1])
 env.play()
 
