@@ -7,25 +7,31 @@
 #######################################################################################
 
 # imports framework
-import sys, os
+import os
+import numpy as np
 
 from evoman.environment import Environment
 from demo_controller import player_controller
+from evolve.neural_net import NNController
 
-# imports other libs
-import numpy as np
+INPUT_SIZE = 20
+HIDDEN = 10
+OUTPUT_SIZE = 5
+EXPERIMENT_NAME = 'nn_test'
 
-experiment_name = 'controller_specialist_demo'
-if not os.path.exists(experiment_name):
-    os.makedirs(experiment_name)
+if not os.path.exists(EXPERIMENT_NAME):
+    os.makedirs(EXPERIMENT_NAME)
 
 # Update the number of neurons for this specific example
 n_hidden_neurons = 0
 
 # initializes environment for single objective mode (specialist)  with static enemy and ai player
-env = Environment(experiment_name=experiment_name,
+# controller = player_controller(n_hidden_neurons)
+controller = NNController(INPUT_SIZE, HIDDEN, OUTPUT_SIZE)
+controller.load_weights(os.path.join(EXPERIMENT_NAME, 'weights.txt'))
+env = Environment(experiment_name=EXPERIMENT_NAME,
                   playermode="ai",
-                  player_controller=player_controller(n_hidden_neurons),
+                #   player_controller=controller,
                   speed="normal",
                   enemymode="static",
                   level=2,
@@ -35,8 +41,5 @@ env = Environment(experiment_name=experiment_name,
 for en in range(1, 9):
     # Update the enemy
     env.update_parameter('enemies', [en])
-
-    # Load specialist controller
-    sol = np.loadtxt('solutions_demo/demo_' + str(en) + '.txt')
     print('\n LOADING SAVED SPECIALIST SOLUTION FOR ENEMY ' + str(en) + ' \n')
-    env.play(sol)
+    env.play(controller)
