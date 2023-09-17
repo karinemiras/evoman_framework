@@ -8,9 +8,13 @@ A demo can be found here:  https://www.youtube.com/watch?v=ZqaMjd1E4ZI
 `pip install -U pygame --user`
 `pip install tmx`
 `pip install numpy`
+`pip install deap`
 
-To run the demo:
-`python controller_specialist_demo.py`
+If you want to train NN with DEAP network run:
+`python neural_net_deap_example.py`
 
-To play the game:
-`python human_demo.py`
+Inside the script you can also finetune parameters.
+
+
+When you trained neural net from the above script you can see it in action with the following command:
+`python neural_net_deap_demo.py`
