@@ -112,7 +112,6 @@ def main(config):
 
         # Apply crossover and mutation on the offspring
         for child1, child2 in zip(offspring[::2], offspring[1::2]):
-
             # cross two individuals with probability CXPB
             if random.random() < config.evolve.cross_prob:
                 toolbox.mate(child1, child2)
@@ -139,18 +138,15 @@ def main(config):
         print_statistics(fits, len(invalid_ind), len(pop))
 
     print("-- End of (successful) evolution --")
-
     best_ind = tools.selBest(pop, 1)[0]
     print("Best individual is %s, %s" % (best_ind, best_ind.fitness.values))
     best_ind.save_weights(os.path.join(EXPERIMENT_NAME, 'weights.txt'))
 
+
 def update_fitness(eval_func, pop):
     # Multiprocessing to make simulations run faster
     with multiprocessing.Pool() as pool:
-        # fitnesses = map(eval_func, pop)
-        # fitnesses = map_async(pool, eval_func, (pop))
         fitnesses = pool.map(eval_func, pop)
-        # fitnesses = pool.apply_async(evaluate, args=(eval_func, pop))
     for ind, fit in zip(pop, fitnesses):
         ind.fitness.values = fit
     return fitnesses

@@ -1,26 +1,41 @@
 import numpy as np
 
 from evoman.controller import Controller
+from evolve.util import sigmoid, relu, init_weights, normalize_input
 from math import prod
 
+class NNController(Controller):
+    def __init__(self, threshold=0.5):
+        self.threshold = threshold
 
-class NNController:
+    def set(self, net, _):
+        self.net = net
+
+    def control(self, params, net = None):
+        if net is None:
+            nn_out = self.net(params)
+        else:
+            nn_out = net(params)
+        return [int(elem > self.threshold) for elem in nn_out]
+
+
+class NeuralNetwork:
     def __init__(self, input, hidden, output, activation="sigmoid"):
-        self.w1 = np.random.randn(hidden, input)
-        self.b1 = np.random.randn(hidden)
-        self.w2 = np.random.randn(output, hidden)
-        self.b2 = np.random.randn(output)
+        self.w1 = init_weights(input, hidden)
+        self.b1 = init_weights(1, hidden).flatten()
+        self.w2 = init_weights(hidden, output)
+        self.b2 = init_weights(1, output).flatten()
         self._params_list = self._convert_params_to_list()
 
         if activation == "sigmoid":
-            self.activation = self._sigmoid
+            self.activation = sigmoid
         elif activation == "relu":
-            self.activation = self._relu
+            self.activation = relu
         else:
             raise ValueError("Unknown activation passed as init argument")
         
-    def control(self, x):
-        x = self._normalize_input(x)
+    def __call__(self, x):
+        x = normalize_input(x)
         x = np.dot(self.w1, x) + self.b1
         x = self.activation(x)
         x = np.dot(self.w2, x) + self.b2
@@ -71,17 +86,3 @@ class NNController:
 
     def _get_params(self):
         return [self.w1, self.b1, self.w2, self.b2]
-
-    # TODO: Implement
-    def _normalize_input(self, x):
-        # min = np.min(x)
-        # max = np.max(x)
-        # x_norm = x - min / (max-min)
-        # return x_norm
-        return x
-
-    def _sigmoid(self, x):
-        return 1 / (1 + np.exp(-x))
-
-    def _relu(self, x):
-        return np.maximum(0, x)

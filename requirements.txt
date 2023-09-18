@@ -1,0 +1,5 @@
+pygame
+tmx
+numpy
+deap
+hydra-core
