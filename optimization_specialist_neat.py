@@ -23,7 +23,16 @@ if headless:
 #     os.makedirs(experiment_name)
 
 # Change the enemy here, the winner will be saved in winner_neat_[en].pkl
-en = 1
+# Keep in mind that if you run this file, the winner will be overwritten
+
+#en = 1  # fitness = 95.03
+#en = 2 # fitness = 94.21
+#en = 3 # fitness = 93.21
+#en = 4 # fitness = 90.67
+#en = 5 # fitness = 95.00
+#en = 6 # fitness = 93.68
+#en = 7 # fitness = 94.08
+#en = 8 # fitness = 93.75
 
 # initializes simulation in individual evolution mode, for single static enemy.
 env = Environment(experiment_name="optimization_specialist_neat",
@@ -76,11 +85,11 @@ def run(config_file):
     stats = neat.StatisticsReporter()
     p.add_reporter(stats)
 
-    # Run for up to 30 generations.
-    winner = p.run(eval_genomes, 30)
+    # Run for up to 100 generations.
+    winner = p.run(eval_genomes, 100)
 
     # Display the winning genome.
-    # print('\nBest genome:\n{!s}'.format(winner))
+    #print('\nBest genome:\n{!s}'.format(winner))
 
     # Save the best genome in winner_neat.pkl
     pickle.dump(winner, open('winner_neat_' + str(en) + '.pkl', 'wb'))
