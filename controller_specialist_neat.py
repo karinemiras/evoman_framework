@@ -20,7 +20,6 @@ env = Environment(experiment_name="controller_specialist_neat",
                   speed="normal",
                   logs="off",
                   savelogs="no",
-                  fullscreen=True,
                   player_controller=player_controller(),
                   visuals=True)
 
@@ -35,5 +34,5 @@ for en in range(1, 9):
                          neat.DefaultSpeciesSet, neat.DefaultStagnation,
                          'config-feedforward_neat.txt')
     net = neat.nn.FeedForwardNetwork.create(winner, config)
-    print('\n LOADING SAVED SPECIALIST SOLUTION FOR ENEMY ' + str(en) + ' \n')
+    print('\n LOADING SAVED SPECIALIST NEAT SOLUTION FOR ENEMY ' + str(en) + ' \n')
     env.play(pcont=net)
