@@ -1,0 +1,12 @@
+train:
+  pop_size: 100
+  num_gens: 15
+
+nn:
+  input_size: 20
+  hidden_size: 100
+  output_size: 5
+
+evolve:
+  cross_prob: 0.5
+  mutation_prob: 0.2
