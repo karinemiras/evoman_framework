@@ -3,88 +3,89 @@
 # go step-by-step through tutorial and see what differences you can
 # spot between this code and code in the tutorial.
 
-import random
-import multiprocessing
+import hydra
+import multiprocessing as multiprocessing
 import os
+import random
 
 from deap import base
 from deap import creator
 from deap import tools
-from evolve.neural_net import NNController
+from evolve.neural_net import NNController, NeuralNetwork
 from evoman.environment import Environment
+from functools import partial
 
+os.environ['SDL_VIDEODRIVER'] = 'dummy'
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
 
-INPUT_SIZE = 20
-HIDDEN = 10
-OUTPUT_SIZE = 5
-POP_SIZE = 100
-NUM_ENEMIES = 8
-NUM_GENS = 50
 EXPERIMENT_NAME = 'nn_test'
-# CXPB  is the probability with which two individuals are crossed
-CXPB = 0.5
-# MUTPB is the probability for mutating an individual
-MUTPB = 0.2
+ENEMY_IDX = 2
 
-os.environ["SDL_VIDEODRIVER"] = "dummy"
-os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "1"
+env = Environment(
+                experiment_name=EXPERIMENT_NAME,
+                player_controller=NNController(),
+                enemies=[ENEMY_IDX],
+                playermode="ai",
+                enemymode="static",
+                level=2,
+                speed="fastest",
+                visuals=False)
 
-if not os.path.exists(EXPERIMENT_NAME):
-    os.makedirs(EXPERIMENT_NAME)
-    
-env = Environment(experiment_name=EXPERIMENT_NAME,
-                  enemies=[NUM_ENEMIES],
-                  playermode="ai",
-                  enemymode="static",
-                  level=2,
-                  speed="fastest",
-                  visuals=False)
-
-creator.create("FitnessMax", base.Fitness, weights=(1.0,))
-creator.create("Individual", NNController, fitness=creator.FitnessMax)
-
-toolbox = base.Toolbox()
-
-# Structure initializers
-# define 'individual' to consist of of randomly initialized
-# NeuralNet with params given by INPUT_SIZE, HIDDEN, OUTPUT_SIZE
-toolbox.register("individual", creator.Individual, INPUT_SIZE, HIDDEN, OUTPUT_SIZE)
-
-# define the population to be a list of individuals
-toolbox.register("population", tools.initRepeat, list, toolbox.individual)
-
-# setup game environment
 # the goal ('fitness') function to be maximized
-def evalFitness(individual):
+def eval_fitness(individual):
     return env.play(pcont=individual)[0],
 
-#----------
-# Operator registration
-#----------
-# register the goal / fitness function
-toolbox.register("evaluate", evalFitness)
+def prepare_toolbox(config):
+    creator.create("FitnessMax", base.Fitness, weights=(1.0,))
+    creator.create("Individual", NeuralNetwork, fitness=creator.FitnessMax)
 
-# register the crossover operator
-toolbox.register("mate", tools.cxTwoPoint)
+    toolbox = base.Toolbox()
 
-# register a mutation operator with a probability to
-# flip each attribute/gene of 0.05
-toolbox.register("mutate", tools.mutGaussian, mu=0, sigma=1, indpb=0.05)
+    # Structure initializers
+    # define 'individual' to consist of of randomly initialized
+    # NeuralNet with params given by INPUT_SIZE, HIDDEN, OUTPUT_SIZE
+    toolbox.register(
+        "individual", 
+        creator.Individual, 
+        config.nn.input_size,
+        config.nn.hidden_size,
+        config.nn.output_size)
 
-# operator for selecting individuals for breeding the next
-# generation: each individual of the current generation
-# is replaced by the 'fittest' (best) of three individuals
-# drawn randomly from the current generation.
-toolbox.register("select", tools.selTournament, tournsize=30)
+    # define the population to be a list of individuals
+    toolbox.register("population", tools.initRepeat, list, toolbox.individual)
 
-#----------
+    #----------
+    # Operator registration
+    #----------
+    # register the goal / fitness function
+    toolbox.register("evaluate", eval_fitness)
 
-def main():
+    # register the crossover operator
+    toolbox.register("mate", tools.cxTwoPoint)
+
+    # register a mutation operator with a probability to
+    # flip each attribute/gene of 0.05
+    toolbox.register("mutate", tools.mutGaussian, mu=0, sigma=1, indpb=0.05)
+
+    # operator for selecting individuals for breeding the next
+    # generation: each individual of the current generation
+    # is replaced by the 'fittest' (best) of three individuals
+    # drawn randomly from the current generation.
+    toolbox.register("select", tools.selTournament, tournsize=30)
+    #----------
+    return toolbox
+
+@hydra.main(version_base=None, config_path=".", config_name="config")
+def main(config):
+    if not os.path.exists(EXPERIMENT_NAME):
+        os.makedirs(EXPERIMENT_NAME)
+    
+    toolbox = prepare_toolbox(config)
     random.seed(2137)
 
     # create an initial population of POP_SIZE individuals 
     # (where each individual is a neural net)
-    pop = toolbox.population(n=POP_SIZE)
+    pop = toolbox.population(n=config.train.pop_size)
 
     print("Start of evolution")
 
@@ -93,13 +94,13 @@ def main():
 
     # # Extracting all the fitnesses of 
     fits = [ind.fitness.values[0] for ind in pop]
-    print_statistics(fits, len(pop))
+    print_statistics(fits, len(pop), len(pop))
 
     # Variable keeping track of the number of generations
     g = 0
 
     # Begin the evolution
-    while g < NUM_GENS:
+    while g < config.train.num_gens:
         # A new generation
         g = g + 1
         print("-- Generation %i --" % g)
@@ -113,7 +114,7 @@ def main():
         for child1, child2 in zip(offspring[::2], offspring[1::2]):
 
             # cross two individuals with probability CXPB
-            if random.random() < CXPB:
+            if random.random() < config.evolve.cross_prob:
                 toolbox.mate(child1, child2)
 
                 # fitness values of the children
@@ -123,7 +124,7 @@ def main():
 
         for mutant in offspring:
             # mutate an individual with probability MUTPB
-            if random.random() < MUTPB:
+            if random.random() < config.evolve.mutation_prob:
                 toolbox.mutate(mutant)
                 del mutant.fitness.values
 
@@ -135,7 +136,7 @@ def main():
 
         # Gather all the fitnesses in one list and print the stats
         fits = [ind.fitness.values[0] for ind in pop]
-        print_statistics(fits, len(pop))
+        print_statistics(fits, len(invalid_ind), len(pop))
 
     print("-- End of (successful) evolution --")
 
@@ -146,13 +147,16 @@ def main():
 def update_fitness(eval_func, pop):
     # Multiprocessing to make simulations run faster
     with multiprocessing.Pool() as pool:
+        # fitnesses = map(eval_func, pop)
+        # fitnesses = map_async(pool, eval_func, (pop))
         fitnesses = pool.map(eval_func, pop)
+        # fitnesses = pool.apply_async(evaluate, args=(eval_func, pop))
     for ind, fit in zip(pop, fitnesses):
         ind.fitness.values = fit
     return fitnesses
 
-def print_statistics(fits, len_pop):
-    print("  Evaluated %i individuals" % len_pop)
+def print_statistics(fits, len_evaluated, len_pop):
+    print("  Evaluated %i individuals" % len_evaluated)
     mean = sum(fits) / len_pop
     sum2 = sum(x*x for x in fits)
     std = abs(sum2 / len_pop - mean**2)**0.5
