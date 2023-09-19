@@ -7,12 +7,6 @@ import visualize_neat
 from evoman.environment import Environment
 from controller_neat import player_controller
 
-# imports other libs
-import time
-import numpy as np
-from math import fabs, sqrt
-import glob, os
-
 # choose this for not using visuals and thus making experiments faster
 headless = True
 if headless:
@@ -25,7 +19,7 @@ if headless:
 # Change the enemy here, the winner will be saved in winner_neat_[en].pkl
 # Keep in mind that if you run this file, the winner will be overwritten
 
-#en = 1  # fitness = 95.03
+#en = 1 # fitness = 95.03
 #en = 2 # fitness = 94.21
 #en = 3 # fitness = 93.21
 #en = 4 # fitness = 90.67
@@ -101,4 +95,3 @@ if __name__ == '__main__':
     run(config_path)
 
 env.state_to_log()  # checks environment state
-print()
