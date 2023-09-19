@@ -1,10 +1,7 @@
-import time
 import numpy as np
 import gymnasium as gym
 from IPython.display import clear_output
 import os
-import plotly.express as px
-import pandas as pd
 
 
 class NeuralNetwork:

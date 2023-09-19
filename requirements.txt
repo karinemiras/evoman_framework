@@ -3,3 +3,8 @@ tmx
 numpy
 deap
 hydra-core
+graphviz
+matplotlib
+gymnasium
+ipython
+neat-python

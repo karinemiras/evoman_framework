@@ -1,11 +1,10 @@
 # imports framework
-import pickle
-import sys, os
 import neat
-import visualize_neat
+import os
+import pickle
 
 from evoman.environment import Environment
-from controller_neat import player_controller
+from controller_neat import PlayerController
 
 # choose this for not using visuals and thus making experiments faster
 headless = True
@@ -19,7 +18,7 @@ if headless:
 # Change the enemy here, the winner will be saved in winner_neat_[en].pkl
 # Keep in mind that if you run this file, the winner will be overwritten
 
-#en = 1 # fitness = 95.03
+en = 1 # fitness = 95.03
 #en = 2 # fitness = 94.21
 #en = 3 # fitness = 93.21
 #en = 4 # fitness = 90.67
@@ -34,19 +33,18 @@ env = Environment(experiment_name="optimization_specialist_neat",
                   speed="fastest",
                   logs="off",
                   savelogs="no",
-                  player_controller=player_controller(),  # you  can insert your own controller here
+                  player_controller=PlayerController(),  # you  can insert your own controller here
                   visuals=False)
 
 # start writing your own code from here
 
-env.state_to_log()  # checks environment state
-
+# global variable to keep track of the generation
 gen = 0
 
 
 # runs simulation
 def simulation(env, x):
-    f, p, e, t = env.play(pcont=x)
+    f, _, _, _ = env.play(pcont=x)
     return f
 
 
@@ -56,7 +54,7 @@ def eval_genomes(genomes, config):
     gen += 1
     nets = []
     ge = []
-    for genome_id, genome in genomes:
+    for _, genome in genomes:
         net = neat.nn.FeedForwardNetwork.create(genome, config)
         nets.append(net)
         ge.append(genome)
@@ -93,5 +91,3 @@ if __name__ == '__main__':
     local_dir = os.path.dirname(__file__)
     config_path = os.path.join(local_dir, 'config-feedforward_neat.txt')
     run(config_path)
-
-env.state_to_log()  # checks environment state
