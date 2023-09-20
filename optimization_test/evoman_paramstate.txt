@@ -1,0 +1,19 @@
+
+enemies 8
+timeexpire 3000
+level 2
+enemyn 8
+overturetime 100
+playermode ai
+enemymode static
+contacthurt player
+clockprec low
+inputscoded no
+randomini no
+multiplemode no
+speed fastest
+loadplayer yes
+loadenemy yes
+sound off
+logs on
+savelogs yes
