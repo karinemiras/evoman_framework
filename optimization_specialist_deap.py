@@ -22,18 +22,20 @@ EXPERIMENT_NAME = 'nn_test'
 ENEMY_IDX = 2
 
 env = Environment(
-                experiment_name=EXPERIMENT_NAME,
-                player_controller=NNController(),
-                enemies=[ENEMY_IDX],
-                playermode="ai",
-                enemymode="static",
-                level=2,
-                speed="fastest",
-                visuals=False)
+    experiment_name=EXPERIMENT_NAME,
+    player_controller=NNController(),
+    enemies=[ENEMY_IDX],
+    playermode="ai",
+    enemymode="static",
+    level=2,
+    speed="fastest",
+    visuals=False)
+
 
 # the goal ('fitness') function to be maximized
 def eval_fitness(individual):
     return env.play(pcont=individual)[0],
+
 
 def prepare_toolbox(config):
     creator.create("FitnessMax", base.Fitness, weights=(1.0,))
@@ -42,11 +44,11 @@ def prepare_toolbox(config):
     toolbox = base.Toolbox()
 
     # Structure initializers
-    # define 'individual' to consist of of randomly initialized
+    # define 'individual' to consist of randomly initialized
     # NeuralNet with params given by INPUT_SIZE, HIDDEN, OUTPUT_SIZE
     toolbox.register(
-        "individual", 
-        creator.Individual, 
+        "individual",
+        creator.Individual,
         config.nn.input_size,
         config.nn.hidden_size,
         config.nn.output_size)
@@ -54,9 +56,9 @@ def prepare_toolbox(config):
     # define the population to be a list of individuals
     toolbox.register("population", tools.initRepeat, list, toolbox.individual)
 
-    #----------
+    # ----------
     # Operator registration
-    #----------
+    # ----------
     # register the goal / fitness function
     toolbox.register("evaluate", eval_fitness)
 
@@ -72,14 +74,15 @@ def prepare_toolbox(config):
     # is replaced by the 'fittest' (best) of three individuals
     # drawn randomly from the current generation.
     toolbox.register("select", tools.selTournament, tournsize=30)
-    #----------
+    # ----------
     return toolbox
+
 
 @hydra.main(version_base=None, config_path=".", config_name="config")
 def main(config):
     if not os.path.exists(EXPERIMENT_NAME):
         os.makedirs(EXPERIMENT_NAME)
-    
+
     toolbox = prepare_toolbox(config)
     random.seed(2137)
 
@@ -151,16 +154,18 @@ def update_fitness(eval_func, pop):
         ind.fitness.values = fit
     return fitnesses
 
+
 def print_statistics(fits, len_evaluated, len_pop):
     print("  Evaluated %i individuals" % len_evaluated)
     mean = sum(fits) / len_pop
-    sum2 = sum(x*x for x in fits)
-    std = abs(sum2 / len_pop - mean**2)**0.5
+    sum2 = sum(x * x for x in fits)
+    std = abs(sum2 / len_pop - mean ** 2) ** 0.5
 
     print("  Min %s" % min(fits))
     print("  Max %s" % max(fits))
     print("  Avg %s" % mean)
     print("  Std %s" % std)
+
 
 if __name__ == "__main__":
     main()
