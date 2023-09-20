@@ -1,11 +1,9 @@
 # imports framework
-import sys, os
+import neat
 import pickle
 
-import neat
-
 from evoman.environment import Environment
-from controller_neat import player_controller
+from controller_neat import PlayerControllerNeat
 
 
 # initializes environment for single objective mode (specialist)  with static enemy and ai player
@@ -13,7 +11,7 @@ env = Environment(experiment_name="controller_specialist_neat",
                   speed="normal",
                   logs="off",
                   savelogs="no",
-                  player_controller=player_controller(),
+                  player_controller=PlayerControllerNeat(),
                   visuals=True)
 
 # tests saved neat solutions for selected enemy

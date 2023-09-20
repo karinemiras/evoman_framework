@@ -22,18 +22,20 @@ EXPERIMENT_NAME = 'nn_test'
 ENEMY_IDX = 2
 
 env = Environment(
-                experiment_name=EXPERIMENT_NAME,
-                player_controller=NNController(),
-                enemies=[ENEMY_IDX],
-                playermode="ai",
-                enemymode="static",
-                level=2,
-                speed="fastest",
-                visuals=False)
+    experiment_name=EXPERIMENT_NAME,
+    player_controller=NNController(),
+    enemies=[ENEMY_IDX],
+    playermode="ai",
+    enemymode="static",
+    level=2,
+    speed="fastest",
+    visuals=False)
+
 
 # the goal ('fitness') function to be maximized
 def eval_fitness(individual):
     return env.play(pcont=individual)[0],
+
 
 def prepare_toolbox(config):
     creator.create("FitnessMax", base.Fitness, weights=(1.0,))
@@ -42,11 +44,11 @@ def prepare_toolbox(config):
     toolbox = base.Toolbox()
 
     # Structure initializers
-    # define 'individual' to consist of of randomly initialized
+    # define 'individual' to consist of randomly initialized
     # NeuralNet with params given by INPUT_SIZE, HIDDEN, OUTPUT_SIZE
     toolbox.register(
-        "individual", 
-        creator.Individual, 
+        "individual",
+        creator.Individual,
         config.nn.input_size,
         config.nn.hidden_size,
         config.nn.output_size)
@@ -54,9 +56,9 @@ def prepare_toolbox(config):
     # define the population to be a list of individuals
     toolbox.register("population", tools.initRepeat, list, toolbox.individual)
 
-    #----------
+    # ----------
     # Operator registration
-    #----------
+    # ----------
     # register the goal / fitness function
     toolbox.register("evaluate", eval_fitness)
 
@@ -72,14 +74,15 @@ def prepare_toolbox(config):
     # is replaced by the 'fittest' (best) of three individuals
     # drawn randomly from the current generation.
     toolbox.register("select", tools.selTournament, tournsize=30)
-    #----------
+    # ----------
     return toolbox
+
 
 @hydra.main(version_base=None, config_path=".", config_name="config")
 def main(config):
     if not os.path.exists(EXPERIMENT_NAME):
         os.makedirs(EXPERIMENT_NAME)
-    
+
     toolbox = prepare_toolbox(config)
     random.seed(2137)
 
@@ -112,7 +115,6 @@ def main(config):
 
         # Apply crossover and mutation on the offspring
         for child1, child2 in zip(offspring[::2], offspring[1::2]):
-
             # cross two individuals with probability CXPB
             if random.random() < config.evolve.cross_prob:
                 toolbox.mate(child1, child2)
@@ -139,32 +141,31 @@ def main(config):
         print_statistics(fits, len(invalid_ind), len(pop))
 
     print("-- End of (successful) evolution --")
-
     best_ind = tools.selBest(pop, 1)[0]
     print("Best individual is %s, %s" % (best_ind, best_ind.fitness.values))
     best_ind.save_weights(os.path.join(EXPERIMENT_NAME, 'weights.txt'))
 
+
 def update_fitness(eval_func, pop):
     # Multiprocessing to make simulations run faster
     with multiprocessing.Pool() as pool:
-        # fitnesses = map(eval_func, pop)
-        # fitnesses = map_async(pool, eval_func, (pop))
         fitnesses = pool.map(eval_func, pop)
-        # fitnesses = pool.apply_async(evaluate, args=(eval_func, pop))
     for ind, fit in zip(pop, fitnesses):
         ind.fitness.values = fit
     return fitnesses
 
+
 def print_statistics(fits, len_evaluated, len_pop):
     print("  Evaluated %i individuals" % len_evaluated)
     mean = sum(fits) / len_pop
-    sum2 = sum(x*x for x in fits)
-    std = abs(sum2 / len_pop - mean**2)**0.5
+    sum2 = sum(x * x for x in fits)
+    std = abs(sum2 / len_pop - mean ** 2) ** 0.5
 
     print("  Min %s" % min(fits))
     print("  Max %s" % max(fits))
     print("  Avg %s" % mean)
     print("  Std %s" % std)
+
 
 if __name__ == "__main__":
     main()

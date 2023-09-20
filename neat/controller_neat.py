@@ -2,7 +2,7 @@ from evoman.controller import Controller
 
 
 # implements controller structure for player
-class player_controller(Controller):
+class PlayerControllerNeat(Controller):
     def control(self, inputs, net):
         output = net.activate(inputs)
 

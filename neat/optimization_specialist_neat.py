@@ -1,11 +1,24 @@
 # imports framework
-import pickle
-import sys, os
 import neat
-import visualize_neat
+import os
+import pickle
 
 from evoman.environment import Environment
-from controller_neat import player_controller
+from controller_neat import PlayerControllerNeat
+
+# Change the enemy here, the winner will be saved in winner_neat_[ENEMY_IDX].pkl
+# Keep in mind that if you run this file, the winner will be overwritten
+ENEMY_IDX = 1
+# Actual fitness values for each enemy (stored in winner_neat_[ENEMY_IDX].pkl)
+# Update these values if you run this file
+#ENEMY_1 fitness = 95.03
+#ENEMY_2 fitness = 94.21
+#ENEMY_3 fitness = 93.21
+#ENEMY_4 fitness = 90.67
+#ENEMY_5 fitness = 95.00
+#ENEMY_6 fitness = 93.68
+#ENEMY_7 fitness = 94.08
+#ENEMY_8 fitness = 93.75
 
 # choose this for not using visuals and thus making experiments faster
 headless = True
@@ -16,37 +29,24 @@ if headless:
 # if not os.path.exists(experiment_name):
 #     os.makedirs(experiment_name)
 
-# Change the enemy here, the winner will be saved in winner_neat_[en].pkl
-# Keep in mind that if you run this file, the winner will be overwritten
-
-#en = 1 # fitness = 95.03
-#en = 2 # fitness = 94.21
-#en = 3 # fitness = 93.21
-#en = 4 # fitness = 90.67
-#en = 5 # fitness = 95.00
-#en = 6 # fitness = 93.68
-#en = 7 # fitness = 94.08
-#en = 8 # fitness = 93.75
-
 # initializes simulation in individual evolution mode, for single static enemy.
 env = Environment(experiment_name="optimization_specialist_neat",
-                  enemies=[en],
+                  enemies=[ENEMY_IDX],
                   speed="fastest",
                   logs="off",
                   savelogs="no",
-                  player_controller=player_controller(),  # you  can insert your own controller here
+                  player_controller=PlayerControllerNeat(),  # you  can insert your own controller here
                   visuals=False)
 
 # start writing your own code from here
 
-env.state_to_log()  # checks environment state
-
+# global variable to keep track of the generation
 gen = 0
 
 
 # runs simulation
 def simulation(env, x):
-    f, p, e, t = env.play(pcont=x)
+    f, _, _, _ = env.play(pcont=x)
     return f
 
 
@@ -56,7 +56,7 @@ def eval_genomes(genomes, config):
     gen += 1
     nets = []
     ge = []
-    for genome_id, genome in genomes:
+    for _, genome in genomes:
         net = neat.nn.FeedForwardNetwork.create(genome, config)
         nets.append(net)
         ge.append(genome)
@@ -86,12 +86,10 @@ def run(config_file):
     #print('\nBest genome:\n{!s}'.format(winner))
 
     # Save the best genome in winner_neat.pkl
-    pickle.dump(winner, open('winner_neat_' + str(en) + '.pkl', 'wb'))
+    pickle.dump(winner, open('neat/winner_neat_' + str(ENEMY_IDX) + '.pkl', 'wb'))
 
 
 if __name__ == '__main__':
     local_dir = os.path.dirname(__file__)
     config_path = os.path.join(local_dir, 'config-feedforward_neat.txt')
     run(config_path)
-
-env.state_to_log()  # checks environment state

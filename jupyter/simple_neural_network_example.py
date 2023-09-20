@@ -1,11 +1,10 @@
-import time
 import numpy as np
 import gymnasium as gym
 from IPython.display import clear_output
 import os
-import plotly.express as px
-import pandas as pd
 
+
+# This is the runnable code from the Jupyter notebook "simple_neural_network_example.ipynb"
 
 class NeuralNetwork:
     def __init__(self, n_inputs, n_outputs):
@@ -118,7 +117,7 @@ env = gym.make("MountainCar-v0")
 net = NeuralNetwork(2, 3)
 pop = initialize_population(population_size, weight_lower_bound, weight_upper_bound)
 pop_fit = evaluate_population(pop, n_evaluations, net, env)
-data = DataGatherer("simple_example")  # think of a good naming convention
+data = DataGatherer("simple_neural_network_example")  # think of a good naming convention
 
 for gen in range(generations):
     parents = parent_selection(pop, pop_fit, n_offspring)
