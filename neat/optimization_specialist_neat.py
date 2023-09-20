@@ -86,7 +86,7 @@ def run(config_file):
     #print('\nBest genome:\n{!s}'.format(winner))
 
     # Save the best genome in winner_neat.pkl
-    pickle.dump(winner, open('/neat/winner_neat_' + str(ENEMY_IDX) + '.pkl', 'wb'))
+    pickle.dump(winner, open('neat/winner_neat_' + str(ENEMY_IDX) + '.pkl', 'wb'))
 
 
 if __name__ == '__main__':
