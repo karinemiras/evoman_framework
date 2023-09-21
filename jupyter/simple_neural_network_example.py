@@ -2,6 +2,8 @@ import numpy as np
 import gymnasium as gym
 from IPython.display import clear_output
 import os
+import pandas as pd
+import plotly.express as px
 
 
 # This is the runnable code from the Jupyter notebook "simple_neural_network_example.ipynb"
@@ -33,6 +35,10 @@ def evaluate(weights, net, env):
     return total_reward
 
 
+def initialize_population(population_size, lower, upper, n_weights=6):
+    return np.random.uniform(lower, upper, (population_size, n_weights))
+
+
 def evaluate_population(pop, number_of_evaluations, net, env):
     population_fitness = np.zeros(pop.shape[0])
 
@@ -40,10 +46,6 @@ def evaluate_population(pop, number_of_evaluations, net, env):
         population_fitness[i] = np.mean([evaluate(pop[i], net, env) for _ in range(number_of_evaluations)])
 
     return population_fitness
-
-
-def initialize_population(population_size, lower, upper, n_weights=6):
-    return np.random.uniform(lower, upper, (population_size, n_weights))
 
 
 def parent_selection(pop, pop_fit, n_parents, smoothing=1):
@@ -137,20 +139,28 @@ for gen in range(generations):
     clear_output(wait=True)
 env.close()
 
-individual = pop[np.argmax(pop_fit)]
+# Uncomment to display the winner
 
-network = NeuralNetwork(2, 3)
+# individual = pop[np.argmax(pop_fit)]
+#
+# network = NeuralNetwork(2, 3)
+#
+# env = gym.make("MountainCar-v0", render_mode="human")
+#
+# observation, info = env.reset()
+#
+# for _ in range(1000):
+#     action = network.activation(observation, individual)
+#     observation, reward, done, truncated, info = env.step(action)
+#     env.render()
+#
+#     if done:
+#         break
+#
+# env.close()
 
-env = gym.make("MountainCar-v0", render_mode="human")
 
-observation, info = env.reset()
-
-for _ in range(1000):
-    action = network.activation(observation, individual)
-    observation, reward, done, truncated, info = env.step(action)
-    env.render()
-
-    if done:
-        break
-
-env.close()
+raw_data = np.loadtxt("simple_neural_network_example/stats.out", delimiter=",")
+data_plot = pd.DataFrame(raw_data, columns=["Generation", "Mean", "Best"])
+fig = px.line(data_plot, x="Generation", y=["Mean", "Best"], labels={"value": "Performance"})
+fig.show()

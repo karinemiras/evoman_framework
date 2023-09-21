@@ -16,19 +16,19 @@ from evoman.environment import Environment
 from functools import partial
 
 os.environ['SDL_VIDEODRIVER'] = 'dummy'
-os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
+# hide pygame support prompt
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = 'hide'
 
 EXPERIMENT_NAME = 'nn_test'
 ENEMY_IDX = 2
 
 env = Environment(
     experiment_name=EXPERIMENT_NAME,
-    player_controller=NNController(),
     enemies=[ENEMY_IDX],
-    playermode="ai",
-    enemymode="static",
-    level=2,
     speed="fastest",
+    logs="off",
+    savelogs="no",
+    player_controller=NNController(),
     visuals=False)
 
 
