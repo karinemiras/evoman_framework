@@ -8,3 +8,5 @@ matplotlib
 gymnasium
 ipython
 neat-python
+plotly
+pandas

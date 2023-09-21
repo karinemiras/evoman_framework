@@ -224,33 +224,16 @@ np.random.seed(5)
 k = 3
 
 # City list, see the index from above
-# 0: Amsterdam, 1: Athens, 2: Berlin, 3: Brussels,
-# 4: Copenhagen, 5: Edinburgh, 6: Lisbon, 7: London, 8: Madrid, 9: Paris
+# 0: Amsterdam, 1: Athens, 2: Berlin, 3: Brussels, 4: Copenhagen,
+# 5: Edinburgh, 6: Lisbon, 7: London, 8: Madrid, 9: Paris
 
 city_list = np.arange(0, 10).tolist()
 
-# Adjacency mat
-adjacency_mat = np.asarray(
-    # Remember that we use the encoding above, i.e. 1 refers to Amsterdam and 10 to Paris!
-    [
-        [0, 3082, 649, 209, 904, 1180, 2300, 494, 1782, 515],  # Distance Amsterdam to the other cities
-        [3082, 0, 2552, 3021, 3414, 3768, 4578, 3099, 3940, 3140],  # Distance Athens to the other cities
-        [649, 2552, 0, 782, 743, 1727, 3165, 1059, 2527, 1094],  # Distance Berlin to the other cities
-        [209, 3021, 782, 0, 1035, 996, 2080, 328, 1562, 294],  # Distance Brussels to the other cities
-        [904, 3414, 743, 1035, 0, 1864, 3115, 1196, 2597, 1329],  # Distance Copenhagen to the other cities
-        [1180, 3768, 1727, 996, 1864, 0, 2879, 656, 2372, 1082],  # Distance Edinburgh to the other cities
-        [2300, 4578, 3165, 2080, 3115, 2879, 0, 2210, 638, 1786],  # Distance Lisbon to the other cities
-        [494, 3099, 1059, 328, 1196, 656, 2210, 0, 1704, 414],  # Distance London to the other cities
-        [1782, 3940, 2527, 1562, 2597, 2372, 638, 1704, 0, 1268],  # Distance Madrid to the other cities
-        [515, 3140, 1094, 294, 1329, 1082, 1786, 414, 1268, 0]  # Distance Paris to the other cities
-    ]
-
-)
 
 # Initialize the number of children
 number_of_children = 2
 
-# Initiliaze the generation
+# Initialize the generation
 generation = initialize_population(n_population, city_list, start_city=0)
 
 # Compute the current best fitness
