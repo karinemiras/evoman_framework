@@ -17,6 +17,8 @@ INPUT_SIZE = 20
 HIDDEN = 10
 OUTPUT_SIZE = 5
 EXPERIMENT_NAME = 'nn_test'
+ENEMY_IDX = 2
+
 
 if not os.path.exists(EXPERIMENT_NAME):
     os.makedirs(EXPERIMENT_NAME)
@@ -31,9 +33,6 @@ env = Environment(experiment_name=EXPERIMENT_NAME,
                   player_controller=controller,
                   visuals=True)
 
-# tests saved demo solutions for each enemy
-for en in range(2, 3):
-    # Update the enemy
-    env.update_parameter('enemies', [en])
-    print('\n LOADING SAVED SPECIALIST SOLUTION FOR ENEMY ' + str(en) + ' \n')
-    env.play(neural_net)
+# tests saved demo solutions for ENEMY_IDX
+print('\n LOADING SAVED SPECIALIST DEAP SOLUTION FOR ENEMY ' + str(ENEMY_IDX) + ' \n')
+env.play(neural_net)
