@@ -1,15 +1,18 @@
 import numpy as np
 
+
 def init_weights(in_features, out_features):
     k = 1. / in_features
     sqk = np.sqrt(k)
     return np.random.uniform(-sqk, sqk, (out_features, in_features))
 
+
 def normalize_input(x):
     min = np.min(x)
     max = np.max(x)
-    x_norm = x - min / (max-min)
+    x_norm = x - min / (max - min)
     return x_norm
+
 
 def sigmoid(x):
     y = np.zeros_like(x)
@@ -22,6 +25,7 @@ def sigmoid(x):
     c4 = x > 50.
     y[c4] = 1
     return y
+
 
 def relu(x):
     return np.maximum(0, x)

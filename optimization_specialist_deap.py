@@ -4,7 +4,6 @@
 # spot between this code and code in the tutorial.
 
 import hydra
-import multiprocessing as multiprocessing
 import os
 import random
 
@@ -13,14 +12,15 @@ from deap import creator
 from deap import tools
 from evolve.neural_net import NNController, NeuralNetwork
 from evoman.environment import Environment
-from functools import partial
+from evolve.logging import DataVisualizer
 
-os.environ['SDL_VIDEODRIVER'] = 'dummy'
+# disable visuals and thus make experiments faster
+os.environ["SDL_VIDEODRIVER"] = "dummy"
 # hide pygame support prompt
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = 'hide'
 
 EXPERIMENT_NAME = 'nn_test'
-ENEMY_IDX = 2
+ENEMY_IDX = 1
 
 env = Environment(
     experiment_name=EXPERIMENT_NAME,
@@ -73,7 +73,7 @@ def prepare_toolbox(config):
     # generation: each individual of the current generation
     # is replaced by the 'fittest' (best) of three individuals
     # drawn randomly from the current generation.
-    toolbox.register("select", tools.selTournament, tournsize=30)
+    toolbox.register("select", tools.selTournament, tournsize=3)
     # ----------
     return toolbox
 
@@ -83,12 +83,18 @@ def main(config):
     if not os.path.exists(EXPERIMENT_NAME):
         os.makedirs(EXPERIMENT_NAME)
 
+    # create a data gatherer object
+    data = DataVisualizer(EXPERIMENT_NAME)
+
     toolbox = prepare_toolbox(config)
     random.seed(2137)
 
     # create an initial population of POP_SIZE individuals 
     # (where each individual is a neural net)
     pop = toolbox.population(n=config.train.pop_size)
+
+    # Variable keeping track of the number of generations
+    g = 0
 
     print("Start of evolution")
 
@@ -98,9 +104,8 @@ def main(config):
     # # Extracting all the fitnesses of 
     fits = [ind.fitness.values[0] for ind in pop]
     print_statistics(fits, len(pop), len(pop))
-
-    # Variable keeping track of the number of generations
-    g = 0
+    # save gen, max, mean, std
+    data.gather(fits, g)
 
     # Begin the evolution
     while g < config.train.num_gens:
@@ -139,7 +144,10 @@ def main(config):
         # Gather all the fitnesses in one list and print the stats
         fits = [ind.fitness.values[0] for ind in pop]
         print_statistics(fits, len(invalid_ind), len(pop))
+        # save gen, max, mean
+        data.gather(fits, g)
 
+    data.draw_plot()
     print("-- End of (successful) evolution --")
     best_ind = tools.selBest(pop, 1)[0]
     print("Best individual is %s, %s" % (best_ind, best_ind.fitness.values))
@@ -147,9 +155,7 @@ def main(config):
 
 
 def update_fitness(eval_func, pop):
-    # Multiprocessing to make simulations run faster
-    with multiprocessing.Pool() as pool:
-        fitnesses = pool.map(eval_func, pop)
+    fitnesses = map(eval_func, pop)
     for ind, fit in zip(pop, fitnesses):
         ind.fitness.values = fit
     return fitnesses

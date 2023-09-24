@@ -5,8 +5,10 @@ deap
 hydra-core
 graphviz
 matplotlib
+scipy
 gymnasium
 ipython
 neat-python
 plotly
 pandas
+seaborn
