@@ -1,11 +1,13 @@
 # Code from https://deap.readthedocs.io/en/master/examples/ga_onemax.html
-# modified to run on our neural network and evoman objective. 
+# modified to run on our neural network and evoman objective.
 # go step-by-step through tutorial and see what differences you can
 # spot between this code and code in the tutorial.
 
 import hydra
 import os
 import random
+import multiprocessing
+import numpy as np
 
 from deap import base
 from deap import creator
@@ -17,10 +19,10 @@ from evolve.logging import DataVisualizer
 # disable visuals and thus make experiments faster
 os.environ["SDL_VIDEODRIVER"] = "dummy"
 # hide pygame support prompt
-os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = 'hide'
+os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
 
-EXPERIMENT_NAME = 'nn_test'
-ENEMY_IDX = 1
+EXPERIMENT_NAME = "nn_test"
+ENEMY_IDX = 6
 
 env = Environment(
     experiment_name=EXPERIMENT_NAME,
@@ -29,12 +31,28 @@ env = Environment(
     logs="off",
     savelogs="no",
     player_controller=NNController(),
-    visuals=False)
+    visuals=False,
+)
 
 
-# the goal ('fitness') function to be maximized
-def eval_fitness(individual):
-    return env.play(pcont=individual)[0],
+@hydra.main(version_base=None, config_path=".", config_name="config")
+def main(config):
+    if not os.path.exists(EXPERIMENT_NAME):
+        os.makedirs(EXPERIMENT_NAME)
+
+    # create a data gatherer object
+    logger = DataVisualizer(EXPERIMENT_NAME)
+    toolbox = prepare_toolbox(config)
+
+    NUM_RUNS = 10
+    for i in range(NUM_RUNS):
+        print(f"=====RUN {i + 1}/{NUM_RUNS}=====")
+        new_seed = 2137 + i * 10
+        best_ind = train_loop(toolbox, config, logger, new_seed)
+
+    logger.draw_plot()
+    print("Best individual is %s, %s" % (best_ind, best_ind.fitness.values))
+    best_ind.save_weights(os.path.join(EXPERIMENT_NAME, "weights.txt"))
 
 
 def prepare_toolbox(config):
@@ -51,7 +69,8 @@ def prepare_toolbox(config):
         creator.Individual,
         config.nn.input_size,
         config.nn.hidden_size,
-        config.nn.output_size)
+        config.nn.output_size,
+    )
 
     # define the population to be a list of individuals
     toolbox.register("population", tools.initRepeat, list, toolbox.individual)
@@ -73,23 +92,27 @@ def prepare_toolbox(config):
     # generation: each individual of the current generation
     # is replaced by the 'fittest' (best) of three individuals
     # drawn randomly from the current generation.
-    toolbox.register("select", tools.selTournament, tournsize=3)
+    toolbox.register(
+        "parent_select", tools.selTournament, tournsize=config.evolve.selection_pressure
+    )
+    toolbox.register(
+        "survivor_select",
+        tools.selTournament,
+        tournsize=config.evolve.selection_pressure,
+    )
     # ----------
     return toolbox
 
 
-@hydra.main(version_base=None, config_path=".", config_name="config")
-def main(config):
-    if not os.path.exists(EXPERIMENT_NAME):
-        os.makedirs(EXPERIMENT_NAME)
+# the goal ('fitness') function to be maximized
+def eval_fitness(individual):
+    return (env.play(pcont=individual)[0],)
 
-    # create a data gatherer object
-    data = DataVisualizer(EXPERIMENT_NAME)
 
-    toolbox = prepare_toolbox(config)
-    random.seed(2137)
-
-    # create an initial population of POP_SIZE individuals 
+def train_loop(toolbox, config, logger, seed):
+    random.seed(seed)
+    np.random.seed(seed)
+    # create an initial population of POP_SIZE individuals
     # (where each individual is a neural net)
     pop = toolbox.population(n=config.train.pop_size)
 
@@ -101,11 +124,11 @@ def main(config):
     # Evaluate and update fitness for the entire population
     update_fitness(toolbox.evaluate, pop)
 
-    # # Extracting all the fitnesses of 
+    # # Extracting all the fitnesses of
     fits = [ind.fitness.values[0] for ind in pop]
     print_statistics(fits, len(pop), len(pop))
     # save gen, max, mean, std
-    data.gather(fits, g)
+    logger.gather(fits, g)
 
     # Begin the evolution
     while g < config.train.num_gens:
@@ -114,7 +137,7 @@ def main(config):
         print("-- Generation %i --" % g)
 
         # Select the next generation individuals
-        offspring = toolbox.select(pop, len(pop))
+        offspring = toolbox.parent_select(pop, config.evolve.lambda_coeff * len(pop))
         # Clone the selected individuals
         offspring = list(map(toolbox.clone, offspring))
 
@@ -138,24 +161,31 @@ def main(config):
         # Evaluate the individuals with an invalid fitness
         invalid_ind = [ind for ind in offspring if not ind.fitness.valid]
         update_fitness(toolbox.evaluate, invalid_ind)
-        # The population is entirely replaced by the offspring
-        pop[:] = offspring
+        if config.evolve.selection_strategy == "comma":
+            pop_len = len(pop)
+            pop[:] = offspring
+            pop = toolbox.survivor_select(pop, pop_len)
+            pop = list(map(toolbox.clone, pop))
+        elif config.evolve.selection_strategy == "plus":
+            pop_len = len(pop)
+            pop[:] = pop + offspring
+            pop = toolbox.survivor_select(pop, pop_len)
+            pop = list(map(toolbox.clone, pop))
 
         # Gather all the fitnesses in one list and print the stats
         fits = [ind.fitness.values[0] for ind in pop]
         print_statistics(fits, len(invalid_ind), len(pop))
         # save gen, max, mean
-        data.gather(fits, g)
+        logger.gather(fits, g)
 
-    data.draw_plot()
     print("-- End of (successful) evolution --")
-    best_ind = tools.selBest(pop, 1)[0]
-    print("Best individual is %s, %s" % (best_ind, best_ind.fitness.values))
-    best_ind.save_weights(os.path.join(EXPERIMENT_NAME, 'weights.txt'))
+    return tools.selBest(pop, 1)[0]
 
 
 def update_fitness(eval_func, pop):
-    fitnesses = map(eval_func, pop)
+    cpu_count = multiprocessing.cpu_count() - 1
+    with multiprocessing.Pool(processes=cpu_count) as pool:
+        fitnesses = pool.map(eval_func, pop)
     for ind, fit in zip(pop, fitnesses):
         ind.fitness.values = fit
     return fitnesses
@@ -165,7 +195,7 @@ def print_statistics(fits, len_evaluated, len_pop):
     print("  Evaluated %i individuals" % len_evaluated)
     mean = sum(fits) / len_pop
     sum2 = sum(x * x for x in fits)
-    std = abs(sum2 / len_pop - mean ** 2) ** 0.5
+    std = abs(sum2 / len_pop - mean**2) ** 0.5
 
     print("  Min %s" % min(fits))
     print("  Max %s" % max(fits))

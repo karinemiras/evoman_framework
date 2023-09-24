@@ -10,3 +10,6 @@ nn:
 evolve:
   cross_prob: 0.5
   mutation_prob: 0.2
+  lambda_coeff: 3
+  selection_pressure: 3
+  selection_strategy: "comma" # Can be either "comma" or "plus"
