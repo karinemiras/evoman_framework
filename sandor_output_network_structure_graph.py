@@ -6,7 +6,7 @@ import neat
 import pickle
 
 # Load configurations and winner genome
-experiment_name = 'neat-optimizer'
+experiment_name = 'colab-exp3-game1'
 enemy = 1
 run_number = 0
 num_inputs = 20
@@ -84,13 +84,23 @@ node_sizes.update({node: 2000 for node in hidden_nodes})
 node_sizes.update({node: 3000 for node in output_nodes})
 
 # Extract the sizes in the order of G.nodes()
-size_list = [node_sizes[node] for node in G.nodes()]
+default_size = 1000  # You can set this to whatever default size you prefer
+size_list = [node_sizes.get(node, default_size) for node in G.nodes()]
+
 
 # Combine all layer positions
 positions = {**layer_positions['input'], **layer_positions['hidden'], **layer_positions['output']}
 
+
 # Check if all nodes in the graph have assigned positions
-assert set(G.nodes()) <= set(positions.keys()), "Some nodes do not have assigned positions"
+nodes_without_positions = set(G.nodes()) - set(positions.keys())
+default_position = (1, 1)  # Set this to a suitable default position
+for node in nodes_without_positions:
+    positions[node] = default_position
+if nodes_without_positions:
+    print("Nodes without assigned positions:", nodes_without_positions)
+    assert False, "Some nodes do not have assigned positions"
+
 
 # Draw the graph with custom labels
 node_colors = {node: 'lightcoral' for node in input_nodes}
@@ -113,7 +123,7 @@ nx.draw_networkx_edges(G, positions, alpha=0.5)
 nx.draw_networkx_labels(G, positions, labels=labels, font_size=font_size, font_color=font_color)
 
 # Add title and annotations/legends
-plt.title(f"Neural Network Structure for enemey {enemy} and run {run_number}")
+plt.title(f"Neural Network Structure for enemy {enemy} and run {run_number}")
 legend_labels = [mpatches.Patch(color=color, label=label) for label, color in 
                  zip(['Input', 'Hidden', 'Output'], ['lightcoral', 'lightgreen', 'lightblue'])]
 plt.legend(handles=legend_labels, loc='upper right')

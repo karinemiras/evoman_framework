@@ -4,7 +4,7 @@ import pickle
 import pandas as pd
 
 # Load configurations and winner genome
-experiment_name = 'neat-optimizer'
+experiment_name = 'colab-exp3-game1'
 enemy = 1
 run_number = 0
 num_inputs = 20

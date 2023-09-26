@@ -1,0 +1,3 @@
+
+
+MESSAGE: Pygame initialized for simulation.

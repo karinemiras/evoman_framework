@@ -1,3 +1,7 @@
 
 
 MESSAGE: Pygame initialized for simulation.
+
+MESSAGE: sound has been turned on.
+
+PARAMETER CHANGE: enemies = [8]

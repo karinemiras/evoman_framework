@@ -9,7 +9,7 @@ experiment_name = 'neat-optimizer'
 visuals = True
 original_enemy = 5
 run_number = 0
-new_enemy = 5
+new_enemy = 1
 
 env = Environment(
         experiment_name=experiment_name,
@@ -42,6 +42,12 @@ def run_winner(config, enemy, run_number, new_enemy):
 
         env.player_controller = player
         print(env.play()[0])
+
+    # Calculate the difference between player life and enemy life and print it
+    player_life = env.get_playerlife()
+    enemy_life = env.get_enemylife()
+    life_difference = player_life - enemy_life
+    print(f'Player life {player_life} - Enemy life {enemy_life} is {life_difference}')
 
 
 def main():
