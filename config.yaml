@@ -1,6 +1,7 @@
 train:
+  num_runs: 1
   pop_size: 100
-  num_gens: 15
+  num_gens: 10
 
 nn:
   input_size: 20
