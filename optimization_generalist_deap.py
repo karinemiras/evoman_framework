@@ -22,11 +22,13 @@ os.environ["SDL_VIDEODRIVER"] = "dummy"
 os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
 
 EXPERIMENT_NAME = "nn_test"
-ENEMY_IDX = 6
+# ENEMY_IDX = [1, 2, 3, 4, 5, 6, 7, 8]
+ENEMY_IDX = [1, 2, 3]
 
 env = Environment(
     experiment_name=EXPERIMENT_NAME,
-    enemies=[ENEMY_IDX],
+    enemies=ENEMY_IDX,
+    multiplemode="yes",
     speed="fastest",
     logs="off",
     savelogs="no",
