@@ -4,7 +4,11 @@ from IPython.display import clear_output
 import os
 import pandas as pd
 import plotly.express as px
-
+import matplotlib.pyplot as plt
+import seaborn as sns
+import warnings
+warnings.filterwarnings("ignore", "is_categorical_dtype")
+warnings.filterwarnings("ignore", "use_inf_as_na")
 
 # This is the runnable code from the Jupyter notebook "simple_neural_network_example.ipynb"
 
@@ -92,17 +96,16 @@ class DataGatherer:
 
         if not os.path.exists(name):
             os.mkdir(name)
-            os.mkdir(name + "/best")
 
     def gather(self, pop, pop_fit, gen):
-        self.mean_fitness = np.concatenate([self.mean_fitness, [np.mean(pop_fit)]])
-        self.best_fitness = np.concatenate([self.best_fitness, [np.max(pop_fit)]])
         self.generations = np.concatenate([self.generations, [gen]])
+        self.best_fitness = np.concatenate([self.best_fitness, [np.max(pop_fit)]])
+        self.mean_fitness = np.concatenate([self.mean_fitness, [np.mean(pop_fit)]])
 
-        self.stats = np.stack([self.generations, self.mean_fitness, self.best_fitness])
+        self.stats = np.stack([self.generations, self.best_fitness, self.mean_fitness])
 
         np.savetxt(f"{self.name}/stats.out", self.stats.T, delimiter=',', fmt='%1.2e')
-        np.savetxt(f"{self.name}/best/{gen}.out", pop[np.argmax(pop_fit)], delimiter=',', fmt='%1.2e')
+        #np.savetxt(f"{self.name}/best/{gen}.out", pop[np.argmax(pop_fit)], delimiter=',', fmt='%1.2e')
 
 
 # Parameters
@@ -121,6 +124,7 @@ pop = initialize_population(population_size, weight_lower_bound, weight_upper_bo
 pop_fit = evaluate_population(pop, n_evaluations, net, env)
 data = DataGatherer("simple_neural_network_example")  # think of a good naming convention
 
+# Uncomment to run the algorithm
 for gen in range(generations):
     parents = parent_selection(pop, pop_fit, n_offspring)
     offspring = crossover(parents)
@@ -139,8 +143,8 @@ for gen in range(generations):
     clear_output(wait=True)
 env.close()
 
-# Uncomment to display the winner
 
+# Uncomment to display the winner
 # individual = pop[np.argmax(pop_fit)]
 #
 # network = NeuralNetwork(2, 3)
@@ -160,7 +164,22 @@ env.close()
 # env.close()
 
 
-raw_data = np.loadtxt("simple_neural_network_example/stats.out", delimiter=",")
-data_plot = pd.DataFrame(raw_data, columns=["Generation", "Mean", "Best"])
-fig = px.line(data_plot, x="Generation", y=["Mean", "Best"], labels={"value": "Performance"})
-fig.show()
+# Set up
+sns.set()
+plt.figure()
+sns.set_theme(style="whitegrid")
+
+df = pd.read_csv("simple_neural_network_example/stats.out", names=["Generation", "Best", "Mean"])
+# This is where the actual plot gets made
+# Plot the responses for different events and regions
+ax = sns.lineplot(x='Generation', y='value', hue='variable',
+                  data=pd.melt(df, ['Generation']),
+                  legend=False
+                  )
+
+ax.set_title('Evolutionary algorithm performance')
+plt.legend(title='Legend', loc='upper right', labels=['Best', "StdBest", 'Mean', "StdMean"])
+
+ax.set(xlabel='Generation', ylabel='Performance')
+# Ask Matplotlib to show it
+plt.show()

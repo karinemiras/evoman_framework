@@ -2,6 +2,7 @@ train:
   num_runs: 1
   pop_size: 100
   num_gens: 10
+  multiprocessing: true
 
 nn:
   input_size: 20
@@ -13,4 +14,8 @@ evolve:
   mutation_prob: 0.2
   lambda_coeff: 3
   selection_pressure: 3
-  selection_strategy: "comma" # Can be either "comma" or "plus"
+  sigma_mutation: 1
+  indpb_mutation: 0.5
+  eta_crossover: 0.2
+  selection_strategy: "plus" # Can be either "comma" or "plus"
+

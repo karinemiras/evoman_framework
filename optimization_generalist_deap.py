@@ -43,15 +43,15 @@ def main(config):
         os.makedirs(EXPERIMENT_NAME)
 
     # create a data gatherer object
-    logger = DataVisualizer(EXPERIMENT_NAME)
+    logger = DataVisualizer(EXPERIMENT_NAME, config.evolve.selection_strategy)
     toolbox = prepare_toolbox(config)
 
     for i in range(config.train.num_runs):
         print(f"=====RUN {i + 1}/{config.train.num_runs}=====")
         new_seed = 2137 + i * 10
-        best_ind = train_loop(toolbox, config, logger, new_seed)
+        best_ind = train_loop(toolbox, config, logger, new_seed, config.evolve.selection_strategy)
 
-    logger.draw_plot()
+    #logger.draw_plots()
     print("Best individual is %s, %s" % (best_ind, best_ind.fitness.values))
     best_ind.save_weights(os.path.join(EXPERIMENT_NAME, "weights.txt"))
 
@@ -83,11 +83,12 @@ def prepare_toolbox(config):
     toolbox.register("evaluate", eval_fitness)
 
     # register the crossover operator
-    toolbox.register("mate", tools.cxTwoPoint)
+    toolbox.register("mate", tools.cxSimulatedBinary, eta=config.evolve.eta_crossover)
 
     # register a mutation operator with a probability to
     # flip each attribute/gene of 0.05
-    toolbox.register("mutate", tools.mutGaussian, mu=0, sigma=1, indpb=0.05)
+    toolbox.register("mutate", tools.mutGaussian, mu=0, sigma=config.evolve.sigma_mutation,
+                     indpb=config.evolve.indpb_mutation)
 
     # operator for selecting individuals for breeding the next
     # generation: each individual of the current generation
@@ -110,7 +111,7 @@ def eval_fitness(individual):
     return (env.play(pcont=individual)[0],)
 
 
-def train_loop(toolbox, config, logger, seed):
+def train_loop(toolbox, config, logger, seed, survivor_selection):
     random.seed(seed)
     np.random.seed(seed)
     # create an initial population of POP_SIZE individuals
@@ -123,13 +124,14 @@ def train_loop(toolbox, config, logger, seed):
     print("Start of evolution")
 
     # Evaluate and update fitness for the entire population
-    update_fitness(toolbox.evaluate, pop)
+    update_fitness(toolbox.evaluate, pop, config)
 
     # # Extracting all the fitnesses of
     fits = [ind.fitness.values[0] for ind in pop]
+
     print_statistics(fits, len(pop), len(pop))
     # save gen, max, mean, std
-    logger.gather(fits, g)
+    #logger.gather_line(fits, g, survivor_selection)
 
     # Begin the evolution
     while g < config.train.num_gens:
@@ -141,6 +143,9 @@ def train_loop(toolbox, config, logger, seed):
         offspring = toolbox.parent_select(pop, config.evolve.lambda_coeff * len(pop))
         # Clone the selected individuals
         offspring = list(map(toolbox.clone, offspring))
+
+        # Shuffle the offspring
+        random.shuffle(offspring)
 
         # Apply crossover and mutation on the offspring
         for child1, child2 in zip(offspring[::2], offspring[1::2]):
@@ -161,7 +166,7 @@ def train_loop(toolbox, config, logger, seed):
 
         # Evaluate the individuals with an invalid fitness
         invalid_ind = [ind for ind in offspring if not ind.fitness.valid]
-        update_fitness(toolbox.evaluate, invalid_ind)
+        update_fitness(toolbox.evaluate, invalid_ind, config)
         if config.evolve.selection_strategy == "comma":
             pop_len = len(pop)
             pop[:] = offspring
@@ -177,16 +182,19 @@ def train_loop(toolbox, config, logger, seed):
         fits = [ind.fitness.values[0] for ind in pop]
         print_statistics(fits, len(invalid_ind), len(pop))
         # save gen, max, mean
-        logger.gather(fits, g)
+        #logger.gather_line(fits, g, survivor_selection)
 
     print("-- End of (successful) evolution --")
     return tools.selBest(pop, 1)[0]
 
 
-def update_fitness(eval_func, pop):
-    cpu_count = multiprocessing.cpu_count() - 1
-    with multiprocessing.Pool(processes=cpu_count) as pool:
-        fitnesses = pool.map(eval_func, pop)
+def update_fitness(eval_func, pop, config):
+    if config.train.multiprocessing == "true":
+        cpu_count = multiprocessing.cpu_count() - 1
+        with multiprocessing.Pool(processes=cpu_count) as pool:
+            fitnesses = pool.map(eval_func, pop)
+    else:
+        fitnesses = map(eval_func, pop)
     for ind, fit in zip(pop, fitnesses):
         ind.fitness.values = fit
     return fitnesses
