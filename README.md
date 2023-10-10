@@ -8,20 +8,35 @@ To install requirements type in command:
 `pip install -r requirements.txt`
 
 If you want to train NN with DEAP network run:
-`python neural_net_deap_example.py`
+`python controller_specialist_deap.py`
+
+or 
+
+`python controller_generalist_deap.py`
 
 ## Hyperparameters
 In the file `config.yaml` there's a set of parameters you can tune. The config utilizes `hydra` library.
 
 ## Inference
 When you trained neural net from the above script you can see it in action with the following command:
-`python neural_net_deap_demo.py`
+`python controller_specialist_deap.py`
 
 ## DEAP
 All files ending with "deap"
 
 ## NEAT
 All files in the folder "neat"
+
+## Optuna
+In order to run training with automatic hyperparameter search, you can run one of the following commands:
+
+`python controller_specialist_deap.py --multirun`
+
+or 
+
+`python controller_generalist_deap.py --multirun`
+
+The results of your experiments can be found in directory `multirun/{timestamp}/optimization_results.yaml`
 
 ## Legend:
 "optimization_" files are used to find the best solution
