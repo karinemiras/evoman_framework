@@ -52,6 +52,10 @@ def main(config):
     print("Best individual is %s, %s" % (best_ind, best_ind.fitness.values))
     best_ind.save_weights(os.path.join(EXPERIMENT_NAME, "weights.txt"))
 
+    # Result by which optuna will choose which solution performs best
+    eval_result = best_ind.fitness.values[0]
+    return eval_result
+
 
 def prepare_toolbox(config):
     creator.create("FitnessMax", base.Fitness, weights=(1.0,))
@@ -84,8 +88,13 @@ def prepare_toolbox(config):
 
     # register a mutation operator with a probability to
     # flip each attribute/gene of 0.05
-    toolbox.register("mutate", tools.mutGaussian, mu=0, sigma=config.evolve.sigma_mutation,
-                     indpb=config.evolve.indpb_mutation)
+    toolbox.register(
+        "mutate",
+        tools.mutGaussian,
+        mu=0,
+        sigma=config.evolve.sigma_mutation,
+        indpb=config.evolve.indpb_mutation,
+    )
 
     # operator for selecting individuals for breeding the next
     # generation: each individual of the current generation
@@ -94,9 +103,7 @@ def prepare_toolbox(config):
     toolbox.register(
         "parent_select", tools.selTournament, tournsize=config.evolve.selection_pressure
     )
-    toolbox.register(
-        "survivor_select", tools.selBest
-    )
+    toolbox.register("survivor_select", tools.selBest)
     # ----------
     return toolbox
 
@@ -204,7 +211,7 @@ def print_statistics(fits, len_evaluated, len_pop):
     print("  Evaluated %i individuals" % len_evaluated)
     mean = sum(fits) / len_pop
     sum2 = sum(x * x for x in fits)
-    std = abs(sum2 / len_pop - mean ** 2) ** 0.5
+    std = abs(sum2 / len_pop - mean**2) ** 0.5
 
     print("  Min %s" % min(fits))
     print("  Max %s" % max(fits))
