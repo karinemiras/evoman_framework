@@ -3,6 +3,7 @@ tmx
 numpy
 deap
 hydra-core
+hydra-optuna-sweeper
 graphviz
 matplotlib
 scipy

@@ -49,11 +49,17 @@ def main(config):
     for i in range(config.train.num_runs):
         print(f"=====RUN {i + 1}/{config.train.num_runs}=====")
         new_seed = 2137 + i * 10
-        best_ind = train_loop(toolbox, config, logger, new_seed, config.evolve.selection_strategy)
+        best_ind = train_loop(
+            toolbox, config, logger, new_seed, config.evolve.selection_strategy
+        )
 
-    #logger.draw_plots()
+    # logger.draw_plots()
     print("Best individual is %s, %s" % (best_ind, best_ind.fitness.values))
     best_ind.save_weights(os.path.join(EXPERIMENT_NAME, "weights.txt"))
+
+    # Result by which optuna will choose which solution performs best
+    eval_result = best_ind.fitness.values[0]
+    return eval_result
 
 
 def prepare_toolbox(config):
@@ -87,8 +93,13 @@ def prepare_toolbox(config):
 
     # register a mutation operator with a probability to
     # flip each attribute/gene of 0.05
-    toolbox.register("mutate", tools.mutGaussian, mu=0, sigma=config.evolve.sigma_mutation,
-                     indpb=config.evolve.indpb_mutation)
+    toolbox.register(
+        "mutate",
+        tools.mutGaussian,
+        mu=0,
+        sigma=config.evolve.sigma_mutation,
+        indpb=config.evolve.indpb_mutation,
+    )
 
     # operator for selecting individuals for breeding the next
     # generation: each individual of the current generation
@@ -131,7 +142,7 @@ def train_loop(toolbox, config, logger, seed, survivor_selection):
 
     print_statistics(fits, len(pop), len(pop))
     # save gen, max, mean, std
-    #logger.gather_line(fits, g, survivor_selection)
+    # logger.gather_line(fits, g, survivor_selection)
 
     # Begin the evolution
     while g < config.train.num_gens:
@@ -182,14 +193,14 @@ def train_loop(toolbox, config, logger, seed, survivor_selection):
         fits = [ind.fitness.values[0] for ind in pop]
         print_statistics(fits, len(invalid_ind), len(pop))
         # save gen, max, mean
-        #logger.gather_line(fits, g, survivor_selection)
+        # logger.gather_line(fits, g, survivor_selection)
 
     print("-- End of (successful) evolution --")
     return tools.selBest(pop, 1)[0]
 
 
 def update_fitness(eval_func, pop, config):
-    if config.train.multiprocessing == "true":
+    if config.train.multiprocessing:
         cpu_count = multiprocessing.cpu_count() - 1
         with multiprocessing.Pool(processes=cpu_count) as pool:
             fitnesses = pool.map(eval_func, pop)
