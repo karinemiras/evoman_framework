@@ -16,13 +16,15 @@ hydra:
     n_jobs: 1
     # Define below which parameters you want to tune
     params:
-      evolve.mutation_prob: range(0.1, 0.3, 0.1)
-      evolve.selection_strategy: choice("comma", "plus")
+      pso.smin: range(-6.0, 0.0, 0.5)
+      pso.smax: range(0.0, 6.0, 0.5)
+      pso.phi1: range(0.0, 4.0, 0.5)
+      pso.phi2: range(0.0, 4.0, 0.5)
+      pso.w_dec: range(0.0020, 0.0050, 0.0005)
+
 
 train:
   num_runs: 1
-  pop_size: 100
-  num_gens: 3
   multiprocessing: True
 
 nn:
@@ -38,5 +40,21 @@ evolve:
   sigma_mutation: 1
   indpb_mutation: 0.5
   eta_crossover: 0.2
-  selection_strategy: "plus" # Can be either "comma" or "plus"
+  selection_strategy: "comma" # Can be either "comma" or "plus"
+
+island:
+  pop_size : 50
+  num_gens : 30
+  num_islands : 4
+  migration_interval : 25
+  migration_size : 5
+
+pso:
+    pop_size: 100
+    num_gens: 30
+    smin: -3
+    smax: 3
+    phi1: 2.0
+    phi2: 2.0
+    w_dec: 0.0035
 
