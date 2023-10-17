@@ -12,7 +12,7 @@ import numpy as np
 from deap import base
 from deap import creator
 from deap import tools
-from evolve.neural_net import NNController, NeuralNetwork
+from evolve.neural_net import NeuralNetwork, NNController
 from evoman.environment import Environment
 from evolve.logging import DataVisualizer
 
@@ -21,13 +21,15 @@ os.environ["SDL_VIDEODRIVER"] = "dummy"
 # hide pygame support prompt
 os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
 
-EXPERIMENT_NAME = "nn_test"
-# ENEMY_IDX = [1, 2, 3, 4, 5, 6, 7, 8]
-ENEMY_IDX = [1, 2, 3]
+EXPERIMENT_NAME = "optimization_generalist_deap"
+#enemies = [2, 3, 5, 8]
+enemies = [1, 5, 6]
+
+n_hidden_neurons = 10
 
 env = Environment(
     experiment_name=EXPERIMENT_NAME,
-    enemies=ENEMY_IDX,
+    enemies=enemies,
     multiplemode="yes",
     speed="fastest",
     logs="off",
@@ -42,20 +44,21 @@ def main(config):
     if not os.path.exists(EXPERIMENT_NAME):
         os.makedirs(EXPERIMENT_NAME)
 
-    # create a data gatherer object
-    logger = DataVisualizer(EXPERIMENT_NAME, config.evolve.selection_strategy)
+    # create a toolbox
     toolbox = prepare_toolbox(config)
+
+    # create a data gatherer object
+    logger = DataVisualizer(EXPERIMENT_NAME)
 
     for i in range(config.train.num_runs):
         print(f"=====RUN {i + 1}/{config.train.num_runs}=====")
         new_seed = 2137 + i * 10
-        best_ind = train_loop(
-            toolbox, config, logger, new_seed, config.evolve.selection_strategy
-        )
+        best_ind = train_loop(toolbox, config, logger, new_seed, enemies)
+        eval_gain(best_ind, logger, i + 1, enemies)
 
-    # logger.draw_plots()
     print("Best individual is %s, %s" % (best_ind, best_ind.fitness.values))
-    best_ind.save_weights(os.path.join(EXPERIMENT_NAME, "weights.txt"))
+    np.savetxt(EXPERIMENT_NAME + '/best_' + str(enemies) + '.txt', best_ind)
+    logger.draw_plots(enemies)
 
     # Result by which optuna will choose which solution performs best
     eval_result = best_ind.fitness.values[0]
@@ -122,7 +125,15 @@ def eval_fitness(individual):
     return (env.play(pcont=individual)[0],)
 
 
-def train_loop(toolbox, config, logger, seed, survivor_selection):
+def eval_gain(individual, logger, winner_num, enemies):
+    num_runs_for_gain = 5
+    for _ in range(num_runs_for_gain):
+        _, p, e, _ = env.play(pcont=individual)
+        gain = p - e
+        logger.gather_box(winner_num, gain, enemies)
+
+
+def train_loop(toolbox, config, logger, seed, enemies):
     random.seed(seed)
     np.random.seed(seed)
     # create an initial population of POP_SIZE individuals
@@ -142,7 +153,7 @@ def train_loop(toolbox, config, logger, seed, survivor_selection):
 
     print_statistics(fits, len(pop), len(pop))
     # save gen, max, mean, std
-    # logger.gather_line(fits, g, survivor_selection)
+    logger.gather_line(fits, g, enemies)
 
     # Begin the evolution
     while g < config.train.num_gens:
@@ -193,7 +204,7 @@ def train_loop(toolbox, config, logger, seed, survivor_selection):
         fits = [ind.fitness.values[0] for ind in pop]
         print_statistics(fits, len(invalid_ind), len(pop))
         # save gen, max, mean
-        # logger.gather_line(fits, g, survivor_selection)
+        logger.gather_line(fits, g, enemies)
 
     print("-- End of (successful) evolution --")
     return tools.selBest(pop, 1)[0]
@@ -201,7 +212,7 @@ def train_loop(toolbox, config, logger, seed, survivor_selection):
 
 def update_fitness(eval_func, pop, config):
     if config.train.multiprocessing:
-        cpu_count = multiprocessing.cpu_count() - 1
+        cpu_count = multiprocessing.cpu_count() - 2
         with multiprocessing.Pool(processes=cpu_count) as pool:
             fitnesses = pool.map(eval_func, pop)
     else:
@@ -215,7 +226,7 @@ def print_statistics(fits, len_evaluated, len_pop):
     print("  Evaluated %i individuals" % len_evaluated)
     mean = sum(fits) / len_pop
     sum2 = sum(x * x for x in fits)
-    std = abs(sum2 / len_pop - mean**2) ** 0.5
+    std = abs(sum2 / len_pop - mean ** 2) ** 0.5
 
     print("  Min %s" % min(fits))
     print("  Max %s" % max(fits))
