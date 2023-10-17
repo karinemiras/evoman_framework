@@ -260,4 +260,3 @@ def print_statistics(fits, len_evaluated, len_pop):
 
 if __name__ == "__main__":
     main()
-    os.system('afplay /System/Library/Sounds/Sosumi.aiff')

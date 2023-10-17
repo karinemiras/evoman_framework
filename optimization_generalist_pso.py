@@ -19,8 +19,8 @@ os.environ["SDL_VIDEODRIVER"] = "dummy"
 os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
 
 EXPERIMENT_NAME = "optimization_generalist_pso"
-enemies = [2, 3, 5, 8]
-#enemies = [1, 5, 6]
+#enemies = [2, 3, 5, 8]
+enemies = [1, 5, 6]
 
 env = Environment(
     experiment_name=EXPERIMENT_NAME,
@@ -116,17 +116,16 @@ def train_loop_pso(toolbox, config, logger, seed, enemies):
     best = None
 
     for part in pop:
-        part.fitness.values = toolbox.evaluate(env, individual=part)
+        part.fitness.values = toolbox.evaluate(env, individual=np.array(part))
 
-    logger.gather_line([ind.fitness.values[0] for ind in pop], 0, enemies)
 
 
     w = 1
     #this weight decrementing teqnique (inertia) is taken from a Karine Miras paper
-    w_dec = config.pso.inertia
+    w_dec = config.pso.w_dec
     for g in range(GEN):
         for part in pop:
-            part.fitness.values = toolbox.evaluate(env, individual=part)
+            part.fitness.values = toolbox.evaluate(env, individual=np.array(part))
             if not part.best or part.best.fitness < part.fitness:
                 part.best = creator.Particle(part)
                 part.best.fitness.values = part.fitness.values
@@ -140,7 +139,7 @@ def train_loop_pso(toolbox, config, logger, seed, enemies):
         # Gather all the fitnesses in one list and print the stats
         logbook.record(gen=g, **stats.compile(pop))
         print(logbook.stream)
-        logger.gather_line([ind.fitness.values[0] for ind in pop], g + 1, enemies)
+        logger.gather_line([ind.fitness.values[0] for ind in pop], g, enemies)
 
     np.savetxt(EXPERIMENT_NAME + '/best_' + str(enemies) + '.txt', best)
     return best
@@ -162,4 +161,3 @@ def updateParticle(part, best, w, phi1, phi2):
 
 if __name__ == "__main__":
     main()
-    os.system('afplay /System/Library/Sounds/Sosumi.aiff')

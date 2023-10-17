@@ -24,7 +24,7 @@ hydra:
 
 
 train:
-  num_runs: 1
+  num_runs: 10
   multiprocessing: True
 
 nn:
@@ -43,18 +43,27 @@ evolve:
   selection_strategy: "comma" # Can be either "comma" or "plus"
 
 island:
-  pop_size : 50
-  num_gens : 30
-  num_islands : 4
-  migration_interval : 25
-  migration_size : 5
+  pop_size: 50
+  num_gens: 30
+  num_islands: 4
+  migration_interval: 25
+  migration_size: 5
 
+# default params
 pso:
-    pop_size: 100
-    num_gens: 30
-    smin: -3
-    smax: 3
-    phi1: 2.0
-    phi2: 2.0
-    w_dec: 0.0035
+  pop_size: 100
+  num_gens: 31
+  smin: -3.0
+  smax: 3.0
+  phi1: 2.0
+  phi2: 2.0
+  w_dec: 0.0035
+
+# params obtained by optuna for enemies = [2, 3, 5, 8] and [1, 5, 6] and used for plotting
+# pso:
+#     smin: -4.0
+#     smax: 2.5
+#     phi1: 3.0
+#     phi2: 3.0
+#     w_dec: 0.0045
 
