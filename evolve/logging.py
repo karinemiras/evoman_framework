@@ -72,7 +72,7 @@ class DataVisualizer:
 
 
         # Read data from file
-        data, mean_gain = self._read_data_box(enemies)
+        data, mean_gain = self._read_data_box(enemies, self.name.split("_")[-1])
         # Set up box plot
         sns.set(rc={'figure.figsize': (3.2, 4.8)}, font_scale=2, style="whitegrid")
         palette = itertools.cycle(sns.color_palette())
@@ -90,6 +90,41 @@ class DataVisualizer:
 
         fig_box.savefig(os.path.join(self.name, "box_plot_" + str(enemies) + ".png"), dpi=300)
 
+    def draw_both_box_plots(self, enemies):
+        # Read data from file
+        data, mean_gain = self._read_data_box(enemies, "island")
+        # Set up box plot
+        sns.set(rc={'figure.figsize': (3.2, 4.8)}, font_scale=2, style="whitegrid")
+        palette = itertools.cycle(sns.color_palette())
+        plt.figure()
+        # This is where the actual plot gets made
+        fig_box, ax_box = plt.subplots(1, 2, sharey=True)
+        fig_box.suptitle(enemies, y=1.00)
+        sns.set_theme(style="whitegrid")
+        sns.set(font_scale=2)
+        c = next(palette)
+        plt.ylabel('Average Gain', fontsize=20, labelpad=100)
+        ax_box[0] = sns.boxplot(y='Gain', data=data, color=c, ax=ax_box[0])
+        ax_box[0].set_title("island", y=-0.1)
+        ax_box[0].set(ylabel=None)
+        ax_box[0].tick_params(labelleft=False, labelright=False)
+
+
+
+        # Read data from file
+        data, mean_gain = self._read_data_box(enemies, "pso")
+        # Set up box plot
+        sns.set(rc={'figure.figsize': (3.2, 4.8)}, font_scale=2, style="whitegrid")
+        plt.figure()
+        # This is where the actual plot gets made
+        c = next(palette)
+        ax_box[1] = sns.boxplot(y='Gain', data=data, color=c, ax=ax_box[1])
+        ax_box[1].set_title(self.name.split("_")[-1], y=-0.1)
+        ax_box[1].tick_params(labelleft=False, labelright=True, labelsize=20, pad=-4)
+        fig_box.savefig(os.path.join(self.name, "both_box_plots_" + str(enemies) + ".png"), dpi=300)
+
+
+
     def _read_data_line(self, enemies):
         file_path = os.path.join(self.name, "stats_line_" + str(enemies) + ".out")
         data = pd.read_csv(file_path, names=["Generation", "Max", "Mean"])
@@ -99,8 +134,8 @@ class DataVisualizer:
         std_mean = data.groupby(['Generation'])['Mean'].std().reset_index(name='Std of Mean')
         return mean_max, std_max, mean_mean, std_mean
 
-    def _read_data_box(self, enemies):
-        file_path = os.path.join(self.name, "stats_box_" + str(enemies) + ".out")
+    def _read_data_box(self, enemies, path):
+        file_path = os.path.join("optimization_generalist_" + path, "stats_box_" + str(enemies) + ".out")
         data = pd.read_csv(file_path, names=["Winner", "Gain"])
         mean_gain = data.groupby(['Winner'])['Gain'].mean().reset_index(name='Mean of Gain')
         return data, mean_gain

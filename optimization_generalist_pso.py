@@ -160,4 +160,6 @@ def updateParticle(part, best, w, phi1, phi2):
 
 
 if __name__ == "__main__":
-    main()
+    #main()
+    logger = DataVisualizer(EXPERIMENT_NAME)
+    logger.draw_both_box_plots(enemies)
