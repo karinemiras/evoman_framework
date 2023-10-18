@@ -19,7 +19,7 @@ os.environ["SDL_VIDEODRIVER"] = "dummy"
 os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
 
 EXPERIMENT_NAME = "optimization_generalist_pso"
-enemies = [2, 3, 5, 8]
+enemies = [2, 4, 7, 8]
 #enemies = [1, 5, 6]
 
 env = Environment(
