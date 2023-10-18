@@ -22,8 +22,8 @@ os.environ["SDL_VIDEODRIVER"] = "dummy"
 os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
 
 EXPERIMENT_NAME = "optimization_generalist_island"
-#enemies = [2, 3, 5, 8]
-enemies = [1, 5, 6]
+enemies = [2, 3, 5, 8]
+#enemies = [1, 5, 6]
 
 n_hidden_neurons = 10
 
@@ -35,6 +35,17 @@ env = Environment(
     logs="off",
     savelogs="no",
     player_controller=player_controller(n_hidden_neurons),
+    visuals=False,
+)
+
+env_gain = Environment(
+    experiment_name=EXPERIMENT_NAME,
+    enemies=[1, 2, 3, 4, 5, 6, 7, 8],
+    multiplemode="yes",
+    speed="fastest",
+    logs="off",
+    savelogs="no",
+    player_controller=player_controller(10),
     visuals=False,
 )
 
@@ -54,11 +65,8 @@ def main(config):
         print(f"=====RUN {i + 1}/{config.train.num_runs}=====")
         new_seed = 2137 + i * 10
         best_ind = train_loop_island(toolbox, config, logger, new_seed, enemies)
-        eval_gain(best_ind, logger, i + 1, enemies)
-    print("Best individual is %s, %s" % (best_ind, best_ind.fitness.values))
-    np.savetxt(EXPERIMENT_NAME + '/best_' + str(enemies) + '.txt', best_ind)
-    logger.draw_plots(enemies)
-
+        eval_gain(best_ind, logger, i, enemies)
+        np.savetxt(EXPERIMENT_NAME + '/best_' + str(i) + '_' + str(enemies) + '.txt', best_ind)
 
 
 def prepare_toolbox(config):
@@ -114,7 +122,7 @@ def eval_fitness(individual):
 def eval_gain(individual, logger, winner_num, enemies):
     num_runs_for_gain = 5
     for _ in range(num_runs_for_gain):
-        _, p, e, _ = env.play(pcont=individual)
+        _, p, e, _ = env_gain.play(pcont=individual)
         gain = p - e
         logger.gather_box(winner_num, gain, enemies)
 
@@ -260,3 +268,4 @@ def print_statistics(fits, len_evaluated, len_pop):
 
 if __name__ == "__main__":
     main()
+    os.system('afplay /System/Library/Sounds/Sosumi.aiff')

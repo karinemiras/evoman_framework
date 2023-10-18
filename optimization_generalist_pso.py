@@ -19,12 +19,23 @@ os.environ["SDL_VIDEODRIVER"] = "dummy"
 os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
 
 EXPERIMENT_NAME = "optimization_generalist_pso"
-#enemies = [2, 3, 5, 8]
-enemies = [1, 5, 6]
+enemies = [2, 3, 5, 8]
+#enemies = [1, 5, 6]
 
 env = Environment(
     experiment_name=EXPERIMENT_NAME,
     enemies=enemies,
+    multiplemode="yes",
+    speed="fastest",
+    logs="off",
+    savelogs="no",
+    player_controller=player_controller(10),
+    visuals=False,
+)
+
+env_gain = Environment(
+    experiment_name=EXPERIMENT_NAME,
+    enemies=[1, 2, 3, 4, 5, 6, 7, 8],
     multiplemode="yes",
     speed="fastest",
     logs="off",
@@ -49,10 +60,8 @@ def main(config):
         print(f"=====RUN {i + 1}/{config.train.num_runs}=====")
         new_seed = 2137 + i * 10
         best_ind = train_loop_pso(toolbox, config, logger, new_seed, enemies)
-        eval_gain(best_ind, logger, i + 1, enemies)
-    print("Best individual is %s, %s" % (best_ind, best_ind.fitness.values))
-    np.savetxt(EXPERIMENT_NAME + '/best_' + str(enemies) + '.txt', best_ind)
-    logger.draw_plots(enemies)
+        eval_gain(best_ind, logger, i, enemies)
+        np.savetxt(EXPERIMENT_NAME + '/best_' + str(i) + '_' + str(enemies) + '.txt', best_ind)
 
     # Result by which optuna will choose which solution performs best
     eval_result = best_ind.fitness.values[0]
@@ -61,13 +70,13 @@ def main(config):
 
 def prepare_toolbox(config):
     creator.create("FitnessMax", base.Fitness, weights=(1.0,))
-    creator.create("Particle", list, fitness=creator.FitnessMax, speed=list,
+    creator.create("Particle", np.ndarray, fitness=creator.FitnessMax, speed=list,
                    smin=None, smax=None, best=None)
 
     # create the toolbox
     toolbox = base.Toolbox()
     # attribute generator
-    toolbox.register("particle", generate, 265, pmin=-1, pmax=1, smin=config.pso.smin, smax=config.pso.smax)
+    toolbox.register("particle", generate, size=265, pmin=-1, pmax=1, smin=config.pso.smin, smax=config.pso.smax)
     # register the population as a list of particles
     toolbox.register("population", tools.initRepeat, list, toolbox.particle)
     # register the update rules
@@ -78,21 +87,21 @@ def prepare_toolbox(config):
     return toolbox
 
 
-def eval_fitness(env, individual):
+def eval_fitness(individual):
     return (env.play(pcont=individual)[0],)
 
 
 def eval_gain(individual, logger, winner_num, enemies):
     num_runs_for_gain = 5
     for _ in range(num_runs_for_gain):
-        _, p, e, _ = env.play(pcont=individual)
+        _, p, e, _ = env_gain.play(pcont=individual)
         gain = p - e
         logger.gather_box(winner_num, gain, enemies)
 
 
 def generate(size, pmin, pmax, smin, smax):
-    part = creator.Particle(random.uniform(pmin, pmax) for _ in range(size))
-    part.speed = [random.uniform(smin, smax) for _ in range(size)]
+    part = creator.Particle(np.random.uniform(pmin, pmax, size))
+    part.speed = np.random.uniform(smin, smax, size)
     part.smin = smin
     part.smax = smax
     return part
@@ -116,20 +125,18 @@ def train_loop_pso(toolbox, config, logger, seed, enemies):
     best = None
 
     for part in pop:
-        part.fitness.values = toolbox.evaluate(env, individual=np.array(part))
+        part.fitness.values = toolbox.evaluate(individual=np.array(part))
 
-
-
+    # Inertia weight starts at 1 and linearly decreases to 0.1
     w = 1
-    #this weight decrementing teqnique (inertia) is taken from a Karine Miras paper
-    w_dec = config.pso.w_dec
+    w_dec = 1/ GEN
     for g in range(GEN):
         for part in pop:
-            part.fitness.values = toolbox.evaluate(env, individual=np.array(part))
-            if not part.best or part.best.fitness < part.fitness:
+            part.fitness.values = toolbox.evaluate(np.array(part))
+            if part.best is None or part.best.fitness < part.fitness:
                 part.best = creator.Particle(part)
                 part.best.fitness.values = part.fitness.values
-            if not best or best.fitness < part.fitness:
+            if best is None or best.fitness < part.fitness:
                 best = creator.Particle(part)
                 best.fitness.values = part.fitness.values
         for part in pop:
@@ -141,23 +148,24 @@ def train_loop_pso(toolbox, config, logger, seed, enemies):
         print(logbook.stream)
         logger.gather_line([ind.fitness.values[0] for ind in pop], g, enemies)
 
-    np.savetxt(EXPERIMENT_NAME + '/best_' + str(enemies) + '.txt', best)
     return best
 
 
 def updateParticle(part, best, w, phi1, phi2):
-    u1 = np.random.uniform(0, phi1, size=len(part))
-    u2 = np.random.uniform(0, phi2, size=len(part))
-    v_u1 = u1 * (np.array(part.best) - np.array(part))
-    v_u2 = u2 * (np.array(best) - np.array(part))
-    part.speed = (w * np.array(part.speed) + v_u1 + v_u2).tolist()
+    u1 = np.random.uniform(0, phi1, len(part))
+    u2 = np.random.uniform(0, phi2, len(part))
+    v_u1 = u1 * (part.best - part)
+    v_u2 = u2 * (best - part)
+    part.speed = w * part.speed + (v_u1 + v_u2)
     for i, speed in enumerate(part.speed):
         if abs(speed) < part.smin:
             part.speed[i] = math.copysign(part.smin, speed)
         elif abs(speed) > part.smax:
             part.speed[i] = math.copysign(part.smax, speed)
-    part[:] = (np.array(part) + np.array(part.speed)).tolist()
+    part += part.speed
 
 
 if __name__ == "__main__":
     main()
+    os.system('afplay /System/Library/Sounds/Sosumi.aiff')
+

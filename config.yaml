@@ -20,7 +20,6 @@ hydra:
       pso.smax: range(0.0, 6.0, 0.5)
       pso.phi1: range(0.0, 4.0, 0.5)
       pso.phi2: range(0.0, 4.0, 0.5)
-      pso.w_dec: range(0.0020, 0.0050, 0.0005)
 
 
 train:
@@ -51,19 +50,19 @@ island:
 
 # default params
 pso:
-  pop_size: 100
+  pop_size: 150
   num_gens: 31
   smin: -3.0
   smax: 3.0
   phi1: 2.0
   phi2: 2.0
-  w_dec: 0.0035
 
-# params obtained by optuna for enemies = [2, 3, 5, 8] and [1, 5, 6] and used for plotting
+# params obtained by optuna for enemies = [2, 3, 5, 8] and [1, 5, 6]
+# NOT used for plotting
+
 # pso:
-#     smin: -4.0
-#     smax: 2.5
-#     phi1: 3.0
-#     phi2: 3.0
-#     w_dec: 0.0045
+#     smin: -1.0
+#     smax: 4.0
+#     phi1: 1.5
+#     phi2: 2.0
 
